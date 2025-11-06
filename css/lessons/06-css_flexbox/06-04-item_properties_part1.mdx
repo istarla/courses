@@ -9,13 +9,20 @@ order, ability to grow or shrink, and their initial size.
 Today we'll cover `order`, `flex-grow`,
 `flex-shrink`, and `flex-basis`.
 
-Default HTML structure for examples (unless specified):
-
-Item 1
-
-Item 2
-
-Item 3
+      <div class="example-html">
+        <p class="text-sm text-gray-600 mb-2">
+          Default HTML structure for examples (unless specified):
+        </p>
+        <div
+          class="flex-container"
+          id="itemPropsContainerTemplate"
+          style="display: none"
+        >
+          <div class="flex-item item1">Item 1</div>
+          <div class="flex-item item2">Item 2</div>
+          <div class="flex-item item3">Item 3</div>
+        </div>
+      </div>
 
 ## 1. order
 
@@ -35,21 +42,20 @@ their source order (as they appear in the HTML).
 
 **Example: Default Order (all items `order: 0`)**
 
-Item 1 (order:0)
-
-Item 2 (order:0)
-
-Item 3 (order:0)
+      <div class="flex-container order-default">
+        <div class="flex-item item1">Item 1 (order:0)</div>
+        <div class="flex-item item2">Item 2 (order:0)</div>
+        <div class="flex-item item3">Item 3 (order:0)</div>
+      </div>
 
 **Example: Modified Order**
 
-Item 1 (order:2)
-
-Item 2 (order:1)
-
-Item Neg (order:-1)
-
-Item 3 (order:3)
+      <div class="flex-container order-modified">
+        <div class="flex-item item1">Item 1 (order:2)</div>
+        <div class="flex-item item2">Item 2 (order:1)</div>
+        <div class="flex-item item-neg">Item Neg (order:-1)</div>
+        <div class="flex-item item3">Item 3 (order:3)</div>
+      </div>
 
 ```css
 .flex-container { display: flex; }
@@ -86,11 +92,13 @@ container.
 
 **Example: Items with `flex-grow`**
 
-No Grow (0)
-
-Grow 1
-
-Grow 2
+      <div class="flex-container grow-example">
+        <div class="flex-item" style="background-color: #fca5a5">
+          No Grow (0)
+        </div>
+        <div class="flex-item item-grow1">Grow 1</div>
+        <div class="flex-item item-grow2">Grow 2</div>
+      </div>
 
 ```css
 .flex-container { display: flex; width: 600px; } /* Container wider than sum of initial item widths */

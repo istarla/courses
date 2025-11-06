@@ -27,13 +27,12 @@ CSS.
 
 **Example: Defining a Layout with Named Areas**
 
-Header
-
-Sidebar
-
-Main Content
-
-Footer
+        <div class="area-container">
+          <div class="area-item area-header">Header</div>
+          <div class="area-item area-sidebar">Sidebar</div>
+          <div class="area-item area-main">Main Content</div>
+          <div class="area-item area-footer">Footer</div>
+        </div>
 
 ```css
 .area-container {
@@ -147,13 +146,12 @@ track definitions.
 
 Example using `grid` shorthand:
 
-Header
-
-Nav
-
-Main
-
-Footer
+        <div class="shorthand-container">
+          <div class="sh-item sh-head">Header</div>
+          <div class="sh-item sh-nav">Nav</div>
+          <div class="sh-item sh-main">Main</div>
+          <div class="sh-item sh-foot">Footer</div>
+        </div>
 
 The `grid` shorthand is powerful but can be complex to read
 and write. While it can condense code, sometimes using the individual

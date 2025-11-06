@@ -114,8 +114,13 @@ example, `1,0,0` is more specific than `0,50,0`.
 
 ### Specificity Examples:
 
-This is a paragraph for specificity testing.
-
+      <div class="example-html">
+        <div class="specificity-example">
+          <p id="unique-para" class="special-text intro">
+            This is a paragraph for specificity testing.
+          </p>
+        </div>
+      </div>
 ```css
 /* Example 1 */
 p { color: blue; }                 /* Specificity: 0,0,1 */

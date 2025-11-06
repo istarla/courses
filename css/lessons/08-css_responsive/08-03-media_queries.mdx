@@ -76,11 +76,13 @@ Here's a typical mobile-first example:
 
 Resize your browser! (Or view on different devices)
 
-Column A
-
-Column B
-
-Column C (Hidden on Small)
+      <div class="mq-columns">
+        <div class="mq-column-item">Column A</div>
+        <div class="mq-column-item">Column B</div>
+        <div class="mq-column-item hide-on-small">
+          Column C (Hidden on Small)
+        </div>
+      </div>
 
 Device Orientation:
 

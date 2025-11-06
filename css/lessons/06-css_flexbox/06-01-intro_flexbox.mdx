@@ -54,21 +54,28 @@ Understanding Flexbox requires familiarity with its key terms:
   depending on whether the main axis is horizontal or vertical.
 * **Cross Size:** The width or height of a flex item,
   depending on whether the cross axis is horizontal or vertical.
+      <div class="axis-illustration">
+        <p>
+          Imagine a container (Flex Container). Its direct children are Flex
+          Items.
+        </p>
+        <p>If <code>flex-direction: row;</code> (default):</p>
+        <p>
+          <span class="main-axis">Main Axis: Horizontal (left to right)</span>
+        </p>
+        <p>
+          <span class="cross-axis">Cross Axis: Vertical (top to bottom)</span>
+        </p>
+        <p>If <code>flex-direction: column;</code>:</p>
+        <p>
+          <span class="main-axis">Main Axis: Vertical (top to bottom)</span>
+        </p>
+        <p>
+          <span class="cross-axis">Cross Axis: Horizontal (left to right)</span>
+        </p>
+      </div>
 
-Imagine a container (Flex Container). Its direct children are Flex
-Items.
 
-If **flex-direction: row** (default):
-
-Main Axis: Horizontal (left to right)
-
-Cross Axis: Vertical (top to bottom)
-
-If **flex-direction: column**:
-
-Main Axis: Vertical (top to bottom)
-
-Cross Axis: Horizontal (left to right)
 
 ## Enabling Flexbox: The `display` Property
 
@@ -86,11 +93,13 @@ become flex items.
 
 ### Basic Flex Container Example
 
-Item 1
-
-Item 2
-
-Item 3
+      <div class="example-html">
+        <div class="flex-container-demo">
+          <div class="flex-item-demo">Item 1</div>
+          <div class="flex-item-demo">Item 2</div>
+          <div class="flex-item-demo">Item 3</div>
+        </div>
+      </div>
 
 ```html
 <div class="flex-container">

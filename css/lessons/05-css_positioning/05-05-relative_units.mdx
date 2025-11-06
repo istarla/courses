@@ -135,13 +135,12 @@ depends on the property it's used for:
 * For `top`, `bottom`: Relative to the
   **height** of the containing block (if positioned).
 
-Parent (width: 400px)
-
-Child (width: 50% of parent = 200px)
-
-Parent (font-size: 20px)
-
-Child (font-size: 150% of parent = 30px)
+      <div class="unit-example percentage-width-parent">
+        Parent (width: 400px)
+        <div class="percentage-width-child">
+          Child (width: 50% of parent = 200px)
+        </div>
+      </div>
 
 ```css
 .parent-container {
@@ -177,10 +176,13 @@ window's visible area).
   very large text on extreme screen sizes, so use with caution (`clamp()`
   function can help here).
 
-This box is 50vw wide and 10vh tall. (Resize your browser window to see
-it change)
-
-This box is 20vw wide and 30vh tall.
+      <div class="unit-example vw-example">
+        This box is 50vw wide and 10vh tall. (Resize your browser window to see
+        it change)
+      </div>
+      <div class="unit-example vh-example">
+        This box is 20vw wide and 30vh tall.
+      </div>
 
 ```css
 .full-screen-hero {

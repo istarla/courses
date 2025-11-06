@@ -19,11 +19,23 @@ lightgray, cyan, magenta,
 tomato, dodgerblue,
 mediumseagreen.
 
-Red
-
-DodgerBlue
-
-MediumSeaGreen
+      <div class="example-html">
+        <div class="color-swatch" style="background-color: #ff5733">
+          #FF5733
+        </div>
+        <div class="color-swatch" style="background-color: #3498db">
+          #3498DB
+        </div>
+        <div
+          class="color-swatch"
+          style="background-color: #2ecc71; color: #000; text-shadow: none"
+        >
+          #2ECC71
+        </div>
+        <div class="color-swatch" style="background-color: #f0f">
+          #F0F (Pink)
+        </div>
+      </div>
 
 ```css
 p {
@@ -72,14 +84,23 @@ Green, and Blue (RGB) light.
 * **#333** (shorthand for `#333333`): Dark Gray
 * **#A0A0A0:** A medium gray.
 
-#FF5733
-
-#3498DB
-
-#2ECC71
-
-#F0F (Pink)
-
+   <div class="example-html">
+        <div class="color-swatch" style="background-color: rgb(255, 87, 51)">
+          rgb(255,87,51)
+        </div>
+        <div
+          class="color-swatch rgba-example"
+          style="background-color: rgba(52, 152, 219, 0.7)"
+        >
+          <span class="color-swatch-text">rgba(52,152,219,0.7)</span>
+        </div>
+        <div
+          class="color-swatch rgba-example"
+          style="background-color: rgba(46, 204, 113, 0.4)"
+        >
+          <span class="color-swatch-text">rgba(46,204,113,0.4)</span>
+        </div>
+      </div>
 ```css
 body {
   background-color: #f4f4f4; /* Light gray */
@@ -120,11 +141,23 @@ rgba(red, green, blue, alpha)
 *  rgba(0, 0, 255, 0.5): Semi-transparent Blue
 *  rgba(50, 50, 50, 0.8): Semi-transparent Dark Gray
 
-rgb(255,87,51)
-
-rgba(52,152,219,0.7)
-
-rgba(46,204,113,0.4)
+  <div class="example-html">
+        <div class="color-swatch" style="background-color: hsl(30, 100%, 50%)">
+          hsl(30,100%,50%)
+        </div>
+        <div
+          class="color-swatch hsla-example"
+          style="background-color: hsla(200, 70%, 60%, 0.7)"
+        >
+          <span class="color-swatch-text">hsla(200,70%,60%,0.7)</span>
+        </div>
+        <div
+          class="color-swatch hsla-example"
+          style="background-color: hsla(320, 80%, 50%, 0.4)"
+        >
+          <span class="color-swatch-text">hsla(320,80%,50%,0.4)</span>
+        </div>
+      </div>
 
 ```css
 .error-text {

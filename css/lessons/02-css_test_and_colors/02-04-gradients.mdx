@@ -25,7 +25,14 @@ the direction of the gradient and the color stops.
 
 ### Simple Two-Color Linear Gradient
 
-to right, steelblue, lightskyblue
+      <div
+        class="gradient-box"
+        style="
+          background-image: linear-gradient(to right, steelblue, lightskyblue);
+        "
+      >
+        to right, steelblue, lightskyblue
+      </div>
 
 ```css
 .element1 {
@@ -39,7 +46,12 @@ to right, steelblue, lightskyblue
 
 ### Linear Gradient with an Angle
 
-45deg, orange, tomato
+     <div
+        class="gradient-box"
+        style="background-image: linear-gradient(45deg, orange, tomato)"
+      >
+        45deg, orange, tomato
+      </div>
 
 ```css
 .element3 {
@@ -50,10 +62,33 @@ to right, steelblue, lightskyblue
 
 ### Linear Gradient with Multiple Color Stops and Positions
 
-to right, red 0%, yellow 50%, green 100%
-
-multi-stop: red, green 20%, blue 80%
-
+      <div
+        class="gradient-box"
+        style="
+          background-image: linear-gradient(
+            to right,
+            red 0%,
+            yellow 50%,
+            green 100%
+          );
+        "
+      >
+        to right, red 0%, yellow 50%, green 100%
+      </div>
+      <div
+        class="gradient-box"
+        style="
+          margin-top: 10px;
+          background-image: linear-gradient(
+            to bottom,
+            #ff0000,
+            #00ff00 20%,
+            #0000ff 80%
+          );
+        "
+      >
+        multi-stop: red, green 20%, blue 80%
+      </div>
 ```css
 .element4 {
   background-image: linear-gradient(to right, red 0%, yellow 50%, green 100%);
@@ -93,7 +128,12 @@ end-color);`
 
 ### Simple Two-Color Radial Gradient (Circle)
 
-circle, white, steelblue
+      <div
+        class="gradient-box"
+        style="background-image: radial-gradient(circle, white, steelblue)"
+      >
+        circle, white, steelblue
+      </div>
 
 ```css
 .element7 {
@@ -107,7 +147,18 @@ circle, white, steelblue
 
 ### Radial Gradient with Shape, Size, and Position
 
-ellipse farthest-corner at 70% 30%, yellow, red
+      <div
+        class="gradient-box"
+        style="
+          background-image: radial-gradient(
+            ellipse farthest-corner at 70% 30%,
+            #ffff00,
+            #ff0000
+          );
+        "
+      >
+        ellipse farthest-corner at 70% 30%, yellow, red
+      </div>
 
 ```css
 .element9 {
@@ -120,7 +171,19 @@ ellipse farthest-corner at 70% 30%, yellow, red
 
 ### Radial Gradient with Multiple Color Stops
 
-circle, red 20%, yellow 50%, green 80%
+      <div
+        class="gradient-box"
+        style="
+          background-image: radial-gradient(
+            circle,
+            red 20%,
+            yellow 50%,
+            green 80%
+          );
+        "
+      >
+        circle, red 20%, yellow 50%, green 80%
+      </div>
 
 ```css
 .element11 {
@@ -138,9 +201,36 @@ clock.
 `conic-gradient([from angle] [at position,] color [angle], color
 [angle], ...);`
 
-Simple Conic (Rainbow)
-
-Conic from 45deg at 25% 75%
+      <div
+        class="gradient-box"
+        style="
+          background-image: conic-gradient(
+            red,
+            yellow,
+            lime,
+            aqua,
+            blue,
+            magenta,
+            red
+          );
+        "
+      >
+        Simple Conic (Rainbow)
+      </div>
+      <div
+        class="gradient-box"
+        style="
+          margin-top: 10px;
+          background-image: conic-gradient(
+            from 45deg at 25% 75%,
+            red,
+            yellow,
+            green
+          );
+        "
+      >
+        Conic from 45deg at 25% 75%
+      </div>
 
 ```css
 .pie-chart-slice {
@@ -163,9 +253,35 @@ You can create repeating patterns using
 `repeating-conic-gradient()`). The color stops are defined,
 and then the pattern repeats itself to fill the element.
 
-Repeating Linear Stripes
-
-Repeating Radial Circles
+      <div
+        class="gradient-box"
+        style="
+          background-image: repeating-linear-gradient(
+            45deg,
+            #ccc,
+            #ccc 10px,
+            #eee 10px,
+            #eee 20px
+          );
+        "
+      >
+        Repeating Linear Stripes
+      </div>
+      <div
+        class="gradient-box"
+        style="
+          margin-top: 10px;
+          background-image: repeating-radial-gradient(
+            circle,
+            black,
+            black 5px,
+            white 5px,
+            white 10px
+          );
+        "
+      >
+        Repeating Radial Circles
+      </div>
 
 ```css
 .striped-background {

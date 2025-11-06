@@ -47,12 +47,14 @@ A common, older technique is to add an empty element (like a
 `<div>`) after the floated elements and apply
 `clear: both;` to it.
 
-Float 1
-
-Float 2
-
-Container now correctly wraps floats.
-
+      <div class="example-container">
+        <div class="floated-item">Float 1</div>
+        <div class="floated-item">Float 2</div>
+        <div style="clear: both"></div>
+        <p style="padding-top: 5px; font-size: 0.9em">
+          Container now correctly wraps floats.
+        </p>
+      </div>
 ```css
 <div class="container">
   <div style="float: left; width: 100px; height: 50px; background: lightblue;">Float A</div>
@@ -168,23 +170,11 @@ There are also overflow-x and
 overflow-y properties to control overflow independently for
 the horizontal and vertical axes.
 
-overflow: visible; (Default)
-
-This is some long content that will overflow its container.
-
-overflow: hidden;
-
-This is some long content that will be hidden where it overflows.
-
-overflow: scroll;
-
-This is some long content that will cause scrollbars to appear. Even
-if it fits, scrollbars are shown.
-
-overflow: auto;
-
-This is some long content that will cause scrollbars to appear only
-if needed.
+        <div class="overflow-visible">
+          <div class="long-content">
+            This is some long content that will overflow its container.
+          </div>
+        </div>
 
 ```css
 .box-scroll {

@@ -29,9 +29,14 @@ division (`/`) with different units.
 * Especially useful for responsive design, allowing for fluid layouts
   with fixed offsets.
 
-Width: calc(100% - 40px)  
-Height: calc(50vh - var(--header-height))
-
+      <div class="example-html">
+        <div class="calc-example">
+          Width: <code>calc(100% - 40px)</code><br />
+          Height: <code>calc(50vh - var(--header-height))</code><br />
+          Padding: <code>var(--spacing-unit)</code> = 10px<br />
+          Margin-bottom: <code>calc(2 * var(--spacing-unit))</code> = 20px
+        </div>
+      </div>
 ```css
 :root {
   --default-padding: 15px;
@@ -73,8 +78,10 @@ property: var(--property-name, fallback_value);
 * Great for theming, maintaining consistent spacing/sizing, and reducing
   repetition.
 
-This box uses `var()` for background, text color, padding,
-and border color (with a fallback for border).
+        <div class="var-example">
+          This box uses <code>var()</code> for background, text color, padding,
+          and border color (with a fallback for border).
+        </div>
 
 ```css
 :root {
@@ -129,11 +136,21 @@ content property in pseudo-elements.
   than `content`) A fallback value if the attribute is
   missing or invalid.
 
-Some content here. The label "Info:" is from data-label.
-
-More text.
-
-Color?
+      <div class="example-html">
+        <div class="attr-example" data-label="Info">
+          Some content here. The label "Info:" is from <code>data-label</code>.
+        </div>
+        <div class="attr-example" data-label="Warning" style="margin-top: 10px">
+          More text.
+        </div>
+        <div
+          class="attr-color-example"
+          data-bg-color="lightblue"
+          title="Background should be data-bg-color (experimental)"
+        >
+          Color?
+        </div>
+      </div>
 
 ```css
 /* Common use: Displaying attribute content */

@@ -29,15 +29,20 @@ will generally be rendered on top of an element with a lower
   be used to stack elements behind their parent or other non-positioned
   content.
 
-Boxes are positioned absolutely. Hover to see z-index values.
 
-Box 1 (z-index: 1)
-
-Box 2 (z-index: 2)
-
-Box 3 (z-index: 0)
-
-Box 4 (z-index: auto)
+      <div class="example-html1">
+        <p class="mb-2">
+          Boxes are positioned absolutely. Hover to see z-index values.
+        </p>
+        <div class="absolute-z-boxes">
+          <div class="z-box box1" title="z-index: 1">Box 1 (z-index: 1)</div>
+          <div class="z-box box2" title="z-index: 2">Box 2 (z-index: 2)</div>
+          <div class="z-box box3" title="z-index: 0">Box 3 (z-index: 0)</div>
+          <div class="z-box box-auto" title="z-index: auto (behaves like 0 here)">
+            Box 4 (z-index: auto)
+          </div>
+        </div>
+      </div>
 
 ```css
 .box {
@@ -124,16 +129,22 @@ order (from bottom to top):
 7. Positioned descendants with positive `z-index` values
    (ordered by their `z-index`).
 
-Parent has
-`position:relative; z-index:1; opacity:0.99;` (forms a
-stacking context)
-
-Parent (z-index:1, opacity:0.99)
-
-Child (z-index: 100 inside parent context)
-
-Sibling (z-index: 2 in root/outer context)
-
+      <div class="example-html stacking-context-parent">
+        <p class="mb-2">
+          Parent has
+          <code>position:relative; z-index:1; opacity:0.99;</code> (forms a
+          stacking context)
+        </p>
+        <div class="parent-z-index">
+          Parent (z-index:1, opacity:0.99)
+          <div class="z-box child-high-z" title="z-index: 100">
+            Child (z-index: 100 inside parent context)
+          </div>
+        </div>
+        <div class="z-box sibling-low-z" title="z-index: 2">
+          Sibling (z-index: 2 in root/outer context)
+        </div>
+      </div>
 ```css
 .parent-container {
   position: relative; /* Establishes a stacking context if z-index is not auto */
