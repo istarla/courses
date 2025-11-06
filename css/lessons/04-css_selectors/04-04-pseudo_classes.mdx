@@ -70,9 +70,26 @@ relationship within the document structure.
 12. **:empty**: Selects elements that have no children (including text nodes).
   Comments or whitespace may count as content.
 
-* Item 1 (First child)
-* Item 2
-* Item 3 (Last child)
+      <div class="example-html structural-example">
+        <ul>
+          <li>Item 1 (First child)</li>
+          <li>Item 2</li>
+          <li>Item 3 (Last child)</li>
+        </ul>
+        <ol>
+          <li>Alpha (Odd)</li>
+          <li>Beta (Even)</li>
+          <li>Gamma (Odd)</li>
+          <li>Delta (Even)</li>
+        </ol>
+        <article>
+          <p>First paragraph.</p>
+          <p>Second paragraph of type P.</p>
+          <div>Div element</div>
+          <p>Third paragraph of type P.</p>
+        </article>
+        <div class="target-div"></div>
+      </div>
 
 1. Alpha (Odd)
 2. Beta (Even)
@@ -123,7 +140,13 @@ These target form elements based on their state or attributes.
 * **`:valid`** /
   **`:invalid`**: For input elements based on their form validation status.
 
-Opt-in
+      <div class="example-html pseudo-example">
+        <input type="checkbox" id="optIn" checked />
+        <label for="optIn">Opt-in</label><br />
+        <input type="text" value="Can't edit me" disabled /><br />
+        <input type="email" placeholder="your@email.com" required />
+      </div>
+    
 
 ```css
 input[type="checkbox"]:checked + label {
