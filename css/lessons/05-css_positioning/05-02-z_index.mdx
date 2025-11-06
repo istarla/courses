@@ -1,0 +1,201 @@
+# Z-index and Stacking Contexts
+
+When elements are positioned using CSS (e.g., with
+`position: absolute`, `relative`,
+`fixed`, or `sticky`), they can overlap. The
+`z-index` property allows you to control the stacking order
+of these positioned elements along the z-axis (perpendicular to the
+screen). Understanding `z-index` also requires understanding
+the concept of stacking contexts.
+
+## The z-index Property
+
+The `z-index` property specifies the stack level of a
+positioned element. An element with a greater `z-index` value
+will generally be rendered on top of an element with a lower
+`z-index` value.
+
+**Key points about `z-index`:**
+
+* It only works on **positioned elements** (elements with
+  `position` set to `absolute`,
+  `relative`, `fixed`, or `sticky`). It
+  has no effect on statically positioned elements.
+* It accepts integer values (positive, negative, or zero) or the keyword
+  `auto`.
+* `auto`: The element's stack level is the same as its
+  parent. This is the default value.
+* Higher values are stacked on top of lower values. Negative values can
+  be used to stack elements behind their parent or other non-positioned
+  content.
+
+Boxes are positioned absolutely. Hover to see z-index values.
+
+Box 1 (z-index: 1)
+
+Box 2 (z-index: 2)
+
+Box 3 (z-index: 0)
+
+Box 4 (z-index: auto)
+
+```css
+.box {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+.red-box {
+  background-color: red;
+  top: 20px; left: 20px;
+  z-index: 1; /* Above default (0 or auto) */
+}
+.blue-box {
+  background-color: blue;
+  top: 40px; left: 40px;
+  z-index: 2; /* Above red-box */
+}
+.green-box {
+  background-color: green;
+  top: 60px; left: 60px;
+  z-index: 0; /* Below red-box and blue-box */
+}
+```
+
+In the example above, Box 2 (`z-index: 2`) will be on top,
+followed by Box 1 (`z-index: 1`), then Box 3 (`z-index: 0`), and finally Box 4 (`z-index: auto`, which typically
+behaves like `z-index: 0` in this context if all are siblings
+in the same stacking context).
+
+## Stacking Contexts
+
+A stacking context is an element that contains a set of layers. Within a
+stacking context, its child elements are stacked according to their
+`z-index` values, but the entire group of elements (the
+stacking context and its children) is then treated as a single unit in
+the parent stacking context.
+
+**What creates a stacking context?**
+
+* The root element (`<html>`).
+* An element with `position` value `absolute` or
+  `relative` and a `z-index` value other than
+  `auto`.
+* An element with `position` value `fixed` or
+  `sticky`.
+* An element that is a child of a flex container, with a
+  `z-index` value other than `auto`.
+* An element that is a child of a grid container, with a
+  `z-index` value other than `auto`.
+* An element with an `opacity` value less than
+  `1`.
+* An element with a `transform` value other than
+  `none`.
+* An element with a `filter` value other than
+  `none`.
+* Several other less common properties (e.g.,
+  `mix-blend-mode`, `perspective`,
+  `clip-path`, `mask`,
+  `contain: paint`).
+
+**Key Implication of Stacking Contexts:** Once an element
+forms a stacking context, the `z-index` values of its
+children are only meaningful *within that context*. A child
+element, no matter how high its `z-index`, cannot appear on
+top of an element that is in a different stacking context if that
+context itself has a lower stack level than the child's parent context.
+
+### Stacking Order within a Stacking Context:
+
+
+Within a given stacking context, elements are painted in the following
+order (from bottom to top):
+
+1. The background and borders of the element forming the stacking
+   context.
+2. Positioned descendants with negative `z-index` values
+   (ordered by their `z-index`).
+3. Non-positioned, block-level descendants in source order.
+4. Non-positioned, floated descendants in source order.
+5. Non-positioned, inline-level descendants (including inline tables and
+   inline blocks) in source order.
+6. Positioned descendants with `z-index: auto` or
+   `z-index: 0`, in source order.
+7. Positioned descendants with positive `z-index` values
+   (ordered by their `z-index`).
+
+Parent has
+`position:relative; z-index:1; opacity:0.99;` (forms a
+stacking context)
+
+Parent (z-index:1, opacity:0.99)
+
+Child (z-index: 100 inside parent context)
+
+Sibling (z-index: 2 in root/outer context)
+
+```css
+.parent-container {
+  position: relative; /* Establishes a stacking context if z-index is not auto */
+  z-index: 1;
+  background-color: lightgray;
+  padding: 20px;
+}
+.child-inside {
+  position: absolute;
+  background-color: red;
+  width: 80px; height: 80px;
+  top: 10px; left: 10px;
+  z-index: 100; /* Very high, but only within .parent-container */
+}
+.sibling-outside {
+  position: absolute;
+  background-color: blue;
+  width: 80px; height: 80px;
+  top: 50px; left: 50px;
+  z-index: 2; /* Higher than .parent-container's z-index */
+}
+/*
+  In this case, .sibling-outside (z-index: 2) will appear on top of .parent-container (z-index: 1)
+  AND all of its children, including .child-inside (z-index: 100), because .child-inside's
+  z-index is only relative to other elements within .parent-container.
+*/
+```
+
+In the visual example above, the "Sibling (z-index: 2)" box will appear
+on top of the "Parent" div and its "Child (z-index: 100)" because the
+"Parent" div creates its own stacking context (due to
+`position:relative`, `z-index:1` and
+`opacity:0.99`). The child's `z-index:100` is only
+relative to other items \*within\* that parent's stacking context. The
+parent itself is then stacked according to its
+`z-index:1` against the "Sibling" which has
+`z-index:2` in the outer (root) stacking context.
+
+## Practical Uses and Tips
+
+
+* **Modals and Popups:** Use high
+  `z-index` values to ensure they appear above all other page
+  content. The overlay background for a modal often has a slightly lower
+  `z-index` than the modal itself.
+* **Dropdown Menus:** Need a higher
+  `z-index` than surrounding elements to overlap them.
+* **Fixed Headers/Footers:** Usually given a
+  `z-index` to stay above page content during scrolling.
+* **Debugging:** If an element isn't appearing where you
+  expect in the stacking order, check its `position` property
+  and inspect the `z-index` values of it and its ancestors,
+  looking for unintended stacking contexts. Browser developer tools are
+  invaluable for this.
+* **Keep it Simple:** Try not to use excessively high
+  `z-index` values (like `99999`) unless
+  necessary. Manage `z-index` in smaller, more controlled
+  ranges (e.g., 1-10 for general layout, 100s for overlays, 1000s for
+  critical popups).
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/z_index.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

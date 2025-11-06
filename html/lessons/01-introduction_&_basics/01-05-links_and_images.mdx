@@ -1,0 +1,315 @@
+# Links and Images
+
+## Creating Hyperlinks (`<a>` tag)
+<section id="creating-hyperlinks-a-tag" />
+
+Hyperlinks, or simply links, are the essence of the "HyperText" in HTML.
+They allow users to navigate between web pages, websites, or even
+different sections within the same page. Links are created using the
+anchor tag: `<a>`.
+
+The most important attribute of the `<a>` tag is
+`href` (hypertext reference), which
+specifies the destination URL (the address the link points to). The
+content between the opening `<a>` and closing
+`</a>` tags becomes the clickable text or element.
+
+*Sample Code*
+```html
+<a href="https://www.google.com">Visit Google</a>
+```
+
+**Rendered Output:**
+[Visit Google](https://www.google.com)
+
+### Types of Links:
+
+* **Absolute URLs:** Point to a specific, complete address
+  on the internet (like the Google example above). They include the
+  protocol (`http://` or `https://`), domain name,
+  and potentially paths/filenames. Use these for linking to external
+  websites.
+
+*Sample Code*
+```html
+<a href="https://www.google.com">Visit Google</a>
+```
+
+**Rendered Output:**
+[Visit Google](https://www.google.com)
+
+*Sample Code*
+  ```html
+  <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
+  ```
+  **Rendered Output:**
+  [MDN Web Docs](https://developer.mozilla.org/en-US/)
+  <br/>
+
+* **Relative URLs:** Point to files within the same
+  website. They specify the path relative to the current document. This
+  is useful for internal navigation.
+  + `<a href="about.html">About Us</a>` (Links
+    to `about.html` in the same directory)
+  + `<a href="products/product1.html">Product
+    1</a>`
+    (Links to `product1.html` inside a
+    `products` subdirectory)
+  + `<a href="../contact.html">Contact</a>`
+    (Links to `contact.html` in the parent directory)
+* **Page Anchors (Fragment Identifiers):** Link to a
+  specific section within the same page (or another page). Requires the
+  target section to have an `id` attribute.
+
+*Sample Code*
+  ```html
+  <!-- Link -->
+  <a href="#section2">Go to Section 2</a>
+
+  <!-- Target Element (somewhere else on the page) -->
+  <h2 id="section2">Section 2</h2>
+  ```
+**Rendered Output:**
+[Go to Section 2](#section2)
+
+* **Email Links:** Create a link that opens the user's
+  default email client.
+
+*Sample Code*
+```html
+<a href="mailto:info@example.com">Email Us</a>
+```
+**Rendered Output:**
+[Email Us](mailto:info@example.com)
+
+### The `target` Attribute
+
+The `target` attribute specifies where to open the linked
+document.
+
+* `_self`: (Default) Opens the link in the same window/tab.
+* `_blank`: Opens the link in a new window or tab. Use this
+  cautiously, especially for external links, as it can be slightly
+  disorienting for users if overused. When using `_blank`,
+  it's good practice to add `rel="noopener noreferrer"` for
+  security reasons.
+* `_parent`: Opens the link in the parent frame (used with
+  framesets/iframes).
+* `_top`: Opens the link in the full body of the window (used
+  with framesets/iframes).
+
+*Sample Code*
+```html
+<a href="https://www.wikipedia.org" target="_blank" rel="noopener noreferrer">Wikipedia (opens in new tab)</a>
+```
+**Rendered Output:**
+[Wikipedia (opens in new tab)](https://www.wikipedia.org)
+
+## Embedding Images (`<img>` tag)
+<section id="embedding-images-img-tag" />
+
+Images make web pages more visually appealing and informative. The
+`<img>` tag is used to embed images into an HTML
+document. It's an empty element (no closing tag).
+
+Key attributes for `<img>`:
+
+* **`src`** (source): Specifies the path (URL)
+  to the image file. Similar to links, this can be an absolute URL or a
+  relative URL. This attribute is mandatory.
+* **`alt`** (alternative text): Provides a
+  textual description of the image. This is crucial for:
+  + **Accessibility:** Screen readers read the alt text
+    to visually impaired users.
+  + **SEO:** Search engines use alt text to understand
+    image content.
+  + **Broken Images:** If the image fails to load, the
+    alt text is displayed instead.This attribute is mandatory for meaningful images. For purely
+  decorative images, use an empty alt attribute (`alt=""`).
+* `width` and
+  `height`: Specify the dimensions of the image in pixels. Setting these can
+  help the browser reserve space for the image before it loads, reducing
+  layout shifts. However, using CSS for sizing is generally more
+  flexible.
+
+*Sample Code*
+```html
+<img src="images/logo.png" alt="Our Company Logo" width="150" height="50">
+```
+**Rendered Output:**
+<img src="/src/courses/assets/images/companyLogo.png" alt="Our Company Logo" width="150" height="50" />
+
+<br/>
+### Image File Formats
+
+Common web image formats include:
+
+* **JPEG (.jpg, .jpeg):** Best for photographs with complex
+  colors and gradients. Lossy compression (some quality loss for smaller
+  file size).
+* **PNG (.png):** Best for graphics with transparency,
+  sharp lines, or text (like logos, icons). Lossless compression (no
+  quality loss, potentially larger files).
+* **GIF (.gif):** Supports animation and transparency.
+  Limited color palette, often used for simple animations.
+* **SVG (.svg):** Vector format, scales infinitely without
+  quality loss. Ideal for logos, icons, and illustrations defined by
+  lines and shapes. Uses XML markup.
+* **WebP (.webp):** Modern format developed by Google,
+  offering both lossy and lossless compression, transparency, and
+  animation, often with better compression than JPEG and PNG. Browser
+  support is now widespread.
+
+## Examples
+<section id="examples" />
+### Example 1: Basic Links and Image
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Links and Image Example</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>This page demonstrates links and images.</p>
+
+    <img src="images/placeholder.png" alt="A placeholder image">
+
+    <p>Here are some useful resources:</p>
+    <ul>
+        <li><a href="https://www.w3.org/" target="_blank" rel="noopener noreferrer">W3C (World Wide Web Consortium)</a></li>
+        <li><a href="day_4_lists.html">Go back to Day 4 (Lists)</a></li>
+        <li><a href="mailto:help@example.com">Contact Support</a></li>
+    </ul>
+</body>
+</html>
+```
+
+**Output:**
+<>
+  <h1>Welcome!</h1>
+    <p>This page demonstrates links and images.</p>
+
+    <img src="/src/courses/assets/images/placeholderImg.png" alt="A placeholder image" />
+
+    <p>Here are some useful resources:</p>
+    <ul>
+        <li><a href="https://www.w3.org/" target="_blank" rel="noopener noreferrer">W3C (World Wide Web Consortium)</a></li>
+        <li><a href="day_4_lists.html">Go back to Day 4 (Lists)</a></li>
+        <li><a href="mailto:help@example.com">Contact Support</a></li>
+    </ul>
+</>
+
+(Note: Uses a placeholder image URL for demonstration. Replace with your
+own image path.)
+
+### Example 2: Image as a Link
+
+You can wrap an `<img>` tag inside an
+`<a>` tag to make the image clickable.
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Link</title>
+</head>
+<body>
+    <h1>Clickable Logo</h1>
+    <p>Click the logo below to visit the homepage.</p>
+
+    <a href="index.html">
+        <img src="https://via.placeholder.com/100x100.png?text=Logo" alt="Homepage Logo">
+    </a>
+</body>
+</html>
+```
+
+(Again, replace the placeholder URL.)
+
+**Rendered Output (Conceptual):**
+
+[![Homepage Logo](https://via.placeholder.com/100x100.png?text=Logo)](#)
+
+### Example 3: Linking to Page Sections
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Anchors</title>
+    <style>
+        /* Add some space to make scrolling noticeable */
+        section { height: 500px; border: 1px dashed #ccc; margin-bottom: 20px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Linking Within a Page</h1>
+    <nav>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#details">Details</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <section id="intro">
+        <h2>Introduction</h2>
+        <p>This is the first section.</p>
+    </section>
+
+    <section id="details">
+        <h2>Details</h2>
+        <p>This section contains the details.</p>
+    </section>
+
+    <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>This is the final section.</p>
+        <p><a href="#top">Back to top</a></p> <!-- Assumes no explicit id="top", browser goes to top -->
+    </section>
+
+</body>
+</html>
+```
+**Rendered Output (Conceptual):**
+<h1>Linking Within a Page</h1>
+    <nav>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#details">Details</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <section id="intro">
+        <h2>Introduction</h2>
+        <p>This is the first section.</p>
+    </section>
+
+    <section id="details">
+        <h2>Details</h2>
+        <p>This section contains the details.</p>
+    </section>
+
+    <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>This is the final section.</p>
+        <p><a href="#top">Back to top</a></p> {/* Assumes no explicit id="top", browser goes to top */}
+    </section>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import links_and_images_quizData from "../../data/links_and_images_quizData"
+
+<Quiz questions = {links_and_images_quizData} />

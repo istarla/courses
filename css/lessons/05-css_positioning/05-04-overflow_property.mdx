@@ -1,0 +1,215 @@
+# Clearing Floats and Overflow Property
+
+Yesterday, we learned about floating elements. A common challenge with
+floats is that they are taken out of the normal document flow, which can
+cause their parent container to collapse or subsequent content to wrap
+undesirably. Today, we'll explore techniques to "clear" floats and also
+discuss the versatile overflow property.
+
+## The Problem: Container Collapse
+
+
+When a container element only contains floated elements (or its
+non-floated content is shorter than the floats), its height might not
+expand to enclose the floated children. This is because floated elements
+do not contribute to the height calculation of their parent in the
+normal flow.
+
+Float 1
+
+Float 2
+
+The red-dashed container above demonstrates this collapse if no clearing
+method is applied to it (its current border is just for illustration).
+
+## The clear Property
+
+
+The `clear` property is used to control the behavior of an
+element with respect to floating elements that precede it. It specifies
+whether an element can be next to floating elements or if it should be
+moved down (cleared) below them.
+
+The `clear` property can take the following values:
+
+* **none**: The element is not moved down to clear past floating elements. This
+  is the default.
+* **left**: The element is moved down to clear past left-floating elements.
+* **right**: The element is moved down to clear past right-floating elements.
+* **both**: The element is moved down to clear past both left and right
+  floating elements.
+* inherit: The element inherits the clear value of its
+  parent.
+
+### Method 1: Using an Empty Clearing Element
+
+A common, older technique is to add an empty element (like a
+`<div>`) after the floated elements and apply
+`clear: both;` to it.
+
+Float 1
+
+Float 2
+
+Container now correctly wraps floats.
+
+```css
+<div class="container">
+  <div style="float: left; width: 100px; height: 50px; background: lightblue;">Float A</div>
+  <div style="float: left; width: 100px; height: 50px; background: lightgreen;">Float B</div>
+  <div style="clear: both;"></div> <!-- Clearing element -->
+</div>
+<p>This paragraph will appear below the floated elements and the container.</p>
+```
+
+While this works, it adds non-semantic HTML to the markup.
+
+### Method 2: The "Clearfix" Hack (using `::after` pseudo-element)
+
+A more modern and preferred method is the "clearfix" technique, which
+uses the `::after` pseudo-element on the container of the
+floated elements.
+
+Float 1
+
+Float 2
+
+Container (with .clearfix) now correctly wraps floats without extra
+HTML.
+
+```css
+.clearfix::after {
+  content: ""; /* Generates an empty pseudo-element */
+  display: table; /* Or display: block; can also work, but table is common for older clearfix */
+  clear: both; /* Clears the floats */
+}
+/* Apply this class to the container of floated elements */
+```
+
+```html
+<div class="container clearfix">
+  <div style="float: left; width: 100px; height: 50px; background: lightblue;">Float A</div>
+  <div style="float: right; width: 100px; height: 50px; background: lightcoral;">Float B</div>
+  <!-- No extra clearing div needed -->
+</div>
+<p>This content follows normally.</p>
+```
+
+### Method 3: Using `overflow` on the Container
+
+Setting the `overflow` property on the parent container to a
+value other than `visible` (e.g., `auto`,
+`hidden`, or `scroll`) will cause the parent to
+establish a new Block Formatting Context (BFC). A BFC will contain its
+floated children, thus solving the collapse issue.
+
+Float 1
+
+Float 2
+
+Container (with overflow:auto) now correctly wraps floats.
+
+```css
+.container-overflow {
+  overflow: auto; /* or hidden, scroll */
+  border: 1px solid blue; /* Just to see the container */
+}
+```
+
+This is often the simplest method but be aware that
+`overflow: hidden` will clip content that extends beyond the
+container's bounds, and `overflow: scroll/auto` might show
+scrollbars if content exceeds dimensions.
+
+### Method 4: Using `display: flow-root;`
+
+A newer CSS value, `display: flow-root;`, is specifically
+designed to create a BFC without any other side effects (like clipping
+or scrollbars from `overflow`).
+
+Float 1
+
+Float 2
+
+Container (with display:flow-root) now correctly wraps floats.
+
+```css
+.container-flow-root {
+  display: flow-root;
+  border: 1px solid green; /* Just to see the container */
+}
+```
+
+Browser support for `flow-root` is good in modern browsers,
+but check compatibility if older browser support is needed.
+
+## The overflow Property
+
+The `overflow` property specifies what should happen if
+content overflows an element's box (i.e., when the content is too big to
+fit within the element's specified dimensions and padding).
+
+It can take the following values:
+
+* **visible**: The overflow is not clipped. Content renders outside the element's
+  box. This is the default.
+* **hidden**: The overflow is clipped, and the rest of the content will be
+  invisible. No scrollbars are shown.
+* **scroll**: The overflow is clipped, but scrollbars are added to allow viewing
+  the rest of the content. Scrollbars are shown regardless of whether
+  content actually overflows.
+* **auto**: Similar to `scroll`, but scrollbars are only added if
+  content overflows. This is often preferred over `scroll` to
+  avoid unnecessary scrollbars.
+* **inherit**: The element inherits the overflow value of its
+  parent.
+
+There are also overflow-x and
+overflow-y properties to control overflow independently for
+the horizontal and vertical axes.
+
+overflow: visible; (Default)
+
+This is some long content that will overflow its container.
+
+overflow: hidden;
+
+This is some long content that will be hidden where it overflows.
+
+overflow: scroll;
+
+This is some long content that will cause scrollbars to appear. Even
+if it fits, scrollbars are shown.
+
+overflow: auto;
+
+This is some long content that will cause scrollbars to appear only
+if needed.
+
+```css
+.box-scroll {
+  width: 200px;
+  height: 100px;
+  overflow: auto; /* Adds scrollbars if content inside is larger */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.box-hidden {
+  width: 100px;
+  height: 50px;
+  overflow: hidden; /* Clips any content that doesn't fit */
+  border: 1px solid #ccc;
+}
+```
+
+As mentioned, setting overflow to auto or
+hidden on a container is a common way to make it self-clear
+its floated children because it establishes a new Block Formatting
+Context (BFC).
+
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/clearing_floats.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

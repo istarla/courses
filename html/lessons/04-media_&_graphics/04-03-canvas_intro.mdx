@@ -1,0 +1,334 @@
+# Canvas Element (Introduction)
+
+## What is the Canvas Element?
+<section id = "what-is-the-canvas-element" />
+
+The HTML `<canvas>` element provides a
+container on a webpage where you can draw graphics dynamically using
+scripting, typically **JavaScript**. Think of it as a blank
+digital canvas.
+
+By itself, the `<canvas>` element is just an empty
+rectangular area. To actually draw anything, you need to use JavaScript
+to access its **rendering context** (most commonly the 2D
+context) and use the context's API (Application Programming Interface)
+to draw shapes, text, images, and perform other graphical operations.
+
+Canvas is powerful for generating visualizations, creating photo
+manipulations, rendering game graphics in real-time, or creating other
+dynamic graphical interfaces.
+
+**Important Distinction:** Unlike SVG (Scalable Vector
+Graphics, covered next), Canvas uses a "bitmap" or "raster" approach.
+Once something is drawn on the canvas, the browser forgets the
+individual shapes; it only knows about the pixels. This means canvas
+graphics don't scale as smoothly as SVG and aren't easily inspectable or
+interactive without additional JavaScript logic.
+
+## Setting up the Canvas
+<section id = "setting-up-the-canvas" />
+
+Using canvas involves two steps:
+
+1. **HTML Setup:** Add the
+   `<canvas>` element to your HTML, giving it an
+   `id` attribute (to easily select it with JavaScript) and
+   specifying its dimensions using the `width` and
+   `height` attributes. The content inside the
+   `<canvas>` tags serves as fallback content for
+   browsers that don't support canvas.
+    <br/>
+    *Sample Code*
+    ```html
+    <canvas id="myDrawingCanvas" width="500" height="300" style="border: 2px solid black;">
+      Your browser does not support the HTML canvas element. Please upgrade.
+    </canvas>
+    ```
+
+    **Output:**
+    <canvas
+        id="myDrawingCanvas"
+        width={500}
+        height={300}
+        style={{ border: "1px solid black" }}
+      >
+        Your browser does not support the HTML canvas element. Please upgrade.
+      </canvas>
+
+    <br/>
+   **Note:** It's crucial to set the canvas dimensions
+   using the HTML attributes (`width`, `height`),
+   not just CSS. CSS styling affects the size of the element container,
+   while the attributes define the actual number of pixels available
+   for drawing (the coordinate system).
+
+2. **JavaScript Setup:** Use JavaScript to get a reference
+   to the canvas element and obtain its rendering context (usually '2d').
+
+    *Sample Code*
+    ```javascript
+    // Get the canvas element from the DOM
+    const canvas = document.getElementById('myDrawingCanvas');
+
+    // Check if canvas is supported before proceeding
+    if (canvas.getContext) {
+      // Get the 2D rendering context
+      const ctx = canvas.getContext('2d');
+
+      // Now you can use 'ctx' to draw!
+      // (Drawing code goes here)
+
+    } else {
+      // Canvas not supported - fallback logic could go here
+      console.error('Canvas not supported by this browser.');
+    }
+    ```
+    
+   (This JavaScript code would typically go inside a
+   `<script>` tag at the end of your
+   `<body>` or in a separate `.js` file
+   linked to your HTML).
+   
+
+## The 2D Rendering Context (`ctx`)
+<section id = "the-2d-rendering-context-ctx" />
+
+Once you have the 2D context object (commonly named `ctx`),
+you can use its properties and methods to draw. Think of
+`ctx` as your set of drawing tools (pens, brushes, paint
+colors, etc.).
+
+Key Concepts:
+
+* **Coordinate System:** The canvas has a coordinate system
+  where (0, 0) is the top-left corner. The X-axis increases to the
+  right, and the Y-axis increases downwards.
+* **Paths:** Drawing complex shapes often involves creating
+  paths. You begin a path (`beginPath()`), define points and
+  lines (`moveTo()`, `lineTo()`,
+  `arc()`, etc.), and then either stroke (outline) the path
+  (`stroke()`) or fill it (`fill()`).
+* **Styles:** You can set colors and styles for fills
+  (`fillStyle`) and strokes (`strokeStyle`,
+  `lineWidth`) before drawing.
+
+### Basic Drawing Methods:
+
+* `fillStyle = color`: Sets the color/style used for filling shapes (e.g.,
+  `'red'`, `'#00FF00'`,
+  `'rgba(0, 0, 255, 0.5)'`).
+* `fillRect(x, y, width, height)`: Draws a filled rectangle immediately.
+* `strokeStyle = color`: Sets the color/style used for stroking (outlining) shapes.
+* `lineWidth = value`: Sets the width of lines for stroking.
+* `strokeRect(x, y, width, height)`: Draws the outline of a rectangle immediately.
+* `clearRect(x, y, width, height)`: Clears the specified rectangular area, making it transparent.
+* `beginPath()`: Starts a new drawing path.
+* `moveTo(x, y)`: Moves the "pen" to the specified coordinates without drawing a
+  line.
+* `lineTo(x, y)`: Adds a straight line from the current pen position to the specified
+  coordinates.
+* `stroke()`: Draws the outline of the current path using the current
+  `strokeStyle` and `lineWidth`.
+* `fill()`: Fills the current path using the current `fillStyle`.
+* `closePath()`: Closes the current path by drawing a straight line back to the
+  starting point (useful before filling closed shapes).
+
+## Examples
+<section id = "examples" />
+
+These examples show the HTML setup and the JavaScript needed to draw.
+Remember to place the JavaScript within a
+`<script>` tag, usually just before the closing
+`</body>` tag, or in an external file.
+
+### Example 1: Drawing Simple Filled and Stroked Rectangles
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Rectangles</title>
+    <style> canvas { border: 1px solid black; display: block; margin: 20px auto; } </style>
+</head>
+<body>
+    <h1>Drawing Rectangles</h1>
+    <canvas id="canvasRects" width="400" height="200">Canvas not supported.</canvas>
+
+    <script>
+        const canvas1 = document.getElementById('canvasRects');
+        if (canvas1.getContext) {
+            const ctx1 = canvas1.getContext('2d');
+
+            // Filled rectangle
+            ctx1.fillStyle = 'rgb(200, 0, 0)'; // Red color
+            ctx1.fillRect(10, 10, 100, 80); // x, y, width, height
+
+            // Stroked rectangle
+            ctx1.strokeStyle = 'blue';
+            ctx1.lineWidth = 3;
+            ctx1.strokeRect(150, 40, 120, 100); // x, y, width, height
+
+            // Filled rectangle with transparency
+            ctx1.fillStyle = 'rgba(0, 200, 0, 0.5)'; // Green with 50% opacity
+            ctx1.fillRect(80, 70, 100, 100);
+
+        }
+    </script>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1 style={{fontSize: "20px"}}>Drawing Rectangles</h1>
+
+  <svg
+    width="400"
+    height="200"
+    style={{ border: "1px solid black", display: "block", margin: "20px auto" }}
+  >
+    {/* Filled red rectangle */}
+    <rect x="10" y="10" width="100" height="80" fill="rgb(200, 0, 0)" />
+
+    {/* Stroked blue rectangle */}
+    <rect
+      x="150"
+      y="40"
+      width="120"
+      height="100"
+      fill="none"
+      stroke="blue"
+      strokeWidth="3"
+    />
+
+    {/* Filled green rectangle with 50% opacity */}
+    <rect x="80" y="70" width="100" height="100" fill="rgba(0, 200, 0, 0.5)" />
+  </svg>
+</>
+
+### Example 2: Drawing Lines using Paths
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Lines</title>
+    <style> canvas { border: 1px solid black; display: block; margin: 20px auto; } </style>
+</head>
+<body>
+    <h1>Drawing Lines</h1>
+    <canvas id="canvasLines" width="400" height="200">Canvas not supported.</canvas>
+
+    <script>
+        const canvas2 = document.getElementById('canvasLines');
+        if (canvas2.getContext) {
+            const ctx2 = canvas2.getContext('2d');
+
+            // Draw a simple line
+            ctx2.beginPath();       // Start a new path
+            ctx2.moveTo(50, 50);    // Move the pen to (50, 50)
+            ctx2.lineTo(200, 150);  // Draw a line to (200, 150)
+            ctx2.strokeStyle = 'green';
+            ctx2.lineWidth = 5;
+            ctx2.stroke();          // Render the path outline
+
+            // Draw a triangle outline
+            ctx2.beginPath();
+            ctx2.moveTo(250, 50);   // Start point
+            ctx2.lineTo(350, 50);   // Top line
+            ctx2.lineTo(300, 150);  // Right line
+            ctx2.closePath();       // Connect back to start (creates bottom line)
+            ctx2.strokeStyle = 'purple';
+            ctx2.lineWidth = 2;
+            ctx2.stroke();
+        }
+    </script>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1 style={{fontSize:"20px"}}>Drawing Lines</h1>
+
+  <svg
+    width="400"
+    height="200"
+    style={{ border: "1px solid black", display: "block", margin: "20px auto" }}
+  >
+    {/* Simple green line */}
+    <line x1="50" y1="50" x2="200" y2="150" stroke="green" strokeWidth="5" />
+
+    {/* Purple triangle outline */}
+    <polygon
+      points="250,50 350,50 300,150"
+      fill="none"
+      stroke="purple"
+      strokeWidth="2"
+    />
+  </svg>
+</>
+
+
+### Example 3: Drawing a Filled Triangle
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Fill Path</title>
+    <style> canvas { border: 1px solid black; display: block; margin: 20px auto; } </style>
+</head>
+<body>
+    <h1>Filling Paths</h1>
+    <canvas id="canvasFill" width="400" height="200">Canvas not supported.</canvas>
+
+    <script>
+        const canvas3 = document.getElementById('canvasFill');
+        if (canvas3.getContext) {
+            const ctx3 = canvas3.getContext('2d');
+
+            // Draw a filled triangle
+            ctx3.beginPath();
+            ctx3.moveTo(75, 50);    // Top point
+            ctx3.lineTo(125, 150);  // Bottom right
+            ctx3.lineTo(25, 150);   // Bottom left
+            ctx3.closePath();       // Connect back to top point
+
+            ctx3.fillStyle = 'orange';
+            ctx3.fill();            // Fill the defined path
+
+             // Outline the same triangle in black
+            ctx3.strokeStyle = 'black';
+            ctx3.lineWidth = 1;
+            ctx3.stroke(); // Stroke the same path (optional)
+        }
+    </script>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1 style={{fontSize:"20px"}}>Filling Paths</h1>
+
+  <svg
+    width="400"
+    height="200"
+    style={{ border: "1px solid black", display: "block", margin: "20px auto" }}
+  >
+    {/* Filled orange triangle with black outline */}
+    <polygon
+      points="75,50 125,150 25,150"
+      fill="orange"
+      stroke="black"
+      strokeWidth="1"
+    />
+  </svg>
+</>
+
+
+## Test Your Knowledge
+<section id = "test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import canvas_intro_quizData from "../../data/canvas_intro_quizData"
+
+<Quiz questions = {canvas_intro_quizData} />

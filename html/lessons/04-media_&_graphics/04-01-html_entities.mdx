@@ -1,0 +1,343 @@
+# HTML Entities & symbols
+
+## What are HTML Entities?
+<section id="what-are-html-entities" />
+
+HTML entities are special codes used to represent reserved characters or
+characters that are difficult or impossible to type directly using a
+standard keyboard.
+
+**Reserved Characters:** Some characters have special
+meaning in HTML itself. For example, the less-than sign
+(`<`) is used to start HTML tags. If you want to actually
+display a less-than sign as text on your webpage, you need to use its
+entity representation. Otherwise, the browser might interpret it as the
+start of a tag, leading to errors or unexpected rendering.
+
+**Other Characters:** Entities are also used for symbols
+that aren't typically on keyboards, such as copyright symbols (©),
+registered trademark symbols (®), currency symbols (€, £, ¥),
+mathematical symbols (∑, ∞), and accented characters from various
+languages.
+
+While modern character encodings like UTF-8 (which we specified with
+`<meta charset="UTF-8">`) allow you to directly type
+many of these symbols into your HTML code, using entities is still
+essential for reserved characters and can sometimes be more reliable or
+readable for less common symbols.
+
+## Entity Syntax
+<section id="entity-syntax" />
+
+HTML entities typically have two forms:
+
+1. **Entity Name:** Starts with an ampersand
+   (`&`), followed by a predefined name, and ends with a
+   semicolon (`;`). These are generally easier to remember.
+     
+   Example: `&lt;` represents `<`.
+2. **Entity Number (Decimal or Hexadecimal):** Starts with
+   an ampersand (`&`) and a hash sign (`#`),
+   followed by a numeric code (either decimal or hexadecimal starting
+   with 'x'), and ends with a semicolon (`;`). Every character
+   in the Unicode standard has a unique number.   
+   Example (Decimal):
+   `&#60;` represents `<`.   
+   Example
+   (Hexadecimal): `&#x3C;` represents `<`.
+
+  Both forms achieve the same result. Entity names are often preferred for
+  common entities due to readability, but numeric codes can represent any
+  Unicode character, even those without a predefined name.
+
+## Commonly Used HTML Entities
+<section id="commonly-used-html-entities" />
+
+Here are some essential and frequently used entities:
+
+<table class="entity-table">
+        <thead>
+          <tr>
+            <th>Result</th>
+            <th>Description</th>
+            <th>Entity Name</th>
+            <th>Entity Number (Dec)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&nbsp;</td>
+            <td>Non-breaking space (prevents line breaks between words)</td>
+            <td><code>&amp;nbsp;</code></td>
+            <td><code>&amp;#160;</code></td>
+          </tr>
+          <tr>
+            <td>&lt;</td>
+            <td>Less than sign</td>
+            <td><code>&amp;lt;</code></td>
+            <td><code>&amp;#60;</code></td>
+          </tr>
+          <tr>
+            <td>&gt;</td>
+            <td>Greater than sign</td>
+            <td><code>&amp;gt;</code></td>
+            <td><code>&amp;#62;</code></td>
+          </tr>
+          <tr>
+            <td>&amp;</td>
+            <td>Ampersand</td>
+            <td><code>&amp;amp;</code></td>
+            <td><code>&amp;#38;</code></td>
+          </tr>
+          <tr>
+            <td>"</td>
+            <td>Double quotation mark</td>
+            <td><code>&amp;quot;</code></td>
+            <td><code>&amp;#34;</code></td>
+          </tr>
+          <tr>
+            <td>'</td>
+            <td>Single quotation mark (apostrophe)</td>
+            <td>
+              <code>&amp;apos;</code> (less common, use
+              <code>&amp;#39;</code> for better compatibility)
+            </td>
+            <td><code>&amp;#39;</code></td>
+          </tr>
+          <tr>
+            <td>©</td>
+            <td>Copyright symbol</td>
+            <td><code>&amp;copy;</code></td>
+            <td><code>&amp;#169;</code></td>
+          </tr>
+          <tr>
+            <td>®</td>
+            <td>Registered trademark symbol</td>
+            <td><code>&amp;reg;</code></td>
+            <td><code>&amp;#174;</code></td>
+          </tr>
+          <tr>
+            <td>™</td>
+            <td>Trademark symbol</td>
+            <td><code>&amp;trade;</code></td>
+            <td><code>&amp;#8482;</code></td>
+          </tr>
+          <tr>
+            <td>€</td>
+            <td>Euro sign</td>
+            <td><code>&amp;euro;</code></td>
+            <td><code>&amp;#8364;</code></td>
+          </tr>
+          <tr>
+            <td>£</td>
+            <td>Pound sign</td>
+            <td><code>&amp;pound;</code></td>
+            <td><code>&amp;#163;</code></td>
+          </tr>
+          <tr>
+            <td>¥</td>
+            <td>Yen sign</td>
+            <td><code>&amp;yen;</code></td>
+            <td><code>&amp;#165;</code></td>
+          </tr>
+          <tr>
+            <td>→</td>
+            <td>Right arrow</td>
+            <td><code>&amp;rarr;</code></td>
+            <td><code>&amp;#8594;</code></td>
+          </tr>
+          <tr>
+            <td>←</td>
+            <td>Left arrow</td>
+            <td><code>&amp;larr;</code></td>
+            <td><code>&amp;#8592;</code></td>
+          </tr>
+          <tr>
+            <td>↑</td>
+            <td>Up arrow</td>
+            <td><code>&amp;uarr;</code></td>
+            <td><code>&amp;#8593;</code></td>
+          </tr>
+          <tr>
+            <td>↓</td>
+            <td>Down arrow</td>
+            <td><code>&amp;darr;</code></td>
+            <td><code>&amp;#8595;</code></td>
+          </tr>
+          <tr>
+            <td>&hearts;</td>
+            <td>Heart symbol</td>
+            <td><code>&amp;hearts;</code></td>
+            <td><code>&amp;#9829;</code></td>
+          </tr>
+        </tbody>
+      </table>
+Many, many more entities exist for various symbols, mathematical
+operators, Greek letters, etc. You can find comprehensive lists online
+by searching for "HTML entities list".
+
+## Using Non-Breaking Spaces (`&nbsp;`)
+<section id="using-non-breaking-spaces-nbsp" />
+
+The non-breaking space (`&nbsp;`) is particularly useful.
+Normally, browsers might collapse multiple spaces in your HTML code into
+a single space and might break lines between words to fit content.
+
+`&nbsp;` forces the browser to:
+
+* Render an actual space character.
+* Prevent a line break at that position.
+
+This is useful for keeping related words or characters together, like
+"10 km" or "Dr. Smith", or for creating multiple visible
+spaces if needed (though CSS margin/padding is usually better for layout
+spacing).
+
+## Examples
+<section id="examples" />
+
+### Example 1: Displaying HTML Code Snippets
+
+To show HTML code itself on a webpage, you must escape the
+`<`, `>`, and potentially
+`&` characters.
+
+*Sample code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Displaying Code</title>
+    <style> code { background: #eee; padding: 3px; border-radius: 3px; } pre { background: #f4f4f4; border: 1px solid #ccc; padding: 10px; } </style>
+</head>
+<body>
+    <h1>How to write a paragraph in HTML</h1>
+    <p>Use the <code>&lt;p&gt;</code> tag like this:</p>
+
+    <pre><code>
+    &lt;p&gt;This is paragraph text.&lt;/p&gt;
+    &lt;p&gt;Use &amp;lt;strong&amp;gt; for <strong>important</strong> text.&lt;/p&gt;
+    </code></pre>
+
+    <p>Notice how we used <code>&amp;lt;</code> for <code>&lt;</code>,
+       <code>&amp;gt;</code> for <code>&gt;</code>, and
+       <code>&amp;amp;</code> for <code>&amp;</code> inside the <code>&lt;pre&gt;</code> block.</p>
+</body>
+</html>
+```
+**Output:**
+<div style={{ fontFamily: "sans-serif", padding: "20px" }}>
+  <h1>How to write a paragraph in HTML</h1>
+
+  <p>
+    Use the <code>&lt;p&gt;</code> tag like this:
+  </p>
+
+  <pre style={{ background: "#f4f4f4", border: "1px solid #ccc", padding: "10px", borderRadius: "4px", overflowX: "auto" }}>
+    <code>
+{`<p>This is paragraph text.</p>
+<p>Use <strong>important</strong> text.</p>`}
+    </code>
+  </pre>
+
+  <p>
+    Notice how we used <code>&amp;lt;</code> for <code>&lt;</code>, <code>&amp;gt;</code> for <code>&gt;</code>, and <code>&amp;amp;</code> for <code>&amp;</code> inside the <code>&lt;pre&gt;</code> block.
+  </p>
+</div>
+
+
+### Example 2: Using Copyright, Trademark, and Currency Symbols
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symbols Example</title>
+</head>
+<body>
+    <h1>Product Information</h1>
+    <p>WidgetPro&trade; is the latest innovation from ACME Corp&reg;.</p>
+    <p>Price: &euro;99.95 / &pound;85.00 / &#165;12000</p> <!-- Used &#165; for Yen -->
+
+    <footer style="margin-top: 50px; font-size: 0.9em; border-top: 1px solid #ccc; padding-top: 10px;">
+        <p>Copyright &copy; 2025 ACME Corporation. All rights reserved.</p>
+        <p>Designed &amp; Developed by AwesomeDevs.</p> <!-- Used &amp; -->
+    </footer>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1>Product Information</h1>
+  <p>WidgetPro&trade; is the latest innovation from ACME Corp&reg;.</p>
+  <p>Price: &euro;99.95 / &pound;85.00 / &#165;12000</p>
+
+  <footer
+    style={{
+      marginTop: "50px",
+      fontSize: "0.9em",
+      borderTop: "1px solid #ccc",
+      paddingTop: "10px"
+    }}
+  >
+    <p>Copyright &copy; 2025 ACME Corporation. All rights reserved.</p>
+    <p>Designed &amp; Developed by AwesomeDevs.</p>
+  </footer>
+</>
+
+
+### Example 3: Using Non-Breaking Spaces and Arrows
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NBSP and Arrows</title>
+</head>
+<body>
+    <h1>Measurements and Directions</h1>
+
+    <p>The distance is approximately 50&nbsp;km.</p> <!-- Keeps "50 km" together -->
+    <p>Please contact Mr.&nbsp;Jones for details.</p> <!-- Keeps "Mr. Jones" together -->
+
+    <p>Navigation:</p>
+    <ul>
+        <li>Go straight &rarr;</li>
+        <li>Turn left &larr;</li>
+        <li>Press up &uarr; or down &darr;</li>
+    </ul>
+
+    <p>Adding extra space: Space&nbsp;&nbsp;&nbsp;Space</p>
+    <!-- Using multiple &nbsp; creates visible spaces, but CSS padding/margin is usually better for layout. -->
+
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1>Measurements and Directions</h1>
+
+  <p>The distance is approximately 50&nbsp;km.</p>
+  <p>Please contact Mr.&nbsp;Jones for details.</p>
+
+  <p>Navigation:</p>
+  <ul>
+    <li>Go straight &rarr;</li>
+    <li>Turn left &larr;</li>
+    <li>Press up &uarr; or down &darr;</li>
+  </ul>
+
+  <p>Adding extra space: Space&nbsp;&nbsp;&nbsp;Space</p>
+</>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import html_entities_quizData from "../../data/html_entities_quizData"
+
+<Quiz questions = {html_entities_quizData} />

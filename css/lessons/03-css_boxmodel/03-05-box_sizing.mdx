@@ -1,0 +1,195 @@
+# Box Sizing
+We've spent the last few days exploring the CSS box model, including
+content, padding, border, and margin. Today, we'll discuss a crucial
+property that controls how the total width and height of an element are
+calculated: `box-sizing`. Understanding this property can
+significantly simplify layout and sizing management.
+
+## The Default: content-box
+
+By default, the box-sizing property is set to
+content-box. In this model:
+
+* The width and height properties you set
+  apply **only to the content area** of the element.
+* Any padding and border values are added
+  *on top of* the specified width and
+  height.
+
+This means the actual visible width of an element on the page is
+calculated as:
+width + padding-left + padding-right + border-left-width +
+border-right-width. The same applies to height.
+
+ box-sizing: content-box;  
+ width: 250px;
+
+```css
+.my-element-content-box {
+  box-sizing: content-box; /* This is the default */
+  width: 200px;
+  height: 100px;
+  padding: 15px;
+  border: 5px solid green;
+  background-color: lightgreen;
+}
+/*
+  Actual rendered width: 200px (content) + 15px (left_pad) + 15px (right_pad) + 5px (left_border) + 5px (right_border) = 240px
+  Actual rendered height: 100px (content) + 15px (top_pad) + 15px (bottom_pad) + 5px (top_border) + 5px (bottom_border) = 140px
+*/
+```
+
+While this is the default, it can sometimes make layouts challenging.
+For instance, if you want an element to be exactly 300px wide including
+its border and padding, you'd have to manually subtract those values
+from the width property, which can be tedious and
+error-prone, especially in responsive designs.
+
+## The Alternative: border-box
+
+The box-sizing: border-box; model offers a more intuitive
+way to manage element dimensions. In this model:
+
+* The width and height properties you set
+  apply to the
+  **total width and height of the element, including padding and
+  border**, but not margin.
+* `Padding` and `border` values are drawn
+  *inside* the specified `width` and
+  `height`, effectively shrinking the available content area.
+
+This means if you set width: 300px; and
+box-sizing: border-box;, the element's total rendered width
+(content + padding + border) will be 300px. The browser automatically
+adjusts the content area to accommodate the padding and border.
+
+box-sizing: border-box;  
+width: 250px;  
+padding: 20px;  
+border: 10px solid ...;  
+Actual rendered width: **250px**.   
+(Content area becomes 250px - 40px padding - 20px border = 190px)
+
+```css
+.my-element-border-box {
+  box-sizing: border-box;
+  width: 200px; /* This is now the total width including padding and border */
+  height: 100px; /* This is now the total height including padding and border */
+  padding: 15px;
+  border: 5px solid dodgerblue;
+  background-color: lightblue;
+}
+/*
+  Actual rendered width: 200px
+  Content area width: 200px - 15px (left_pad) - 15px (right_pad) - 5px (left_border) - 5px (right_border) = 160px
+
+  Actual rendered height: 100px
+  Content area height: 100px - 15px (top_pad) - 15px (bottom_pad) - 5px (top_border) - 5px (bottom_border) = 60px
+*/
+```
+
+Using border-box makes it much easier to create layouts,
+especially when dealing with percentage-based widths and fixed
+padding/borders. For example, if you have two columns, each with
+width: 50%; box-sizing: border-box;, you can add padding
+and borders to them without worrying about them exceeding the 50% width
+and breaking the layout.
+
+## Universal border-box Sizing
+
+Many developers prefer to use border-box for all elements
+on their pages for consistency and easier layout management. A common
+way to achieve this is with the following CSS snippet:
+
+```html
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+```
+
+**Explanation:**
+
+* `html { box-sizing: border-box; }`: Sets the base
+  `box-sizing` for the root element.
+* `*, *::before, *::after { box-sizing: inherit; }`: This
+  rule selects all elements (`*`), as well as all
+  `::before` and `::after` pseudo-elements. It
+  sets their `box-sizing` property to `inherit`.
+  This means they will inherit the `box-sizing` value from
+  their parent element. Since we set `border-box` on the
+  `html` element, most elements will inherit this.
+
+This approach is considered robust because it allows you to easily
+override `box-sizing` for specific components if needed,
+simply by setting it directly on that component, and its children will
+inherit that specific setting rather than the global
+`border-box`.
+
+**Why not just `* { box-sizing: border-box; }`?**
+While simpler, using `inherit` as shown above provides more
+flexibility if you ever need to use `content-box` for a
+specific section of your site and want its children to naturally
+follow that, rather than being forced to `border-box` by a
+global wildcard selector.
+
+### Example: Two Columns
+
+Consider a simple two-column layout:
+
+Column 1 (border-box, 50% width, padding, border)
+
+Column 2 (border-box, 50% width, padding, border)
+
+Without `border-box`, if `width: 50%;` was set and
+padding/border added, the total width would exceed 100%, causing columns
+to wrap.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+  .row {
+    display: flex; /* Simple way to create columns */
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 5px;
+  }
+  .column {
+    width: 50%; /* Each column aims for 50% */
+    padding: 15px;
+    border: 3px solid #555;
+    text-align: center;
+  }
+  .col1 { background-color: #add8e6; } /* LightBlue */
+  .col2 { background-color: #90ee90; } /* LightGreen */
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="column col1">
+      Column 1 <br> (50% width + padding + border still fits!)
+    </div>
+    <div class="column col2">
+      Column 2 <br> (50% width + padding + border still fits!)
+    </div>
+  </div>
+</body>
+</html>
+```
+
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/box_sizing.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

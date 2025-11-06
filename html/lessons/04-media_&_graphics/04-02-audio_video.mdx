@@ -1,0 +1,299 @@
+# Audio and Video Elements
+
+## Embedding Multimedia
+<section id="embedding-multimedia" />
+
+HTML5 introduced native support for embedding audio and video content
+directly into web pages without requiring third-party plugins like Flash
+(which is now deprecated). This is achieved using the
+`<audio>` and `<video>` elements.
+
+## The `<audio>` Element
+<section id="the-audio-element" />
+
+The `<audio>` element is used to embed sound content in
+documents. You can provide multiple audio sources using the
+`<source>` element inside `<audio>`,
+and the browser will use the first format it supports.
+
+### Key Attributes for `<audio>`:
+
+* **`src`:** Specifies the URL of the audio file (can be used directly on the
+  `<audio>` tag if only providing one source, but using
+  `<source>` is recommended for compatibility).
+* **`controls`:** A boolean attribute. If present, the browser will display standard
+  audio controls (play/pause button, volume control, progress bar). This
+  is essential for user interaction.
+* **`autoplay`:** A boolean attribute. If present, the audio will start playing
+  automatically as soon as it can. **Note:** Autoplay with
+  sound is often blocked by browsers or disliked by users; use with
+  caution, preferably muted.
+* **`loop`:** A boolean attribute. If present, the audio will automatically loop
+  back to the beginning upon reaching the end.
+* **`muted`:** A boolean attribute. If present, the audio output will be muted by
+  default.
+* **`preload`:** Suggests how much of the audio file should be loaded when the page
+  loads. Values:
+  + `none`: Don't preload the audio.
+  + `metadata`: Preload only metadata (like duration).
+  + `auto` (Default): The browser can preload the entire
+    audio file.
+
+### The `<source>` Element (within `<audio>`):
+
+* `src`: Specifies the URL of the audio source file.
+* `type`: Specifies the MIME type of the audio format (e.g.,
+  `audio/mpeg` for MP3, `audio/ogg` for Ogg
+  Vorbis, `audio/wav` for WAV). Providing the type helps the
+  browser quickly determine if it can play the file without having to
+  download it first.
+
+  Text content placed between the opening `<audio>` and
+  closing `</audio>` tags (after any
+  `<source>` elements) will be displayed as fallback
+  content for browsers that do not support the
+  `<audio>` element.
+
+  <br/>
+  *Sample Code*
+  ```html
+  <audio controls preload="metadata">
+    <source src="audio/my-song.mp3" type="audio/mpeg">
+    <source src="audio/my-song.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+    Please <a href="audio/my-song.mp3">download the MP3</a> instead.
+  </audio>
+  ```
+  **Rendered Output:**
+  <audio controls preload="metadata">
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg" />
+    <source src="audio/my-song.ogg" type="audio/ogg" />
+  </audio>
+  <p>Please <a href="audio/my-song.mp3">download the MP3</a> if your browser doesn't support audio.</p>
+
+
+  (Note: For this to work, you need actual `my-song.mp3` and
+  `my-song.ogg` files in an `audio` subfolder).
+
+## The `<video>` Element
+<section id="the-video-tag" titles="The `<video>` Tag" />
+
+  The `<video>` element is used to embed video content.
+  Similar to `<audio>`, it supports multiple sources via
+  the `<source>` element for cross-browser compatibility.
+
+  ### Key Attributes for `<video>`:
+
+  Many attributes are the same as for `<audio>`:
+  `src`, `controls`, `autoplay`,
+  `loop`, `muted`, `preload`.
+
+  Additional common attributes:
+
+  * `width`: Sets the display width of the video player in pixels.
+  * `height`: Sets the display height of the video player in pixels. (It's
+    generally recommended to set only one dimension and let the browser
+    calculate the other to maintain aspect ratio, or better yet, use CSS
+    for responsive sizing).
+  * `poster`: Specifies the URL of an image to show while the video is
+    downloading or until the user hits the play button.
+  * `playsinline`: A boolean attribute primarily for mobile browsers (especially iOS
+    Safari) that allows the video to play within the element's playback
+    area instead of automatically entering fullscreen mode.
+
+### The `<source>` Element (within `<video>`):
+
+* `src`: Specifies the URL of the video source file.
+* `type`: Specifies the MIME type of the video format (e.g.,
+  `video/mp4`, `video/webm`,
+  `video/ogg`). Often includes codec information for more
+  precision, e.g.,
+  `type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'`.
+
+### The `<track>` Element
+
+Used as a child of `<audio>` or
+`<video>` to specify timed text tracks, such as
+subtitles, captions, descriptions, chapters, or metadata. Requires a
+WebVTT file (`.vtt`).
+
+* `kind`: Type of track (`subtitles`, `captions`,
+  `descriptions`, `chapters`,
+  `metadata`).
+* `src`: URL of the `.vtt` file.
+* `srclang`: Language of the track text (e.g., "en", "es").
+* `label`: A user-visible title for the track (e.g., "English Subtitles").
+* `default`: Boolean attribute indicating the track should be enabled by
+  default.
+
+*Sample Code*
+```html
+<video controls width="640" height="360" poster="images/video-poster.jpg" preload="metadata">
+  <source src="videos/my-movie.mp4" type="video/mp4">
+  <source src="videos/my-movie.webm" type="video/webm">
+
+  <!-- Subtitles/Captions -->
+  <track kind="captions" src="captions/my-movie-en.vtt" srclang="en" label="English Captions" default>
+  <track kind="subtitles" src="subtitles/my-movie-es.vtt" srclang="es" label="Spanish Subtitles">
+
+  <!-- Fallback Content -->
+  Your browser does not support the video tag.
+  You can <a href="videos/my-movie.mp4">download the MP4 video</a>.
+</video>
+```
+**Output:**
+<video
+  controls
+  width="640"
+  height="360"
+  poster="/src/courses/assets/images/image3.webp"
+  preload="metadata"
+>
+  <source
+    src="/src/courses/assets/videos/video1.mp4"
+    type="video/mp4"
+  />
+
+  {/* Subtitles (optional) */}
+  <track
+    kind="captions"
+    src="captions/my-movie-en.vtt"
+    srclang="en"
+    label="English Captions"
+  />
+
+  Your browser does not support the video tag. You can{" "}
+  <a href="https://cdn.pixabay.com/video/2023/05/17/16847-817699467_large.mp4">download the MP4 video</a>.
+</video>
+
+
+
+(Requires `my-movie.mp4`, `my-movie.webm`,
+`video-poster.jpg`, and the `.vtt` files in
+appropriate folders).
+
+## Supported Media Formats
+<section id="supported-media-queries" />
+
+Browser support for different audio and video formats varies. The most
+commonly supported formats across modern browsers are:
+
+* **Audio:** MP3 (`audio/mpeg`), AAC
+  (`audio/aac`), Ogg Vorbis (`audio/ogg`), WAV
+  (`audio/wav`). MP3 has the widest support.
+* **Video:** MP4 (H.264 codec + AAC/MP3 audio,
+  `video/mp4`), WebM (VP8/VP9 codec + Vorbis/Opus audio,
+  `video/webm`), Ogg Theora (`video/ogg` - less
+  common now). MP4 (H.264) is the most widely supported.
+
+Providing sources in both MP4 and WebM (for video) or MP3 and Ogg (for
+audio) generally ensures good compatibility across major browsers.
+
+## Examples
+<section id="examples" />
+
+### Example 1: Simple Audio Player
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Audio</title>
+</head>
+<body>
+    <h1>Listen to our Podcast Snippet</h1>
+    <audio controls>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.ogg" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+    <p>(Audio source: MDN examples)</p>
+</body>
+</html>
+```
+
+**Rendered Output (Conceptual):**
+<h1>Listen to our Podcast Snippet</h1>
+    <audio controls>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg" />
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.ogg" type="audio/ogg" />
+      Your browser does not support the audio element.
+    </audio>
+    <p>(Audio source: MDN examples)</p>
+
+Your browser does not support the audio element.
+
+### Example 2: Video Player with Poster and Controls
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Player</title>
+    <style> video { max-width: 100%; height: auto; border: 1px solid #ccc; } </style>
+</head>
+<body>
+    <h1>Watch this Short Clip</h1>
+    <video controls width="720" poster="https://via.placeholder.com/720x400.png?text=Video+Poster" preload="metadata">
+         <!-- Example using video from MDN -->
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        Sorry, your browser doesn't support embedded videos.
+    </video>
+    <p>(Video source: MDN examples. Poster is a placeholder.)</p>
+</body>
+</html>
+```
+
+**Rendered Output (Conceptual):**
+
+<video controls width="720" poster="/src/courses/assets/images/tulips.jpg" preload="metadata">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+        Sorry, your browser doesn't support embedded videos.
+    </video>
+    <p>(Video source: MDN examples. Poster is a placeholder.)</p>
+
+### Example 3: Audio with Loop and Muted Autoplay
+
+(Note: Autoplay behavior can be inconsistent and often requires the
+`muted` attribute to work in modern browsers).
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Background Audio</title>
+</head>
+<body>
+    <h1>Page with Background Ambiance</h1>
+    <p>This page has looping background audio (autoplayed muted). Add controls to unmute.</p>
+
+    <audio loop autoplay muted controls> <!-- Added controls so user can unmute -->
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.ogg" type="audio/ogg">
+        Audio not supported.
+    </audio>
+     <p>(Audio source: MDN examples)</p>
+</body>
+</html>
+```
+**Rendered Output (Conceptual):**
+<audio loop autoplay muted controls> {/* Added controls so user can unmute */}
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg" />
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.ogg" type="audio/ogg" />
+        Audio not supported.
+    </audio>
+     <p>(Audio source: MDN examples)</p>
+     
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import audio_video_quizData from "../../data/audio_video_quizData"
+
+<Quiz questions = {audio_video_quizData} />

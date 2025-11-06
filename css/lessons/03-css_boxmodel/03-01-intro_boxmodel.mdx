@@ -1,0 +1,331 @@
+# Introduction to the Box Model
+
+Welcome to Week 2! We're kicking it off with one of the most fundamental
+concepts in CSS: the Box Model. Understanding the box model is crucial
+for controlling layout and spacing of elements on a web page. Every HTML
+element can be considered as a box.
+
+## What is the CSS Box Model?
+
+The CSS box model is a set of rules that defines how an HTML element is
+rendered on a page. It describes the rectangular boxes that are
+generated for elements in the document tree and lays them out according
+to the visual formatting model. Each box consists of four main parts,
+layered on top of each other:
+
+* **Content:** The actual content of the box, where text,
+  images, or other media appear. Its dimensions are given by the
+  `width` and `height` properties.
+* **Padding:** An optional transparent area surrounding the
+  content. It clears an area around the content. The padding is affected
+  by the `background-color` of the element.
+* **Border:** An optional line that goes around the padding
+  and content. The border's thickness, style, and color can be set.
+* **Margin:** An optional transparent area surrounding the
+  border. It clears an area outside the border, separating the element
+  from other elements.
+### Visual Representation of the Box Model
+
+<div style={{
+  border: "2px solid #444",
+  padding: "40px",
+  backgroundColor: "transparent",
+  marginBottom: "20px",
+  textAlign: "center"
+}}>
+  <div style={{
+    backgroundColor: "#e6f4ff", /* Margin area */
+    padding: "30px",
+    border: "2px solid transparent"
+  }}>
+    Margin Area (Transparent)
+
+    <div style={{
+      backgroundColor: "#b3e1f1", /* Border area */
+      padding: "30px",
+      marginTop: "15px",
+      marginBottom: "15px",
+      border: "10px solid #b3e1f1",
+      position: "relative"
+    }}>
+      Border Area
+
+      <div style={{
+        backgroundColor: "#faf7ce", /* Padding area */
+        padding: "30px",
+        border: "1px dashed #555",
+        marginTop: "20px"
+      }}>
+        Padding Area <br />
+        <strong>Content Box (width & height)</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p style={{ textAlign: "center", marginTop: "10px", fontStyle: "italic" }}>
+  Visual representation of the Box Model.
+</p>
+
+
+## Core Box Model Properties
+
+### 1. Content (width and height)
+
+These properties define the width and height of the content area of the
+element. We will cover these in more detail tomorrow.
+
+```css
+.my-box {
+  width: 300px;
+  height: 150px;
+  background-color: lightcoral; /* So we can see the box */
+}
+```
+
+      <div
+        class="example-box my-box"
+        style="
+          width: 300px;
+          height: 150px;
+          background-color: lightcoral;
+          margin: auto;
+        "
+      >
+        Content Area
+      </div>
+
+### 2. padding
+
+Padding creates space between the element's content and its border. You
+can set padding for all four sides at once, or individually.
+
+* padding-top
+* padding-right
+* padding-bottom
+* padding-left
+
+**Shorthand for `padding`:**
+
+*  padding: value; (all four sides)
+*  padding: top_bottom left_right; (e.g.,
+   padding: 10px 20px;`)
+*  padding: top right_left bottom; (e.g.,
+   padding: 10px 20px 15px;`)
+*  padding: top right bottom left; (e.g.,
+   padding: 10px 20px 15px 5px;`)
+
+```css
+.padded-box {
+  width: 200px;
+  background-color: lightseagreen;
+  color: white;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  /* Or shorthand: padding: 10px 20px 30px 40px; */
+}
+.another-padded-box {
+  background-color: mediumpurple;
+  color: white;
+  padding: 25px; /* 25px on all sides */
+}
+```
+
+      <div
+        class="example-box padded-box"
+        style="
+          width: 200px;
+          background-color: lightseagreen;
+          color: white;
+          padding: 10px 20px 30px 40px;
+          margin: auto;
+          text-align: center;
+        "
+      >
+        Padded Content
+      </div>
+      <div
+        class="example-box another-padded-box mt-4"
+        style="
+          background-color: mediumpurple;
+          color: white;
+          padding: 25px;
+          margin: auto;
+          text-align: center;
+        "
+      >
+        25px Padding All Around
+      </div>
+
+### 3. border
+
+The border goes around the padding and content. It has properties for
+width, style, and color. We'll cover border properties in more detail on
+Day 08.
+
+Basic shorthand: border: width style color;
+
+```css
+.bordered-box {
+  width: 250px;
+  padding: 20px;
+  background-color: lightgoldenrodyellow;
+  border: 5px solid navy; /* 5px wide, solid style, navy color */
+}
+```
+
+     <div
+        class="example-box bordered-box"
+        style="
+          width: 250px;
+          padding: 20px;
+          background-color: lightgoldenrodyellow;
+          border: 5px solid navy;
+          margin: auto;
+          text-align: center;
+        "
+      >
+        Bordered Content
+      </div>
+
+### 4. margin
+
+Margin creates space outside the border, between this element and other
+elements. It is transparent and does not take the element's background
+color.
+
+Similar to padding, margin can be set for all sides or individually:
+
+*  margin-top
+*  margin-right
+*  margin-bottom
+*  margin-left
+
+**Shorthand for `margin` (same syntax as padding):**
+
+* `margin: value;`
+* `margin: top_bottom left_right;`
+* `margin: top right_left bottom;`
+* `margin: top right bottom left;`
+
+```css
+.box-with-margin {
+  width: 150px;
+  height: 100px;
+  background-color: salmon;
+  border: 2px solid darkred;
+  padding: 10px;
+  margin-top: 20px;
+  margin-right: 30px;
+  margin-bottom: 40px;
+  margin-left: 50px;
+  /* Or shorthand: margin: 20px 30px 40px 50px; */
+}
+.centered-box {
+    width: 60%;
+    background-color: lightblue;
+    padding: 15px;
+    margin: 20px auto; /* Top/bottom 20px, auto left/right for centering block elements */
+}
+```
+
+      <div class="example-box" style="background-color: #eee; padding: 10px">
+        <div
+          class="box-with-margin"
+          style="
+            width: 150px;
+            height: 60px;
+            background-color: salmon;
+            border: 2px solid darkred;
+            padding: 10px;
+            margin: 20px 30px 40px 50px;
+            text-align: center;
+          "
+        >
+          Box 1
+        </div>
+        <div
+          class="box-with-margin"
+          style="
+            width: 150px;
+            height: 60px;
+            background-color: lightgreen;
+            border: 2px solid darkgreen;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+          "
+        >
+          Box 2 (margins separate these boxes)
+        </div>
+      </div>
+**Centering Block Elements:** Setting
+`margin-left` and `margin-right` to
+`auto` for a block-level element with a defined width will
+center it horizontally within its container. Example:
+`margin: 0 auto;`.
+
+## Total Element Width/Height Calculation
+
+By default (when `box-sizing: content-box;` is active, which
+is the default), the `width` and
+`height` properties apply only to the content area. Padding,
+border, and margin are added \*outside\* of this defined width and height.
+
+So, the total space an element takes up is:
+
+**Total Width =** `width` +
+padding-left + padding-right +
+`border-left` + `border-right` +
+`margin-left` + `margin-right`
+
+**Total Height =** `height` +
+`padding-top` + `padding-bottom` +
+`border-top` + `border-bottom` +
+`margin-top` + `margin-bottom`
+
+This can sometimes make layout calculations tricky. We'll discuss the
+`box-sizing` property on Day 10, which can change how this
+calculation works.
+
+```css
+.sample-div {
+  width: 200px; /* Content width */
+  height: 100px; /* Content height */
+  padding: 20px; /* Adds 20px on all 4 sides inside the border */
+  border: 5px solid black; /* Adds 5px on all 4 sides outside the padding */
+  margin: 10px; /* Adds 10px on all 4 sides outside the border */
+  background-color: skyblue;
+}
+/*
+Total visible width for .sample-div (excluding margin):
+200px (width)
++ 20px (left padding) + 20px (right padding) = 40px padding
++ 5px (left border) + 5px (right border) = 10px border
+= 200 + 40 + 10 = 250px
+*/
+```
+      <div
+        class="sample-div"
+        style="
+          width: 200px;
+          height: 50px;
+          padding: 20px;
+          border: 5px solid black;
+          margin: 10px auto;
+          background-color: skyblue;
+          text-align: center;
+        "
+      >
+        Visible width: 250px
+      </div>
+
+Visible width: 250px
+
+{/* // import Quiz from '../../../components/Quiz'
+// import cssMCQs from '../quiz-data/intro_boxmodel.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

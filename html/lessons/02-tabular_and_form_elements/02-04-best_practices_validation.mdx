@@ -1,0 +1,204 @@
+# HTML Best Practices & Validation
+
+## Why Best Practices Matter
+<section id="why-best-practices-matter" />
+
+Writing HTML correctly isn't just about making things appear on the
+screen. Following best practices ensures your web pages are:
+
+* **Accessible:** Usable by everyone, including people with
+  disabilities using assistive technologies (like screen readers).
+* **Maintainable:** Easier for you and other developers to
+  read, understand, and update in the future.
+* **Performant:** Can contribute to faster loading times
+  and better browser rendering.
+* **SEO-Friendly:** Easier for search engines to crawl and
+  understand your content.
+* **Cross-Browser Compatible:** More likely to render
+  consistently across different web browsers.
+
+## Key HTML Best Practices
+<section id="key-html-best-practices" />
+
+* ### Use Semantic HTML Appropriately
+  <br/>
+  As covered before, use elements like `<header>`,
+  `<nav>`, `<main>`,
+  `<article>`, `<section>`,
+  `<aside>`, and `<footer>` to
+  structure your content meaningfully. Avoid "div-itis" (using
+  `<div>` for everything when a more specific semantic
+  tag exists). Use `<h1>`-`<h6>`
+  hierarchically.
+
+
+* ### Always Include `alt` Text for Images
+  <br/>
+  Provide meaningful alternative text for all images using the
+  `alt`
+  attribute. This is critical for accessibility and SEO. For purely
+  decorative images, use an empty alt attribute (`alt=""`) so
+  screen readers can skip them.
+  <br/>
+  *Sample Code*
+  ```html
+  <img src="logo.png" alt="ACME Corp Logo">
+  <img src="decorative-swirl.png" alt="">
+  <img src="important-diagram.png" alt="">
+  <img src="photo.jpg" alt="image">
+  ```
+
+* ### Use Labels Correctly with Form Inputs
+  <br/>
+  Always associate a `<label>` with every form control
+  (`<input>`, `<select>`,
+  `<textarea>`) using the `for` attribute
+  linking to the control's `id`. This improves usability and
+  accessibility.
+* ### Validate Your HTML
+  <br/>
+  Regularly check your HTML code for errors using validation tools. This
+  helps catch syntax mistakes, missing attributes, or improper element
+  nesting that could cause rendering issues or accessibility problems.
+  (More on validation below).
+* ### Declare the Correct Doctype
+  <br/>
+  Always start your HTML document with
+  `<!DOCTYPE html>` to ensure browsers render the page
+  in standards mode (using the latest HTML5 rules).
+* ### Specify Character Encoding
+  <br/>
+  Include `<meta charset="UTF-8">` within the
+  `<head>` section. UTF-8 supports a vast range of
+  characters and prevents display issues with special characters or
+  different languages.
+* ### Set the Document Language
+  <br/>
+  Use the `lang` attribute on the
+  `<html>` tag (e.g.,
+  `<html lang="en">`) to indicate the primary language
+  of the page content. This helps browsers, translation tools, and
+  assistive technologies.
+* ### Maintain Proper Nesting and Closing Tags
+  <br/>
+  Ensure all elements are properly nested (tags opened inside others
+  must be closed before the outer tag closes) and that all non-empty
+  elements have a corresponding closing tag.
+  <br/>
+  *Sample Code*
+  ```html
+  <p>Here is some <strong>important</strong> text.</p>
+
+  <p>Here is some <strong>important text.</strong> </p>
+  ```
+* ### Use Comments Wisely
+  <br/>
+  Use HTML comments (`<!-- ... -->`) to explain complex
+  sections of code, note temporary changes, or add reminders. Avoid
+  over-commenting simple code. Remember comments are visible in the page
+  source.
+* ### Separate Structure (HTML), Presentation (CSS), and Behavior (JavaScript)
+  <br/>
+  Avoid using inline styles (`style="..."` attribute) or
+  inline event handlers (`onclick="..."` attribute)
+  extensively in your HTML. Keep styling in separate CSS files and
+  scripting in separate JavaScript files for better organization and
+  maintainability. We'll touch on linking these in the next lessons.
+* ### Minimize Inline Elements for Block Layout
+  <br/>
+  Don't use inline elements like **`<span>`** or
+  **`<br>`** to create block-level spacing or layout. Use
+  CSS properties like `margin`, `padding`, and
+  layout techniques (Flexbox, Grid) on block-level or semantic elements.
+
+## HTML Validation
+<section id="html-validation" />
+
+HTML validation is the process of checking your HTML code against the
+official standards defined by the World Wide Web Consortium (W3C).
+Validators are tools that analyze your code and report errors or
+warnings based on these standards.
+
+**Why Validate?**
+
+* **Catch Errors:** Finds syntax errors like unclosed tags,
+  improperly nested elements, missing required attributes, or typos.
+* **Ensure Consistency:** Helps ensure your page will
+  render more predictably across different browsers, as browsers are
+  generally built to handle valid code better.
+* **Improve Accessibility:** Many validation errors
+  correspond to accessibility issues (e.g., missing alt text, incorrect
+  form labeling).
+* **Future-Proofing:** Valid code is more likely to work
+  correctly with future browser versions and web technologies.
+* **Debugging Aid:** Validation errors often point directly
+  to the source of rendering problems.
+
+### How to Validate
+
+The most common way is to use the official W3C Markup Validation
+Service:
+
+* **Website:**
+  [W3C Markup Validation Service](https://validator.w3.org/)
+* **Methods:** You can validate by:
+  + Entering the URL (URI) of a live webpage.
+  + Uploading an HTML file.
+  + Pasting your HTML code directly into a text area ("Validate by
+    Direct Input").
+
+There are also browser extensions and built-in tools in some code
+editors that can perform HTML validation.
+
+Aim to fix all errors reported by the validator. Warnings are
+suggestions and might not always indicate a critical problem, but they
+are worth reviewing.
+
+## Examples of Common Validation Errors
+<section id="examples-of-common-validation-errors" />
+
+### Example 1: Unclosed Tag
+*Sample Code*
+```html
+<p>This paragraph is missing its closing tag.
+<div>This div is inside the unclosed paragraph.</div>
+```
+
+**Correct Version:**
+
+```html
+<p>This paragraph has its closing tag.</p>
+<div>This div is now properly outside the paragraph.</div>
+```
+
+### Example 2: Missing Required Attribute (alt on img)
+*Sample Code*
+```html
+<img src="logo.png">
+```
+**Correct Version:**
+
+```html
+<img src="logo.png" alt="Company Logo"> <img src="decoration.png" alt="">
+```
+
+### Example 3: Improper Nesting
+*Sample Code*
+```html
+<!-- ❌ Incorrect nesting: <em> is closed after </strong> -->
+<p>Here is <strong>some text <em>that is nested</strong> incorrectly.</em></p>
+```
+
+**Correct Version:**
+
+```html
+<p>Here is <strong>some text <em>that is nested</em> correctly.</strong></p>
+```
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from '../../../components/quiz';
+import bestPractiseValidation from '../../data/best_practices_validation_quizData';
+
+<Quiz questions={bestPractiseValidation} />

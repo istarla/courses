@@ -1,0 +1,140 @@
+# Viewport Meta Tag
+
+Yesterday, we introduced Responsive Web Design (RWD). A critical
+component required for RWD to function correctly on mobile devices is
+the **viewport meta tag**. Today, we'll explore what the
+viewport is, why this tag is essential, and the different directives you
+can use within it.
+
+## What is the Viewport?
+
+The viewport is the user's visible area of a web page. It varies
+depending on the device:
+
+* On desktop computers, the viewport is the browser window. Resizing the
+  window changes the viewport size.
+* On mobile devices, the viewport is typically the screen area available
+  to the browser, but mobile browsers handle it differently by default
+  without the viewport meta tag.
+
+## The Problem Without the Viewport Meta Tag
+
+
+Mobile browsers, when first encountering a web page not optimized for
+mobile, often assume it's a desktop site. To display it, they use a
+"virtual" viewport much wider than the physical screen (e.g., 980px
+wide) and then shrink the rendered result down to fit the physical
+screen. This results in:
+
+* Text becoming tiny and unreadable.
+* Users having to zoom in and pan around to navigate the content.
+* Media queries based on device width not triggering correctly, as the
+  browser reports the wider virtual viewport width.
+
+This behavior was a reasonable default when most websites weren't
+mobile-friendly, but it prevents responsive designs from working as
+intended.
+
+## The Solution:
+```css  
+<meta name="viewport">
+```
+
+The viewport meta tag, placed within the `<head>` of
+your HTML, allows you to control the browser's viewport size and
+scaling.
+
+The standard, recommended viewport tag for RWD is:
+
+```css
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+Let's break down the `content` attribute directives:
+
+* **`width=device-width`**: This is the crucial part. It tells the browser to set the width of
+  the viewport equal to the width of the device's screen (in
+  device-independent pixels) instead of using the default virtual
+  viewport width. This ensures that media queries based on width
+  function correctly.
+* **`initial-scale=1.0`**: This sets the initial zoom level when the page first loads. A value
+  of `1.0` prevents the browser from initially zooming in or
+  out, displaying the page at its intended size (1 CSS pixel = 1
+  device-independent pixel).
+
+### Visual Comparison (Conceptual)
+
+**Without Viewport Tag on Mobile:**  
+Browser uses wide virtual viewport (e.g., 980px), renders page, then
+scales down to fit screen. Text is tiny. Media queries might not
+activate correctly.
+
+**With width=device-width, initial-scale=1.0:**  
+Browser sets viewport width to device width. Page renders at 1:1
+scale. Text is readable. Responsive styles based on device width apply
+correctly.
+
+(Note: The iframes above are illustrative; actual mobile browser
+rendering depends on the device.)
+
+## Other Viewport Directives
+
+While `width=device-width, initial-scale=1.0` is standard,
+other directives exist, though some should be used with caution:
+
+* **`height=device-height`**: Sets the viewport height to the device height. Less commonly used
+  than `width`.
+* **`minimum-scale=<value>`**: Sets the minimum allowed zoom level (e.g.,
+  `minimum-scale=1.0`).
+* **`maximum-scale=<value>`**: Sets the maximum allowed zoom level (e.g.,
+  `maximum-scale=3.0`).
+* **`user-scalable=yes/no`**: Controls whether the user is allowed to zoom in or out. Setting
+  this to `no` (or setting `maximum-scale=1.0`) is
+  **strongly discouraged** as it hinders accessibility for
+  users with low vision.
+
+```css
+<!-- Example allowing more zoom -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
+
+<!-- ****** AVOID THIS - Bad for Accessibility ****** -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+```
+
+**Accessibility First:** Always allow users to zoom.
+Disabling zoom (`user-scalable=no` or
+`maximum-scale=1.0`) prevents users with visual impairments
+from enlarging content, violating WCAG (Web Content Accessibility
+Guidelines). Stick to
+`width=device-width, initial-scale=1.0` unless you have a
+very specific, well-justified reason to modify scaling, and even then,
+avoid disabling user scaling.
+
+## Where to Place It
+
+The viewport meta tag should be placed within the
+`<head>` section of your HTML document, usually early
+on, before any large CSS or JavaScript files are loaded, to ensure the
+browser applies the settings as soon as possible.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Responsive Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Page content -->
+</body>
+</html>
+```
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/viewport.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

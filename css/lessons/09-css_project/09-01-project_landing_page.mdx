@@ -1,0 +1,208 @@
+# Project - Building a Simple Landing Page
+
+Congratulations on reaching the final day of the core Tailwind module!
+Today, we'll consolidate what we've learned by building the structure
+and styling for a simple, responsive landing page. This project will
+utilize various Tailwind utilities for layout, typography, spacing,
+responsiveness, and basic component structure.
+
+This project focuses on the HTML structure and Tailwind classes.
+Interactivity (like mobile menu toggling or form submission) would
+require JavaScript, which is outside our current scope. Images are
+placeholders.
+
+## Landing Page Structure
+
+Our simple landing page will have:
+
+* A Navigation Bar
+* A Hero Section
+* A Features Section
+* A Call-to-Action (CTA) Section
+* A Footer
+
+## Live Demo / Example Output
+
+LandingPage
+
+* [Features](#features)
+* [Sign Up](#cta)
+
+## Build Something Amazing
+
+Quickly design and customize responsive mobile-first sites with
+Tailwind CSS.
+
+[Get Started](#cta)
+
+### Features
+
+* **Rapid Development**:
+Build complex designs quickly with utility classes.
+* **Highly Customizable**
+Configure colors, spacing, fonts, and more.
+* **Responsive Built-in**
+
+Mobile-first design with intuitive breakpoint prefixes.
+
+### Ready to Dive In?
+
+1.Start your free trial today and experience the power of
+utility-first CSS.
+
+2.Sign Up Now
+
+3.© 2025 LandingPage. All rights reserved.
+
+[Privacy Policy](#) |
+[Terms of Service](#)
+
+## HTML Code with Tailwind Classes
+
+```html
+<!DOCTYPE html>
+<html lang="en" class=""> <!-- Add/remove 'dark' class -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Example for custom background if needed */
+        .hero-section {
+             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1200x600/cccccc/808080?text=Hero+Background');
+             background-size: cover;
+             background-position: center;
+        }
+        html { scroll-behavior: smooth; } /* Smooth scroll for anchor links */
+    </style>
+    <!-- Basic Dark Mode Toggle JS -->
+     <script>
+        function toggleDarkMode() { document.documentElement.classList.toggle('dark'); localStorage.setItem('darkMode', document.documentElement.classList.contains('dark')); }
+        if (localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white dark:bg-gray-800 shadow sticky top-0 z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-indigo-600 dark:text-indigo-400">LandingPage</a>
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#features" class="text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">Features</a></li>
+                <li><a href="#cta" class="text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">Sign Up</a></li>
+            </ul>
+             <!-- Mobile Menu Button (needs JS) -->
+             <button class="md:hidden text-gray-600 dark:text-gray-300 focus:outline-none">
+                 <!-- Hamburger Icon SVG -->
+                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+             </button>
+        </div>
+        <!-- Mobile Menu Panel (hidden by default, shown by JS) -->
+        <div class="hidden md:hidden"> <!-- Mobile menu items here --> </div>
+    </nav>
+
+     <!-- Hero Section -->
+    <section class="hero-section text-white py-20 md:py-32 text-center">
+         <div class="container mx-auto">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">Build Something Amazing</h2>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Quickly design and customize responsive mobile-first sites with Tailwind CSS.</p>
+            <a href="#cta" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Features</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4 text-indigo-500 dark:text-indigo-400">🚀</div>
+                    <h4 class="text-xl font-semibold mb-2 dark:text-white">Rapid Development</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Build complex designs quickly with utility classes.</p>
+                </div>
+                <!-- Feature 2 -->
+                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4 text-indigo-500 dark:text-indigo-400">🎨</div>
+                    <h4 class="text-xl font-semibold mb-2 dark:text-white">Highly Customizable</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Configure colors, spacing, fonts, and more.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4 text-indigo-500 dark:text-indigo-400">📱</div>
+                    <h4 class="text-xl font-semibold mb-2 dark:text-white">Responsive Built-in</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Mobile-first design with intuitive breakpoint prefixes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- CTA Section -->
+    <section id="cta" class="py-16 bg-indigo-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold mb-4">Ready to Dive In?</h3>
+            <p class="text-lg mb-8">Start your free trial today and experience the power of utility-first CSS.</p>
+             <button class="bg-white hover:bg-gray-200 text-indigo-700 font-bold py-3 px-8 rounded-full text-lg transition duration-300">Sign Up Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-8">
+         <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 LandingPage. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="#" class="hover:text-white mx-2">Privacy Policy</a> |
+                <a href="#" class="hover:text-white mx-2">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle Button -->
+    <button onclick="toggleDarkMode()" title="Toggle Dark Mode" class="fixed bottom-4 right-4 bg-gray-500 hover:bg-gray-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 text-white dark:text-black font-bold w-10 h-10 rounded-full flex items-center justify-center shadow-lg z-50">🌙</button>
+
+</body>
+</html>
+```
+
+## Key Takeaways from Project
+
+* **Structure First:** Semantically structure your HTML
+  (header, nav, main, section, article, footer).
+* **Layout Utilities:** Use Flexbox (flex,
+  justify-*, items-*) and Grid
+  (grid, grid-cols-*, gap-*) for
+  arranging major sections and components.
+* **Spacing & Sizing:** Apply padding (p-*),
+  margin (m-*), width (w-*), height
+  (h-*), and max-width (max-w-*) consistently.
+  container mx-auto is common for centering page content.
+* **Typography:** Use text size (text-*),
+  weight (font-*), and color (text-*)
+  utilities.
+* **Responsiveness:** Use breakpoint prefixes
+  (sm:, md:, lg:) to adapt
+  layout, visibility, and styling for different screen sizes
+  (mobile-first).
+* **Interactivity:** Use state variants
+  (hover:, focus:) for visual feedback on
+  buttons and links.
+* **Dark Mode:** Apply dark: variants for
+  colors and backgrounds.
+* **Composition:** Combine multiple utilities on single
+  elements to achieve the desired appearance without custom CSS.
+
+This project provides a foundation. Real-world landing pages would
+involve more detailed styling, specific brand colors/fonts (via
+customization), potentially more complex components, animations, and
+JavaScript for full interactivity.
+
+Congratulations on completing this 3-month CSS and Tailwind CSS course
+outline!
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/project_landing.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

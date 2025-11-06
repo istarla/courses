@@ -1,0 +1,198 @@
+# Placing Items in a Grid
+
+After defining the structure of our grid with columns and rows
+yesterday, today we'll learn how to place grid items precisely onto that
+grid. CSS Grid provides several ways to position items, primarily using
+grid line numbers or named grid areas (which we'll cover tomorrow).
+
+By default, grid items are automatically placed into the next available
+grid cell according to the grid's auto-placement algorithm.
+
+### Understanding Grid Lines
+
+
+Grid lines are the horizontal and vertical lines that separate the
+tracks (rows and columns). They are numbered starting from 1 for both
+rows and columns. In a grid with `N` columns, there are
+`N+1` vertical grid lines. Similarly, for
+`M` rows, there are `M+1` horizontal grid lines.
+
+Lines can also be numbered negatively, starting from the end. The last
+line is -1, the second-to-last is -2, and so on.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+Conceptual 4x3 Grid: Column lines 1-5, Row lines 1-4.
+
+### Line-Based Placement Properties
+
+These properties define where a grid item starts and ends, based on grid
+line numbers.
+
+* **`grid-column-start`**: Specifies the vertical grid line where the item begins.
+* **`grid-column-end`**: Specifies the vertical grid line where the item ends.
+* **`grid-row-start`**: Specifies the horizontal grid line where the item begins.
+* **`grid-row-end`**: Specifies the horizontal grid line where the item ends.
+
+The item will occupy the cells between its start and end lines. The end
+line number itself is exclusive, similar to array slicing.
+
+Example Grid (4 columns, 3 rows)
+
+A (col 1-3, row 1-2)
+
+B (col 3-5, row 1-4)
+
+C (col 1, row 2-4)
+
+D (col 2, row 2)
+
+E (row 3, col 2)
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+}
+.item-a {
+  grid-column-start: 1;
+  grid-column-end: 3; /* Spans 2 columns (ends *before* line 3) */
+  grid-row-start: 1;
+  grid-row-end: 2; /* Spans 1 row */
+  background-color: lightcoral;
+}
+.item-b {
+  grid-column-start: 3;
+  grid-column-end: 5; /* Spans 2 columns (ends *before* line 5) */
+  grid-row-start: 1;
+  grid-row-end: 4; /* Spans 3 rows (ends *before* line 4) */
+  background-color: lightblue;
+}
+/* ... styles for C, D, E using line numbers ... */
+```
+
+### Shorthands: grid-column and grid-row
+
+These properties are shorthands for the start and end lines.
+
+**Syntax:**
+
+* `grid-column: <start-line> / <end-line>;`
+* `grid-row: <start-line> / <end-line>;`
+
+If only one value is provided, the item spans only one track (column or
+row).
+
+```css
+/* Equivalent to the .item-b styles above */
+.item-b-shorthand {
+  grid-column: 3 / 5; /* Start at line 3, end before line 5 */
+  grid-row: 1 / 4;    /* Start at line 1, end before line 4 */
+  background-color: lightblue;
+}
+.item-single-cell {
+  grid-column: 2 / 3; /* Only column 2 */
+  /* OR simply: grid-column: 2; */
+  grid-row: 2 / 3;    /* Only row 2 */
+  /* OR simply: grid-row: 2; */
+  background-color: lightgreen;
+}
+```
+
+### Spanning Tracks: The span Keyword
+
+Instead of specifying the end line, you can specify how many tracks an
+item should span using the `span` keyword.
+
+**Syntax:**
+
+* `grid-column: <start-line> / span
+  <number-of-tracks>;`
+* `grid-column-end: span <number-of-tracks>;` (if start
+  line is known)
+* Similarly for `grid-row` and `grid-row-end`.
+
+```css
+.item-span-cols {
+  grid-column-start: 2;
+  grid-column-end: span 2; /* Starts at line 2, spans 2 columns (ends before line 4) */
+  grid-row: 1; /* Stays in row 1 */
+  background-color: lightpink;
+}
+.item-span-rows-shorthand {
+  grid-column: 1; /* Column 1 */
+  grid-row: 2 / span 2; /* Starts at row line 2, spans 2 rows (ends before line 4) */
+  background-color: lightyellow;
+}
+```
+
+Using `span` can be helpful when you know how many tracks an
+item should cover but might not know the exact end line number,
+especially in complex or dynamic grids.
+
+## Shorthand: `grid-area`
+
+The `grid-area` property is a shorthand that can set all four
+line-based placement properties at once.
+
+**Syntax:**
+`grid-area: <row-start> / <column-start> / <row-end>
+/ <column-end>;`
+
+Remember the order: row-start, column-start, row-end, column-end.
+
+```css
+.item-using-grid-area {
+  /* Place item starting at row line 2, column line 3,
+     ending before row line 4, column line 5 */
+  grid-area: 2 / 3 / 4 / 5;
+  background-color: mediumpurple;
+}
+
+/* Spanning example with grid-area */
+.item-span-grid-area {
+   /* Start row 1, col 1, span 2 rows, span 3 columns */
+   grid-area: 1 / 1 / span 2 / span 3;
+   background-color: sandybrown;
+}
+```
+
+The `grid-area` property can also be used with named grid
+areas, which we will cover tomorrow.
+
+**Line Numbers and Implicit Grid:** If you place an item
+using line numbers that don't exist in your explicit grid definition
+(e.g., placing an item in row 5 when you only defined 3 rows with
+`grid-template-rows`), the browser will create implicit
+tracks (rows or columns) to accommodate the item. These implicit tracks
+typically size themselves based on content (`auto`).
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/placing_item.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

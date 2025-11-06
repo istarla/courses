@@ -1,0 +1,197 @@
+# Combining Selectors
+
+Welcome to Week 3! We've learned about basic selectors like element,
+class, and ID selectors. Today, we'll explore how to combine these basic
+selectors to target HTML elements with greater precision using
+combinators. Combinators allow you to define relationships between
+selectors.
+
+The following HTML structure will be used for examples:
+
+```html
+<div class="container">
+  <h2>Main Title</h2>
+  <p>A paragraph directly inside container.</p>
+  <div class="section highlight-descendant highlight-child">
+    <p>Paragraph inside section (child of section, descendant of container).</p>
+    <span>A span here.</span>
+    <p>Another paragraph inside section.</p>
+  </div>
+  <p class="highlight-adjacent highlight-general">Paragraph after section (sibling).</p>
+  <ul>
+    <li>Item 1</li>
+    <li class="special"><a href="#">Special Item Link</a></li>
+  </ul>
+  <p>Last paragraph in container.</p>
+</div>
+```
+
+## 1. Descendant Combinator (space)
+
+The descendant combinator, represented by a space, selects elements that
+are descendants of a specified element. A descendant can be a child,
+grandchild, great-grandchild, and so on, at any level deep within the
+specified ancestor.
+
+**Syntax:** `ancestor descendant`
+
+**Example:** `.container p` selects all
+`<p>` elements that are anywhere inside an element with
+the class `container`.
+
+## Main Title
+
+A paragraph directly inside container. (This will be blue)
+
+Paragraph inside section. (This will also be blue)
+
+A span here.
+
+Another paragraph inside section. (This will also be blue)
+
+Paragraph after section (sibling). (This will be blue)
+
+Last paragraph in container. (This will be blue)
+
+```css
+/* Selects all <p> elements that are descendants of an element with class "container" */
+.container p {
+  color: blue;
+}
+
+/* Selects <a> tags only if they are inside an <li> with class "special" */
+li.special a {
+  font-weight: bold;
+  color: green;
+}
+```
+
+## 2. Child Combinator (`>`)
+
+The child combinator, represented by the greater-than sign
+(`>`), selects elements that are direct children of a
+specified element. It does not select deeper descendants (grandchildren,
+etc.).
+
+**Syntax:** `parent > child`
+
+**Example:** `.section > p` selects only
+```css
+`<p>` elements that are direct children of an element
+with the class `section`.
+```
+## Main Title (not a direct child paragraph)
+
+A paragraph directly inside container (not child of .section).
+
+Paragraph inside section. (This will be bold)
+
+A span here.
+
+Another paragraph inside section. (This will be bold)
+
+Grandchild paragraph (not a direct child of .section). (This will
+NOT be bold)
+
+```css
+/* Selects <p> elements that are direct children of elements with class "section" */
+.section > p {
+  font-weight: bold;
+  border-left: 3px solid red;
+  padding-left: 5px;
+}
+
+/* Selects <li> elements that are direct children of a <ul> element */
+ul > li {
+  list-style-type: square;
+}
+```
+
+## 3. Adjacent Sibling Combinator (`+`)
+
+The adjacent sibling combinator, represented by a plus sign
+(`+`), selects an element that is the immediately following
+sibling of a specified element. Both elements must share the same
+parent, and the second element must come directly after the first in the
+HTML markup.
+
+**Syntax:** `first_element + second_element`
+```css
+**Example:** `h2 + p` selects a
+`<p>` element only if it immediately follows an
+`<h2>` element (and they are siblings).
+```
+## Main Title
+
+A paragraph directly after h2. (This will be italic)
+
+Another paragraph, not immediately after h2. (This will NOT be italic)
+
+I'm a div
+
+Paragraph after section div. (This will be italic, if the div was h2,
+or if the rule was .section + p)
+
+```css
+/* Selects a <p> element that immediately follows an <h2> element */
+h2 + p {
+  font-style: italic;
+  color: #555;
+}
+
+/* Selects a <ul> that immediately follows an element with class "intro" */
+.intro + ul {
+  margin-top: 0; /* Remove top margin if it follows an intro */
+}
+```
+
+## 4. General Sibling Combinator (`~`)
+
+The general sibling combinator, represented by a tilde (`~`),
+selects elements that are siblings of a specified element and come after
+it in the HTML markup. They don't have to be immediately adjacent, but
+they must share the same parent.
+
+**Syntax:** `first_element ~ sibling_element`
+```css
+**Example:** `h2 ~ p` selects all
+`<p>` elements that are siblings of an
+`<h2>` element and appear after it.
+```
+## Main Title
+
+A paragraph after h2. (This will be underlined)
+
+A div sibling
+
+Another paragraph sibling after h2 and div. (This will be underlined)
+
+Yet another paragraph sibling. (This will be underlined)
+
+```css
+/* Selects all <p> elements that are siblings of and come after an <h2> element */
+h2 ~ p {
+  text-decoration: underline;
+  color: purple;
+}
+
+/* Selects all <li> elements that are siblings of an <li> with class "active" and come after it */
+li.active ~ li {
+  opacity: 0.7;
+}
+```
+
+**Combining Combinators:** You can chain multiple
+combinators and selectors together to create very specific targeting
+rules. For example:
+`div.main-content > article h3 + p` would select a
+paragraph that immediately follows an `h3`, where that
+`h3` is a descendant of an `article` element,
+which itself is a direct child of a `div` with the class
+`main-content`.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/combining_selectors.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

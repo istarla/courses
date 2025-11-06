@@ -1,0 +1,260 @@
+# Defining a Grid
+
+Now that we understand the basics of CSS Grid and its terminology, let's
+learn how to explicitly define the structure of our grid using the
+`grid-template-columns` and
+`grid-template-rows` properties, and how to control the
+spacing between grid tracks using the `gap` properties.
+
+### 1. Defining Columns: grid-template-columns
+
+The `grid-template-columns` property defines the number and
+size of the columns in your grid layout.
+
+You provide a space-separated list of values, where each value
+represents the size of a column track.
+
+**Common Size Values:**
+
+* **Length units:** `px`, `em`,
+  `rem`, etc. (e.g., `100px 200px 100px` creates
+  three columns with fixed widths).
+* **Percentage units:** `%` (relative to the
+  container width).
+* **`auto`:** The column sizes itself based on
+  its content, or takes up remaining space if other columns are fixed.
+* **Fractional units (`fr`):** Represents a
+  fraction of the available space in the grid container after accounting
+  for fixed-size tracks and gaps. `1fr 2fr` means the second
+  column gets twice as much available space as the first.
+* **minmax(min, max):** Defines a size range,
+  allowing the track to be flexible within limits (e.g.,
+  `minmax(100px, 1fr)` means the column is at least 100px
+  wide, but can grow to take 1 fraction of available space).
+* **fit-content(value):** Sizes the column
+  based on its content, but caps it at the specified `value`.
+
+**Example: Fixed Width Columns**
+
+100px
+
+200px
+
+100px
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 100px 200px 100px; /* 3 columns with fixed widths */
+}
+```
+
+**Example: Fractional Unit Columns**
+
+1fr
+
+2fr
+
+1fr
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* 3 columns, middle one gets twice the space */
+}
+```
+
+**Example: Mixed Units**
+
+150px
+
+1fr
+
+2fr
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 150px 1fr 2fr; /* Fixed first column, remaining space split 1:2 */
+}
+```
+
+## 2. Defining Rows: `grid-template-rows`
+
+The `grid-template-rows` property works similarly to
+`grid-template-columns`, but defines the number and height of
+the rows in your grid.
+
+You provide a space-separated list of row track sizes, using the same
+types of values (`px`, `%`, `fr`,
+`auto`, `minmax()`, etc.). Percentage heights are
+relative to the container's height (which often needs to be explicitly
+set).
+
+If you define columns but not rows, the grid will create implicit rows
+with `auto` height (sizing based on content) as needed.
+
+**Example: Fixed Height Rows**
+
+Row 1 (50px)
+
+Row 1 (50px)
+
+Row 2 (100px)
+
+Row 2 (100px)
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Define columns first */
+  grid-template-rows: 50px 100px; /* Define two rows with fixed heights */
+}
+```
+
+**Example: Auto Height Rows**
+
+Row 1 (auto height)  
+More Content
+
+Row 1 (auto height)
+
+Row 2 (60px height)
+
+Row 2 (60px height)
+
+Row 3 (auto height)
+
+Row 3 (auto height)  
+Line  
+Line
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: auto 60px auto; /* Row heights based on content, except middle row */
+}
+```
+
+## 3. The repeat() Function
+
+To avoid writing out the same track size multiple times, you can use the
+`repeat()` function.
+
+**Syntax:** `repeat(count, track-size-list)`
+
+* `count`: The number of times to repeat, or keywords like
+  `auto-fill` or `auto-fit`.
+* `track-size-list`: The track size(s) to repeat (e.g.,
+  `1fr`, `minmax(100px, 1fr)`,
+  `100px 200px`).
+
+**Example: Repeating Columns**
+
+1fr
+
+1fr
+
+1fr
+
+```css
+.grid-container {
+  display: grid;
+  /* Equivalent to: 1fr 1fr 1fr */
+  grid-template-columns: repeat(3, 1fr);
+}
+```
+
+**Example: Auto-Fitting Columns (Responsive)**
+
+Using `auto-fill` or `auto-fit` with
+`minmax()` creates responsive grids without media queries.
+`auto-fill` fills the row with as many columns as possible,
+even if they are empty. `auto-fit` behaves similarly but
+collapses empty tracks.
+
+Item 1
+
+Item 2
+
+Item 3
+
+Item 4
+
+Item 5
+
+```css
+.responsive-grid {
+  display: grid;
+  /* Create as many columns as fit, each at least 100px wide,
+     growing equally to fill space */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+```
+
+### 4. Defining Gaps: `gap`, `row-gap`, `column-gap`
+
+These properties define the size of the gutters (space) between grid
+tracks.
+
+* **`column-gap`**: Sets the gap between columns.
+* **`row-gap`**: Sets the gap between rows.
+* **`gap`**: A shorthand for setting both `row-gap` and
+  `column-gap`. If one value is provided, it applies to both.
+  If two values are provided, the first is `row-gap`, the
+  second is `column-gap`.
+
+(Note: These properties were previously named
+`grid-column-gap`, `grid-row-gap`, and
+`grid-gap`. The shorter names are now standard and also work
+in Flexbox).
+
+**Example: Uniform Gap**
+
+1
+
+2
+
+3
+
+4
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px; /* 10px gap between rows AND columns */
+}
+```
+
+**Example: Different Row and Column Gaps**
+
+1
+
+2
+
+3
+
+4
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 20px; /* 20px gap between rows */
+  column-gap: 5px; /* 5px gap between columns */
+  /* Shorthand: gap: 20px 5px; */
+}
+```
+
+The `gap` properties create space only \*between\* tracks, not
+between the edge tracks and the container boundary. Use container
+`padding` for that.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/defining_grid.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

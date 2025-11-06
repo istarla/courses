@@ -1,0 +1,355 @@
+# HTML Tables
+
+## Introduction to Tables
+<section id="introduction-to-tables" />
+
+HTML tables are used to present data in a structured, two-dimensional
+grid of rows and columns. They are ideal for displaying tabular data
+like spreadsheets, statistics, schedules, or comparison charts.
+
+**Important Note:** In the past, tables were often misused
+for page layout. This is strongly discouraged now. Use CSS (specifically
+techniques like Flexbox or Grid) for layout purposes. Use HTML tables
+**only** for presenting actual tabular data.
+
+## Basic Table Structure
+<section id="basic-table-structure" />
+
+The core tags for creating a table are:
+
+* **`<table>`**: The main container for the entire table.
+* **`<tr>`** (Table Row): Defines a row
+  within the table.
+* **`<td>`** (Table Data): Defines a
+  standard data cell within a row. The content inside
+  `<td>` is the actual data.
+* **`<th>`**  (Table Header): Defines a
+  header cell within a row. Header cells typically contain titles for
+  columns or rows. Browsers usually render `<th>` text
+  as bold and centered. Using `<th>` is important for
+  semantics and accessibility.
+
+*Sample Code*
+```html
+<table class="basic-table">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Role</th>
+  </tr>
+  <tr>
+    <td>Jane</td>
+    <td>Doe</td>
+    <td>Developer</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Smith</td>
+    <td>Designer</td>
+  </tr>
+</table>
+```
+
+**Rendered Output (with basic styling applied):**
+
+<table class="basic-table">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Role</th>
+        </tr>
+        <tr>
+          <td>Jane</td>
+          <td>Doe</td>
+          <td>Developer</td>
+        </tr>
+        <tr>
+          <td>John</td>
+          <td>Smith</td>
+          <td>Designer</td>
+        </tr>
+      </table>
+
+## Structuring Tables Further: `<thead>`, `<tbody>`, `<tfoot>`
+<section id="structuring-tables-further-thead-tbody-tfoot" />
+
+For more complex tables and better semantic structure (which also helps
+with styling and accessibility), you can group rows into header, body,
+and footer sections:
+
+* `<thead>`: Groups the header content (usually the row(s) containing
+  `<th>` elements for column titles).
+* `<tbody>`: Groups the main body content (the data rows). You can have multiple
+  `<tbody>` elements in a table to group rows
+  logically.
+* `<tfoot>`: Groups the footer content (e.g., summary rows or totals). Note: A
+  `<tfoot>` must appear after
+  `<thead>` and `<tbody>` in the HTML
+  structure, although some older practices placed it differently. The
+  browser will render it at the bottom regardless.
+
+Using these elements doesn't change the basic visual layout much by
+default, but it provides structure that browsers, assistive
+technologies, and CSS can use.
+
+## Spanning Rows and Columns: `colspan` and `rowspan`
+<section id="spanning-rows-and-columns-colspan-and-rowspan" />
+
+Sometimes, a cell needs to extend across multiple columns or rows.
+
+* `colspan="number"`: Attribute added to a `<th>` or
+  `<td>`. Makes the cell span horizontally across the
+  specified `number` of columns.
+* `rowspan="number"`: Attribute added to a `<th>` or
+  `<td>`. Makes the cell span vertically across the
+  specified `number` of rows.
+
+When using these, you need to adjust the number of cells in the affected
+rows/columns accordingly.
+
+## Table Caption (`<caption>`)
+<section id="table-caption" />
+
+The `<caption>` tag provides a title
+or description for the table. It should be the first child element
+inside the `<table>` tag. Captions are important for
+accessibility, helping users understand the table's content without
+having to read through the cells.
+
+## Examples
+<section id="examples" />
+
+### Example 1: Table with `<thead>`, `<tbody>`, `<tfoot>`, and `<caption>`
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Structured Table</title>
+    <!-- Link to basic table CSS from Day 6 page for rendering -->
+    <link href="day_6_tables.css" rel="stylesheet"> <!-- Assume basic styling in this file -->
+    <style>
+        /* Basic Table Styling Copied Here for Demo */
+        table.basic-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+        table.basic-table th, table.basic-table td { border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left; }
+        table.basic-table th { background-color: #e5e7eb; font-weight: bold; }
+        table.basic-table caption { caption-side: top; text-align: center; margin-bottom: 0.5rem; color: #1e40af; font-weight: bold; font-size: 1.1em; }
+        thead { background-color: #f3f4f6; } /* Style thead */
+        tbody tr:nth-child(even) { background-color: #f9fafb; } /* Zebra striping */
+        tfoot { background-color: #e2e8f0; font-weight: bold; text-align: right; } /* Style tfoot */
+    </style>
+</head>
+<body>
+    <h1>Monthly Expenses</h1>
+    <table class="basic-table">
+        <caption>Summary of Expenses for January</caption>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Item</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Utilities</td>
+                <td>Electricity</td>
+                <td>$75.00</td>
+            </tr>
+            <tr>
+                <td>Utilities</td>
+                <td>Internet</td>
+                <td>$60.00</td>
+            </tr>
+            <tr>
+                <td>Food</td>
+                <td>Groceries</td>
+                <td>$350.00</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Total Expenses:</td>
+                <td>$485.00</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
+```
+
+**Rendered Output (with basic styling):**
+<table className="basic-table">
+  <caption
+    style={{
+      captionSide: "top",
+      textAlign: "center",
+      marginBottom: "0.5rem",
+      color: "#1e40af",
+      fontWeight: "bold",
+      fontSize: "1.1em"
+    }}
+  >
+    Summary of Expenses for January
+  </caption>
+
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Item</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Utilities</td>
+      <td>Electricity</td>
+      <td>$75.00</td>
+    </tr>
+    <tr>
+      <td>Utilities</td>
+      <td>Internet</td>
+      <td>$60.00</td>
+    </tr>
+    <tr>
+      <td>Food</td>
+      <td>Groceries</td>
+      <td>$350.00</td>
+    </tr>
+  </tbody>
+
+  <tfoot
+    style={{
+      backgroundColor: "#e2e8f0",
+      fontWeight: "bold",
+      textAlign: "right"
+    }}
+  >
+    <tr>
+      <td colSpan="2">Total Expenses:</td>
+      <td>$485.00</td>
+    </tr>
+  </tfoot>
+</table>
+
+### Example 2: Using `colspan`
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colspan Example</title>
+     <style> /* Basic Table Styling */ table.basic-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; } table.basic-table th, table.basic-table td { border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left; } table.basic-table th { background-color: #e5e7eb; font-weight: bold; } </style>
+</head>
+<body>
+    <h1>Item Inventory</h1>
+    <table class="basic-table">
+        <tr>
+            <th colspan="2">Item Details</th> <!-- Spans 2 columns -->
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td>Gadget</td>
+            <td>Model A</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Widget</td>
+            <td>Type X</td>
+            <td>23</td>
+        </tr>
+    </table>
+</body>
+</html>
+```
+
+**Rendered Output (with basic styling):**
+
+<table class="basic-table">
+        <tr>
+          <th colspan="2">Item Details</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+          <td>Gadget</td>
+          <td>Model A</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>Widget</td>
+          <td>Type X</td>
+          <td>23</td>
+        </tr>
+      </table>
+### Example 3: Using `rowspan`
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rowspan Example</title>
+     <style> /* Basic Table Styling */ table.basic-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; } table.basic-table th, table.basic-table td { border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left; vertical-align: top; } table.basic-table th { background-color: #e5e7eb; font-weight: bold; } </style>
+</head>
+<body>
+    <h1>Event Schedule</h1>
+    <table class="basic-table">
+        <tr>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Location</th>
+        </tr>
+        <tr>
+            <td rowspan="2">9:00 AM</td> <!-- Spans 2 rows -->
+            <td>Registration</td>
+            <td>Lobby</td>
+        </tr>
+        <tr>
+            <!-- No time cell needed here (spanned by above) -->
+            <td>Welcome Coffee</td>
+            <td>Lobby</td>
+        </tr>
+        <tr>
+            <td>10:00 AM</td>
+            <td>Keynote Speech</td>
+            <td>Main Hall</td>
+        </tr>
+    </table>
+</body>
+</html>
+```
+
+**Rendered Output (with basic styling):**
+
+<table class="basic-table">
+        <tr>
+          <th>Time</th>
+          <th>Activity</th>
+          <th>Location</th>
+        </tr>
+        <tr>
+         <td rowSpan="2" style={{ verticalAlign: "top" }}>9:00 AM</td>
+          <td>Registration</td>
+          <td>Lobby</td>
+        </tr>
+        <tr>
+          <td>Welcome Coffee</td>
+          <td>Lobby</td>
+        </tr>
+        <tr>
+          <td>10:00 AM</td>
+          <td>Keynote Speech</td>
+          <td>Main Hall</td>
+        </tr>
+      </table>
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from '../../../components/quiz.js';
+import tableQuizQuestions from '../../data/tables_quizData.js'
+
+<Quiz questions={tableQuizQuestions} />

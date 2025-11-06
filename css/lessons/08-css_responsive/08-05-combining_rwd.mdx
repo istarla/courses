@@ -1,0 +1,210 @@
+# Combining RWD Techniques
+
+Over the past few days, we've introduced the core concepts of Responsive
+Web Design: fluid grids, flexible media, the viewport meta tag, and
+media queries. True responsive design emerges when you effectively
+combine these techniques to create layouts that adapt smoothly across
+different screen sizes and contexts.
+
+Today, we'll look at how these pieces fit together in a practical
+example and discuss common strategies for building responsive layouts.
+
+## Putting It All Together: Strategy
+
+
+A common strategy for building responsive layouts, often following the
+mobile-first approach, involves:
+
+1. **Base Styles (Mobile-First):** Define default styles
+   suitable for small screens. Often uses a single-column layout, larger
+   tap targets, and readable font sizes. Use relative units for spacing
+   and typography where appropriate. Ensure images are flexible (`max-width: 100%`).
+2. **Identify Breakpoints:** Determine the screen widths at
+   which the layout needs to change significantly to remain usable and
+   aesthetically pleasing. These breakpoints are based on the content and
+   design, not specific devices.
+3. **Add Media Queries:** Use `min-width` media
+   queries to introduce layout changes for larger screens. This might
+   involve:
+   * Changing `display` properties (e.g., using Flexbox or
+     Grid for multi-column layouts).
+   * Adjusting widths, margins, and padding (often using fluid units).
+   * Modifying font sizes or line heights.
+   * Showing/hiding elements (e.g., displaying a full navigation menu
+     instead of a burger icon).
+   * Potentially loading different image assets using
+     `srcset` or `<picture>`.
+4. **Refine and Test:** Test the layout across a wide range
+   of screen sizes (using browser developer tools and real devices) and
+   refine the styles and breakpoints as needed.
+
+## Example: A Simple Responsive Layout
+
+Let's create a basic page layout with a header, main content area,
+sidebar, and footer that adapts to different screen sizes.
+
+Header
+
+## Main Content Area
+
+This is the primary content. On larger screens, it takes up more
+space next to the sidebar. On smaller screens, it might stack
+below the sidebar or take the full width.
+
+
+More content follows here...
+
+
+
+### Sidebar
+
+Links or secondary information might go here.
+
+* Link 1
+* Link 2
+* Link 3
+
+Footer
+
+**HTML Structure:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout Example</title>
+    <link rel="stylesheet" href="responsive-styles.css">
+</head>
+<body>
+    <div class="rwd-container">
+        <header class="rwd-header">Header</header>
+        <div class="rwd-row">
+            <main class="rwd-main">
+                <h2>Main Content Area</h2>
+                <p>... content ...</p>
+                <picture>
+                    <source media="(min-width: 800px)" srcset="large.jpg">
+                    <img class="rwd-image" src="small.jpg" alt="Description">
+                </picture>
+                <p>... more content ...</p>
+            </main>
+            <aside class="rwd-sidebar">
+                <h3>Sidebar</h3>
+                <p>... sidebar content ...</p>
+            </aside>
+        </div>
+        <footer class="rwd-footer">Footer</footer>
+    </div>
+</body>
+</html>
+```
+
+**CSS (`responsive-styles.css` - Combining
+Techniques):**
+
+```css
+/* --- Base / Mobile Styles --- */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px; /* Base font size */
+    line-height: 1.6;
+}
+
+.rwd-container {
+    max-width: 1200px; /* Limit maximum width */
+    margin: 0 auto; /* Center container */
+    padding: 10px; /* Padding for smaller screens */
+}
+
+.rwd-header, .rwd-footer {
+    background-color: #eee;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.rwd-row {
+    /* Flexbox used for layout */
+    display: flex;
+    flex-direction: column; /* Stack columns on mobile */
+    gap: 10px;
+}
+
+.rwd-main, .rwd-sidebar {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    /* flex-basis will be set later */
+}
+
+.rwd-image {
+    max-width: 100%; /* Fluid image */
+    height: auto;
+    display: block;
+}
+
+/* --- Tablet Styles (e.g., 600px and up) --- */
+@media (min-width: 600px) {
+    body {
+        font-size: 17px; /* Slightly larger font */
+    }
+    .rwd-container {
+        padding: 15px;
+    }
+    .rwd-row {
+        flex-direction: row; /* Side-by-side layout */
+        gap: 15px;
+    }
+    .rwd-main {
+        flex: 2 1 60%; /* Allow growing/shrinking from 60% basis */
+        order: 2; /* Main content after sidebar visually */
+    }
+    .rwd-sidebar {
+        flex: 1 1 30%; /* Allow growing/shrinking from 30% basis */
+        order: 1; /* Sidebar visually first */
+    }
+}
+
+/* --- Desktop Styles (e.g., 992px and up) --- */
+@media (min-width: 992px) {
+    body {
+        font-size: 18px;
+    }
+     .rwd-row {
+        gap: 20px;
+    }
+    .rwd-main {
+        order: 1; /* Reset order for desktop - main first */
+    }
+     .rwd-sidebar {
+        order: 2; /* Sidebar second */
+    }
+}
+```
+
+This example demonstrates:
+
+* **Mobile-First:** Base styles define a single-column
+  layout.
+* **Fluid Layout:** Flexbox (display: flex)
+  is used for the main layout row. flex property with
+  percentages/basis allows columns to adapt.
+* **Flexible Images:** max-width: 100%; on
+  the image. The `<picture>` element handles art
+  direction/resolution switching.
+* **Media Queries:** Breakpoints at 600px and 992px
+  adjust layout (flex-direction, order),
+  font sizes, and spacing (gap, padding).
+* **Relative Units:** While not heavily used here,
+  rem or em could be used for fonts/padding
+  for better scalability. Flex basis could use px or
+  other units.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/combining_rwd.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

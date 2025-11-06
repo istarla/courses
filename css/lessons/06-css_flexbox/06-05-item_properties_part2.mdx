@@ -1,0 +1,216 @@
+# Flex Item Properties (Part 2) & Practical Examples
+
+We're concluding our initial exploration of Flexbox item properties
+today by looking at the `flex` shorthand and the
+`align-self` property. Afterwards, we'll put our knowledge to
+use with some practical examples of how Flexbox can be used to build
+common UI components.
+
+### 5. flex (Shorthand Property)
+
+
+The `flex` property is a shorthand for
+`flex-grow`, `flex-shrink`, and
+`flex-basis`, in that order.
+
+**Syntax:**
+`flex: <flex-grow> <flex-shrink> <flex-basis>;`
+
+* **One value (unitless number):** Interpreted as
+  `flex: <number> 1 0%;` (e.g.,
+  `flex: 1;` becomes
+  `flex-grow: 1; flex-shrink: 1; flex-basis: 0%;`). This is a
+  common way to make an item flexible and take up available space.
+* **One value (valid width/basis):** Interpreted as
+  `flex: 1 1 <basis>;` (e.g.,
+  `flex: 100px;` becomes
+  `flex-grow: 1; flex-shrink: 1; flex-basis: 100px;`).
+* **Two values:**
+  + First value (unitless number) is `flex-grow`.
+  + Second value: If unitless, it's `flex-shrink` (`flex-basis`
+    becomes `0%`). If a valid width/basis, it's
+    `flex-basis` (`flex-shrink` becomes
+    `1`).
+  + Example: `flex: 1 0;` (grow:1, shrink:0, basis:0%)
+  + Example: `flex: 0 200px;` (grow:0, shrink:1,
+    basis:200px)
+* **Three values:** Explicitly sets `flex-grow`,
+  `flex-shrink`, and `flex-basis`.
+
+**Common Predefined Values:**
+
+* **`flex: initial;`** equivalent to
+  `flex: 0 1 auto;` (Item doesn't grow, can shrink, size is
+  based on width/height or content).
+* **`flex: auto;`** equivalent to
+  `flex: 1 1 auto;` (Item can grow and shrink, size is based
+  on width/height or content).
+* **`flex: none;`** equivalent to
+  `flex: 0 0 auto;` (Item is fully inflexible; doesn't grow
+  or shrink, size is based on width/height or content).
+* **`flex: <positive-number>;`** (e.g.,
+  `flex: 1;` or `flex: 2;`) is equivalent to
+  `flex: <positive-number> 1 0%;`. These items will
+  share space proportionally.
+
+Item A (0 1 auto)
+
+Item B (flex: 1)
+
+Item C (0 0 150px)
+
+Item D (2 0 auto)
+
+```css
+.item-default { flex: initial; /* Same as flex: 0 1 auto; */ }
+.item-flexible { flex: 1; /* Same as flex: 1 1 0%; - Will take up available space */ }
+.item-fixed-width { flex: 0 0 100px; /* Will be 100px wide, won't grow or shrink */ }
+.item-auto-basis-can-grow { flex: 1 1 auto; }
+```
+
+The `flex` shorthand is powerful and widely used.
+Understanding its components (`flex-grow`,
+`flex-shrink`, `flex-basis`) is key to using it
+effectively. When in doubt, it's often clearest to set
+`flex-basis` explicitly if you need a specific initial size.
+
+### 6. align-self
+
+
+The `align-self` property allows you to override the default
+alignment (or the one specified by the flex container's
+`align-items` property) for an individual flex item.
+
+It accepts the same values as `align-items`, plus
+`auto`:
+
+* **`auto`** (default): The item inherits its
+  alignment from the flex container's `align-items` property.
+* **`stretch`**
+* **`flex-start`**
+* **`flex-end`**
+* **`center`**
+* **`baseline`**
+
+Default (flex-start from container)
+
+Center
+
+Flex-End
+
+Stretch (height:auto)
+
+Baseline
+
+```css
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: flex-start; /* All items default to top alignment */
+}
+.item-one {
+  /* Inherits flex-start */
+}
+.item-two {
+  align-self: center; /* This item will be vertically centered, overriding flex-start */
+}
+.item-three {
+  align-self: flex-end; /* This item will be aligned to the bottom */
+}
+.item-four {
+  align-self: stretch; /* Will stretch if its height is 'auto' */
+  height: auto;
+}
+```
+
+## Practical Flexbox Examples
+
+### Example 1: Responsive Navigation Bar
+
+A common use case: a logo on the left and navigation links on the right,
+which re-arranges on smaller screens (though the responsive part would
+need media queries, we focus on the flex layout here).
+
+MyLogo
+
+* [Home](#)
+* [About](#)
+* [Services](#)
+* [Contact](#)
+
+```css
+.nav-bar {
+  display: flex;
+  justify-content: space-between; /* Pushes logo and links to opposite ends */
+  align-items: center; /* Vertically aligns logo and links if they have different heights */
+  background-color: #333;
+  padding: 10px 20px;
+  color: white;
+}
+.nav-logo {
+  font-size: 1.5em;
+}
+.nav-links {
+  display: flex; /* Make the ul a flex container for its li items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li {
+  margin-left: 15px; /* Space between links */
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+```
+
+### Example 2: Flexible Card Layout
+
+Creating a row of cards that can grow or shrink and wrap onto multiple
+lines.
+
+### Card 1:  
+Some descriptive text for card one. It might be a bit longer.
+
+### Card 2:
+
+Shorter text for card two.
+
+### Card 3:
+
+Another card with some content to fill it up nicely.
+
+### Card 4:
+
+The final card in this example row.
+
+```css
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to new lines */
+  justify-content: space-around; /* Distribute space nicely */
+  padding: 10px;
+}
+.card {
+  flex: 1 1 250px; /* Grow and shrink from a basis of 250px */
+  /* Or for fixed number of columns, e.g., 3 columns: flex: 0 0 calc(33.33% - 20px); (adjusting for margin) */
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  background-color: white;
+}
+.card h3 { margin-top: 0; }
+```
+
+These are basic examples. Flexbox can be used for much more complex
+layouts, including centering elements, creating full-page layouts, and
+intricate component designs. Combining container and item properties
+unlocks its full power.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/flex_item_part2.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

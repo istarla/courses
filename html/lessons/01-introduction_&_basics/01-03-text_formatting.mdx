@@ -1,0 +1,320 @@
+# Text Formatting in HTML
+
+## Structuring Content with Headings and Paragraphs
+<section-anchor id="structuring-content-with-headings-and-paragraphs" />
+
+Well-structured content is easier to read and understand, both for users
+and search engines. HTML provides tags specifically for creating
+headings and paragraphs.
+
+* **Headings (`<h1>` to
+  `<h6>`):**
+  These tags define headings. `<h1>` represents the
+  most important heading (usually the main title of the page or
+  section), and `<h6>` represents the least important.
+  Browsers typically display headings in larger and bolder fonts than
+  normal text. It's crucial to use headings hierarchically (don't skip
+  levels, e.g., go from an `<h1>` directly to an
+  `<h3>` without an `<h2>`). There
+  should generally be only one `<h1>` per page.
+* **Paragraphs (`<p>`):** This tag defines
+  a paragraph of text. Browsers automatically add some vertical space
+  (margin) before and after each paragraph. Any block of text that forms
+  a distinct paragraph should be wrapped in `<p>` tags.
+
+## Basic Text Styling: Bold, Italic, Underline, etc.
+<section-anchor id="basic-text-styling-bold-italic-underline-etc" />
+
+HTML offers several tags to change the appearance or semantic meaning of
+text within a block (like a paragraph). These are often called "inline"
+elements.
+
+<table>
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>Description</th>
+            <th>Typical Browser Rendering</th>
+            <th>Semantic Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&lt;strong&gt;</code></td>
+            <td>Marks text with strong importance.</td>
+            <td>Bold</td>
+            <td>Indicates significant importance, seriousness, or urgency.</td>
+          </tr>
+          <tr>
+            <td><code>&lt;b&gt;</code></td>
+            <td>Stylistically offsets text (historically "bold").</td>
+            <td>Bold</td>
+            <td>
+              Draws attention without implying extra importance (e.g., keywords,
+              product names). Use <code>&lt;strong&gt;</code> if importance is
+              intended.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;em&gt;</code></td>
+            <td>Marks text with emphasis.</td>
+            <td>Italic</td>
+            <td>
+              Indicates stress emphasis, changing the meaning of the sentence.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;i&gt;</code></td>
+            <td>Stylistically offsets text (historically "italic").</td>
+            <td>Italic</td>
+            <td>
+              Represents text in an alternate voice or mood (e.g., technical
+              terms, foreign words, thoughts). Use <code>&lt;em&gt;</code> if
+              emphasis is intended.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;u&gt;</code></td>
+            <td>
+              Represents text with an unarticulated, non-textual annotation
+              (historically "underline").
+            </td>
+            <td>Underline</td>
+            <td>
+              Often used for things like marking misspelled words or proper
+              names in Chinese text. Avoid using it purely for decoration, as
+              users often associate underlines with hyperlinks.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;mark&gt;</code></td>
+            <td>
+              Represents text marked or highlighted for reference or notation
+              purposes.
+            </td>
+            <td>Highlighted background (often yellow)</td>
+            <td>
+              Indicates text relevance in a specific context (e.g., highlighting
+              search terms in results).
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;sub&gt;</code></td>
+            <td>Defines subscript text.</td>
+            <td>Lowered, smaller font</td>
+            <td>
+              Used for chemical formulas (H<sub>2</sub>O), mathematical
+              variables, etc.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;sup&gt;</code></td>
+            <td>Defines superscript text.</td>
+            <td>Raised, smaller font</td>
+            <td>
+              Used for exponents (x<sup>2</sup>), footnotes, ordinal numbers
+              (1<sup>st</sup>), etc.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;small&gt;</code></td>
+            <td>Represents side comments or small print.</td>
+            <td>Smaller font size</td>
+            <td>
+              Used for things like copyright notices or legal disclaimers.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;del&gt;</code></td>
+            <td>Represents deleted text.</td>
+            <td>Strikethrough</td>
+            <td>
+              Indicates text that has been removed or is no longer accurate.
+            </td>
+          </tr>
+          <tr>
+            <td><code>&lt;ins&gt;</code></td>
+            <td>Represents inserted text.</td>
+            <td>Underline (often)</td>
+            <td>
+              Indicates text that has been added to the document. Often used
+              with <code>&lt;del&gt;</code>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+**Important Note:** While tags like
+`<b>` and `<i>` primarily define
+presentation (bold, italic), tags like `<strong>` and
+`<em>` carry semantic meaning (importance, emphasis).
+It's generally better to use the semantic tags when the meaning applies,
+as this benefits accessibility (screen readers can convey
+importance/emphasis) and search engines. Use `<b>` and
+`<i>` when there's no change in meaning, just style.
+For most styling, CSS is the preferred method, but these HTML tags are
+useful for specific semantic or stylistic inline adjustments.
+
+## Line Breaks and Horizontal Rules
+<section-anchor id="line-breaks-and-horizontal-rules" />
+
+* **Line Break (`<br>`):** This is an
+  empty tag (no closing tag needed) that forces a line break within a
+  block of text (like inside a paragraph). Use it sparingly; if you need
+  separate blocks of text, use multiple `<p>` tags.
+  It's useful for things like addresses or poetry where line structure
+  matters within a single block.
+* **Horizontal Rule (`<hr>`):** This empty
+  tag represents a thematic break between paragraph-level elements. It's
+  typically rendered as a horizontal line across the page. Use it to
+  indicate a shift in topic or scene.
+
+## Examples
+<section id="examples" />
+
+### Example 1: Headings, Paragraphs, and Basic Styling
+*sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Formatting Example 1</title>
+</head>
+<body>
+    <h1>Main Page Title (h1)</h1>
+    <p>This is the introductory paragraph. It provides context for the page.</p>
+
+    <h2>A Major Section (h2)</h2>
+    <p>This paragraph discusses the first main topic. We can use <strong>strong importance</strong> for key concepts and <em>emphasis</em> for stressed words. Sometimes, you might just want to draw attention using <b>bold</b> or <i>italics</i> for terms.</p>
+
+    <h3>A Subsection (h3)</h3>
+    <p>More details under the subsection. Let's highlight <mark>this important finding</mark>.</p>
+
+    <h2>Another Major Section (h2)</h2>
+    <p>Concluding thoughts.</p>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1>Main Page Title (h1)</h1>
+  <p>This is the introductory paragraph. It provides context for the page.</p>
+
+  <h2>A Major Section (h2)</h2>
+  <p>
+    This paragraph discusses the first main topic. We can use{" "}
+    <strong>strong importance</strong> for key concepts and{" "}
+    <em>emphasis</em> for stressed words. Sometimes, you might just want to
+    draw attention using <b>bold</b> or <i>italics</i> for terms.
+  </p>
+
+  <h3>A Subsection (h3)</h3>
+  <p>
+    More details under the subsection. Let's highlight{" "}
+    <mark>this important finding</mark>.
+  </p>
+
+  <h2>Another Major Section (h2)</h2>
+  <p>Concluding thoughts.</p>
+</>
+
+
+### Example 2: Using Subscript, Superscript, Deleted, Inserted, and Small Text
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Formatting</title>
+</head>
+<body>
+    <h1>Scientific and Editorial Notations</h1>
+
+    <p>The chemical formula for water is H<sub>2</sub>O.</p>
+    <p>Einstein's famous equation is E=mc<sup>2</sup>.</p>
+    <p>Please read the <small>terms and conditions</small> carefully.</p>
+    <p>The original price was <del>$100</del>, now it's <ins>$75</ins>!</p>
+
+    <!-- This shows how del and ins might be used together -->
+    <p>The event is scheduled for <del>May 5th</del> <ins>May 12th</ins>.</p>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1>Scientific and Editorial Notations</h1>
+
+    <p>The chemical formula for water is H<sub>2</sub>O.</p>
+    <p>Einstein's famous equation is E=mc<sup>2</sup>.</p>
+    <p>Please read the <small>terms and conditions</small> carefully.</p>
+    <p>The original price was <del>$100</del>, now it's <ins>$75</ins>!</p>
+    
+    <p>The event is scheduled for <del>May 5th</del> <ins>May 12th</ins>.</p>
+</>
+### Example 3: Using Line Breaks and Horizontal Rules
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Breaks and Rules</title>
+</head>
+<body>
+    <h1>Structure Elements</h1>
+
+    <p>Haiku Corner:<br>
+    An old silent pond...<br>
+    A frog jumps into the pond,<br>
+    splash! Silence again.
+    </p>
+
+    <hr> <!-- Thematic break between different content sections -->
+
+    <p>Mailing Address:<br>
+    ACME Corp.<br>
+    123 Main Street<br>
+    Anytown, CA 90210
+    </p>
+
+    <hr>
+
+    <p>This is the final section of the page.</p>
+</body>
+</html>
+```
+**Output**
+<>
+  <h1>Structure Elements</h1>
+
+  <p>
+    Haiku Corner:<br />
+    An old silent pond...<br />
+    A frog jumps into the pond,<br />
+    splash! Silence again.
+  </p>
+
+  <hr />
+
+  <p>
+    Mailing Address:<br />
+    ACME Corp.<br />
+    123 Main Street<br />
+    Anytown, CA 90210
+  </p>
+
+  <hr />
+
+  <p>This is the final section of the page.</p>
+</>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import Text_formatting from "../../data/text_formatting_quizData"
+
+<Quiz questions = {Text_formatting} />

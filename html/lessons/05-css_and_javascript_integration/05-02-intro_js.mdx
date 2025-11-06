@@ -1,0 +1,489 @@
+# Introduction to JavaScript
+
+## What is JavaScript?
+<section id="what-is-javascript" />
+
+JavaScript (often abbreviated as JS) is a high-level, interpreted
+programming language primarily used to create dynamic and interactive
+content on web pages. While HTML provides the structure and CSS handles
+the presentation, JavaScript adds the **behavior** and
+interactivity.
+
+With JavaScript, you can:
+
+* Modify HTML content and attributes dynamically after the page has
+  loaded.
+* Change CSS styles dynamically.
+* React to user events (like clicks, mouse movements, key presses).
+* Validate user input in forms before submitting to a server.
+* Perform calculations and manipulate data.
+* Make asynchronous requests to servers to fetch or send data without
+  reloading the entire page (techniques like AJAX).
+* Create animations, games, and complex user interfaces.
+
+JavaScript runs directly in the user's web browser (client-side),
+although it can also be used on servers (e.g., Node.js).
+
+**Focus of this Lesson:** Like the CSS lesson, this is an
+HTML course. We will focus on **what JavaScript is** in the
+context of web pages and
+**how to include it in your HTML**, not on teaching the
+JavaScript language itself.
+
+## The Document Object Model (DOM)
+<section id="the-document-object-model-dom" />
+
+To interact with HTML and CSS, JavaScript uses the
+**Document Object Model (DOM)**. The DOM is a programming
+interface provided by the browser that represents the structure of an
+HTML (or XML) document as a tree of objects.
+
+Each HTML element (like `<p>`,
+`<div>`, `<img>`) becomes an object
+(or "node") in this tree. JavaScript can access these objects to:
+
+* Find specific elements (e.g., using their ID or class).
+* Read or change the content of elements (e.g., change the text inside a
+  paragraph).
+* Read or change the attributes of elements (e.g., change the
+  `src` of an image).
+* Read or change the CSS styles applied to elements.
+* Add or remove elements from the page.
+* Respond to events happening on elements (like clicks).
+
+Manipulating the DOM is the core way JavaScript makes web pages dynamic.
+
+## Ways to Add JavaScript to HTML
+<section id="ways-to-add-javascript-to-html" />
+
+Similar to CSS, there are three main ways to include JavaScript in your
+HTML:
+
+### 1. External JavaScript File (Recommended)
+
+This is the **most common and recommended** method. You
+write your JavaScript code in separate files with a
+`.js` extension (e.g., `script.js`). You then link
+this file to your HTML document using the
+`<script>` tag, usually placed just
+before the closing `</body>` tag.
+
+**Why before `</body>`?** Placing scripts
+at the end of the body allows the HTML content (the DOM) to be parsed
+and loaded first. This ensures that JavaScript code attempting to
+manipulate HTML elements will find those elements already present in the
+DOM. If scripts are placed in the `<head>` without
+special attributes, they can block the rendering of the page while they
+download and execute.
+
+**Advantages:**
+
+* Keeps HTML clean and focused on structure/content.
+* Allows reusing the same script across multiple HTML pages.
+* Easier code organization and maintenance.
+* Browsers can cache the `.js` file, improving performance.
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>External JS Example</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link CSS -->
+</head>
+<body>
+    <h1 id="main-heading">Hello World!</h1>
+    <button id="myButton">Click Me</button>
+
+    <!-- Link external JS file just before closing body tag -->
+    <script src="js/script.js"></script>
+    <!--
+        src="js/script.js": Specifies the path to your JS file.
+                        (Assumes script.js is in a 'js' subfolder)
+    -->
+</body>
+</html>
+```
+
+```javascript
+// In your JS file (e.g., js/script.js)
+// Basic DOM manipulation example
+
+// Find the button element by its ID
+const button = document.getElementById('myButton');
+// Find the heading element
+const heading = document.getElementById('main-heading');
+
+// Add an event listener to the button
+// When the button is clicked, run the function
+button.addEventListener('click', function() {
+  // Change the text content of the heading
+  heading.textContent = 'Button Was Clicked!';
+  // Log a message to the browser's developer console
+  console.log('Heading text changed.');
+});
+
+console.log('External script loaded.'); // Message in console on load
+```
+
+(To see `console.log` messages, open your browser's Developer
+Tools (F12) and check the Console tab.)
+
+**Rendered Output:**
+<section id="color-section" style={{ padding: "20px" }}>
+  <h1 id="main-heading">Hello World!</h1>
+  <button
+    id="myButton"
+    onClick={() => {
+      const section = document.getElementById("color-section");
+      const heading = document.getElementById("main-heading");
+
+      section.style.backgroundColor = "lightgreen"; // ✅ Change background
+      heading.textContent = "Button Was Clicked!";
+      console.log("Background color changed to green.");
+    }}
+    style={{
+      padding: "8px 16px",
+      marginTop: "12px",
+      backgroundColor: "#2563eb",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+    }}
+  >
+    Click Me
+  </button>
+</section>
+
+
+### 2. Internal JavaScript
+
+You can embed JavaScript code directly within the HTML document using
+the `<script>` tag, typically placed
+just before the closing `</body>` tag (for the same
+reasons as linking external scripts there).
+
+**Advantages:** Useful for small scripts specific to a
+single page.
+
+**Disadvantages:** Mixes behavior with structure; code
+cannot be easily reused across pages; cannot be cached separately.
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internal JS Example</title>
+</head>
+<body>
+    <p id="status">Status: Waiting...</p>
+
+    <script>
+        // JavaScript code directly inside the script tag
+        const statusParagraph = document.getElementById('status');
+        statusParagraph.textContent = 'Status: Script Executed!';
+        statusParagraph.style.color = 'blue'; // Change style via JS
+
+        console.log('Internal script ran.');
+    </script>
+</body>
+</html>
+```
+**Rendered Output (Conceptual):**
+<section
+  id="internal-js-example"
+  style={{
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    maxWidth: "400px",
+  }}
+>
+  <p id="status">Status: Waiting...</p>
+
+  <button
+    onClick={() => {
+      const statusParagraph = document.getElementById("status");
+      statusParagraph.textContent = "Status: Script Executed!";
+      statusParagraph.style.color = "blue";
+      console.log("Internal script ran.");
+    }}
+    style={{
+      marginTop: "12px",
+      padding: "8px 16px",
+      backgroundColor: "#2563eb",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+    }}
+  >
+    Run Script
+  </button>
+</section>
+
+
+### 3. Inline JavaScript (Use Sparingly / Avoid for Complex Logic)
+
+JavaScript code can be placed directly within HTML event handler
+attributes, such as `onclick`, `onmouseover`,
+`onload`, etc.
+
+**Advantages:** Can seem simple for very basic
+interactions.
+
+**Disadvantages:** Strongly discouraged for anything beyond
+trivial code. It tightly couples behavior with HTML structure, makes
+code hard to read and debug, pollutes the HTML, and is generally
+considered poor practice for maintainability and separation of concerns.
+
+*Sample Code*
+```html
+<!-- Example of inline JavaScript (Avoid for complex logic) -->
+<button onclick="alert('Button Clicked!'); this.textContent='Clicked!'; this.style.backgroundColor='grey';">
+  Click Me (Inline JS)
+</button>
+```
+**Rendered Output (Conceptual):**
+<button
+  onClick={(e) => {
+    alert("Button Clicked!");
+    e.target.textContent = "Clicked!";
+    e.target.style.backgroundColor = "grey";
+  }}
+  style={{
+    padding: "10px 16px",
+    backgroundColor: "#2563eb",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+  }}
+>
+  Click Me (Inline JS)
+</button>
+
+Modern JavaScript development heavily favors using external files and
+techniques like `addEventListener` (shown in the external
+file example) over inline event handlers.
+
+## Defer and Async Attributes
+<section id="defer-and-async-attributes" />
+
+When using the `<script>` tag with an external file
+(`src` attribute), you can modify how the script is
+downloaded and executed using the `defer` and
+`async` boolean attributes:
+
+* (No attribute, often in `<head>`): HTML parsing
+  stops, script is downloaded and executed, then HTML parsing resumes.
+  Can block page rendering.
+* (Usually in `<head>`): Script is downloaded
+  asynchronously (doesn't block HTML parsing). Once downloaded, HTML
+  parsing stops, and the script executes. Scripts might execute out of
+  order if multiple `async` scripts exist. Good for
+  independent scripts (like analytics).
+* (Usually in `<head>`): Script is downloaded
+  asynchronously (doesn't block HTML parsing). The script is guaranteed
+  to execute only \*after\* the HTML parsing is complete, but \*before\* the
+  `DOMContentLoaded` event. Scripts execute in the order they
+  appear in the HTML.
+  **Often a good choice for scripts that need the full DOM.**
+* Placing scripts just before `</body>` (without
+  `defer` or `async`) achieves a similar result to
+  `defer` in terms of execution timing relative to DOM
+  parsing.
+
+## Examples
+<section id="examples" />
+
+### Example 1: Changing Text Content on Button Click (External JS)
+
+HTML (`index.html`):
+
+```html
+<!DOCTYPE html><html lang="en"><head><title>JS Click Event</title></head><body>
+    <h1 id="message">Original Message</h1>
+    <button id="changeButton" class="js-button">Change Text</button>
+    <script src="app1.js" defer></script> <!-- Use defer if script is in head -->
+</body></html>
+```
+
+JavaScript (`app1.js`):
+
+```javascript
+const messageHeading = document.getElementById('message');
+const changeBtn = document.getElementById('changeButton');
+
+changeBtn.addEventListener('click', () => {
+    messageHeading.textContent = 'Text Changed by JavaScript!';
+});
+```
+**Rendered Output:**
+<section
+  id="js-click-event"
+  style={{
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    maxWidth: "400px",
+  }}
+>
+  <h1 id="message">Original Message</h1>
+  <button
+    id="changeButton"
+    className="js-button"
+    onClick={() => {
+      const messageHeading = document.getElementById("message");
+      messageHeading.textContent = "Text Changed by JavaScript!";
+    }}
+    style={{
+      marginTop: "12px",
+      padding: "8px 16px",
+      backgroundColor: "#2563eb",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+    }}
+  >
+    Change Text
+  </button>
+</section>
+
+
+### Example 2: Showing/Hiding an Element (Internal JS)
+
+This is a hidden element!
+
+ Click on Show/Hide Element (sample code)
+
+```html
+<!DOCTYPE html><html lang="en"><head><title>JS Toggle</title>
+<style>
+    #secret-box { display: none; border: 2px dashed blue; padding: 10px; margin-top: 10px; background: lightcyan; }
+    button { margin-top: 10px; padding: 5px 10px; }
+</style>
+</head><body>
+    <h1>Toggle Visibility</h1>
+    <div id="secret-box">This is a hidden element!</div>
+    <button id="toggleButton" style="padding:20px;border:1px solid black;background-color:pink;">Show/Hide Element</button>
+
+    <script>
+        const box = document.getElementById('secret-box');
+        const toggleBtn = document.getElementById('toggleButton');
+        let isVisible = false;
+
+        toggleBtn.addEventListener('click', () => {
+            if (isVisible) {
+                box.style.display = 'none';
+                toggleBtn.textContent = 'Show Element';
+            } else {
+                box.style.display = 'block';
+                toggleBtn.textContent = 'Hide Element';
+            }
+            isVisible = !isVisible; // Flip the visibility state
+        });
+    </script>
+</body></html>
+```
+**Output:**
+<section
+  style={{
+    fontFamily: "sans-serif",
+    padding: "20px",
+    maxWidth: "400px",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+  }}
+>
+  <h1>Toggle Visibility</h1>
+
+  <div
+    id="secret-box"
+    style={{
+      display: "none",
+      border: "2px dashed blue",
+      padding: "10px",
+      marginTop: "10px",
+      background: "lightcyan",
+    }}
+  >
+    This is a hidden element!
+  </div>
+
+  <button
+    id="toggleButton"
+    onClick={() => {
+      const box = document.getElementById("secret-box");
+      const toggleBtn = document.getElementById("toggleButton");
+      if (box.style.display === "none" || box.style.display === "") {
+        box.style.display = "block";
+        toggleBtn.textContent = "Hide Element";
+      } else {
+        box.style.display = "none";
+        toggleBtn.textContent = "Show Element";
+      }
+    }}
+    style={{
+      marginTop: "10px",
+      padding: "5px 10px",
+      cursor: "pointer",
+      background: "pink",
+      borderRadius: "5px",
+    }}
+  >
+    Show Element
+  </button>
+</section>
+
+### Example 3: Simple Inline JS Alert (Demonstration)
+
+Click (Inline Alert)
+
+```html
+<!DOCTYPE html><html lang="en"><head><title>Inline JS</title></head><body>
+    <h1>Inline JS Demo</h1>
+    <!-- Avoid this for more than simple alerts/actions -->
+    <button onclick="alert('Inline JavaScript says hello!');">Click (Inline Alert)</button>
+</body></html>
+```
+**Rendered Output (Conceptual):**
+<section
+  style={{
+    fontFamily: "sans-serif",
+    padding: "20px",
+    maxWidth: "400px",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+  }}
+>
+  <h1>Inline JS Demo</h1>
+
+  <button
+    onClick={() => alert("Inline JavaScript says hello!")}
+    style={{
+      marginTop: "10px",
+      padding: "8px 16px",
+      backgroundColor: "#2563eb",
+      color: "white",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+    }}
+  >
+    Click (Inline Alert)
+  </button>
+</section>
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import intro_js_quizData from "../../data/intro_js_quizData"
+
+<Quiz questions = {intro_js_quizData} />

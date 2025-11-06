@@ -1,0 +1,206 @@
+# Gradients (linear-gradient, radial-gradient)
+
+CSS gradients allow you to create smooth transitions between two or more
+specified colors. They are a type of `<image>` data
+type and can be used anywhere an image can be used, such as for
+backgrounds. There are two main types of gradients: linear gradients and
+radial gradients. We'll also touch upon conic gradients and repeating
+gradients.
+
+## 1. Linear Gradients: linear-gradient()
+
+Linear gradients transition colors along a straight line. You can define
+the direction of the gradient and the color stops.
+
+**Basic Syntax:**
+`linear-gradient(direction, color-stop1, color-stop2, ...);`
+
+* **`direction`**: Optional. Can be an angle (e.g., 45deg,
+  1.57rad) or keywords like to top,
+  to bottom (default), to left,
+  to right, to top right, etc.
+* **`color-stop`**: A color value (e.g., `red`, `#FF0000`,
+  `rgba(255,0,0,0.5)`). You can optionally specify a position
+  for each color stop (e.g., `red 20%`).
+
+### Simple Two-Color Linear Gradient
+
+to right, steelblue, lightskyblue
+
+```css
+.element1 {
+  /* Default direction is 'to bottom' */
+  background-image: linear-gradient(red, yellow);
+}
+.element2 {
+  background-image: linear-gradient(to right, steelblue, lightskyblue);
+}
+```
+
+### Linear Gradient with an Angle
+
+45deg, orange, tomato
+
+```css
+.element3 {
+  background-image: linear-gradient(45deg, orange, tomato);
+}
+/* 0deg is 'to top', 90deg is 'to right', 180deg is 'to bottom', 270deg is 'to left' */
+```
+
+### Linear Gradient with Multiple Color Stops and Positions
+
+to right, red 0%, yellow 50%, green 100%
+
+multi-stop: red, green 20%, blue 80%
+
+```css
+.element4 {
+  background-image: linear-gradient(to right, red 0%, yellow 50%, green 100%);
+}
+.element5 {
+  /* Creates hard lines if color stops are at the same position */
+  background-image: linear-gradient(to right, blue 0%, blue 33%, yellow 33%, yellow 66%, red 66%, red 100%);
+}
+.element6 {
+  background-image: linear-gradient(to bottom right, #f06, #9f6 25%, #05f 75%, #ff0);
+}
+```
+
+If you don't specify a position for a color stop, it will be placed
+midway between its neighbors.
+
+## 2. Radial Gradients: radial-gradient()
+
+Radial gradients transition colors outwards from a central point. You
+can define the shape, size, position of the center, and color stops.
+
+**Basic Syntax:**
+`radial-gradient(shape size at position, start-color, ...,
+end-color);`
+
+* **`shape`**: Optional. Can be `circle` (default if size is a single
+  length) or `ellipse` (default).
+* **`size`**: Optional. Keywords like `closest-side`,
+  `closest-corner`, `farthest-side`,
+  `farthest-corner` (default). Can also be explicit lengths
+  or percentages for circle/ellipse radii.
+* **`at position`**: Optional. Defines the center of the gradient. Uses keywords (`center`
+  is default) or length/percentage values (e.g.,
+  `at 25% 75%`).
+* **`color-stop`**: Similar to linear gradients, a color value, optionally with a
+  position.
+
+### Simple Two-Color Radial Gradient (Circle)
+
+circle, white, steelblue
+
+```css
+.element7 {
+  /* Default shape is ellipse, default position is center */
+  background-image: radial-gradient(yellow, darkorange);
+}
+.element8 {
+  background-image: radial-gradient(circle, white, steelblue);
+}
+```
+
+### Radial Gradient with Shape, Size, and Position
+
+ellipse farthest-corner at 70% 30%, yellow, red
+
+```css
+.element9 {
+  background-image: radial-gradient(ellipse farthest-corner at 70% 30%, yellow, red);
+}
+.element10 {
+  background-image: radial-gradient(circle closest-side at 30px 30px, lightblue, navy);
+}
+```
+
+### Radial Gradient with Multiple Color Stops
+
+circle, red 20%, yellow 50%, green 80%
+
+```css
+.element11 {
+  background-image: radial-gradient(circle, red 20%, yellow 50%, green 80%);
+}
+```
+
+## 3. Conic Gradients: conic-gradient() (More Advanced)
+
+Conic gradients transition colors around a center point (rather than
+radiating from it). The colors rotate around the center, like hands on a
+clock.
+
+**Basic Syntax:**
+`conic-gradient([from angle] [at position,] color [angle], color
+[angle], ...);`
+
+Simple Conic (Rainbow)
+
+Conic from 45deg at 25% 75%
+
+```css
+.pie-chart-slice {
+  background-image: conic-gradient(red 0deg, red 90deg, yellow 90deg, yellow 180deg, blue 180deg, blue 270deg, green 270deg, green 360deg);
+  border-radius: 50%; /* To make it look like a pie chart */
+}
+.element12 {
+   background-image: conic-gradient(from 0.25turn at 60% 45%, red, orange, yellow, green, blue);
+}
+```
+
+Conic gradients are powerful for creating pie charts, color wheels, and
+other circular designs.
+
+## 4. Repeating Gradients
+
+You can create repeating patterns using
+`repeating-linear-gradient()` and
+`repeating-radial-gradient()` (and
+`repeating-conic-gradient()`). The color stops are defined,
+and then the pattern repeats itself to fill the element.
+
+Repeating Linear Stripes
+
+Repeating Radial Circles
+
+```css
+.striped-background {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #f0f0f0 10px,
+    #f0f0f0 20px /* Stripe of #f0f0f0 from 10px to 20px */
+  );
+}
+.target-bullseye {
+  background-image: repeating-radial-gradient(
+    circle,
+    red,
+    red 10px,
+    yellow 10px,
+    yellow 20px
+  );
+}
+```
+
+**Browser Prefixes:** Older browsers might require vendor
+prefixes (`-webkit-`, `-moz-`, `-o-`)
+for gradients. However, modern browsers generally support the standard
+syntax well. Always check compatibility on sites like
+[caniuse.com](https://caniuse.com/)
+if targeting older browsers.
+
+**Performance:** Complex gradients, especially repeating
+ones or those with many color stops, can sometimes impact rendering
+performance. Use them judiciously.
+
+{/* // import Quiz from '../../../components/Quiz'
+// import cssMCQs from '../quiz-data/gradient.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

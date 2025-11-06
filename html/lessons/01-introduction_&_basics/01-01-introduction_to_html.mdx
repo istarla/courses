@@ -1,0 +1,137 @@
+# Introduction to HTML & Web Basics
+
+## What is HTML?
+<section-anchor id="what-is-html" />
+HTML stands for **HyperText Markup Language**. It's the
+standard markup language used to create and structure content on the
+World Wide Web. Think of it as the skeleton or the blueprint of a
+webpage.
+
+It's not a programming language like Python or Java, meaning it doesn't
+have logic like loops or conditional statements. Instead, HTML uses
+"markup" - a system of tags - to describe the structure and meaning of
+web content. Browsers (like Chrome, Firefox, Safari) read HTML files and
+render them into the visual webpages we see.
+
+* **HyperText:** Refers to links that connect web pages to
+  one another, either within a single website or between websites. Links
+  are a fundamental aspect of the Web.
+* **Markup Language:** Means you use HTML to simply "mark
+  up" a text document with tags that tell a web browser how to structure
+  it for display.
+
+## How the Web Works (Simplified)
+<section-anchor id="how-the-web-works" />
+
+When you type a web address (URL) like `www.google.com` into
+your browser:
+
+1. **Request:** Your browser sends a request over the
+   internet to a special computer called a
+   **web server** where the website's files (including HTML
+   files) are stored.
+2. **Server Processing:** The web server finds the requested
+   HTML file (e.g., `index.html`).
+3. **Response:** The server sends the HTML file (and
+   potentially other files like CSS for styling and JavaScript for
+   interactivity) back to your browser.
+4. **Rendering:** Your browser reads the HTML code to
+   understand the structure (headings, paragraphs, images, etc.) and then
+   displays the webpage visually on your screen.
+
+HTML provides the structure, CSS (Cascading Style Sheets) adds the style
+(colors, fonts, layout), and JavaScript adds interactivity (animations,
+dynamic updates). We'll focus solely on HTML for now.
+
+## Introduction to Browser Developer Tools
+<section-anchor id="browser-developer-tools" />
+Every modern web browser comes with built-in "Developer Tools" (often
+called DevTools). These tools are essential for web developers to
+inspect, debug, and understand how webpages are built.
+
+**How to open DevTools:**
+
+* Right-click on any webpage element and select "Inspect" or "Inspect
+  Element".
+* Press the F12 key on your keyboard (common on Windows).
+* Use keyboard shortcuts: Ctrl+Shift+I (Windows/Linux) or Cmd+Opt+I
+  (Mac).
+
+**Key Features (Focus on Elements/Inspector):**
+
+* **Elements (or Inspector) Panel:** Shows the live HTML
+  structure of the page. You can see the tags, attributes, and content.
+  You can even temporarily edit the HTML here to see how changes affect
+  the page (these changes are temporary and reset on page reload).
+* **Styles Panel (within Elements):** Shows the CSS rules
+  applied to the selected HTML element.
+* **Console Panel:** Used mainly for JavaScript errors and
+  logging, but useful to know it exists.
+
+Get comfortable opening and exploring the DevTools on different
+websites. It's like looking under the hood of a car!
+
+## Examples
+<section-anchor id="examples" />
+
+### Example 1: Basic HTML Structure Concept
+
+This isn't a full HTML file yet, but illustrates the idea of tags
+marking up content.
+
+*Sample Code:*
+```html
+<h1>This is a Main Heading</h1>
+<p>This is a paragraph of text. HTML uses tags like <p> to define content blocks.</p>
+<p>Another paragraph.</p>
+```
+
+**Rendered Output:**
+<>
+<h1>This is a Main Heading</h1>
+<p>This is a paragraph of text. HTML uses tags like `<p>` to define content blocks.</p>
+<p>Another paragraph.</p>
+</>
+
+Here, `<h1>` and `</h1>` mark the text
+between them as a level 1 heading. `<p>` and
+`</p>` mark text as paragraphs.
+
+### Example 2: Identifying HTML in DevTools
+
+**Step-1:** Open any webpage (e.g., google.com).
+
+**Step-2:** Right-click on the main logo or search bar.
+
+**Step-3:** Select "Inspect" or "Inspect Element".
+
+**Step-4:** Observe the HTML code highlighted in the Elements panel. You'll see
+tags like `<img>` (for the logo image) or
+`<input>` (for the search bar). This is the underlying
+HTML structure the browser uses.
+
+(No code block needed here as it's an action to perform).
+
+### Example 3: Client-Server Interaction Analogy
+
+Think of ordering a pizza:
+
+1. **You (Browser):** Decide you want pizza (a webpage) and
+   call the pizza place (enter URL/click link).
+2. **Phone Call (Request):** You tell the order taker what
+   you want (requesting a specific HTML page).
+3. **Pizza Place (Web Server):** Receives your order, finds
+   the recipe (HTML file), and makes the pizza (processes the request).
+4. **Delivery Driver (Response):** Brings the pizza (HTML
+   file and other assets) to your house.
+5. **Eating the Pizza (Rendering):** You open the box and
+   see the pizza arranged (Browser displays the webpage based on HTML
+   structure).
+
+## Test Your Knowledge
+<section-anchor id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz.js"
+import HTML_Quiz from "../../data/introduction_&_basics_quizData.js"
+
+<Quiz questions = {HTML_Quiz} />

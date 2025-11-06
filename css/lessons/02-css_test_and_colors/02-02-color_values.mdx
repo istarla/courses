@@ -1,0 +1,197 @@
+# Color Values
+
+
+Color is a fundamental aspect of web design. CSS provides several ways
+to define colors for text, backgrounds, borders, and other properties.
+Today, we'll explore the most common color value formats: Named Colors,
+Hexadecimal (Hex), RGB, RGBA, HSL, and HSLA.
+
+### 1. Named Colors
+
+CSS includes a set of predefined color names (around 140+). These are
+English words that represent specific colors. They are easy to remember
+and use for common colors.
+
+**Examples:** red, blue,
+green, black, white,
+yellow, purple, orange,
+lightgray, cyan, magenta,
+tomato, dodgerblue,
+mediumseagreen.
+
+Red
+
+DodgerBlue
+
+MediumSeaGreen
+
+```css
+p {
+  color: darkslategray;
+}
+.highlight {
+  background-color: yellow;
+}
+.button-primary {
+  background-color: steelblue;
+  color: white;
+}
+```
+
+While convenient, named colors offer a limited palette. For more precise
+control, other formats are used.
+
+### 2. Hexadecimal (Hex) Color Values
+
+Hexadecimal color values are one of the most common ways to specify
+colors in web design. They represent colors using a combination of Red,
+Green, and Blue (RGB) light.
+
+**Format:** `#RRGGBB` or
+`#RGB` (shorthand).
+
+* **RR**: Two hexadecimal digits (0-9, A-F) representing the
+  intensity of Red (00 to FF).
+* **GG**: Two hexadecimal digits for Green intensity.
+* **BB**: Two hexadecimal digits for Blue intensity.
+* **#RGB** shorthand: If each pair of digits is the same (e.g.,
+  **#FF00CC can be** `#F0C` - this is incorrect,
+  **#FF00CC** cannot be shortened. Shorthand is for
+  **#AABBCC** to `#ABC`, e.g., `#F00` for
+  **#FF0000**). Corrected: `#RGB` shorthand is used
+  when pairs are identical e.g., `#FF0000` becomes
+  **#F00**, `#AABBCC` becomes `#ABC`.
+
+**Examples:**
+
+* **#FF0000:** Pure Red (FF for Red, 00 for Green, 00 for Blue)
+* **#00FF00:** Pure Green
+* **#0000FF:** Pure Blue
+* **#000000:** Black
+* **#FFFFFF:** White
+* **#333** (shorthand for `#333333`): Dark Gray
+* **#A0A0A0:** A medium gray.
+
+#FF5733
+
+#3498DB
+
+#2ECC71
+
+#F0F (Pink)
+
+```css
+body {
+  background-color: #f4f4f4; /* Light gray */
+}
+h1 {
+  color: #2c3e50; /* Dark blue/gray */
+}
+.accent-border {
+  border: 2px solid #e74c3c; /* Reddish-orange */
+}
+```
+
+Modern CSS also supports 8-digit hex notation (`#RRGGBBAA`)
+and 4-digit hex notation (`#RGBA`) to include an alpha
+(transparency) channel, similar to RGBA (covered next).
+
+### 3. RGB and RGBA Color Values
+
+
+RGB (Red, Green, Blue) is another way to define colors based on the
+intensity of these primary light colors.
+
+**Format (RGB):** rgb(red, green, blue)
+
+* red, green, blue: Values from 0
+  to 255 (integer) or 0% to 100% (percentage).
+
+**Format (RGBA):**
+rgba(red, green, blue, alpha)
+
+* `alpha`: A value from 0 (fully transparent) to 1 (fully
+  opaque) (e.g., 0.5 for 50% transparency).
+
+**Examples:**
+
+*  rgb(255, 0, 0): Pure Red
+*  rgb(0%, 100%, 0%): Pure Green
+*  rgba(0, 0, 255, 0.5): Semi-transparent Blue
+*  rgba(50, 50, 50, 0.8): Semi-transparent Dark Gray
+
+rgb(255,87,51)
+
+rgba(52,152,219,0.7)
+
+rgba(46,204,113,0.4)
+
+```css
+.error-text {
+  color: rgb(192, 57, 43);
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black overlay */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+```
+
+### 4. HSL and HSLA Color Values
+
+
+HSL (Hue, Saturation, Lightness) offers a more intuitive way to define
+colors for some people, as it aligns more closely with how humans
+perceive color.
+
+**Format (HSL):**
+hsl(hue, saturation, lightness)
+
+* **hue:** An angle on the color wheel (0-360 degrees). 0 or
+  360 is Red, 120 is Green, 240 is Blue.
+* **saturation**: Percentage (0% to 100%). 0% is a shade of
+  gray, 100% is the full color.
+* **lightness**: Percentage (0% to 100%). 0% is black, 100% is
+  white, 50% is the "normal" color.
+
+**Format (HSLA):**
+`hsla(hue, saturation, lightness, alpha)`
+
+* **alpha**: Transparency value from 0 (fully transparent) to 1
+  (fully opaque).
+
+**Examples:**
+
+* hsl(0, 100%, 50%): Pure Red
+* hsl(120, 100%, 50%): Pure Green
+* hsl(120, 100%, 25%): Dark Green
+* hsl(120, 60%, 70%): Pastel Green
+* hsla(240, 100%, 50%, 0.5): Semi-transparent Blue
+
+hsl(30,100%,50%)
+
+hsla(200,70%,60%,0.7)
+
+hsla(320,80%,50%,0.4)
+
+```css
+.theme-primary {
+  color: hsl(210, 80%, 45%); /* A nice blue */
+}
+.subtle-highlight {
+  background-color: hsla(60, 100%, 90%, 0.5); /* Very light, semi-transparent yellow */
+}
+```
+
+HSL can be very useful for creating color variations. For example, you
+can easily create lighter or darker shades of a color by adjusting the
+lightness, or more or less vibrant versions by adjusting saturation,
+all while keeping the hue constant.
+
+
+{/* // import Quiz from '../../../components/Quiz'
+// import cssMCQs from '../quiz-data/color-values.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

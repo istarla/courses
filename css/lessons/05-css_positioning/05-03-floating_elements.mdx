@@ -1,0 +1,146 @@
+# Floating Elements
+
+
+The float property in CSS is used to take an element out of
+the normal document flow and position it to the left or right of its
+container. Surrounding content then flows around the floated element.
+While modern layout techniques like Flexbox and Grid have reduced the
+need for floats for overall page layout, they are still useful for
+specific scenarios like wrapping text around images.
+
+## The float Property
+
+The `float` property can take one of the following values:
+
+* **left**: The element floats to the left of its container. Text and other
+  inline content flow around its right side.
+* **right**: The element floats to the right of its container. Text and other
+  inline content flow around its left side.
+* **none**: The element does not float and is displayed where it occurs in the
+  text. This is the default value.
+* inherit: The element inherits the float value of its
+  parent.
+
+When an element is floated, it is taken out of the normal flow, and
+block-level elements that follow it may behave as if the floated element
+isn't there in terms of vertical space, leading to container collapse
+issues (which we'll address tomorrow with "clearing floats").
+
+### Example 1: Floating an Image to the Left
+
+![Floating Image](https://via.placeholder.com/120/fbbf24/78350f?text=Float+Left)
+
+This paragraph demonstrates text wrapping around an image that is
+floated to the left. The image is taken out of the normal flow, and
+this text content flows along its right side and then underneath it,
+once the floated element's height is exceeded. Lorem ipsum dolor sit
+amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+dolore eu fugiat nulla pariatur.
+
+```css
+.image-left {
+  float: left;
+  width: 100px; /* It's good practice to set a width on floated elements */
+  height: auto;
+  margin-right: 15px; /* Add some space between the image and text */
+  margin-bottom: 5px; /* Space below the image before text wraps under */
+}
+.text-content {
+  /* This text will wrap around .image-left */
+}
+```
+
+### Example 2: Floating an Element to the Right
+
+Float Right Box
+
+This paragraph has a div floated to its right. The text content will
+flow on the left side of the floated div. If the text is long enough,
+it will continue below the floated element. This technique was
+historically used for sidebars or callout boxes, but for complex
+layouts, Flexbox or Grid are now preferred. Lorem ipsum dolor sit
+amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+```css
+.pull-quote {
+  float: right;
+  width: 150px;
+  padding: 10px;
+  margin-left: 20px; /* Space from the main text */
+  margin-bottom: 10px;
+  background-color: #f0f0f0;
+  border-left: 3px solid #ccc;
+  font-style: italic;
+}
+```
+
+### Example 3: Multiple Floated Elements
+
+Multiple elements can be floated next to each other. If they are all
+floated in the same direction (e.g., `float: left;`), they
+will line up horizontally as space allows. If they are floated in
+opposite directions, they will move to the respective edges of their
+container.
+
+Box 1 (L)
+
+Box 2 (L)
+
+Box 3 (R)
+
+Text after floated elements (cleared).
+
+```css
+.gallery-item {
+  float: left;
+  width: 30%; /* Example for a three-column gallery, needs margin/padding adjustments */
+  margin: 1.5%;
+  background-color: lightgrey;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+}
+/* NOTE: This simple gallery will likely have issues with container collapse
+   and uneven heights, which 'clear' and other techniques address. */
+```
+
+## Key Behaviors and Considerations of Floats
+
+* **Shrink-Wrapping:** If a floated element doesn't have an
+  explicit width set, it will shrink to fit its content (similar to an
+  inline-block element).
+* **Block Formatting Context (BFC):** A floated element
+  generates a new block formatting context. This means, for instance,
+  that its own margins will not collapse with the margins of its
+  children.
+* **Container Collapse:** Perhaps the most common issue
+  with floats is that the parent container of floated elements does not
+  automatically adjust its height to encompass them if the parent itself
+  has no other non-floated content in the normal flow that extends below
+  the floats. This is because floated elements are taken out of the
+  normal flow. We will learn how to "clear" floats tomorrow to solve
+  this.
+* **Overlapping:** Floated elements can overlap with other
+  elements if there isn't enough space, or if subsequent elements are
+  not cleared.
+* **Impact on Layout:** Historically, floats were heavily
+  used for creating multi-column layouts. However, this approach often
+  required complex workarounds (like clearfix hacks) and could be
+  fragile. Modern CSS offers Flexbox and Grid, which are far more robust
+  and designed for layout purposes.
+
+**Modern Usage:** While floats are less common for
+primary page layout now, they remain the standard and best way to
+achieve effects like text wrapping around an image or an initial drop
+cap. For complex column-based layouts, prefer Flexbox or Grid.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/floating.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

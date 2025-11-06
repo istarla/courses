@@ -1,0 +1,213 @@
+# Relative Units (em, rem, %, vw, vh)
+
+Yesterday we discussed absolute units. Today, we shift our focus to
+**relative length units**. Relative units are more flexible
+as their actual value is calculated based on another length, such as the
+font size of a parent element, the root element, or the size of the
+viewport. They are fundamental for creating responsive and scalable
+designs.
+
+## What are Relative Length Units?
+
+Relative length units define a length in relation to another property's
+length. This dynamic nature makes them ideal for designs that need to
+adapt to different screen sizes and user preferences (like custom font
+sizes).
+
+The main relative units we'll explore are:
+
+* **em**: Relative to the font-size of the parent element (for
+  font-size) or the element itself (for other properties).
+* **rem**: Relative to the font-size of the root
+  (`<html>`) element.
+* **% (percentage)**: Relative to a value of the parent element
+  (e.g., width, height, font-size).
+* **vw (viewport width)**: Relative to 1% of the viewport's
+  width.
+* **vh (viewport height)**: Relative to 1% of the viewport's
+  height.
+
+Other relative units include `ex`, `ch`,
+`vmin`, and `vmax`, which have more specific use
+cases.
+
+### 1.em
+
+The `em` unit is relative to the `font-size` of
+the element it's used on (for properties like `padding`,
+`margin`, `width`, etc.) or relative to the
+`font-size` of the parent element when used for the
+`font-size` property itself.
+
+**Characteristics:**
+
+* If `font-size: 1.2em;` is set on an element, its font size
+  will be 1.2 times the font size of its parent.
+* If `padding: 2em;` is set, the padding will be 2 times the
+  font size of the element itself.
+* **Compounding Effect:** When `em` is used for
+  `font-size` on nested elements, it can lead to a
+  compounding effect, which can be powerful but also tricky to manage.
+  For example, if a parent has `font-size: 1.2em` and its
+  child also has `font-size: 1.2em`, the child's font size
+  will be 1.2 \* 1.2 = 1.44 times the grandparent's font size.
+
+Parent (font-size: 20px). This text is 1.2em (24px). Padding is 0.5em
+(12px).
+
+Inner child. Font-size is 1.2em of its parent (28.8px). Padding 0.5em
+(14.4px).
+
+```css
+.parent {
+  font-size: 16px;
+}
+.child {
+  font-size: 1.5em; /* 1.5 * 16px = 24px */
+  padding: 1em;     /* Padding will be 1 * 24px = 24px */
+  margin-bottom: 0.5em; /* Margin will be 0.5 * 24px = 12px */
+}
+.grandchild {
+  font-size: 1.5em; /* 1.5 * 24px = 36px (compounding) */
+}
+```
+
+### 2. rem (Root em)
+
+The `rem` unit is relative to the `font-size` of
+the root element (`<html>`). This avoids the
+compounding issue of `em` units when setting font sizes on
+nested elements.
+
+**Characteristics:**
+
+* `1rem` is equal to the font size of the
+  `<html>` element (browsers typically default this to
+  `16px`, but users can change it).
+* If `<html> { font-size: 10px; }`, then
+  `2rem` would be `20px` anywhere in the document.
+* Excellent for creating scalable layouts where typography and spacing
+  can be adjusted by changing the root font size.
+
+Parent. This text is 1.6rem (16px, based on
+`html {font-size:10px;}` in example style). Padding is 1rem
+(10px).
+
+Inner child. Font-size is 1.2rem (12px). Not compounded by parent's
+rem. Padding 0.5rem (5px).
+
+```css
+html {
+  font-size: 62.5%; /* Common trick: 62.5% of 16px (default) = 10px. Makes 1rem = 10px for easier math. */
+}
+body {
+  font-size: 1.6rem; /* Equivalent to 16px */
+}
+h1 {
+  font-size: 3.2rem; /* Equivalent to 32px */
+  margin-bottom: 1rem; /* Equivalent to 10px */
+}
+.component {
+  padding: 1.5rem; /* Equivalent to 15px */
+}
+```
+
+The example above uses `html { font-size: 10px; }` for
+simpler demonstration. In real projects, setting
+`html { font-size: 62.5%; }` is a common technique to make
+`1rem = 10px` (assuming the browser default is 16px), which
+simplifies calculations. However, some prefer to leave the root font
+size at the browser default (or set it to `100%`) and work
+with `rem` values based on that (e.g.,
+`1.5rem` for `24px` if root is `16px`).
+
+### 3. Percentage (`%`)
+
+The percentage unit is always relative to another value. The context
+depends on the property it's used for:
+
+* For `font-size`: Relative to the font-size of the parent
+  element.
+* For `width`, `height`, `padding`,
+  `margin` (horizontal): Relative to the
+  **width** of the containing block.
+* For `line-height`: Relative to the element's own font size.
+* For `top`, `bottom`: Relative to the
+  **height** of the containing block (if positioned).
+
+Parent (width: 400px)
+
+Child (width: 50% of parent = 200px)
+
+Parent (font-size: 20px)
+
+Child (font-size: 150% of parent = 30px)
+
+```css
+.parent-container {
+  width: 500px;
+  font-size: 18px;
+}
+.child-element {
+  width: 80%; /* 80% of 500px = 400px */
+  padding: 5%; /* 5% of 500px (parent width) = 25px for left/right padding */
+  font-size: 120%; /* 120% of 18px = 21.6px */
+  line-height: 150%; /* 150% of its own font-size (21.6px) */
+}
+```
+
+### 4. Viewport Units: vw and vh
+
+Viewport units are relative to the size of the viewport (the browser
+window's visible area).
+
+* **`vw` (viewport width)**: 1vw = 1% of the
+  viewport width.
+* **`vh` (viewport height)**: 1vh = 1% of the
+  viewport height.
+
+**Characteristics:**
+
+* Excellent for creating elements that scale directly with the browser
+  window size.
+* Often used for full-height hero sections (`height: 100vh;`)
+  or full-width elements.
+* Can also be used for font sizes (`font-size: 2vw;`) to make
+  text responsive to viewport width, but this can lead to very small or
+  very large text on extreme screen sizes, so use with caution (`clamp()`
+  function can help here).
+
+This box is 50vw wide and 10vh tall. (Resize your browser window to see
+it change)
+
+This box is 20vw wide and 30vh tall.
+
+```css
+.full-screen-hero {
+  width: 100vw;
+  height: 100vh;
+  background-color: lightskyblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.responsive-title {
+  font-size: 5vw; /* Font size scales with viewport width */
+  color: white;
+}
+.sidebar {
+  width: 25vw; /* Sidebar takes 25% of viewport width */
+  min-width: 200px; /* Good to combine with min/max for usability */
+  height: 100vh; /* Full viewport height */
+  background-color: #f0f0f0;
+}
+```
+
+Other viewport units include `vmin` (1% of the smaller of vw
+or vh) and `vmax` (1% of the larger of vw or vh).
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/relative_unit.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

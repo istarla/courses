@@ -1,0 +1,180 @@
+# Absolute Units (px, pt, cm, mm, in)
+
+Welcome to Week 5! This week, we'll explore various units and values
+used in CSS. We'll start today by focusing on
+**absolute length units**. Absolute units are fixed and do
+not change based on any other element or viewport size. They represent a
+physical measurement when the output medium's properties are known (like
+for print).
+
+## What are Absolute Length Units?
+
+
+Absolute length units are considered to be always the same size
+regardless of the context. While this is true for physical media like
+print, on screens, their actual size can depend on screen resolution
+(DPI - dots per inch) and other factors. However, they are generally
+more predictable in size than relative units.
+
+The primary absolute units we'll cover are:
+
+* `px` (pixels)
+* `pt` (points)
+* `cm` (centimeters)
+* `mm` (millimeters)
+* `in` (inches)
+
+There are also `pc` (picas: 1pc = 12pt) and
+`Q` (quarter-millimeters: 1Q = 0.25mm), but they are less
+commonly used in web design.
+
+### 1. Pixels (px)
+
+
+Pixels are the most commonly used absolute unit in web design for screen
+media. One pixel (`1px`) is typically defined as 1/96th of an
+inch (`1in`), but this can vary based on screen density. For
+low-DPI devices, `1px` is one device pixel (dot) on the
+display. For high-DPI ("Retina") devices, `1px` might
+correspond to multiple device pixels to maintain a consistent perceived
+size.
+
+**Characteristics:**
+
+* Represents a single dot on a screen (historically, now more complex
+  with high-DPI screens).
+* Very common for defining font sizes, borders, widths, heights,
+  margins, padding, etc.
+* Can lead to less accessible designs if used for font sizes, as users
+  might have difficulty resizing text set in pixels (though modern
+  browsers handle this better). Relative units like `em` or
+  `rem` are often preferred for font sizes for better
+  accessibility.
+
+This box is 200px wide. Text size is 16px.
+
+```css
+.element {
+  font-size: 16px;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+```
+
+### 2. Points (pt)
+
+Points are traditionally used in print media. One point
+(`1pt`) is equal to 1/72nd of an inch (`1in`).
+
+**Characteristics:**
+
+* Primarily intended for print stylesheets.
+* Less common for screen styling because pixel density varies more on
+  screens than on paper.
+* Generally, `16px` is roughly equivalent to
+  `12pt` on a typical screen with 96 DPI.
+
+This text is 12pt.
+
+```css
+@media print {
+  body {
+    font-size: 12pt; /* Common for print documents */
+    line-height: 1.5; /* Using a unitless number is still good for line-height */
+  }
+  .heading-print {
+    font-size: 18pt;
+    margin-bottom: 6pt;
+  }
+}
+/* For screen, this might not be ideal */
+.screen-text {
+  font-size: 10pt; /* This will translate to a px value by the browser */
+}
+```
+
+### 3. Centimeters (cm), Millimeters (mm), Inches (in)
+
+These are physical units of length, directly corresponding to their
+real-world measurements.
+
+* `1in = 2.54cm = 25.4mm`
+* `1in = 96px` (CSS "reference pixel" definition)
+* `1in = 72pt`
+
+**Characteristics:**
+
+* Most useful when the physical properties of the output medium are
+  known, primarily for print stylesheets.
+* Can be used for screen styling, but their actual rendered size on
+  screen depends on the screen's DPI. A `1cm` line on a
+  low-DPI monitor might look different from `1cm` on a
+  high-DPI phone screen or a projector.
+* Generally not recommended for responsive web design where elements
+  need to adapt to various screen sizes.
+
+Width: 5cm, Height: 2cm
+
+Width: 50mm, Height: 10mm (Same as 5cm x 1cm)
+
+Width: 2in, Height: 0.5in
+
+```css
+.page-for-print {
+  width: 21cm; /* A4 paper width */
+  height: 29.7cm; /* A4 paper height */
+  padding: 1in; /* 1 inch padding around */
+}
+
+.ruler-marking {
+  height: 5mm;
+  width: 1px; /* Even px can be used with physical units */
+  background-color: black;
+  margin-bottom: 0.25cm;
+}
+```
+
+## When to Use Absolute Units
+
+* **Print Stylesheets:** Units like `cm`,
+  `mm`, `in`, and `pt` are ideal for
+  print because the output medium has fixed physical dimensions.
+* **Fixed-Size Elements (with caution):** Pixels
+  (`px`) can be used for elements that need to maintain a
+  specific size, like logos, icons, or sometimes borders and fixed-width
+  containers. However, for overall page layout and typography, relative
+  units often provide better flexibility and accessibility.
+* **When Pixel-Perfection is Required (Screen):** If a
+  design needs to align precisely with a pixel grid for screen display,
+  `px` is the go-to.
+
+## Limitations and Considerations
+
+* **Accessibility:** Using absolute units (especially
+  `px`) for font sizes can sometimes make it harder for users
+  to scale text according to their preferences, although modern browsers
+  have improved zoom functionalities. Relative units (`em`,
+  `rem`, `%`) are generally favored for font
+  sizes.
+* **Responsiveness:** Absolute units do not adapt to
+  different screen sizes or viewport dimensions. For responsive web
+  design, relative units (like `%`, `vw`,
+  `vh`, `em`, `rem`) are essential.
+* **Screen vs. Print:** The perceived size of physical
+  units like `cm` or `in` on a screen can be
+  inconsistent due to varying screen DPIs. Their use is more reliable
+  for print.
+
+While `px` is an absolute unit, it's become the de facto
+standard for many screen-based designs. Modern CSS often involves a
+mix: `px` for things like border widths or specific icon
+sizes, and relative units (which we'll cover next) for typography and
+layout containers to ensure responsiveness and scalability.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/absolute_units.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

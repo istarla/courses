@@ -1,0 +1,162 @@
+# Introduction to Flexbox
+
+
+Welcome to Week 6, where we dive into modern CSS layout techniques!
+Today, we introduce the **Flexible Box Layout Module**,
+commonly known as **Flexbox**. Flexbox is a one-dimensional
+layout model designed to provide a more efficient way to arrange, align,
+and distribute space among items in a container, even when their size is
+unknown or dynamic.
+
+## Why Flexbox?
+
+
+Before Flexbox, creating complex layouts (especially responsive ones)
+often involved using floats, table display properties, or absolute
+positioning, which could be cumbersome and lead to fragile designs
+(e.g., requiring clearfix hacks).
+
+Flexbox aims to solve these problems by offering:
+
+* **One-dimensional layout:** It deals with layout in a
+  single dimension at a time – either as a row or as a column.
+* **Content-out or Layout-in:** It can manage items based
+  on their content size or distribute space according to the layout
+  rules.
+* **Alignment and Distribution:** Powerful alignment
+  capabilities for items along both main and cross axes.
+* **Order Independence:** The visual order of items can be
+  different from their source order in HTML.
+* **Responsiveness:** Items can "flex" (grow or shrink) to
+  fill available space or adapt to different screen sizes.
+
+## Core Flexbox Terminology
+
+Understanding Flexbox requires familiarity with its key terms:
+
+* **Flex Container:** The parent element on which
+  `display: flex;` or `display: inline-flex;` is
+  applied.
+* **Flex Items:** The direct children of the flex
+  container.
+* **Main Axis:** The primary axis along which flex items
+  are laid out. By default, this is horizontal (row direction), but it
+  can be changed to vertical (column direction) using the
+  `flex-direction` property.
+* **Cross Axis:** The axis perpendicular to the main axis.
+  If the main axis is horizontal, the cross axis is vertical, and
+  vice-versa.
+* **Main Start / Main End:** The beginning and end points
+  of the main axis.
+* **Cross Start / Cross End:** The beginning and end points
+  of the cross axis.
+* **Main Size:** The width or height of a flex item,
+  depending on whether the main axis is horizontal or vertical.
+* **Cross Size:** The width or height of a flex item,
+  depending on whether the cross axis is horizontal or vertical.
+
+Imagine a container (Flex Container). Its direct children are Flex
+Items.
+
+If **flex-direction: row** (default):
+
+Main Axis: Horizontal (left to right)
+
+Cross Axis: Vertical (top to bottom)
+
+If **flex-direction: column**:
+
+Main Axis: Vertical (top to bottom)
+
+Cross Axis: Horizontal (left to right)
+
+## Enabling Flexbox: The `display` Property
+
+To start using Flexbox, you apply the `display` property to
+the container element:
+
+* **`display: flex;`**: This makes the element a block-level flex container. It will take
+  up the full available width like a regular block element.
+* **`display: inline-flex;`**: This makes the element an inline-level flex container. It will only
+  take up as much space as its content requires, like a regular
+  inline-block element.
+
+Once either of these is applied, the direct children of that element
+become flex items.
+
+### Basic Flex Container Example
+
+Item 1
+
+Item 2
+
+Item 3
+
+```html
+<div class="flex-container">
+  <div class="flex-item">Item 1</div>
+  <div class="flex-item">Item 2</div>
+  <div class="flex-item">Item 3</div>
+</div>
+```
+
+```css
+.flex-container {
+  display: flex; /* Makes this div a flex container */
+  background-color: lightblue;
+  padding: 10px;
+  border: 1px solid blue;
+}
+
+.flex-item {
+  background-color: navy;
+  color: white;
+  padding: 20px;
+  margin: 5px;
+  border: 1px solid darkblue;
+  text-align: center;
+}
+```
+
+In the example above, without any other flex properties, the items will
+line up in a row (the default `flex-direction`) and will not
+wrap. They might shrink to fit if their combined width exceeds the
+container width, or they might overflow.
+
+## Flex Container Properties vs. Flex Item Properties
+
+Flexbox has a set of properties that apply to the
+**flex container** (to control how its children are laid
+out) and another set of properties that apply to the
+**flex items** themselves (to control how they behave
+within the container).
+
+**Upcoming topics:**
+
+* **Tomorrow (Day 27 & 28):** We will explore key
+  **Flex Container Properties** like:
+  + `flex-direction` (row, column, etc.)
+  + `flex-wrap` (nowrap, wrap, wrap-reverse)
+  + `flex-flow` (shorthand for direction and wrap)
+  + `justify-content` (aligning items along the main axis)
+  + `align-items` (aligning items along the cross axis)
+  + `align-content` (aligning multiple lines of items along
+    the cross axis)
+* **Later this week (Day 29 & 30):** We will look at
+  **Flex Item Properties** like:
+  + `order`
+  + `flex-grow`
+  + `flex-shrink`
+  + `flex-basis`
+  + `flex` (shorthand for grow, shrink, and basis)
+  + `align-self`
+
+Flexbox is a powerful tool, and its true potential is unlocked when
+you combine container and item properties effectively. We will build
+up this understanding step-by-step.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/intro_flex.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

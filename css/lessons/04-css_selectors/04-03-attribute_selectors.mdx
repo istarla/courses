@@ -1,0 +1,205 @@
+# Attribute Selectors
+
+CSS attribute selectors allow you to select HTML elements based on their
+attributes and attribute values. This provides a powerful way to apply
+styles more specifically than with simple element or class selectors,
+especially when dealing with forms, links, or custom data attributes.
+
+The following HTML structure will be used for examples:
+
+* [Example Site (New Tab)](https://example.com "Visit Example")
+* [Other Site (Same Tab)](https://othersite.org)
+* [Document PDF](/docs/document.pdf "Download PDF")
+* [Another Example Page](/page/another-example.html)
+* [Internal Link](#internal-link)
+* English (US) Text
+* French Text
+* English (GB) Text
+
+## 1. Presence Selector: [attribute]
+
+Selects elements that have the specified attribute, regardless of its
+value.
+
+**Syntax:** [attribute]
+
+**Example:** a[target] selects all
+`<a>` elements that have a
+`target` attribute.
+
+```css
+/* Style all anchor tags that have a 'target' attribute */
+a[target] {
+  background-color: #e0f2fe; /* Tailwind sky-100 */
+  border-left: 3px solid #0ea5e9; /* Tailwind sky-500 */
+  padding: 2px 4px;
+}
+
+/* Style all elements that have a 'data-tooltip' attribute */
+[data-tooltip] {
+  position: relative; /* For potential tooltip positioning */
+  cursor: help;
+}
+```
+
+In the example list, links with any `target` attribute will
+have a light blue background and a blue left border.
+
+## 2. Exact Value Selector: [attribute="value"]
+
+
+Selects elements where the specified attribute has an exact,
+case-sensitive value.
+
+**Syntax:** [attribute="value"]
+
+**Example:** `a[target="_blank"]` selects all
+`<a>` elements where the `target` attribute
+is exactly `_blank`.
+
+```css
+/* Style anchor tags that open in a new tab */
+a[target="_blank"] {
+  color: #1d4ed8; /* Tailwind blue-700 */
+  font-weight: bold;
+}
+
+/* Style text input fields */
+input[type="text"] {
+  border: 2px solid #fbbf24; /* Tailwind amber-400 */
+  padding: 3px;
+  border-radius: 3px;
+}
+```
+
+In the list, the "Example Site (New Tab)" link will be bold and dark
+blue. The username input field will get an amber border.
+
+### 3. Whitespace-Separated List Selector: [attribute~="value"]
+
+Selects elements where the attribute's value is a whitespace-separated
+list of words, and one of those words is exactly the specified "value".
+
+**Syntax:** [attribute~="value"]
+
+**Example:** [data-state~="active"] selects
+elements where data-state attribute contains the word
+"active" (e.g., data-state="active important or
+data-state="pending active).
+
+```css
+/* Style elements with 'active' in their data-state attribute */
+[data-state~="active"] {
+  box-shadow: 0 0 5px rgba(234, 88, 12, 0.7); /* Tailwind orange-500 with opacity */
+  padding: 2px; /* To make shadow more visible if content is small */
+}
+
+/* Example: images with a 'landscape' class in a data attribute
+   ![]() */
+img[data-tags~="landscape"] {
+  border: 3px solid forestgreen;
+}
+```
+
+The "English (US) Text" span, with
+`data-state="active important"`, will get an orange box
+shadow.
+
+### 4. Substring Matching Selectors
+
+
+These selectors match based on parts of an attribute's value.
+
+### a) Begins With: `[attribute^="value"]`
+
+Selects elements whose attribute value *begins with* the
+specified string.
+
+**Example:** `a[href^="https://"]` selects links
+whose `href` starts with "https://".
+
+```css
+/* Style secure links */
+a[href^="https://"] {
+  border-bottom: 2px dotted #16a34a; /* Tailwind green-600 */
+}
+```
+
+"Example Site" and "Other Site" links will get a dotted green bottom
+border.
+
+### b) Ends With: `[attribute$="value"]`
+
+Selects elements whose attribute value *ends with* the specified
+string.
+
+**Example:** a[href$=".pdf"] selects links
+whose href ends with ".pdf".
+
+```css
+/* Add an icon or style for PDF links */
+a[href$=".pdf"]::after {
+  content: " (PDF)";
+  color: #dc2626; /* Tailwind red-600 */
+  font-size: 0.8em;
+}
+```
+
+The "Document PDF" link will have "(PDF)" appended to it in red.
+
+### c) Contains: `[attribute*="value"]`
+
+Selects elements whose attribute value *contains* the specified
+string anywhere within it.
+
+**Example:** `a[href*="example.com"]` selects
+links whose `href` contains "example.com".
+
+```css
+/* Highlight links pointing to a specific domain */
+a[href*="example.com"] {
+  background-color: #fce7f3; /* Tailwind pink-100 */
+}
+```
+
+"Example Site" and "Another Example Page" links will get a light pink
+background.
+
+### 5. Hyphen-Separated List Selector (for Language Codes): `[attribute|="value"]`
+
+Selects elements where the attribute value is a hyphen-separated list of
+values beginning with (or an exact match for) the specified "value".
+This is primarily intended for matching language codes.
+
+**Syntax:** `[attribute|="value"]`
+
+**Example:** `[lang|="en"]` selects elements
+with `lang="en"` or `lang="en-US"`,
+`lang="en-GB"`, etc., but not `lang="fr-en"`.
+
+```css
+/* Style elements with English language codes */
+[lang|="en"] {
+  font-style: italic;
+  color: #4f46e5; /* Tailwind indigo-600 */
+}
+```
+
+"English (US) Text" and "English (GB) Text" spans will become italic and
+indigo.
+
+**Case Sensitivity:** By default, attribute values are
+case-sensitive in most contexts. However, for some HTML attributes
+(like `type`), browsers might treat values
+case-insensitively. To explicitly control case sensitivity in CSS
+attribute selectors (Level 4 feature, check browser support), you can
+add an `i` flag before the closing bracket, e.g.,
+`[type="TEXT" i]`. For widespread compatibility, it's often
+safer to ensure your HTML attribute values and CSS selector values
+match in case.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/attribute_selectors.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

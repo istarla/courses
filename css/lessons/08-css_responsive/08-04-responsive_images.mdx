@@ -1,0 +1,269 @@
+# Responsive Images
+
+
+While making images flexible using max-width: 100% is a
+good start for responsiveness, it has limitations. A large,
+high-resolution image scaled down for a small mobile screen still forces
+the user to download the large file, wasting bandwidth and slowing down
+page load. Responsive images techniques address this by allowing the
+browser to choose the most appropriate image source from a set, based on
+factors like viewport width, screen density (resolution), or even
+desired art direction.
+
+## The Problem with Simple Fluid Images
+
+Consider using a single large image (e.g., 1600px wide) and scaling it
+down with CSS:
+
+```css
+img {
+  max-width: 100%;
+  height: auto; 
+}
+```
+
+```html
+<img src="large-image.jpg" alt="A large image" />
+```
+
+**Issues:**
+
+* **Performance:** Mobile users on slower connections
+  download the large file unnecessarily.
+* **Resolution Switching:** Low-resolution screens don't
+  need a high-resolution image designed for Retina displays.
+* **Art Direction:** Sometimes, you might want to show a
+  different crop or composition of an image on smaller screens (e.g., a
+  close-up vs. a wide shot). Simple scaling doesn't allow this.
+
+## Resolution Switching: The srcset Attribute
+
+The srcset attribute allows you to provide multiple image
+sources along with descriptors that help the browser choose the best
+one, primarily based on screen density or image width.
+
+### Using the x Descriptor (Screen Density)
+
+This tells the browser about the resolution each image file is intended
+for.
+
+**Syntax:**
+`srcset="image-1x.jpg 1x, image-2x.jpg 2x, image-3x.jpg 3x"`
+
+* `1x`: For standard resolution displays.
+* `2x`: For high-resolution (Retina) displays.
+* `3x`: For very high-resolution displays.
+
+The browser detects the device's pixel density and downloads the most
+appropriate image.
+
+
+Browser chooses based on screen density (1x or 2x).
+
+```html
+<img srcset="photo-standard.jpg 1x, photo-retina.jpg 2x"
+     src="photo-standard.jpg" /* Fallback for older browsers */
+     alt="A descriptive alt text" />
+```
+
+### Using the w Descriptor and sizes Attribute (Viewport Width)
+
+
+This approach lets the browser choose an image based on the image's
+actual width and how much space it will occupy in the layout.
+
+**Syntax:**
+
+* **`srcset` with `w` descriptors:**
+  Provides image sources and their actual widths in pixels (e.g.,
+  `srcset="image-sm.jpg 400w, image-md.jpg 800w, image-lg.jpg
+  1200w"`).
+* **`sizes` attribute:** Tells the browser how
+  wide the image will be displayed in the layout, usually based on
+  viewport width using media conditions. This helps the browser pick the
+  best `srcset` image. (e.g.,
+  `sizes="(max-width: 600px) 90vw, (max-width: 900px) 50vw,
+  800px"`).
+
+The `sizes` attribute format is:
+```text
+`sizes="[media condition] <width, [media condition]
+<width, ..., <default_width"`. The browser picks the first matching media condition.
+
+![Width descriptor example](https://via.placeholder.com/800x300/lightgreen/008000?text=Medium+800w)
+
+
+Browser chooses image (400w, 800w, 1200w) based on viewport width
+and sizes attribute.
+
+```html
+<img srcset="image-480.jpg 480w,
+             image-800.jpg 800w,
+             im# Responsive Images
+
+While making images flexible using `max-width: 100%` is a good start for responsiveness, it has limitations. A large, high-resolution image scaled down for a small mobile screen still forces the user to download the large file, wasting bandwidth and slowing down page load. Responsive images techniques address this by allowing the browser to choose the most appropriate image source from a set, based on factors like viewport width, screen density (resolution), or even desired art direction.
+```
+## The Problem with Simple Fluid Images
+
+Consider using a single large image (e.g., 1600px wide) and scaling it down with CSS:
+
+```css
+img {
+  max-width: 100%;
+  height: auto;
+}
+```
+
+```html
+<img src="large-image.jpg" alt="A large image" />
+```
+
+**Issues:**
+
+*   **Performance:** Mobile users on slower connections download the large file unnecessarily.
+*   **Resolution Switching:** Low-resolution screens don't need a high-resolution image designed for Retina displays.
+*   **Art Direction:** Sometimes, you might want to show a different crop or composition of an image on smaller screens (e.g., a close-up vs. a wide shot). Simple scaling doesn't allow this.
+
+## Resolution Switching: The srcset Attribute
+
+
+The `srcset` attribute allows you to provide multiple image sources along with descriptors that help the browser choose the best one, primarily based on screen density or image width.
+
+### Using the x Descriptor (Screen Density)
+
+This tells the browser about the resolution each image file is intended for.
+
+**Syntax:** `srcset="image-1x.jpg 1x, image-2x.jpg 2x, image-3x.jpg 3x"`
+
+*   `1x`: For standard resolution displays.
+*   `2x`: For high-resolution (Retina) displays.
+*   `3x`: For very high-resolution displays.
+
+The browser detects the device's pixel density and downloads the most appropriate image.
+
+<div class="example-html">
+  <figure>
+    <img
+      src="https://via.placeholder.com/400x150/lightblue/0000FF?text=Image+1x"
+      srcset="
+        https://via.placeholder.com/400x150/lightblue/0000FF?text=Image+1x 1x,
+        https://via.placeholder.com/800x300/lightblue/0000FF?text=Image+2x 2x
+      "
+      alt="Resolution Switching Example"
+    />
+    <figcaption>
+      Browser chooses based on screen density (1x or 2x).
+    </figcaption>
+  </figure>
+</div>
+
+```html
+<img srcset="photo-standard.jpg 1x, photo-retina.jpg 2x"
+     src="photo-standard.jpg" /* Fallback for older browsers */
+     alt="A descriptive alt text" />
+```
+
+### Using the w Descriptor and sizes Attribute (Viewport Width)
+
+This approach lets the browser choose an image based on the image's actual width and how much space it will occupy in the layout.
+
+**Syntax:**
+
+*   **`srcset` with `w` descriptors:** Provides image sources and their actual widths in pixels (e.g., `srcset="image-sm.jpg 400w, image-md.jpg 800w, image-lg.jpg 1200w"`).
+*   **`sizes` attribute:** Tells the browser how wide the image will be displayed in the layout, usually based on viewport width using media conditions. This helps the browser pick the best `srcset` image. (e.g., `sizes="(max-width: 600px) 90vw, (max-width: 900px) 50vw, 800px"`).
+
+The `sizes` attribute format is: `sizes="[media condition] <width>, [media condition] <width>, ..., <default_width>"`. The browser picks the first matching media condition.
+
+<div class="example-html">
+  <figure>
+    <img
+      srcset="https://via.placeholder.com/400x150/lightgreen/008000?text=Small+400w 400w,
+               https://via.placeholder.com/800x300/lightgreen/008000?text=Medium+800w 800w,
+               https://via.placeholder.com/1200x450/lightgreen/008000?text=Large+1200w 1200w"
+      sizes="(max-width: 500px) 100vw, (max-width: 900px) 50vw, 800px"
+      src="https://via.placeholder.com/800x300/lightgreen/008000?text=Medium+800w"
+      alt="Width descriptor example"
+    />
+    <figcaption>
+      Browser chooses image (400w, 800w, 1200w) based on viewport width and sizes attribute.
+    </figcaption>
+  </figure>
+</div>
+
+```html
+<img srcset="image-480.jpg 480w,
+             image-800.jpg 800w,
+             image-1200.jpg 1200w"
+     sizes="(max-width: 600px) 90vw, /* If viewport <= 600px, image is 90% of viewport width */
+            (max-width: 1000px) 50vw, /* If viewport <= 1000px, image is 50% of viewport width */
+            800px" /* Default width for larger screens */
+     src="image-800.jpg" /* Fallback */
+     alt="Responsive image with width descriptors" />
+```
+
+Using `srcset` with w and sizes is generally preferred over the `x` descriptor for responsive layouts, as it allows the browser to make more intelligent choices based on both resolution and available layout space.
+
+## Art Direction: The `<picture>` Element
+
+Sometimes, you need more than just scaling; you want to show a completely different image or crop depending on the context. This is called "art direction." The `<picture>` element addresses this.
+
+The `<picture>` element acts as a wrapper containing multiple `<source>` elements and one `<img>` element.
+
+*   Each `<source>` element specifies an image resource (using `srcset`) and can have a `media` attribute (containing a media query) or a `type` attribute (for different image formats like WebP or AVIF).
+*   The browser evaluates the `<source>` elements in order and uses the first one that matches the current environment (media query or supported type).
+*   The `<img>` element is mandatory and acts as the fallback if no `<source>` matches or for older browsers. It also provides the `alt` text.
+
+<div class="example-html">
+  <figure>
+    <picture>
+      <source
+        media="(min-width: 1000px)"
+        srcset="https://via.placeholder.com/1200x400/tomato/ffffff?text=Wide+Desktop+Crop"
+      />
+      <source
+        media="(min-width: 600px)"
+        srcset="https://via.placeholder.com/800x400/orange/ffffff?text=Tablet+Crop"
+      />
+      <img
+        src="https://via.placeholder.com/400x400/gold/000000?text=Mobile+Square+Crop"
+        alt="Art direction example"
+      />
+    </picture>
+    <figcaption>
+      Different image crops are shown based on viewport width.
+    </figcaption>
+  </figure>
+</div>
+
+```html
+<picture>
+  <!-- Show landscape crop on wider screens -->
+  <source media="(min-width: 768px)" srcset="landscape-image.jpg">
+
+  <!-- Show portrait/square crop on narrower screens -->
+  <source media="(max-width: 767px)" srcset="portrait-image.jpg">
+
+  <!-- Fallback image required -->
+  <img src="fallback-image.jpg" alt="A descriptive alt text">
+</picture>
+```
+
+### Using `<picture>` for Modern Image Formats
+
+You can also use `<picture>` to serve modern image formats like WebP or AVIF (which offer better compression) to supporting browsers, while providing a fallback (like JPG or PNG) for older browsers.
+
+```html
+<picture>
+  <source srcset="image.avif" type="image/avif">
+  <source srcset="image.webp" type="image/webp">
+  <img src="image.jpg" alt="Description"> <!-- Fallback JPEG -->
+</picture>
+```
+
+
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/responsive.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

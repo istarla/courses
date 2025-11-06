@@ -1,0 +1,232 @@
+# Text Formatting
+
+Today, we delve into the various CSS properties that allow you to
+control the appearance of text on your web pages. Proper text formatting
+is crucial for readability and user experience. We'll cover properties
+for text color, alignment, decoration, transformation, and spacing.
+
+### color:
+
+
+We've touched on this before, but it's the most basic text formatting
+property. The `color` property sets the foreground color of
+an element's text content.
+
+This text is teal.
+
+```css
+p {
+  color: #333333; /* Dark gray for paragraphs */
+}
+a {
+  color: dodgerblue; /* Blue for links */
+}
+.warning {
+  color: red; /* Red for warning messages */
+}
+```
+
+### text-align:
+
+
+The `text-align` property specifies the horizontal alignment
+of text within its containing element.
+
+**Common values:**
+* **left**: Aligns the text to the left (default for
+  left-to-right languages).
+* **right:** Aligns the text to the right.
+* **center:** Centers the text.
+* **justify:** Stretches the lines so that each line has equal
+  width (like in newspapers and magazines). This can sometimes create
+  awkward spacing between words.
+```text
+This text is centered.
+
+This text is right-aligned.
+```
+This text is justified. Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+magna aliqua. Ut enim ad minim veniam.
+
+```css
+h1 {
+  text-align: center;
+}
+.caption {
+  text-align: right;
+  font-size: 0.9em;
+  color: gray;
+}
+.article-body p {
+  text-align: justify;
+}
+```
+
+### text-decoration:
+
+The text-decoration property is used to add or remove
+decorations from text. It's a shorthand for several sub-properties like
+text-decoration-line, text-decoration-color,
+and text-decoration-style.
+
+Common values for text-decoration-line (often used directly
+with text-decoration):
+
+* **none**: Removes any decoration (often used to remove
+  underlines from links).
+* **underline**: Adds a line below the text.
+* **overline**: Adds a line above the text.
+* **line-through**: Adds a line through the text.
+
+Underlined with a wavy blue line.
+
+This text has a line-through.
+
+```css
+a {
+  text-decoration: none; /* Remove default underline from links */
+}
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+.important-note {
+  text-decoration: underline solid red 2px; /* Underline, solid style, red color, 2px thick */
+}
+.strikethrough {
+  text-decoration: line-through;
+}
+```
+
+The full `text-decoration` shorthand can take multiple
+values:
+`text-decoration: <line> || <style> || <color> ||
+<thickness>`.
+
+### text-transform:
+
+
+The text-transform property controls the capitalization of
+text.
+
+Common values:
+
+* **none**: No capitalization effect. The text renders as it is
+  in the source code.
+* **capitalize**: Transforms the first letter of each word to
+  uppercase.
+* **uppercase**: Transforms all letters to uppercase.
+* **lowercase**: Transforms all letters to lowercase.
+
+This text is uppercase.
+
+this text is capitalized.
+
+```css
+.page-title {
+  text-transform: uppercase;
+}
+button {
+  text-transform: capitalize;
+}
+.username {
+  text-transform: lowercase; /* E.g., to ensure consistency */
+}
+```
+
+### Text Spacing Properties:
+
+Several properties control the spacing around characters and lines of
+text.
+
+### letter-spacing
+
+The letter-spacing property increases or decreases the
+space between characters in a text.
+
+1.Wide letter spacing.
+
+2.Tight letter spacing.
+
+```css
+.logo-text {
+  letter-spacing: 2px; /* Add some space between letters for style */
+}
+.condensed-heading {
+  letter-spacing: -0.05em; /* Use 'em' for relative spacing */
+}
+```
+
+### word-spacing
+
+The word-spacing property increases or decreases the space
+between words.
+
+Extra space between words.
+
+```css
+.tagline {
+  word-spacing: 0.5em;
+}
+```
+
+### line-height
+
+The line-height property specifies the height of a line
+box. It's commonly used to set the distance between lines of text.
+
+It can take a unitless number (which is a multiplier of the font size),
+a length (px, em), or a percentage.
+
+This paragraph has a line height of 1.8. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+et dolore magna aliqua.
+
+This paragraph has a line height of 30px. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+et dolore magna aliqua.
+
+```css
+body {
+  line-height: 1.6; /* Recommended for good readability */
+}
+article p {
+  line-height: 1.75; /* Slightly more spacious for long reads */
+}
+.compact-list li {
+  line-height: 1.2;
+}
+```
+
+**Tip:** Using a unitless number for
+`line-height` (e.g., `line-height: 1.6;`) is
+generally recommended because it's relative to the element's font size
+and behaves predictably with inheritance.
+
+### text-indent
+
+The `text-indent` property specifies the indentation of the
+first line of text in a block container.
+
+The first line of this text block is indented by 30 pixels. Lorem ipsum
+dolor sit amet, consectetur adipiscing elit. Praesentium recusandae,
+harum sequi atque tempora aliquam ratione corrupti assumenda.
+
+```css
+.story p {
+  text-indent: 2em; /* Indent first line of each paragraph in the story */
+}
+.report p:first-of-type { /* Target only the very first paragraph */
+   text-indent: 0; /* No indent for the first paragraph */
+}
+.report p + p { /* Target paragraphs that follow another paragraph */
+   text-indent: 2.5em;
+}
+```
+
+
+{/* // import Quiz from '../../../components/Quiz'
+// import cssMCQs from '../quiz-data/text_formatting.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

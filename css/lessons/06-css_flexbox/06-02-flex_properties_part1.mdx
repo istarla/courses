@@ -1,0 +1,286 @@
+# Flex Container Properties (Part 1)
+
+Yesterday, we introduced Flexbox and its core concepts. Today, we'll
+start exploring the properties that can be applied to the
+**flex container** to control the layout of its flex items.
+We'll cover flex-direction, flex-wrap, the
+flex-flow shorthand, and justify-content.
+
+Default items for examples (3 items):
+
+1
+
+2
+
+3
+
+Some examples will use more items (5 items):
+
+1
+
+2
+
+3
+
+4
+
+5
+
+## 1. flex-direction
+
+
+The `flex-direction` property establishes the main axis, thus
+defining the direction flex items are placed in the flex container.
+
+Possible values:
+
+* **`row`** (default): Flex items are laid out
+  horizontally, from left to right (in LTR languages). The main axis is
+  horizontal.
+* **`row-reverse`**: Flex items are laid out horizontally, from right to left.
+* **`column`**: Flex items are laid out vertically, from top to bottom. The main
+  axis is vertical.
+* **`column-reverse`**: Flex items are laid out vertically, from bottom to top.
+
+**Example: `flex-direction: row;` (Default)**
+
+1
+
+2
+
+3
+
+**Example: `flex-direction: row-reverse;`**
+
+1
+
+2
+
+3
+
+**Example: `flex-direction: column;`**
+
+1
+
+2
+
+3
+
+**Example: `flex-direction: column-reverse;`**
+
+1
+
+2
+
+3
+
+```css
+.container-row {
+  display: flex;
+  flex-direction: row; /* Main axis is horizontal, left to right */
+}
+.container-column-reverse {
+  display: flex;
+  flex-direction: column-reverse; /* Main axis is vertical, bottom to top */
+}
+```
+
+## 2. flex-wrap
+
+
+By default, flex items try to fit onto one line. The
+`flex-wrap` property controls whether the flex container
+should wrap its items onto multiple lines if they exceed the container's
+width (for rows) or height (for columns).
+
+Possible values:
+
+* **nowrap** (default): Flex items will all be
+  on one line. They may shrink or overflow the container if they don't
+  fit.
+* **wrap**: Flex items will wrap onto multiple lines if necessary, from top to
+  bottom.
+* **wrap-reverse**: Flex items will wrap onto multiple lines if necessary, from bottom
+  to top.
+
+**Example: `flex-wrap: nowrap;` (Default) - Container width
+300px, items 60px wide each**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+**Example: `flex-wrap: wrap;` - Container width
+250px**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+**Example: `flex-wrap: wrap-reverse;` - Container width
+250px**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+```css
+.container-wrap {
+  display: flex;
+  width: 300px; /* To demonstrate wrapping with fixed-width items */
+  flex-wrap: wrap;
+}
+.flex-item {
+  width: 100px; /* If container-wrap is 250px wide, 3rd item will wrap */
+}
+```
+
+## 3. flex-flow (Shorthand)
+
+The `flex-flow` property is a shorthand for setting both
+`flex-direction` and `flex-wrap` properties in a
+single declaration.
+
+**Syntax:**
+`flex-flow: <flex-direction> || <flex-wrap>;`
+
+The default value is `row nowrap`.
+
+**Example: `flex-flow: column wrap;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+```css
+.container-shorthand {
+  display: flex;
+  flex-flow: column wrap; /* Main axis vertical, wraps items if container height is insufficient */
+}
+.another-container {
+  display: flex;
+  flex-flow: row-reverse wrap-reverse;
+}
+```
+
+## 4. justify-content
+
+The justify-content property defines how flex items are
+aligned along the **main axis** of the flex container. It
+helps distribute extra free space left over when all the flex items on a
+line are inflexible, or are flexible but have reached their maximum
+size.
+
+Possible values:
+
+* **`flex-start`** (default): Items are packed
+  toward the start of the main axis.
+* **`flex-end`**: Items are packed toward the end of the main axis.
+* **`center`**: Items are centered along the main axis.
+* **`space-between`**: Items are evenly distributed in the line; first item is on the
+  start line, last item on the end line. Space is only between items.
+* **`space-around`**: Items are evenly distributed in the line with equal space around
+  them. Note that visually the spaces aren't equal because each item
+  gets space on both sides, so the space between two items is double the
+  space before the first and after the last.
+* **`space-evenly`**: Items are distributed so that the spacing between any two items
+  (and the space to the edges) is equal.
+
+**Example: `justify-content: flex-start;` (Default)**
+
+1
+
+2
+
+3
+
+**Example: `justify-content: flex-end;`**
+
+1
+
+2
+
+3
+
+**Example: `justify-content: center;`**
+
+1
+
+2
+
+3
+
+**Example: `justify-content: space-between;`**
+
+1
+
+2
+
+3
+
+**Example: `justify-content: space-around;`**
+
+1
+
+2
+
+3
+
+**Example: `justify-content: space-evenly;`**
+
+1
+
+2
+
+3
+
+```css
+.nav-menu {
+  display: flex;
+  flex-direction: row; /* Main axis is horizontal */
+  justify-content: space-around; /* Distribute menu items with space around them */
+  list-style: none;
+  padding: 0;
+}
+.vertical-center-column {
+  display: flex;
+  flex-direction: column; /* Main axis is vertical */
+  justify-content: center; /* Centers items vertically in this case */
+  height: 300px; /* Container needs a defined height for vertical centering */
+}
+```
+
+The effect of `justify-content` is most apparent when there's
+extra space along the main axis. If items fill the entire main axis
+(e.g., due to `flex-grow` or their natural size), some
+`justify-content` values might have no visible effect.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/flex_container.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

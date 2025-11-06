@@ -1,0 +1,350 @@
+# SVG Element (Introduction)
+
+## What is SVG?
+<section id="what-is-svg" />
+
+SVG stands for **Scalable Vector Graphics**. It's an
+XML-based markup language for describing two-dimensional vector
+graphics. Unlike raster graphics (like JPEG, PNG, GIF, or Canvas
+drawings) which are based on pixels, vector graphics are defined by
+mathematical descriptions of shapes, lines, and curves.
+
+Key characteristics of SVG:
+
+* **Scalable:** Because they are defined mathematically,
+  SVG images can be scaled up or down to any size without losing quality
+  or becoming pixelated. This makes them ideal for responsive design and
+  high-resolution displays.
+* **XML-Based:** SVG code is written in XML format, meaning
+  it's text-based. You can write SVG directly in your HTML document
+  using the `<svg>` element, or save it in a
+  `.svg` file and embed it like an image (`<img src="logo.svg">`) or using other methods.
+* **DOM Integration:** When SVG is embedded directly in
+  HTML, each element within the SVG (like a shape or path) becomes part
+  of the Document Object Model (DOM). This means you can interact with
+  individual SVG elements using CSS and JavaScript (e.g., change colors
+  on hover, animate shapes).
+* **Accessible:** SVG includes features for accessibility,
+  such as `<title>` and
+  `<desc>` elements to provide text alternatives for
+  graphics.
+* **Good for:** Logos, icons, illustrations, diagrams,
+  charts, and interactive maps where scalability and crispness at any
+  size are important.
+
+## Embedding SVG in HTML
+<section id="embedding-svg-in-html" />
+
+You can include SVG graphics in your HTML in several ways, but the most
+direct method for learning and interaction is embedding it inline using
+the `<svg>` element.
+
+*Sample Code*
+```html
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- SVG shapes and elements go here -->
+  <rect x="10" y="10" width="180" height="80" fill="blue" />
+</svg>
+```
+**Output:**
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="180" height="80" fill="blue" />
+</svg>
+
+* **`<svg>`:** The container element for the SVG graphic.
+* **`width`** and
+**  `height`**: Define the dimensions of the SVG viewport (the visible area). These
+  can be unitless (pixels) or use units like `%`,
+  `em`.
+* **`xmlns`**: Specifies the XML namespace for SVG. While technically required for
+  standalone SVG files, browsers are often lenient when SVG is embedded
+  directly in HTML5. However, it's good practice to include it.
+* **`viewBox`** (Optional but Recommended):
+  Defines the internal coordinate system and aspect ratio. Format is
+  `"min-x min-y width height"`. Using
+  `viewBox` allows the SVG to scale nicely within the
+  dimensions set by `width` and `height`.
+
+## Basic SVG Shapes
+<section id="basic-svg-shapes" />
+
+SVG provides predefined elements for common shapes:
+
+* **`<rect>`:** Draws a rectangle. Attributes: `x`,
+  `y` (top-left corner coordinates), `width`,
+  `height`, `rx`, `ry` (corner
+  rounding).
+* **`<circle>`:** Draws a circle. Attributes: `cx`,
+  `cy` (center coordinates), `r` (radius).
+* **`<ellipse>`:** Draws an ellipse. Attributes: `cx`,
+  `cy` (center coordinates), `rx` (horizontal
+  radius), `ry` (vertical radius).
+* **`<line>`:** Draws a straight line. Attributes: `x1`,
+  `y1` (start coordinates), `x2`,
+  `y2` (end coordinates).
+* **`<polyline>`:** Draws a series of connected straight lines (open shape). Attribute:
+  `points` (a list of x,y coordinate pairs, e.g.,
+  `"x1,y1 x2,y2 x3,y3"`).
+* **`<polygon>`:** Draws a closed shape consisting of connected straight lines.
+  Attribute: `points` (same format as polyline, but the
+  browser automatically connects the last point back to the first).
+* **`<path>`:** The most powerful shape element, used to draw complex shapes
+  involving curves (straight lines, arcs, Bezier curves). Uses a complex
+  `d` (data) attribute to define the path commands. (We won't
+  delve deep into paths today).
+* **`<text>`:** Renders text. Attributes: `x`, `y` (position
+  of the text baseline), font-related attributes. The text content goes
+  between the opening and closing tags.
+
+## Styling SVG Elements
+<section id="styling-svg-elements" />
+
+SVG elements can be styled using presentation attributes directly on the
+element or using CSS.
+
+* **Presentation Attributes:** Attributes like
+  `fill` (fill color), `stroke` (outline color),
+  `stroke-width` (outline thickness), `opacity`,
+  `font-family`, `font-size`, etc., can be added
+  directly to SVG elements.
+  <br/>
+  *sample code*
+  ```html
+  <circle cx="50" cy="50" r="40" fill="red" stroke="black" stroke-width="3" />
+  ```
+
+* **CSS Styling:** You can target SVG elements using
+  standard CSS selectors (element type, class, ID) and apply styles
+  using CSS properties (which often mirror the presentation attributes,
+  e.g., `fill`, `stroke`,
+  `stroke-width`). CSS is generally preferred for more
+  complex styling and maintainability, especially when embedding SVG
+  inline in HTML.
+
+  ```css
+  /* CSS */
+  svg .my-circle {
+    fill: blue;
+    stroke: darkblue;
+    stroke-width: 5;
+    opacity: 0.8;
+  }
+  ```
+
+  ```html
+  <!-- HTML -->
+  <svg width="100" height="100">
+    <circle class="my-circle" cx="50" cy="50" r="40" />
+  </svg>
+  ```
+  **Output:**
+  <svg width="100" height="100">
+    <circle
+      cx="50"
+      cy="50"
+      r="40"
+      fill="blue"
+      stroke="darkblue"
+      strokeWidth="5"
+      opacity="0.8"
+    />
+  </svg>
+
+## Examples
+<section id="examples" />
+
+### Example 1: Basic Shapes (Rectangle, Circle, Line)
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic SVG Shapes</title>
+    <style>
+        svg { border: 1px dashed gray; }
+        .svg-rect { fill: lightcoral; stroke: darkred; stroke-width: 2; }
+        .svg-circle { fill: lightblue; stroke: navy; stroke-width: 3; }
+        .svg-line { stroke: green; stroke-width: 4; }
+    </style>
+</head>
+<body>
+    <h1>Rectangle, Circle, and Line</h1>
+    <svg width="300" height="150" xmlns="http://www.w3.org/2000/svg">
+        <!-- Rectangle -->
+        <rect x="10" y="10" width="100" height="80" class="svg-rect" />
+
+        <!-- Circle -->
+        <circle cx="180" cy="60" r="40" class="svg-circle" />
+
+        <!-- Line -->
+        <line x1="10" y1="130" x2="290" y2="130" class="svg-line" />
+    </svg>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1 style={{fontSize:"20px"}}>Rectangle, Circle, and Line</h1>
+
+  <svg width="300" height="150" xmlns="http://www.w3.org/2000/svg" style={{ border: "1px dashed gray" }}>
+    {/* Rectangle */}
+    <rect x="10" y="10" width="100" height="80" className="svg-rect" />
+
+    {/* Circle */}
+    <circle cx="180" cy="60" r="40" className="svg-circle" />
+
+    {/* Line */}
+    <line x1="10" y1="130" x2="290" y2="130" className="svg-line" />
+  </svg>
+
+  <style>
+    {`
+      .svg-rect { fill: lightcoral; stroke: darkred; stroke-width: 2; }
+      .svg-circle { fill: lightblue; stroke: navy; stroke-width: 3; }
+      .svg-line { stroke: green; stroke-width: 4; }
+    `}
+  </style>
+</>
+
+
+### Example 2: Polygon and Text
+
+SVG Text
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG Polygon and Text</title>
+    <style>
+        svg { border: 1px dashed gray; }
+        .svg-text { font-family: sans-serif; font-size: 20px; fill: purple; }
+    </style>
+</head>
+<body>
+    <h1>Polygon and Text</h1>
+     <svg width="250" height="150" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hexagon using polygon -->
+         <polygon points="50,10 100,10 125,50 100,90 50,90 25,50"
+                  fill="gold" stroke="orange" stroke-width="3" />
+
+        <!-- Simple Text -->
+         <text x="140" y="75" class="svg-text" font-weight="bold">SVG Text</text>
+     </svg>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1 style={{fontSize:"20px"}}>Polygon and Text</h1>
+
+  <svg
+    width="250"
+    height="150"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ border: "1px dashed gray" }}
+  >
+    {/* Hexagon using polygon */}
+    <polygon
+      points="50,10 100,10 125,50 100,90 50,90 25,50"
+      fill="gold"
+      stroke="orange"
+      strokeWidth="3"
+    />
+
+    {/* Simple Text */}
+    <text
+      x="140"
+      y="75"
+      className="svg-text"
+      fontWeight="bold"
+    >
+      SVG Text
+    </text>
+  </svg>
+
+  <style>
+    {`
+      .svg-text { font-family: sans-serif; font-size: 20px; fill: purple; }
+    `}
+  </style>
+</>
+
+
+### Example 3: Using ViewBox for Scalability
+
+This SVG defines a 100x100 internal coordinate system using
+`viewBox`
+but is displayed in a 200x200 container, effectively scaling the content
+up.
+
+Scaled
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG ViewBox</title>
+    <style>
+        svg { border: 1px dashed gray; }
+    </style>
+</head>
+<body>
+    <h1>Using viewBox</h1>
+     <!--
+       width/height set the display size (200x200).
+       viewBox sets the internal coordinate system (0,0 to 100,100).
+       The browser scales the 100x100 content to fit the 200x200 box.
+     -->
+     <svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Light gray background for the viewbox area -->
+        <rect x="0" y="0" width="100" height="100" fill="#eee" />
+
+        <!-- Circle centered in the 100x100 coordinate system -->
+        <circle cx="50" cy="50" r="45" fill="seagreen" />
+
+         <!-- Text centered using text-anchor -->
+         <text x="50" y="55" text-anchor="middle" fill="white" font-size="10">Scaled</text>
+     </svg>
+</body>
+</html>
+```
+**Output:**
+<>
+  <h1 style={{fontSize:"20px"}}>Using viewBox</h1>
+
+  <svg
+    width="200"
+    height="200"
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ border: "1px dashed gray" }}
+  >
+    {/* Light gray background */}
+    <rect x="0" y="0" width="100" height="100" fill="#eee" />
+
+    {/* Circle centered in the coordinate system */}
+    <circle cx="50" cy="50" r="45" fill="seagreen" />
+
+    {/* Text centered using textAnchor */}
+    <text
+      x="50"
+      y="55"
+      textAnchor="middle"
+      fill="white"
+      fontSize="10"
+    >
+      Scaled
+    </text>
+  </svg>
+</>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import svg_intro_quizData from "../../data/svg_intro_quizData"
+
+<Quiz questions = {svg_intro_quizData} />

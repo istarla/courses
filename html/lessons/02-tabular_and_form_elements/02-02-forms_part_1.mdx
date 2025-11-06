@@ -1,0 +1,612 @@
+# HTML Forms - Part 1
+
+## Introduction to Forms
+<section id="introduction-to-forms" />
+
+HTML forms are fundamental for user interaction on the web. They allow
+users to input data, which can then be sent to a web server for
+processing (like logging in, signing up, submitting comments, making
+purchases, etc.).
+
+Creating a form involves two main parts:
+
+1. The HTML structure of the form itself (using form elements).
+2. A server-side script (written in languages like PHP, Python, Node.js,
+   etc.) to process the submitted data.
+   **This course focuses only on the HTML part.** We won't
+   cover server-side processing.
+
+## The `<form>` Element
+<section id="the-form-element" />
+
+All form controls must be contained within a
+`<form>` element. This element acts as
+a container and defines how the form data should be submitted.
+
+Key attributes of the `<form>` tag:
+
+* `action`: Specifies the URL of the server-side script that will process the
+  form data. If omitted, the data is typically sent to the same page.
+* `method`: Specifies the HTTP method to use when submitting the form data.
+  Common values:
+  + `get` (Default): Appends the form data
+    to the URL specified in the `action` attribute (e.g.,
+    `process.php?name=John&email=...`). Useful for simple,
+    non-sensitive data like search queries. Data is visible in the URL
+    and has length limitations.
+  + `post`: Sends the form data in the HTTP request body. More secure for
+    sensitive information (like passwords) as the data is not visible
+    in the URL. No data length limitations. Preferred for forms that
+    modify data on the server.
+* `name`: A name for the form, useful if you need to reference it with
+  JavaScript. (Optional but can be helpful).
+
+*Sample Code*
+```html
+<form action="/submit-handler" method="post">
+  <!-- Form elements go here -->
+</form>
+```
+
+## The `<input>` Element
+<section id="the-input-element" />
+
+The `<input>` element is the most
+versatile form element. It's an empty element (no closing tag) and its
+behavior is determined by its
+`type` attribute.
+
+Essential attributes for most `<input>` types:
+
+* `type`: Defines the type of input control (text field, password, checkbox,
+  radio button, submit button, etc.).
+* `name`: Provides a name for the input field. This name is sent to the
+  server along with the input's value when the form is submitted.
+  **Crucial for data processing.**
+* `id`: Provides a unique identifier for the input element within the
+  document. Used primarily for associating labels
+  (`<label>`) with the input and for JavaScript/CSS
+  manipulation.
+* `value`: Specifies the initial value of the input field. For checkboxes and
+  radio buttons, it defines the value sent to the server if that option
+  is selected. For text fields, it's the default text. For submit/reset
+  buttons, it's the text displayed on the button.
+* `placeholder`: Provides a short hint (e.g., sample value or description) displayed
+  in the input field before the user enters a value. Disappears when the
+  user starts typing.
+* `required`: A boolean attribute indicating that the user must fill in a value
+  before submitting the form.
+
+### Common `<input>` Types (Part 1):
+
+* **`type="text"`:** A single-line text input field.
+
+  ```html
+  <input type="text" id="username" name="username" placeholder="Enter your username" required>
+  ```
+  <input type="text" id="username" name="username" placeholder="Enter your username" required style={{border:"1px solid #ccc"}} />
+
+* **`type="password"`:** Similar to "text", but the characters entered are obscured (e.g.,
+  shown as asterisks or dots).
+
+  ```html
+  <input type="password" id="pwd" name="password" required>
+  ```
+  <input type="password" id="pwd" name="password" required style={{border:"1px solid #ccc"}} />
+
+* **`type="email"`:** Designed for email addresses. Browsers may provide validation to
+  check if the entered text looks like a valid email format. On mobile
+  devices, it might trigger a keyboard optimized for email input.
+
+  ```html
+  <input type="email" id="user_email" name="email" placeholder="you@example.com">
+  ```
+  <input type="email" id="user_email" name="email" placeholder="you@example.com" style={{border:"1px solid #ccc"}} />
+
+* **`type="submit"`:** A button that, when clicked, submits the form data to the URL
+  specified in the form's `action` attribute using the
+  specified `method`. The text on the button comes from its
+  `value` attribute (defaults to "Submit" or similar).
+
+  ```html
+  <input type="submit" value="Sign Up" style="border : 1px solid blue; background-color: blue; color:white; border-radius: 4px; padding: 4px;">
+  ```
+  <input type="submit" value="Sign Up" style={{border:"1px solid blue", backgroundColor:"blue", color: "white", borderRadius:"4px", padding:"4px", cursor:"pointer"}} />
+
+* **`type="reset"`:** A button that, when clicked, resets all form controls within the
+  form to their initial values.
+
+  ```html
+  <input type="reset" value="Clear Form">
+  ```
+
+* **`type="radio"`:** A radio button. Allows the user to select only one option from a
+  group of choices. All radio buttons in a group must share the same
+  `name` attribute but have different
+  `value` attributes. Use `<label>` tags for
+  usability.
+
+  ```html
+  <input type="radio" id="option1" name="fav_color" value="red">
+  <label for="option1">Red</label><br>
+  <input type="radio" id="option2" name="fav_color" value="blue" checked> <!-- 'checked' pre-selects this option -->
+  <label for="option2">Blue</label>
+  ```
+  **Output:**
+  <>
+  <br/>
+    <input type="radio" id="option1" name="fav_color" value="red" />
+    <label htmlFor="option1">Red</label>
+    <br />
+    <input
+      type="radio"
+      id="option2"
+      name="fav_color"
+      value="blue"
+      defaultChecked
+    />
+    <label htmlFor="option2">Blue</label>
+  </>
+
+
+* **`type="checkbox"`:** A checkbox. Allows the user to select zero or more options from a
+  group. Checkboxes representing different choices should have unique
+  `name` attributes (unless they are part of a group where
+  multiple values with the same name are expected, common in server-side
+  processing). Use `<label>` tags.
+
+  ```html
+  <input type="checkbox" id="terms" name="agree_terms" value="yes" required>
+  <label for="terms">I agree to the terms</label><br>
+  <input type="checkbox" id="newsletter" name="subscribe_news" value="true" checked>
+  <label for="newsletter">Subscribe to newsletter</label>
+  ```
+  **Output**:
+  <br/>
+  <input type="checkbox" id="terms" name="agree_terms" value="yes" required />
+    <label for="terms">I agree to the terms</label><br/>
+    <input type="checkbox" id="newsletter" name="subscribe_news" value="true" checked />
+    <label for="newsletter">Subscribe to newsletter</label>
+## The `<label>` Element
+<section id="the-label-element" />
+
+The `<label>` element provides a
+caption or label for a form control. It improves usability and
+accessibility:
+
+* Clicking on the label focuses or activates the associated control
+  (e.g., clicking the label for a text input puts the cursor in the
+  input; clicking the label for a radio button selects that button).
+* Screen readers announce the label when the user focuses on the
+  associated form control.
+
+Associate a label with a control using the
+`for` attribute. The value of the
+`for` attribute must match the
+`id` attribute of the corresponding form
+control.
+
+*Sample Code*
+```html
+<label for="user_name">Username:</label>
+<input type="text" id="user_name" name="username">
+```
+**Output:**
+
+<label for="user_name">Username:</label>
+<input type="text" id="user_name" name="username" style={{border:"1px solid blue"}} />
+
+Alternatively, you can wrap the input element inside the label (implicit
+association), though the explicit `for`/`id`
+method is often considered more robust:
+
+*Sample Code*
+```html
+<label>Username:
+  <input type="text" name="username"> <!-- ID is still recommended for consistency -->
+</label>
+```
+**Output:**
+<label>
+Username:<input type="text" name="username" style={{border:"1px solid blue"}}/> 
+ </label> 
+{/* ID is still recommended for consistency */}
+## Examples
+<section id="examples" />
+
+### Example 1: Simple Login Form
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <!-- Include styles from Day 7 page -->
+    <style>
+      /* Basic Form Styling Copied Here for Demo */
+      form div { margin-bottom: 1rem; } label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #374151; }
+      input[type="text"], input[type="password"], input[type="email"], input[type="submit"] { padding: 0.5rem 0.8rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; width: calc(100% - 1.8rem); box-sizing: border-box; }
+      input[type="submit"] { background-color: #2563eb; color: white; cursor: pointer; transition: background-color 0.2s; width: auto; margin-top: 0.5rem; } input[type="submit"]:hover { background-color: #1d4ed8; }
+    </style>
+</head>
+<body style="padding: 20px; max-width: 400px; margin: auto;">
+    <h1>User Login</h1>
+    <form action="/login-process" method="post">
+        <div>
+            <label for="login_email">Email:</label>
+            <input type="email" id="login_email" name="email" required>
+        </div>
+        <div>
+            <label for="login_pass">Password:</label>
+            <input type="password" id="login_pass" name="password" required>
+        </div>
+        <div>
+            <input type="submit" value="Log In">
+        </div>
+    </form>
+</body>
+</html>
+```
+<b>Output:</b>
+<div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
+      <h1>User Login</h1>
+      <form action="/login-process" method="post" onSubmit={(e) => {
+    e.preventDefault();
+    alert('Form submitted!');
+    e.target.reset(); // 👈 clears the form
+  }}>
+        <div style={{ marginBottom: "1rem" }}>
+          <label
+            htmlFor="login_email"
+            style={{ display: "block", marginBottom: "0.3rem", fontWeight: "bold", color: "#374151" }}
+          >
+            Email:
+          </label>
+          <input
+            type="email"
+            id="login_email"
+            name="email"
+            required
+            style={{
+              padding: "0.5rem 0.8rem",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              fontSize: "1rem",
+              width: "100%",
+              boxSizing: "border-box"
+            }}
+          />
+        </div>
+        <div style={{ marginBottom: "1rem" }}>
+          <label
+            htmlFor="login_pass"
+            style={{ display: "block", marginBottom: "0.3rem", fontWeight: "bold", color: "#374151" }}
+          >
+            Password:
+          </label>
+          <input
+            type="password"
+            id="login_pass"
+            name="password"
+            required
+            style={{
+              padding: "0.5rem 0.8rem",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              fontSize: "1rem",
+              width: "100%",
+              boxSizing: "border-box"
+            }}
+          />
+        </div>
+        <div>
+          <input
+            type="submit"
+            value="Log In"
+            style={{
+              padding: "0.5rem 0.8rem",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              fontSize: "1rem",
+              backgroundColor: "#2563eb",
+              color: "white",
+              cursor: "pointer",
+              transition: "background-color 0.2s",
+              width: "auto",
+              marginTop: "0.5rem"
+            }}
+          />
+        </div>
+      </form>
+    </div>
+
+### Example 2: Contact Form with Radio Buttons
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Form</title>
+    <!-- Include styles from Day 7 page -->
+     <style>
+      /* Basic Form Styling Copied Here for Demo */
+      form div { margin-bottom: 1rem; } label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #374151; }
+      input[type="text"], input[type="email"], input[type="submit"] { padding: 0.5rem 0.8rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; width: calc(100% - 1.8rem); box-sizing: border-box;}
+      input[type="submit"] { background-color: #2563eb; color: white; cursor: pointer; transition: background-color 0.2s; width: auto; margin-top: 0.5rem; } input[type="submit"]:hover { background-color: #1d4ed8; }
+      input[type="radio"] { margin-right: 0.5rem; width: auto; } .radio-group label { font-weight: normal; display: inline; } .radio-group div { margin-bottom: 0.5rem; }
+      legend { font-weight: bold; margin-bottom: 0.5rem; color: #374151;} fieldset { border: 1px solid #d1d5db; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;}
+    </style>
+</head>
+<body style="padding: 20px; max-width: 500px; margin: auto;">
+    <h1>Contact Us</h1>
+    <form action="/contact-submit" method="post">
+        <div>
+            <label for="contact_name">Name:</label>
+            <input type="text" id="contact_name" name="visitor_name" required>
+        </div>
+        <div>
+            <label for="contact_email">Email:</label>
+            <input type="email" id="contact_email" name="visitor_email" required>
+        </div>
+
+        <fieldset class="radio-group">
+            <legend>Reason for Contact:</legend>
+            <div>
+                <input type="radio" id="reason_q" name="contact_reason" value="question" checked>
+                <label for="reason_q">General Question</label>
+            </div>
+            <div>
+                <input type="radio" id="reason_s" name="contact_reason" value="support">
+                <label for="reason_s">Support Request</label>
+            </div>
+            <div>
+                <input type="radio" id="reason_f" name="contact_reason" value="feedback">
+                <label for="reason_f">Feedback</label>
+            </div>
+        </fieldset>
+
+        <div>
+             <!-- We'll add a textarea here in the next lesson -->
+             <label for="message">Message:</label>
+             <textarea id="message" name="message" rows="4" style="width: calc(100% - 1.8rem); border: 1px solid #d1d5db; border-radius: 4px; padding: 0.5rem 0.8rem;" required></textarea>
+        </div>
+
+        <div>
+            <input type="submit" value="Send Message">
+        </div>
+    </form>
+</body>
+</html>
+```
+<b>Output:</b>
+<div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
+      <h1>Contact Us</h1>
+      <form action="/contact-submit" method="post" onSubmit={(e) => {
+    e.preventDefault();
+    alert('Form submitted!');
+    e.target.reset(); // 👈 clears the form
+  }}>
+        <div style={{ marginBottom: "1rem" }}>
+          <label
+            htmlFor="contact_name"
+            style={{ display: "block", marginBottom: "0.3rem", fontWeight: "bold", color: "#374151" }}
+          >
+            Name:
+          </label>
+          <input
+            type="text"
+            id="contact_name"
+            name="visitor_name"
+            required
+            style={{
+              padding: "0.5rem 0.8rem",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              fontSize: "1rem",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: "1rem" }}>
+          <label
+            htmlFor="contact_email"
+            style={{ display: "block", marginBottom: "0.3rem", fontWeight: "bold", color: "#374151" }}
+          >
+            Email:
+          </label>
+          <input
+            type="email"
+            id="contact_email"
+            name="visitor_email"
+            required
+            style={{
+              padding: "0.5rem 0.8rem",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              fontSize: "1rem",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          />
+        </div>
+
+        <fieldset
+          style={{
+            border: "1px solid #d1d5db",
+            padding: "1rem",
+            borderRadius: "4px",
+            marginBottom: "1rem",
+          }}
+        >
+          <legend style={{ fontWeight: "bold", marginBottom: "0.5rem", color: "#374151" }}>
+            Reason for Contact:
+          </legend>
+
+          <div style={{ marginBottom: "0.5rem" }}>
+            <input type="radio" id="reason_q" name="contact_reason" value="question" defaultChecked style={{ marginRight: "0.5rem", width: "auto" }} />
+            <label htmlFor="reason_q" style={{ fontWeight: "normal", display: "inline" }}>General Question</label>
+          </div>
+          <div style={{ marginBottom: "0.5rem" }}>
+            <input type="radio" id="reason_s" name="contact_reason" value="support" style={{ marginRight: "0.5rem", width: "auto" }} />
+            <label htmlFor="reason_s" style={{ fontWeight: "normal", display: "inline" }}>Support Request</label>
+          </div>
+          <div style={{ marginBottom: "0.5rem" }}>
+            <input type="radio" id="reason_f" name="contact_reason" value="feedback" style={{ marginRight: "0.5rem", width: "auto" }} />
+            <label htmlFor="reason_f" style={{ fontWeight: "normal", display: "inline" }}>Feedback</label>
+          </div>
+        </fieldset>
+
+        <div style={{ marginBottom: "1rem" }}>
+          <label
+            htmlFor="message"
+            style={{ display: "block", marginBottom: "0.3rem", fontWeight: "bold", color: "#374151" }}
+          >
+            Message:
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            style={{
+              width: "100%",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              padding: "0.5rem 0.8rem",
+              boxSizing: "border-box",
+            }}
+          />
+        </div>
+
+        <div>
+          <input
+            type="submit"
+            value="Send Message"
+            style={{
+              padding: "0.5rem 0.8rem",
+              border: "1px solid #d1d5db",
+              borderRadius: "4px",
+              fontSize: "1rem",
+              backgroundColor: "#2563eb",
+              color: "white",
+              cursor: "pointer",
+              transition: "background-color 0.2s",
+              width: "auto",
+              marginTop: "0.5rem",
+            }}
+          />
+        </div>
+      </form>
+    </div>
+
+### Example 3: Survey with Checkboxes and Reset Button
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey Form</title>
+     <style>
+      /* Basic Form Styling Copied Here for Demo */
+      form div { margin-bottom: 1rem; } label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #374151; }
+      input[type="text"], input[type="submit"], input[type="reset"] { padding: 0.5rem 0.8rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; box-sizing: border-box;}
+      input[type="submit"], input[type="reset"] { background-color: #2563eb; color: white; cursor: pointer; transition: background-color 0.2s; width: auto; margin-top: 0.5rem; margin-right: 0.5rem;} input[type="submit"]:hover { background-color: #1d4ed8; }
+      input[type="reset"] { background-color: #6b7280; } input[type="reset"]:hover { background-color: #4b5563; }
+      input[type="checkbox"] { margin-right: 0.5rem; width: auto; } .checkbox-group label { font-weight: normal; display: inline; } .checkbox-group div { margin-bottom: 0.5rem; }
+      legend { font-weight: bold; margin-bottom: 0.5rem; color: #374151;} fieldset { border: 1px solid #d1d5db; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;}
+    </style>
+</head>
+<body style="padding: 20px; max-width: 500px; margin: auto;">
+    <h1>Quick Survey</h1>
+    <form action="/survey-submit" method="get"> <!-- Using GET for this example -->
+         <div>
+            <label for="survey_name">Your Name (Optional):</label>
+            <input type="text" id="survey_name" name="name" placeholder="Anonymous">
+        </div>
+
+        <fieldset class="checkbox-group">
+            <legend>Which features do you use? (Check all that apply)</legend>
+            <div>
+                <input type="checkbox" id="feature_a" name="features" value="A">
+                <label for="feature_a">Feature A</label>
+            </div>
+             <div>
+                <input type="checkbox" id="feature_b" name="features" value="B" checked>
+                <label for="feature_b">Feature B</label>
+            </div>
+             <div>
+                <input type="checkbox" id="feature_c" name="features" value="C">
+                <label for="feature_c">Feature C</label>
+            </div>
+        </fieldset>
+
+        <div>
+            <input type="submit" value="Submit Survey">
+            <input type="reset" value="Clear Answers">
+        </div>
+    </form>
+</body>
+</html>
+```
+<b>Output:</b>
+<form onSubmit={(e) => {
+    e.preventDefault();
+    alert('Form submitted!');
+    e.target.reset(); // 👈 clears the form
+  }}>
+  <div style={{ marginBottom: "1rem" }}>
+    <label htmlFor="survey_name" style={{ display: "block", marginBottom: "0.3rem", fontWeight: "bold", color: "#374151" }}>
+      Your Name (Optional):
+    </label>
+    <input
+      type="text"
+      id="survey_name"
+      name="name"
+      placeholder="Anonymous"
+      style={{ padding: "0.5rem 0.8rem", border: "1px solid #d1d5db", borderRadius: "4px", fontSize: "1rem", width: "100%", boxSizing: "border-box" }}
+    />
+  </div>
+
+  <fieldset style={{ border: "1px solid #d1d5db", padding: "1rem", borderRadius: "4px", marginBottom: "1rem" }}>
+    <legend style={{ fontWeight: "bold", marginBottom: "0.5rem", color: "#374151" }}>
+      Which features do you use? (Check all that apply)
+    </legend>
+
+    <div style={{ marginBottom: "0.5rem" }}>
+      <input type="checkbox" id="feature_a" name="features" value="A" style={{ marginRight: "0.5rem", width: "auto" }} />
+      <label htmlFor="feature_a" style={{ fontWeight: "normal", display: "inline" }}>Feature A</label>
+    </div>
+
+    <div style={{ marginBottom: "0.5rem" }}>
+      <input type="checkbox" id="feature_b" name="features" value="B" defaultChecked style={{ marginRight: "0.5rem", width: "auto" }} />
+      <label htmlFor="feature_b" style={{ fontWeight: "normal", display: "inline" }}>Feature B</label>
+    </div>
+
+    <div style={{ marginBottom: "0.5rem" }}>
+      <input type="checkbox" id="feature_c" name="features" value="C" style={{ marginRight: "0.5rem", width: "auto" }} />
+      <label htmlFor="feature_c" style={{ fontWeight: "normal", display: "inline" }}>Feature C</label>
+    </div>
+  </fieldset>
+
+  <div>
+    <input
+      type="submit"
+      value="Submit Survey"
+      style={{ padding: "0.5rem 0.8rem", border: "1px solid #d1d5db", borderRadius: "4px", fontSize: "1rem", backgroundColor: "#2563eb", color: "white", cursor: "pointer", transition: "background-color 0.2s", width: "auto", marginTop: "0.5rem", marginRight: "0.5rem" }}
+    />
+  </div>
+</form>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from '../../../components/quiz';
+import formsPart1Quiz from '../../data/forms_part1_quizData';
+
+<Quiz questions={formsPart1Quiz} />

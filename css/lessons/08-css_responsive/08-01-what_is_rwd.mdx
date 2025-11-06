@@ -1,0 +1,170 @@
+# Introduction to Responsive Web Design (RWD)
+
+Welcome to Week 8! This week, we shift our focus to making websites
+adapt gracefully to different devices and screen sizes. Today, we
+introduce **Responsive Web Design (RWD)**, a fundamental
+approach to modern web development.
+
+## What is Responsive Web Design?
+
+Responsive Web Design is an approach to web design that aims to make web
+pages render well on a variety of devices and window or screen sizes –
+from small phones to large desktop monitors. The core idea is to build
+one website that adapts its layout and content presentation based on the
+characteristics of the device being used, primarily the screen width.
+
+Before RWD became standard, developers often created separate websites
+for mobile devices (e.g., m.website.com), which led to duplicated effort
+and maintenance challenges. RWD allows a single codebase to serve all
+users effectively.
+
+## Why is RWD Important?
+
+
+* **Device Proliferation:** Users access the web from a
+  vast array of devices (phones, tablets, laptops, desktops, TVs) with
+  different screen sizes, resolutions, and orientations.
+* **User Experience:** A responsive site provides a better
+  experience regardless of the device, improving readability,
+  navigation, and overall satisfaction. Non-responsive sites are often
+  difficult to use on mobile devices (requiring pinching, zooming,
+  excessive scrolling).
+* **SEO (Search Engine Optimization):** Google and other
+  search engines prioritize mobile-friendly websites. Having a single
+  responsive URL is generally preferred over separate mobile sites.
+* **Maintenance Efficiency:** Managing one codebase and one
+  set of content is more efficient than maintaining multiple versions of
+  a site.
+* **Future-Proofing:** RWD principles help create sites
+  that can adapt to new devices and screen sizes that may emerge in the
+  future.
+
+## Core Concepts and Techniques of RWD
+
+RWD typically involves a combination of three main technical
+ingredients:
+
+1.**Fluid Grids:**
+
+   Instead of using fixed-width layouts (e.g.,
+   `width: 960px;`), responsive designs use relative units
+   like percentages (`%`) or viewport units
+   (`vw`) for layout containers and columns. This allows the
+   layout to stretch or shrink fluidly based on the available screen
+   space.
+
+   ```css
+   .container {
+     width: 90%; /* Takes 90% of parent width */
+     max-width: 1200px; /* Prevents it from becoming too wide on large screens */
+     margin: 0 auto; /* Centers the container */
+   }
+   .column {
+     width: 50%; /* Example for a two-column layout */
+     float: left; /* Older method - Flexbox/Grid are better */
+     padding: 2%;
+   }
+   /* Modern approach using Flexbox */
+   .container-flex {
+       display: flex;
+   }
+   .column-flex {
+       flex: 1; /* Each column takes equal space */
+       padding: 15px;
+   }
+   ```
+2.**Flexible Images and Media:**
+
+   Images and other media (like videos) need to scale within their
+   containers to avoid overflowing or breaking the layout. A common
+   technique is to use `max-width: 100%;` and
+   `height: auto;`.
+
+   ![Responsive Image Example](https://via.placeholder.com/600x200/60a5fa/ffffff?text=Resize+Window+to+See+Image+Scale)
+
+   ```css
+   img, video, iframe {
+     max-width: 100%; /* Ensures media doesn't exceed its container's width */
+     height: auto; /* Maintains aspect ratio */
+     display: block; /* Prevents extra space below images */
+   }
+   ```
+
+   More advanced techniques using `<picture>` element
+   and `srcset` attribute allow serving different image
+   sizes based on screen resolution or viewport width (covered later).
+3. **Media Queries:**
+
+   Media queries are the cornerstone of RWD. They allow you to apply
+   different CSS rules based on specific device characteristics, most
+   commonly the viewport width. This enables you to change layouts,
+   hide/show elements, adjust font sizes, etc., at different screen
+   sizes (breakpoints).
+
+   ```css
+   /* Default styles (often mobile-first) */
+   .menu { display: none; /* Hidden by default */ }
+   .main-content { width: 100%; }
+
+   /* Styles for tablets and larger */
+   @media (min-width: 768px) {
+     .menu { display: block; /* Show menu */ }
+     .main-content { width: 70%; float: left; }
+     .sidebar { width: 30%; float: right; display: block; }
+   }
+
+   /* Styles for desktops and larger */
+   @media (min-width: 1024px) {
+     body { font-size: 18px; }
+     .container { max-width: 960px; }
+   }
+   ```
+
+   We will dive deep into media queries in Day 38.
+
+## Mobile-First vs. Desktop-First
+
+There are two main strategies when implementing RWD with media queries:
+
+* **Mobile-First:** Start by writing CSS for the smallest
+  screens (mobile). Then, use media queries with
+  `min-width` to add styles or override existing ones for
+  progressively larger screens (tablets, desktops). This is generally
+  the recommended approach today as it forces you to prioritize content
+  and performance for the most constrained environment first.
+* **Desktop-First (Graceful Degradation):** Start by
+  writing CSS for large screens (desktops). Then, use media queries with
+  `max-width` to adjust or simplify the layout for smaller
+  screens. This was more common in the early days of RWD but can
+  sometimes lead to overly complex mobile styles or performance issues
+  if not managed carefully.
+
+The examples above use a mobile-first approach (starting with base
+styles and adding complexity for larger screens using
+`min-width`).
+
+## The Viewport Meta Tag
+
+For RWD to work correctly on mobile devices, you
+**must** include the viewport meta tag in the
+`<head>` of your HTML document. This tag tells the
+browser how to control the page's dimensions and scaling.
+
+```css
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+* `width=device-width`: Sets the width of the viewport to the
+  width of the device screen.
+* `initial-scale=1.0`: Sets the initial zoom level when the
+  page is first loaded by the browser.
+
+Without this tag, mobile browsers often try to render the page at a
+typical desktop width and then scale it down, which defeats the purpose
+of RWD. We'll discuss this tag in more detail tomorrow.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/intro_rwd.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

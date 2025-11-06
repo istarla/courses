@@ -1,0 +1,369 @@
+# Introduction to CSS
+
+## What is CSS?
+<section id="what-is-css" />
+
+CSS stands for **Cascading Style Sheets**. While HTML
+provides the structure and content of a webpage, CSS is responsible for
+its **presentation and appearance**. It controls aspects
+like colors, fonts, spacing, layout, positioning, and even basic
+animations.
+
+Think of HTML as the skeleton and CSS as the skin, clothes, and makeup.
+They work together, but keeping them separate (structure in HTML, style
+in CSS) is a core principle of modern web development, known as the
+**separation of concerns**.
+
+**Focus of this Lesson:** This is an HTML course, so we
+won't dive deep into writing CSS itself. The goal here is to understand
+**what CSS is** and
+**how to connect it to your HTML document**.
+
+## How CSS Works: Rules, Selectors, Declarations
+<section id="how-css-works-rules-selectors-declarations" />
+
+CSS works based on applying **rules** to specific HTML
+elements.
+
+A CSS rule consists of:
+
+* **Selector:** Defines which HTML element(s) the rule
+  applies to. Selectors can target elements by type (`p`,
+  `h1`, `div`), class (`.my-class`), ID
+  (`#unique-id`), attributes, or relationships between
+  elements.
+* **Declaration Block:** Enclosed in curly braces
+  `{ ... }`. Contains one or more declarations.
+* **Declaration:** A property-value pair, separated by a
+  colon (`:`) and ending with a semicolon (`;`).
+  + **Property:** The stylistic aspect you want to change
+    (e.g., `color`, `font-size`,
+    `background-color`, `margin`).
+  + **Value:** The specific setting for that property
+    (e.g., `red`, `16px`, `#ffffff`,
+    `10px`).
+
+```css
+/* This is a CSS comment */
+
+/* Selector: Targets all paragraph elements */
+p {
+  color: navy; /* Declaration: property 'color', value 'navy' */
+  font-size: 16px; /* Declaration: property 'font-size', value '16px' */
+} /* End of declaration block */
+
+/* Selector: Targets elements with the class "highlight" */
+.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+/* Selector: Targets the element with the ID "main-title" */
+#main-title {
+  border-bottom: 2px solid blue;
+}
+```
+
+## Ways to Add CSS to HTML
+<section id="ways-to-add-css-to-html" />
+
+There are three primary methods to apply CSS styles to an HTML document:
+
+### 1. External Style Sheet (Recommended)
+
+This is the **most common and recommended** method for
+real-world projects. You write your CSS rules in a separate file with a
+`.css` extension (e.g., `styles.css`). Then, you
+link this external file to your HTML document using the
+`<link>` tag within the
+`<head>` section.
+
+**Advantages:**
+
+* Keeps HTML clean and focused on structure.
+* Allows you to style multiple HTML pages with a single CSS file,
+  ensuring consistency and easy updates.
+* Browsers can cache the CSS file, improving performance on subsequent
+  page visits.
+
+```css
+/* In your CSS file (e.g., css/styles.css) */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  color: #336699; /* A shade of blue */
+}
+```
+
+### 2. Internal Style Sheet
+
+You can embed CSS rules directly within the HTML document's
+`<head>` section using the
+`<style>` tag.
+
+**Advantages:** Useful for single-page websites or applying
+unique styles to a specific page without creating an extra file.
+
+**Disadvantages:** Styles only apply to that single HTML
+page; less maintainable for larger sites; cannot be cached separately by
+the browser.
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Internal Styles</title>
+  <style>
+    /* CSS rules go directly inside the style tag */
+    body {
+      background-color: #f0f0f0; /* Light gray background */
+    }
+    p {
+      color: green;
+      line-height: 1.8;
+    }
+    .special {
+      font-style: italic;
+      border: 1px dashed green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Page with Internal Styles</h1>
+  <p>This paragraph will be green.</p>
+  <p class="special">This paragraph is green, italic, and has a border.</p>
+</body>
+</html>
+```
+**Output:**
+<style>
+  {`
+    /* CSS rules go directly inside the style tag */
+    body {
+      background-color: #f0f0f0; /* Light gray background */
+    }
+    .inline {
+      color: green;
+      line-height: 1.8;
+    }
+    .special {
+      font-style: italic;
+      border: 1px dashed green;
+    }
+  `}
+</style>
+
+<h1>Page with Internal Styles</h1>
+
+<p className='inline'>This paragraph will be green.</p>
+<p className="special">This paragraph is green, italic, and has a border.</p>
+
+<br/>
+### 3. Inline Styles (Use Sparingly)
+
+You can apply styles directly to a specific HTML element using the
+`style` attribute. The value of the
+attribute consists of CSS property-value pairs, similar to declarations
+but without the braces and selectors.
+
+**Advantages:** Useful for applying unique styles to a
+single element quickly or for styles generated dynamically by
+JavaScript.
+
+**Disadvantages:** Strongly discouraged for general styling
+as it mixes presentation with structure, makes maintenance difficult,
+overrides external/internal styles (due to CSS specificity rules), and
+bloats HTML code.
+
+*Sample Code*
+```html
+<p>This is a normal paragraph.</p>
+<p style="color: red; font-size: 20px; background-color: yellow;">
+  This paragraph has inline styles applied.
+</p>
+```
+**Rendered Output (Conceptual):**
+<p>This is a normal paragraph.</p>
+  <p style={{color: 'red', fontSize: '20px', backgroundColor: 'yellow'}}>
+    This paragraph has inline styles applied.
+  </p>
+
+## Cascading and Specificity
+<section id="cascading-and-specificity" />
+
+The "Cascading" in CSS refers to the order in which styles are applied
+when multiple rules target the same element. Browsers follow rules of
+**specificity** and **order** to determine
+which style wins:
+
+* **Specificity:** More specific selectors override less
+  specific ones (e.g., an ID selector `#myId` is more
+  specific than a class selector `.myClass`, which is more
+  specific than an element selector `p`).
+* **Order:** If selectors have the same specificity, the
+  rule that appears later in the CSS (or is linked later) takes
+  precedence.
+* **Inline Styles:** Inline styles (using the
+  `style` attribute) generally have the highest specificity
+  and override most other styles (except those marked with
+  `!important`, which should be avoided if possible).
+
+(Understanding the full details of the cascade and specificity is part
+of learning CSS itself).
+
+## Examples
+<section id="examples" />
+
+### Example 1: Linking an External Stylesheet
+
+HTML (`index.html`):
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>External CSS Example</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p>This page is styled using an external CSS file.</p>
+    <p class="info">This paragraph has an info class.</p>
+</body>
+</html>
+```
+
+CSS (`style1.css`):
+
+```css
+body {
+    background-color: #eef; /* Light purple background */
+}
+
+h1 {
+    color: darkmagenta;
+    text-align: center;
+}
+
+p {
+    font-family: 'Georgia', serif;
+}
+
+.info {
+    border-left: 5px solid darkmagenta;
+    padding-left: 10px;
+    background-color: #fff;
+}
+```
+**Rendered Output (Conceptual):**
+<h1 style={{color: 'darkmagenta', textAlign: 'center'}}>Welcome!</h1>
+<p style={{fontFamily: 'Georgia, serif'}}>This page is styled using an external CSS file.</p>
+<p style={{borderLeft: '5px solid darkmagenta', paddingLeft: '10  px', backgroundColor: '#fff', fontFamily: 'Georgia, serif'}}>
+  This paragraph has an info class.   
+</p>
+<br/>
+
+### Example 2: Using Internal Styles
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internal CSS Example</title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf; /* Light pink */
+        }
+        #page-header {
+            background-color: pink;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header id="page-header">
+        <h1>Internal Styles Demo</h1>
+    </header>
+    <div class="content">
+        <p>Styles are defined in the head section.</p>
+    </div>
+</body>
+</html>
+```
+**Rendered Output (Conceptual):**
+<header style={{backgroundColor: 'pink', color: '#333', padding: '20px', textAlign: 'center'}}>
+        <h1>Internal Styles Demo</h1>
+    </header>
+    <div style={{padding: '20px'}}>
+        <p>Styles are defined in the head section.</p>
+    </div>
+
+### Example 3: Applying Inline Styles (Demonstration)
+
+This box has inline styles overriding the default
+`.css-example-box`
+styles defined internally.
+
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inline CSS Example</title>
+    <style>
+        /* Default style for the box */
+        .css-example-box {
+            border: 2px solid red;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inline Styles Demo</h1>
+    <div class="css-example-box">
+        This box uses the default styles from the internal stylesheet.
+    </div>
+    <div class="css-example-box" style="border-color: green; background-color: lightgreen; color: darkgreen;">
+        This box has <strong>inline styles</strong> applied using the 'style' attribute,
+        overriding the border and background color defined in the internal styles.
+        (Generally, avoid doing this extensively!)
+    </div>
+</body>
+</html>
+```
+**Rendered Output (Conceptual):**
+<h1>Inline Styles Demo</h1>
+    <div style={{border: '2px solid red', padding: '15px', margin: '10px 0', backgroundColor: 'lightyellow'}}>
+        This box uses the default styles from the internal stylesheet.
+    </div>
+    <div style={{border: '2px solid green', padding: '15px', margin: '10px 0', backgroundColor: 'lightgreen', color: 'darkgreen'}}>
+        This box has <strong>inline styles</strong> applied using the 'style' attribute,
+        overriding the border and background color defined in the internal styles.
+        (Generally, avoid doing this extensively!)
+    </div>
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import intro_css_quizData from "../../data/intro_css_quizData"
+
+<Quiz questions = {intro_css_quizData} />

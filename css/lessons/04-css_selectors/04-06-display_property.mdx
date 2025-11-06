@@ -1,0 +1,227 @@
+# The Display Property
+
+Welcome to Week 4! We're starting this week with a fundamental CSS
+property that dictates how an element is rendered in the document
+layout: the `display` property. It controls the element's
+inner and outer display types, influencing its behavior in terms of
+flow, sizing, and interaction with other elements.
+
+## Understanding Display Types
+
+Every HTML element has a default display value. However, the
+`display` property allows you to change this. The most common
+values are `block`, `inline`,
+`inline-block`, and `none`. Modern CSS also
+introduces layout-specific values like `flex` and
+`grid`, which we'll cover in detail in future lessons.
+
+### 1. display: block
+
+Block-level elements typically start on a new line and take up the full
+width available to them (stretching out to the left and right as far as
+they can within their container).
+
+**Characteristics:**
+
+* Always starts on a new line.
+* Takes up the full available width of its parent container by default.
+* You can set explicit `width` and
+  `height` properties.
+* `padding`, `margin`, and
+  `border` will push other elements away. Vertical margins
+  (top and bottom) are respected between block elements.
+* Common block-level elements include: `<div>`,
+  `<p>`,
+  `<h1>`-`<h6>`,
+  `<ul>`, `<ol>`,
+  `<li>`, `<form>`,
+  `<article>`, `<section>`.
+
+I am a block element (`div`).
+
+I am another block element. I start on a new line.
+
+I am a span, but styled as block (width 50%).
+
+```css
+div {
+  display: block; /* Default for div */
+  background-color: lightblue;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+span.make-block {
+  display: block;
+  width: 200px;
+  height: 50px;
+  background-color: lightcoral;
+}
+```
+
+### 2. display: inline
+
+
+Inline elements do not start on a new line and only take up as much
+width as necessary for their content. They flow along with the text
+content.
+
+**Characteristics:**
+
+* Does not start on a new line; flows with surrounding content.
+* Only takes up as much width as its content requires.
+* You **cannot** set explicit `width` and
+  `height` properties for them. These properties will be
+  ignored.
+* Horizontal `padding`, `margin`, and
+  `border` will apply and push other inline elements
+  horizontally.
+* Vertical `padding`, `margin` (top/bottom), and
+  `border` apply, but they generally
+  **do not** affect the layout of surrounding block-level
+  elements or other inline elements in terms of vertical spacing.
+  Top/bottom margins have no effect.
+* Common inline elements include: `<span>`,
+  `<a>`, `<img>` (though
+  `<img>` is a bit special, it's a "replaced element"),
+  `<strong>`, `<em>`,
+  `<button>` (often styled as inline-block by user
+  agents).
+
+This paragraph contains
+an inline span and also
+[an inline link](#). They flow
+together.
+This span has width/height set, but they are ignored. Vertical
+padding/margin won't push block elements.
+
+```css
+span {
+  display: inline; /* Default for span */
+  background-color: yellow;
+  padding: 5px;
+  margin: 0 3px; /* Horizontal margin works */
+  /* width: 100px;  This would be ignored */
+  /* height: 30px; This would be ignored */
+}
+div.make-inline {
+  display: inline; /* Change a div to behave like an inline element */
+  background-color: lightpink;
+}
+```
+
+### 3. display: inline-block
+
+
+Inline-block elements are a hybrid. They flow with surrounding content
+like inline elements, but you can set `width` and
+`height` on them, and they respect vertical margins and
+padding, like block elements.
+
+**Characteristics:**
+
+* Flows with surrounding content (does not start on a new line unless
+  there's no space).
+* You **can** set explicit `width` and
+  `height` properties.
+* `padding`, `margin` (including vertical), and
+  `border` are all respected and affect layout.
+* Often used for navigation items, buttons, or small layout components
+  that need specific dimensions but should remain in the flow of text.
+
+Here are some inline-block elements:
+Box 1
+Box 2 (taller)
+A Button
+They sit on the same line but can have custom dimensions and full
+margin/padding.
+
+```css
+button.custom-style {
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  line-height: 40px; /* To vertically center text */
+  background-color: lightseagreen;
+  color: white;
+  text-align: center;
+  margin: 5px;
+  padding: 0 10px;
+}
+nav a {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  margin-right: 5px;
+}
+```
+
+### 4. display: none
+
+
+When an element has `display: none;`, it is completely
+removed from the document layout. It takes up no space, and it's as if
+it doesn't exist on the page. Its descendants are also not rendered.
+
+This is different from `visibility: hidden;`, where the
+element is hidden but still occupies its space in the layout.
+
+This box is visible.
+
+This box has `display: none;` and will NOT be visible or
+take up space.
+
+This box appears right after the first one.
+
+```css
+.hidden-element {
+  display: none;
+}
+/* Often used with JavaScript to show/hide elements:
+   document.getElementById('myElement').style.display = 'none';
+   document.getElementById('myElement').style.display = 'block'; // Or 'inline', etc.
+*/
+
+/* Example: Hiding elements for specific screen sizes (though media queries are better for this) */
+.mobile-only { display: block; }
+.desktop-only { display: none; }
+/* In a media query for desktop:
+@media (min-width: 768px) {
+  .mobile-only { display: none; }
+  .desktop-only { display: block; }
+}
+*/
+```
+
+**Accessibility Note:** Elements with
+`display: none;` are typically not perceived by assistive
+technologies (like screen readers). If you need to hide content visually
+but keep it accessible, other techniques (like positioning it
+off-screen) are preferred.
+
+## Other display Values
+
+
+CSS has many other values for the `display` property,
+designed for specific layout models:
+
+* **flex**: Enables Flexbox layout for an element's direct children. We'll
+  cover this in Week 6.
+* **grid**: Enables CSS Grid layout for an element's direct children. We'll
+  cover this in Week 7.
+* **table`, `table-row`, `table-cell:**
+  Allow elements to behave like HTML table elements.
+* **list-item**: Makes an element behave like an
+  `<li>` element, typically generating a marker box.
+* **contents**: The element itself generates no boxes, but its
+  children and pseudo-elements still do. It's as if the element is
+  "unwrapped". Use with caution, can affect accessibility.
+* **flow-root**: Creates a new block formatting context (BFC),
+  which can be useful for containing floats, among other things.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/the_display_property.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

@@ -1,0 +1,199 @@
+# Flex Item Properties (Part 1)
+
+We've spent the last two days focusing on properties for the flex
+container. Now, we shift our attention to the
+**flex items** themselves. These properties control how
+individual items behave within the flex container, including their
+order, ability to grow or shrink, and their initial size.
+
+Today we'll cover `order`, `flex-grow`,
+`flex-shrink`, and `flex-basis`.
+
+Default HTML structure for examples (unless specified):
+
+Item 1
+
+Item 2
+
+Item 3
+
+## 1. order
+
+
+The `order` property controls the order in which flex items
+appear within the flex container. By default, items are laid out in
+their source order (as they appear in the HTML).
+
+* Accepts an integer value (positive, negative, or zero).
+* Default value is `0`.
+* Items with lower `order` values appear first. Items with
+  the same `order` value are laid out in source order.
+* This property allows you to change the visual order without altering
+  the HTML structure, which can be useful for responsiveness or
+  accessibility considerations (though be mindful that source order
+  still matters for things like tab navigation).
+
+**Example: Default Order (all items `order: 0`)**
+
+Item 1 (order:0)
+
+Item 2 (order:0)
+
+Item 3 (order:0)
+
+**Example: Modified Order**
+
+Item 1 (order:2)
+
+Item 2 (order:1)
+
+Item Neg (order:-1)
+
+Item 3 (order:3)
+
+```css
+.flex-container { display: flex; }
+.item-first { order: -1; } /* Will appear first */
+.item-default { order: 0; } /* Default, or explicitly set */
+.item-last { order: 1; }  /* Will appear after items with order 0 or -1 */
+
+.original-item-A { /* HTML: A, B, C */ }
+.original-item-B { order: -1; } /* Visual: B, A, C */
+.original-item-C { }
+```
+
+## 2. flex-grow
+
+The `flex-grow` property defines the ability of a flex item
+to grow if necessary. It specifies what proportion of the remaining
+space in the flex container should be distributed to the item.
+
+* Accepts a unitless non-negative number (e.g., `0`,
+  `1`, `2`).
+* Default value is `0` (meaning the item will not grow to
+  fill available space).
+* If all items have `flex-grow: 1`, the remaining space is
+  distributed equally among them.
+* If one item has `flex-grow: 2` and others have
+  `flex-grow: 1`, the item with
+  `flex-grow: 2` will take up twice as much of the available
+  space as the others.
+
+This property is applied after items have been sized according to
+`flex-basis` (and `width`/`height`). It
+only has an effect if there is positive free space in the flex
+container.
+
+**Example: Items with `flex-grow`**
+
+No Grow (0)
+
+Grow 1
+
+Grow 2
+
+```css
+.flex-container { display: flex; width: 600px; } /* Container wider than sum of initial item widths */
+.item { width: 100px; /* Initial width */ }
+.item-a { flex-grow: 1; } /* Takes 1 part of extra space */
+.item-b { flex-grow: 0; } /* Does not grow */
+.item-c { flex-grow: 2; } /* Takes 2 parts of extra space */
+```
+
+## 3. flex-shrink
+
+The `flex-shrink` property defines the ability of a flex item
+to shrink if necessary (i.e., if the combined size of items is larger
+than the flex container).
+
+* Accepts a unitless non-negative number.
+* Default value is `1` (meaning the item can shrink).
+* A value of `0` means the item will not shrink, even if it
+  causes an overflow.
+* If one item has `flex-shrink: 2` and others have
+  `flex-shrink: 1`, the item with
+  `flex-shrink: 2` will shrink twice as much as the others
+  when space is insufficient. The amount an item shrinks is also
+  proportional to its `flex-basis`.
+
+**Example: Items with `flex-shrink` (Container width 350px,
+items have `flex-basis: 150px`)**
+
+Shrink 1 (basis 150px)
+
+No Shrink (0) (basis 150px)
+
+Shrink 2 (basis 150px)
+
+```css
+.flex-container { display: flex; width: 300px; } /* Container narrower than sum of item widths */
+.item { width: 150px; /* Initial width, acts like flex-basis if basis is auto */ }
+.item-x { flex-shrink: 1; } /* Can shrink (default) */
+.item-y { flex-shrink: 0; } /* Will not shrink, may overflow */
+.item-z { flex-shrink: 2; } /* Will shrink more readily */
+```
+
+## 4. flex-basis
+
+The `flex-basis` property defines the default size of a flex
+item along the main axis *before* any remaining space is
+distributed according to `flex-grow` or
+`flex-shrink`.
+
+* Accepts a length unit (`px`, `%`,
+  `em`, etc.), or the keywords `auto` or
+  `content`.
+* Default value is `auto`. If `auto`, the item's
+  main size property (`width` or `height`) is
+  used. If that is also `auto`, it sizes based on its
+  content.
+* If set to a specific length (e.g., `100px`), that becomes
+  its initial main size.
+* The `content` keyword (newer) sizes the item based on its
+  content size.
+* If `flex-basis` is set to a value other than
+  `auto`, it generally overrides the item's
+  `width` (for rows) or `height` (for columns)
+  property for the purpose of flex layout calculations.
+
+**Example: Items with `flex-basis`**
+
+Basis 120px
+
+Basis auto (width 70px)
+
+Basis content (fits this longer text)
+
+```css
+.flex-container { display: flex; }
+.item-fixed-basis {
+  flex-basis: 200px; /* Item wants to be 200px wide initially */
+  flex-grow: 0; /* Don't grow */
+  flex-shrink: 0; /* Don't shrink */
+}
+.item-percentage-basis {
+  flex-basis: 25%; /* Item wants to be 25% of container width initially */
+}
+.item-auto-basis {
+  flex-basis: auto; /* Uses width/height or content size */
+  width: 100px; /* This will be its basis */
+}
+.item-content-basis {
+  flex-basis: content; /* Sizes based on its content */
+}
+```
+
+The interplay between `flex-basis`, `flex-grow`,
+and `flex-shrink` determines the final size of a flex item.
+`flex-basis` sets the starting point. Then, if there's
+extra space, `flex-grow` distributes it. If there's not
+enough space, `flex-shrink` determines how items shrink.
+
+We'll cover the `flex` shorthand property tomorrow, which
+combines these three.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/flex_items_properties_part1.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

@@ -1,0 +1,270 @@
+# Flex Container Properties (Part 2)
+
+Yesterday, we began exploring flex container properties, covering
+flex-direction, flex-wrap,
+flex-flow, and justify-content. Today, we
+continue our journey with two more crucial properties for aligning flex
+items: `align-items` (for single lines) and
+`align-content` (for multiple lines created by
+`flex-wrap: wrap`).
+
+Items for `align-items` examples (varying heights):
+
+Item 1 (short)
+
+Item 2 (tall)
+
+Item 3 (medium)
+
+Items for `align-content` examples (many items to wrap):
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+## 5. align-items
+
+
+The `align-items` property defines how flex items are aligned
+along the **cross axis** of the current line in the flex
+container. Think of it as the `justify-content` equivalent
+for the cross axis.
+
+Possible values:
+
+* **`stretch`** (default): Flex items are
+  stretched to fill the container's height (if
+  `flex-direction: row`) or width (if
+  `flex-direction: column`), provided they don't have a fixed
+  dimension on the cross axis (e.g., a set `height` for
+  rows).
+* **`flex-start`**: Items are packed toward the start of the cross axis.
+* **`flex-end`**: Items are packed toward the end of the cross axis.
+* **`center`**: Items are centered along the cross axis.
+* **`baseline`**: Items are aligned such that their baselines align. The baseline is
+  typically the imaginary line upon which text sits.
+
+For these examples, assume `flex-direction: row;` (main axis
+is horizontal, cross axis is vertical).
+
+**Example: `align-items: stretch;` (Default - if items have
+no set height)**
+
+Item 1
+
+Item 2
+
+Item 3
+
+**Example: `align-items: flex-start;` (Items with varying
+heights)**
+
+1 (short)
+
+2 (tall)
+
+3 (medium)
+
+**Example: `align-items: flex-end;`**
+
+1 (short)
+
+2 (tall)
+
+3 (medium)
+
+**Example: `align-items: center;`**
+
+1 (short)
+
+2 (tall)
+
+3 (medium)
+
+**Example: `align-items: baseline;`**
+
+Base
+
+Line
+
+Text
+
+```css
+.my-flex-container {
+  display: flex;
+  height: 200px; /* Give container height to see alignment */
+  align-items: center; /* Aligns children to the vertical center of the container */
+}
+.another-container {
+  display: flex;
+  height: 150px;
+  align-items: flex-start; /* Aligns children to the top of the container */
+}
+```
+
+## 6. align-content
+
+
+The `align-content` property is used to align multiple lines
+of flex items along the **cross axis** when there is extra
+space in the flex container. This property only has an effect when
+`flex-wrap` is set to `wrap` or
+`wrap-reverse` and there are multiple lines of flex items.
+
+If there's only one line of flex items, `align-content` has
+no effect.
+
+Possible values (similar to `justify-content`, but for the
+cross axis with multiple lines):
+
+* **`stretch`** (default): Lines stretch to take
+  up the remaining space.
+* **`flex-start`**: Lines are packed to the start of the cross axis.
+* **`flex-end`**: Lines are packed to the end of the cross axis.
+* **`center`**: Lines are packed to the center of the cross axis.
+* **`space-between`**: Lines are evenly distributed; the first line is at the start of the
+  cross axis, the last line is at the end.
+* **`space-around`**: Lines are evenly distributed with equal space around each line.
+* **`space-evenly`**: Lines are evenly distributed with equal space between them and to
+  the edges of the container.
+
+For these examples, container is
+`flex-wrap: wrap; height: 300px; width: 250px;` with 6 items
+(60px wide, 40px tall each).
+
+**Example: `align-content: stretch;` (Default)**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: flex-start;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: flex-end;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: center;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: space-between;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: space-around;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: space-evenly;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.multi-line-container {
+  display: flex;
+  flex-wrap: wrap; /* Required for align-content to have an effect */
+  height: 400px; /* Must have extra space in the cross-axis */
+  align-content: space-around; /* Distributes lines with space around them */
+}
+.item {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+}
+```
+
+It's easy to confuse `align-items` and
+`align-content`.
+**`align-items`** works on single lines of
+flex items, aligning the items \*within\* that line along the cross
+axis. **`align-content`** works when there are
+\*multiple lines\* of flex items (due to wrapping), aligning those lines
+themselves within the flex container along the cross axis. If there's
+only one line, `align-content` has no effect.
+
+
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/flex_properties_paart2.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

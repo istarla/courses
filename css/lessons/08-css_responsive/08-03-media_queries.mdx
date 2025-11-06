@@ -1,0 +1,202 @@
+# Media Queries
+
+Media queries are the engine behind Responsive Web Design. They allow
+you to apply specific CSS rules only when certain conditions about the
+user's device or browser environment are met. The most common use is
+applying styles based on the viewport width, but they can also target
+height, orientation, resolution, and more.
+
+## Media Query Syntax
+
+A media query consists of an optional *media type* and one or
+more *media feature* expressions.
+
+**Basic Structure:**
+
+```css
+@media media-type and (media-feature: value) {
+  /* CSS rules to apply when the conditions are met */
+  selector {
+    property: value;
+  }
+}
+```
+
+* **`@media`**: The at-rule that initiates the media query block.
+* **`media-type`** (Optional): Specifies the
+  type of media the styles are for. Common types include:
+  + `all` (default if omitted)
+  + `screen` (for computer screens, tablets, smartphones,
+    etc.)
+  + `print` (for paged material and print preview mode)
+  + `speech` (for screen readers)Often, you target `screen` or omit the type if using
+  width/height features.
+* **`and`**: Logical operator to combine the media type with feature
+  expressions.
+* **`(media-feature: value)`**: A condition testing a specific characteristic. Parentheses are
+  required.
+* You can combine multiple feature expressions using logical operators:
+  `and`, `or` (or a comma `,` which
+  acts like `or`), and `not`.
+
+## Common Media Features (Especially for RWD)
+
+These features are frequently used to create responsive layouts:
+
+* **`width`**: The width of the viewport (including scrollbar, if any).
+* **`height`**: The height of the viewport.
+* **`min-width`**: Applies styles if the viewport width is
+  *greater than or equal to* the specified value. (Used in
+  mobile-first approach).
+* **`max-width`**: Applies styles if the viewport width is
+  *less than or equal to* the specified value. (Used in
+  desktop-first approach).
+* **`min-height` / `max-height`**: Similar, but for viewport height.
+* **`orientation`**: Value can be `portrait` (height >= width) or
+  `landscape` (width > height).
+* **`aspect-ratio`** /
+  **`min-aspect-ratio`** /
+  **`max-aspect-ratio`**: Ratio of width to height (e.g., `16/9`).
+* **`resolution`** /
+  **`min-resolution`** /
+  **`max-resolution`**: Pixel density of the output device (e.g., `2dppx` for
+  Retina screens, `300dpi` for print).
+* **`hover`**: Checks if the primary input mechanism can hover (`hover: hover`
+  for mouse devices, `hover: none` for touch screens).
+* **`prefers-color-scheme`**: Checks user's system preference for light or dark themes (`light`
+  or `dark`).
+
+## Mobile-First Breakpoint Examples
+
+Breakpoints are the specific widths at which your layout changes.
+Choosing breakpoints depends on your design and content, not specific
+devices.
+
+Here's a typical mobile-first example:
+
+Resize your browser! (Or view on different devices)
+
+Column A
+
+Column B
+
+Column C (Hidden on Small)
+
+Device Orientation:
+
+```css
+/* --- Base styles (Mobile First) --- */
+.container {
+  width: 95%;
+  margin: 0 auto;
+}
+.sidebar {
+  display: none; /* Sidebar hidden on mobile */
+}
+.content {
+  width: 100%;
+}
+body {
+  font-size: 16px;
+}
+
+/* --- Tablet styles (e.g., 600px and up) --- */
+@media (min-width: 600px) {
+  .container {
+    width: 90%;
+  }
+  .content {
+    width: 70%;
+    float: left; /* Example using float */
+    margin-right: 5%;
+  }
+  .sidebar {
+    display: block; /* Show sidebar */
+    width: 25%;
+    float: left;
+  }
+  body {
+    font-size: 17px;
+  }
+}
+
+/* --- Desktop styles (e.g., 992px and up) --- */
+@media (min-width: 992px) {
+  .container {
+    width: 85%;
+    max-width: 1100px; /* Add a max width */
+  }
+  /* Maybe adjust content/sidebar widths or font sizes further */
+  body {
+    font-size: 18px;
+  }
+}
+```
+
+**Common Breakpoints:** There's no universal standard, but
+common breakpoints often fall around:
+
+* ~320px-480px (Small mobile)
+* ~481px-768px (Large mobile / Small tablets)
+* ~769px-1024px (Tablets / Small laptops)
+* ~1025px-1200px (Laptops / Desktops)
+* ~1201px+ (Large desktops)
+
+Focus on where your \*design breaks\* rather than specific device sizes.
+
+## Other Media Query Examples
+
+### Orientation
+
+```css
+@media (orientation: landscape) {
+  .hero-image {
+    height: 50vh; /* Make hero shorter in landscape */
+  }
+}
+@media (orientation: portrait) {
+  .nav-menu {
+    /* Styles for portrait mode, maybe a burger menu */
+  }
+}
+```
+
+### Combining Features (`and`)
+
+```css
+/* Target screens wider than 600px AND in landscape */
+@media screen and (min-width: 600px) and (orientation: landscape) {
+  .complex-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+}
+```
+
+### Print Styles
+
+```css
+@media print {
+  body {
+    font-family: serif;
+    color: black;
+    background-color: white;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")"; /* Show external URLs */
+  }
+  .sidebar, .navigation, .footer, button {
+    display: none; /* Hide non-essential elements */
+  }
+}
+```
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/media_queries.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

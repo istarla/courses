@@ -1,0 +1,447 @@
+# HTML APIs (Web Storage)
+
+## Introduction to Web APIs
+<section id="introduction-to-web-apis" />
+
+While HTML defines the structure, modern web browsers provide a wide
+range of **Application Programming Interfaces (APIs)** that
+allow web pages (via JavaScript) to interact with browser features and
+device capabilities. These APIs extend what HTML alone can do.
+
+Examples of Web APIs include:
+
+* **DOM API:** For manipulating the HTML document structure
+  (as seen in the previous lesson).
+* **Fetch API / XMLHttpRequest:** For making network
+  requests to servers.
+* **Geolocation API:** For accessing the user's physical
+  location (with permission).
+* **Canvas API:** For drawing 2D graphics (as seen).
+* **Web Audio API:** For processing and synthesizing audio.
+* **Web Storage API:** For storing data locally in the
+  user's browser. (Focus of today)
+* And many more...
+
+Today, we'll focus on the Web Storage API, which provides mechanisms for
+web pages to store key/value data locally within the user's web browser.
+
+## The Web Storage API: `localStorage` and `sessionStorage`
+<section id="the-web-storage-api-localstorage-and-sessionstorage" />
+
+Web Storage provides two primary mechanisms for storing data on the
+client-side (in the user's browser): `localStorage` and
+`sessionStorage`. Both allow you to store data as key-value
+pairs, where both keys and values are strings.
+
+They offer advantages over traditional cookies for client-side storage:
+
+* Larger storage capacity (typically 5-10MB per origin, compared to ~4KB
+  for cookies).
+* Data is not automatically sent with every HTTP request to the server,
+  improving performance and security.
+* Provide a simpler JavaScript API compared to manipulating cookies.
+
+### `localStorage`
+
+* **Persistence:** Data stored in
+  `localStorage` persists even after the browser window is
+  closed and reopened. It remains available until explicitly cleared by
+  the web application, the user, or the browser (e.g., due to storage
+  limits or privacy settings).
+* **Scope:** Data is specific to the protocol (http/https)
+  and domain (e.g., `www.example.com`) of the page that
+  stored it (the "origin"). All pages from the same origin can access
+  the same `localStorage` data.
+* **Use Cases:** Storing user preferences (like theme
+  choice), offline application data, user information (that isn't highly
+  sensitive), remembering if a user has seen a notification, etc.
+
+### `sessionStorage`
+
+* **Persistence:** Data stored in
+  `sessionStorage` only lasts for the duration of the browser
+  **session**. A session ends when the browser tab or
+  window is closed. Opening the same page in a new tab or window starts
+  a new session with separate `sessionStorage`.
+* **Scope:** Like `localStorage`, data is
+  specific to the origin. However, it's also specific to the individual
+  browser tab/window. Data in one tab's `sessionStorage` is
+  not accessible by another tab, even if they are from the same origin.
+* **Use Cases:** Storing temporary user state within a
+  single Browse session (e.g., user's input in a multi-step form before
+  final submission, current state of a single-page application within
+  that tab).
+
+## Using the Web Storage API (JavaScript)
+<section id="using-the-web-storage-api-javascript" />
+
+Both `localStorage` and `sessionStorage` share the
+same simple API methods. You access them via the global
+`window` object (though the `window.` prefix is
+often optional).
+
+* **Set Item:** Stores a key-value pair. If the key already
+  exists, its value is updated. Remember, both key and value must be
+  strings. If you need to store objects or arrays, convert them to JSON
+  strings first (`JSON.stringify()`).
+  <br/>
+  *javascript sample code*
+  ```javascript
+  localStorage.setItem('username', 'Alice');
+  sessionStorage.setItem('theme', 'dark');
+
+  const userData = { id: 123, role: 'admin' };
+  localStorage.setItem('user', JSON.stringify(userData));
+  ```
+* **Get Item:** Retrieves the value associated with a given
+  key. Returns `null` if the key does not exist. If you
+  stored a JSON string, you'll need to parse it back
+  (`JSON.parse()`).
+
+  <br/>
+  *javascript sample code*
+  ```javascript
+  const storedUsername = localStorage.getItem('username'); // Returns 'Alice' or null
+  const currentTheme = sessionStorage.getItem('theme'); // Returns 'dark' or null
+
+  const storedUserJSON = localStorage.getItem('user');
+  const storedUserData = storedUserJSON ? JSON.parse(storedUserJSON) : null;
+  ```
+* **Remove Item:** Deletes a specific key-value pair.
+  <br/>
+  *javascript sample code*
+  ```javascript
+  localStorage.removeItem('username');
+  sessionStorage.removeItem('theme');
+  ```
+* **Clear Storage:** Deletes all key-value pairs for that
+  origin in the respective storage (either localStorage or
+  sessionStorage). Use with caution!
+  <br/>
+  *javascript sample code*
+  ```javascript
+  localStorage.clear(); // Clears all localStorage for this origin
+  sessionStorage.clear(); // Clears all sessionStorage for this tab/session
+  ```
+* **Get Key by Index:** Retrieves the key at a specific
+  numerical index (storage order is not guaranteed). Less commonly used.
+  <br/>
+  *javascript sample code*
+  ```javascript
+  const firstKey = localStorage.key(0);
+  ```
+* **Get Number of Items:** Returns the total number of
+  items stored.
+  <br/>
+  *javascript sample code*
+  ```javascript
+  const itemCount = localStorage.length;
+  ```
+
+You can also access storage items using object-like bracket notation
+(e.g., `localStorage['username']`), but the
+`setItem`/`getItem` methods are generally
+recommended as they avoid potential conflicts with built-in properties
+of the Storage object.
+
+## Examples (Requires JavaScript Interaction)
+<section id="examples" />
+
+### 💡 How to View Local Storage and Session Storage in Your Browser
+
+These examples demonstrate how **Web Storage** works — that is, how your browser can store data locally using **LocalStorage** and **SessionStorage**.  
+To actually see the stored data in action, follow these steps:
+
+1.**Open Developer Tools** in your browser:  
+   - Press **F12**, or  
+   - Right-click on the page and choose **Inspect**.
+
+2.Go to the **"Application"** tab (in Chrome) or **"Storage"** tab (in Firefox).
+
+3.In the sidebar, find the **Storage** section. You’ll see:
+   - **Local Storage** → Stores data permanently in your browser (it stays even after closing the tab or browser).  
+   - **Session Storage** → Stores data only for the current tab (it’s cleared once the tab is closed).
+
+4.Now, interact with the buttons in the demo above —  
+   - When you **set** or **remove** items, you can instantly see the changes appear inside the corresponding storage section in Developer Tools.
+
+<br />
+<div
+  className="storage-demo"
+  ref={(el) => {
+    if (!el) return; // Skip if not rendered yet
+
+    // Prevent multiple event bindings (important for MDX rerenders)
+    if (el.dataset.bound) return;
+    el.dataset.bound = "true";
+
+    // LocalStorage elements
+    const localKeyInput = el.querySelector("#localKeyInput");
+    const localValueInput = el.querySelector("#localValueInput");
+    const localSetBtn = el.querySelector("#localSetBtn");
+    const localGetBtn = el.querySelector("#localGetBtn");
+    const localRemoveBtn = el.querySelector("#localRemoveBtn");
+    const localClearBtn = el.querySelector("#localClearBtn");
+    const localOutputArea = el.querySelector("#localOutputArea");
+
+    // SessionStorage elements
+    const sessionKeyInput = el.querySelector("#sessionKeyInput");
+    const sessionValueInput = el.querySelector("#sessionValueInput");
+    const sessionSetBtn = el.querySelector("#sessionSetBtn");
+    const sessionGetBtn = el.querySelector("#sessionGetBtn");
+    const sessionRemoveBtn = el.querySelector("#sessionRemoveBtn");
+    const sessionClearBtn = el.querySelector("#sessionClearBtn");
+    const sessionOutputArea = el.querySelector("#sessionOutputArea");
+
+    // --- LocalStorage Logic ---
+    localSetBtn.addEventListener("click", () => {
+      const key = localKeyInput.value.trim();
+      const value = localValueInput.value;
+      if (!key) return (localOutputArea.textContent = "Enter a key first.");
+      localStorage.setItem(key, value);
+      localOutputArea.innerHTML = `<code>LocalStorage: Set '${key}' to '${value}'</code>`;
+      localKeyInput.value = "";
+      localValueInput.value = "";
+    });
+
+    localGetBtn.addEventListener("click", () => {
+      const key = localKeyInput.value.trim();
+      if (!key) return (localOutputArea.textContent = "Enter a key first.");
+      const value = localStorage.getItem(key);
+      localOutputArea.innerHTML =
+        value !== null
+          ? `<code>LocalStorage: '${key}' = '${value}'</code>`
+          : `<code>Key '${key}' not found.</code>`;
+    });
+
+    localRemoveBtn.addEventListener("click", () => {
+      const key = localKeyInput.value.trim();
+      if (!key) return (localOutputArea.textContent = "Enter a key first.");
+      localStorage.removeItem(key);
+      localOutputArea.innerHTML = `<code>Removed key '${key}' (if existed)</code>`;
+    });
+
+    localClearBtn.addEventListener("click", () => {
+      localStorage.clear();
+      localOutputArea.innerHTML = `<code>Cleared all localStorage</code>`;
+    });
+
+    // --- SessionStorage Logic ---
+    sessionSetBtn.addEventListener("click", () => {
+      const key = sessionKeyInput.value.trim();
+      const value = sessionValueInput.value;
+      if (!key) return (sessionOutputArea.textContent = "Enter a key first.");
+      sessionStorage.setItem(key, value);
+      sessionOutputArea.innerHTML = `<code>SessionStorage: Set '${key}' to '${value}'</code>`;
+      sessionKeyInput.value = "";
+      sessionValueInput.value = "";
+    });
+
+    sessionGetBtn.addEventListener("click", () => {
+      const key = sessionKeyInput.value.trim();
+      if (!key) return (sessionOutputArea.textContent = "Enter a key first.");
+      const value = sessionStorage.getItem(key);
+      sessionOutputArea.innerHTML =
+        value !== null
+          ? `<code>SessionStorage: '${key}' = '${value}'</code>`
+          : `<code>Key '${key}' not found.</code>`;
+    });
+
+    sessionRemoveBtn.addEventListener("click", () => {
+      const key = sessionKeyInput.value.trim();
+      if (!key) return (sessionOutputArea.textContent = "Enter a key first.");
+      sessionStorage.removeItem(key);
+      sessionOutputArea.innerHTML = `<code>Removed key '${key}' (if existed)</code>`;
+    });
+
+    sessionClearBtn.addEventListener("click", () => {
+      sessionStorage.clear();
+      sessionOutputArea.innerHTML = `<code>Cleared all sessionStorage</code>`;
+    });
+  }}
+>
+  <style>{`
+    .storage-demo div {
+      margin-bottom: 1rem;
+    }
+    .storage-demo label {
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+    .storage-demo input[type="text"],
+    .storage-demo button {
+      padding: 5px 8px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+    .storage-demo button {
+      background-color: #3b82f6;
+      color: white;
+      cursor: pointer;
+    }
+    .storage-demo button:hover {
+      background-color: #2563eb;
+    }
+    code {
+      background-color: #f3f4f6;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  `}</style>
+
+  <h2>LocalStorage Demo</h2>
+  <div>
+    <label>Key:</label>
+    <input id="localKeyInput" type="text" />
+    <label>Value:</label>
+    <input id="localValueInput" type="text" />
+  </div>
+  <div>
+    <button id="localSetBtn">Set</button>
+    <button id="localGetBtn">Get</button>
+    <button id="localRemoveBtn">Remove</button>
+    <button id="localClearBtn">Clear All</button>
+  </div>
+  <div id="localOutputArea"></div>
+
+  <h2>SessionStorage Demo</h2>
+  <div>
+    <label>Key:</label>
+    <input id="sessionKeyInput" type="text" />
+    <label>Value:</label>
+    <input id="sessionValueInput" type="text" />
+  </div>
+  <div>
+    <button id="sessionSetBtn">Set</button>
+    <button id="sessionGetBtn">Get</button>
+    <button id="sessionRemoveBtn">Remove</button>
+    <button id="sessionClearBtn">Clear All</button>
+  </div>
+  <div id="sessionOutputArea"></div>
+</div>
+
+<br />
+### Example Code Behind the Demos
+
+(This JavaScript is included in a script tag at the end of this page to
+make the demos above work).
+
+```javascript
+// --- LocalStorage Demo Logic ---
+const localKeyInput = document.getElementById('localKeyInput');
+const localValueInput = document.getElementById('localValueInput');
+const localSetBtn = document.getElementById('localSetBtn');
+const localGetBtn = document.getElementById('localGetBtn');
+const localRemoveBtn = document.getElementById('localRemoveBtn');
+const localClearBtn = document.getElementById('localClearBtn');
+const localOutputArea = document.getElementById('localOutputArea');
+
+localSetBtn.addEventListener('click', () => {
+    const key = localKeyInput.value.trim();
+    const value = localValueInput.value;
+    if (key) {
+        localStorage.setItem(key, value);
+        localOutputArea.textContent = LocalStorage: Set '${key}' to '${value}';
+        localKeyInput.value = ''; // Clear inputs after use
+        localValueInput.value = '';
+    } else {
+        localOutputArea.textContent = 'LocalStorage: Please enter a key.';
+    }
+});
+
+localGetBtn.addEventListener('click', () => {
+    const key = localKeyInput.value.trim();
+    if (key) {
+        const value = localStorage.getItem(key);
+        localOutputArea.textContent = value !== null
+            ? LocalStorage: Value for '${key}' is '${value}'
+            : LocalStorage: Key '${key}' not found.;
+    } else {
+        localOutputArea.textContent = 'LocalStorage: Please enter a key to get.';
+    }
+});
+
+localRemoveBtn.addEventListener('click', () => {
+    const key = localKeyInput.value.trim();
+    if (key) {
+        localStorage.removeItem(key);
+        localOutputArea.textContent = LocalStorage: Removed key '${key}' (if it existed).;
+        localKeyInput.value = '';
+    } else {
+        localOutputArea.textContent = 'LocalStorage: Please enter a key to remove.';
+    }
+});
+
+localClearBtn.addEventListener('click', () => {
+    localStorage.clear();
+    localOutputArea.textContent = 'LocalStorage: All items cleared.';
+});
+
+// --- SessionStorage Demo Logic (similar structure) ---
+const sessionKeyInput = document.getElementById('sessionKeyInput');
+const sessionValueInput = document.getElementById('sessionValueInput');
+const sessionSetBtn = document.getElementById('sessionSetBtn');
+const sessionGetBtn = document.getElementById('sessionGetBtn');
+const sessionRemoveBtn = document.getElementById('sessionRemoveBtn');
+const sessionClearBtn = document.getElementById('sessionClearBtn');
+const sessionOutputArea = document.getElementById('sessionOutputArea');
+
+sessionSetBtn.addEventListener('click', () => {
+    const key = sessionKeyInput.value.trim();
+    const value = sessionValueInput.value;
+    if (key) {
+        sessionStorage.setItem(key, value);
+        sessionOutputArea.textContent = SessionStorage: Set '${key}' to '${value}';
+        sessionKeyInput.value = '';
+        sessionValueInput.value = '';
+    } else {
+         sessionOutputArea.textContent = 'SessionStorage: Please enter a key.';
+    }
+});
+
+sessionGetBtn.addEventListener('click', () => {
+     const key = sessionKeyInput.value.trim();
+    if (key) {
+        const value = sessionStorage.getItem(key);
+        sessionOutputArea.textContent = value !== null
+            ? SessionStorage: Value for '${key}' is '${value}'
+            : SessionStorage: Key '${key}' not found.;
+    } else {
+        sessionOutputArea.textContent = 'SessionStorage: Please enter a key to get.';
+    }
+});
+
+sessionRemoveBtn.addEventListener('click', () => {
+     const key = sessionKeyInput.value.trim();
+    if (key) {
+        sessionStorage.removeItem(key);
+        sessionOutputArea.textContent = SessionStorage: Removed key '${key}' (if it existed).;
+        sessionKeyInput.value = '';
+    } else {
+        sessionOutputArea.textContent = 'SessionStorage: Please enter a key to remove.';
+    }
+});
+
+sessionClearBtn.addEventListener('click', () => {
+    sessionStorage.clear();
+    sessionOutputArea.textContent = 'SessionStorage: All items cleared.';
+});
+
+// Optional: Display initial content on load if needed
+// localOutputArea.textContent = LocalStorage: (Use buttons to interact);
+// sessionOutputArea.textContent = SessionStorage: (Use buttons to interact);
+```
+
+
+🧠 **In short:**  
+LocalStorage = persistent data across sessions.  
+SessionStorage = temporary data for a single tab.
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import html_apis_quizData from "../../data/html_apis_quizData"
+
+<Quiz questions = {html_apis_quizData} />

@@ -1,0 +1,174 @@
+# Pseudo-classes
+
+Pseudo-classes are keywords added to selectors that specify a special
+state of the selected element(s). They allow you to style elements based
+on user interaction, their position in the document tree, or other
+conditions not reflected by a simple attribute or element type.
+Pseudo-classes start with a colon (`:`).
+
+## 1. Link and User Action Pseudo-classes
+
+These pseudo-classes react to how the user interacts with elements,
+especially links and form controls.
+
+* **:link**: Selects unvisited links.
+* **:visited**: Selects visited links. (Note: For privacy reasons, the styles you
+  can apply to `:visited` links are limited, primarily to
+  color.)
+* **:hover**: Selects an element when the user mouses over it.
+* **:active**: Selects an element when it is being activated (e.g., clicked on a
+  link or button).
+* **:focus**: Selects an element when it has keyboard focus (e.g., tabbing to an
+  input field or link).
+* **:focus-within**: Selects an element if it or any of its descendants has focus.
+* **:focus-visible**: Selects an element when it has focus and the browser determines via
+  heuristics that the focus should be made visible (e.g. keyboard
+  navigation).
+
+[Example Link (Unvisited)](#exampleLink1)  
+[Google (Potentially Visited)](https://www.google.com)
+
+```css
+a:link { color: blue; }
+a:visited { color: purple; }
+a:hover { color: red; text-decoration: underline; }
+button:active { background-color: yellow; }
+input:focus { border-color: orange; box-shadow: 0 0 3px orange; }
+div:focus-within { background-color: lightgrey; }
+```
+
+**Order Matters (LVHA):** For link pseudo-classes, it's
+generally recommended to define them in the order: `:link`,
+`:visited`, `:hover`,
+`:active` (Mnemonic: LoVe HAte) to ensure they work as
+expected due to CSS specificity rules.
+
+## 2. Structural Pseudo-classes
+
+
+These pseudo-classes select elements based on their position and
+relationship within the document structure.
+1. **:root**: Selects the root element of the document (usually
+  `<html>`). Often used for CSS Custom Properties
+  (variables).
+2. **:first-child**: Selects an element that is the first child of its parent.
+3. **:last-child**: Selects an element that is the last child of its parent.
+4. **:nth-child(n)**: Selects elements based on their position among siblings.
+  `n` can be a number (`1`, `2`, etc.),
+  a keyword (`odd`, `even`), or a formula
+  (`2n+1`, `3n`, `-n+5`). Indexing is
+  1-based.
+5. **:nth-last-child(n)**: Same as `:nth-child(n)`, but counts from the last child.
+6. **:first-of-type**: Selects the first sibling of its type.
+7. **:last-of-type**: Selects the last sibling of its type.
+8. **:nth-of-type(n)**: Selects siblings of a certain type based on their order among
+  siblings of the same type.
+9. **:nth-last-of-type(n)**: Same as `:nth-of-type(n)`, but counts from the last
+  sibling of that type.
+10. **:only-child**: Selects an element that is the only child of its parent.
+11. **:only-of-type**: Selects an element that is the only sibling of its type.
+12. **:empty**: Selects elements that have no children (including text nodes).
+  Comments or whitespace may count as content.
+
+* Item 1 (First child)
+* Item 2
+* Item 3 (Last child)
+
+1. Alpha (Odd)
+2. Beta (Even)
+3. Gamma (Odd)
+4. Delta (Even)
+
+First paragraph.
+
+Second paragraph of type P.
+
+Div element
+
+Third paragraph of type P.
+
+```css
+:root { --main-color: #333; }
+ul li:first-child { font-weight: bold; }
+ul li:last-child { font-style: italic; }
+ol li:nth-child(even) { background-color: #f0f0f0; }
+article p:nth-of-type(2) { color: green; } /* Second
+
+in
+
+*/
+div:empty { border: 1px solid red; min-height: 10px; }
+```
+
+## 3. Form and Input Pseudo-classes
+
+These target form elements based on their state or attributes.
+
+* **`:checked`**: Selects radio buttons, checkboxes, or options in a
+  `<select>` that are currently selected/checked.
+* **`:disabled`**: Selects UI elements (like `<input>`,
+  `<button>`) that are in a disabled state.
+* **`:enabled`**: Selects UI elements that are in an enabled state.
+* **`:required`**: Selects form elements that have the
+  `required` attribute.
+* **`:optional`**: Selects form elements that do not have the
+  `required` attribute.
+* **`:read-only`**: Selects elements that have the `readonly` attribute.
+* **`:read-write`**: Selects elements that are user-editable (e.g., inputs without
+  `readonly`, `contenteditable` elements).
+* **`:in-range`** /
+  **`:out-of-range`**: For input types with range constraints (e.g.,
+  `type="number"` with `min` and
+  `max` attributes).
+* **`:valid`** /
+  **`:invalid`**: For input elements based on their form validation status.
+
+Opt-in
+
+```css
+input[type="checkbox"]:checked + label {
+  color: green;
+  font-weight: bold;
+}
+input:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+input:required:invalid { /* Style invalid required fields */
+  border-left: 3px solid red;
+}
+```
+
+## 4. Negation Pseudo-class: `:not()`
+
+
+The `:not(X)` pseudo-class takes a simple selector (or a list
+of simple selectors in Selectors Level 4) as an argument. It matches
+elements that are *not* represented by the argument.
+
+**Example:** `p:not(.special)` selects all
+`<p>` elements that do not have the class
+`special`.
+
+A regular paragraph.
+
+A special paragraph.
+
+Another regular paragraph.
+
+```css
+p:not(.highlight) {
+  color: #555; /* Dim non-highlighted paragraphs */
+}
+
+/* Select all inputs that are not disabled */
+input:not(:disabled) {
+  border: 1px solid #ccc;
+}
+```
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/pseudo_classes.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

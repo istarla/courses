@@ -1,0 +1,348 @@
+# Aligning Grid Items and Tracks
+
+Just like Flexbox, CSS Grid provides powerful properties for aligning
+content. We can align items *within* their grid areas (cell
+alignment) and align the grid tracks themselves *within* the grid
+container (track alignment) when the total size of the tracks is less
+than the container size.
+
+## 1. Aligning Items within their Area (Cell Alignment)
+
+These properties control how a grid item is positioned inside the grid
+area it occupies.
+
+### align-items (on Container)
+
+Aligns items along the **block (column) axis** within their
+grid area. Applies to all items in the container unless overridden by
+`align-self`.
+
+Values: `start`, `end`, `center`,
+`stretch` (default).
+
+**Example: `align-items: start;`** (Items
+aligned to the top of their cell)
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-items: center;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-rows: 120px 120px; /* Ensure cells have height */
+  align-items: center; /* Center items vertically within their grid area */
+}
+```
+
+### justify-items (on Container)
+
+Aligns items along the **inline (row) axis** within their
+grid area. Applies to all items unless overridden by
+`justify-self`.
+
+Values: `start`, `end`, `center`,
+`stretch` (default).
+
+**Example: `justify-items: start;`** (Items
+aligned to the left of their cell)
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `justify-items: center;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 150px 150px; /* Ensure cells have width */
+  justify-items: center; /* Center items horizontally within their grid area */
+}
+```
+
+### place-items (Shorthand on Container)
+
+Shorthand for `align-items` and `justify-items`.
+
+**Syntax:**
+`place-items: <align-items> [ <justify-items> ]?;`
+(If only one value is provided, it applies to both).
+
+**Example: `place-items: center start;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.grid-container {
+  display: grid;
+  place-items: center center; /* Center items both vertically and horizontally */
+  /* Equivalent to:
+     align-items: center;
+     justify-items: center; */
+}
+```
+
+### align-self (on Item)
+
+Overrides the container's `align-items` value for an
+individual grid item, aligning it along the
+**block (column) axis** within its area.
+
+Values: `auto` (default - inherits from
+`align-items`), `start`, `end`,
+`center`, `stretch`.
+
+**Example: One item with `align-self: end;`**
+
+1 (Align Self: End)
+
+
+
+```css
+.grid-container {
+  display: grid;
+  align-items: start;
+}
+.special-item {
+  align-self: end; /* Overrides container's align-items: start for this item */
+}
+```
+
+### justify-self (on Item)
+
+Overrides the container's `justify-items` value for an
+individual grid item, aligning it along the
+**inline (row) axis** within its area.
+
+Values: `auto` (default - inherits from
+`justify-items`), `start`, `end`,
+`center`, `stretch`.
+
+**Example: One item with `justify-self: start;`**
+
+1 (Justify Self: Start)
+
+```css
+.grid-container {
+  display: grid;
+  justify-items: center;
+}
+.special-item {
+  justify-self: start; /* Overrides container's justify-items: center */
+}
+```
+
+### place-self (Shorthand on Item)
+
+Shorthand for `align-self` and `justify-self`.
+
+**Syntax:**
+`place-self: <align-self> [ <justify-self> ]?;`
+
+```css
+.special-item {
+  place-self: center end; /* align-self: center; justify-self: end; */
+}
+```
+
+## 2. Aligning the Grid Tracks within the Container (Track Alignment)
+
+These properties are used when the total size of the grid tracks
+(including gaps) is smaller than the grid container's size, allowing you
+to distribute the extra space.
+
+### align-content (on Container)
+
+Aligns the grid tracks along the
+**block (column) axis** when there is extra space in the
+container.
+
+Values: `start`, `end`, `center`,
+`space-between`, `space-around`,
+`space-evenly`, `stretch` (default).
+
+**Example: `align-content: center;`** (Container
+height is 350px)
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `align-content: space-between;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.grid-container {
+  display: grid;
+  height: 500px; /* Container height > sum of row heights */
+  grid-template-rows: 100px 100px;
+  align-content: space-evenly; /* Distribute the rows evenly vertically */
+}
+```
+
+### justify-content (on Container)
+
+Aligns the grid tracks along the **inline (row) axis** when
+there is extra space in the container.
+
+Values: `start`, `end`, `center`,
+`space-between`, `space-around`,
+`space-evenly`, `stretch` (default - has no effect
+here).
+
+**Example: `justify-content: center;`**
+(Container width 500px, columns total 300px)
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+**Example: `justify-content: space-between;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.grid-container {
+  display: grid;
+  width: 800px; /* Container width > sum of column widths */
+  grid-template-columns: 150px 200px 150px;
+  justify-content: space-around; /* Distribute columns with space around them horizontally */
+}
+```
+
+### place-content (Shorthand on Container)
+
+Shorthand for `align-content` and
+`justify-content`.
+
+**Syntax:**
+`place-content: <align-content> [ <justify-content>
+]?;`
+
+**Example: `place-content: center end;`**
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+```css
+.grid-container {
+  display: grid;
+  width: 600px; height: 400px;
+  grid-template-columns: repeat(2, 100px);
+  grid-template-rows: repeat(2, 80px);
+  place-content: center space-between;
+  /* Equivalent to:
+     align-content: center;
+     justify-content: space-between; */
+}
+```
+
+Remember the difference: `place-items` (and its longhands)
+aligns the \*content\* inside a grid area. `place-content` (and
+its longhands) aligns the \*grid tracks\* themselves within the container
+when there's extra space.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/aligning_grid.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

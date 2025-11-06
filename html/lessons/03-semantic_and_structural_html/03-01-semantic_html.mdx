@@ -1,0 +1,493 @@
+# Semantic HTML
+
+## What is Semantic HTML?
+<section id="what-is-semantic-html" />
+
+Semantic HTML refers to using HTML elements that accurately describe the
+meaning and structure of the content they contain, rather than just
+defining its presentation.
+
+For example, using `<h1>` for the main heading tells
+browsers, search engines, and assistive technologies that this text is
+the most important heading on the page. In contrast, using a generic
+`<div>` or `<span>` and styling it to
+look like a heading provides no semantic meaning. While it might look
+the same visually, it lacks the underlying structural information.
+
+Older HTML often relied heavily on non-semantic elements like
+`<div>` and `<span>` for everything,
+using `id` or `class` attributes (e.g.,
+`<div id="header">`) to hint at the structure. HTML5
+introduced specific semantic elements to make this structure explicit.
+
+## Why Use Semantic HTML?
+<section id="why-use-semantic-html" />
+
+* **Accessibility:** Assistive technologies (like screen
+  readers) rely on semantic elements to understand the page structure
+  and navigate content effectively. Elements like
+  `<nav>` allow users to easily jump to the navigation
+  menu.
+* **SEO (Search Engine Optimization):** Search engines use
+  semantic markup to better understand the context and importance of
+  different parts of your content, which can potentially improve search
+  rankings.
+* **Maintainability & Readability:** Semantic code is
+  easier for developers (including your future self) to read,
+  understand, and maintain. `<header>` clearly
+  indicates a header section, unlike a generic `<div>`.
+* **Future Compatibility:** Using standard semantic
+  elements helps ensure your site works better with future browser
+  features or web technologies that might leverage this structure.
+
+## Key HTML5 Semantic Elements for Page Structure
+<section id="key-html5-semantic-elements-for-page-structure" />
+
+HTML5 introduced several block-level elements designed to structure web
+pages:
+
+* **`<header>`**: Represents introductory content for its nearest ancestor sectioning
+  content or sectioning root element. Typically contains headings
+  (`<h1>-<h6>`), logos, search forms, author
+  names, or navigation. Can be used multiple times on a page (e.g., for
+  the site header and an article header).
+* **`<nav>`**: Represents a section of the page whose purpose is to provide
+  navigation links, either within the current document or to other
+  documents. Common examples include main site navigation menus, tables
+  of contents, or indexes. Not all groups of links need to be in a
+  `<nav>` (e.g., links in a footer are often just
+  within the `<footer>`).
+* **`<main>`**: Represents the dominant content of the `<body>` of
+  a document. The content inside `<main>` should be
+  unique to the document, excluding content that is repeated across
+  documents such as sidebars, navigation links, copyright information,
+  site logos, and search forms. There should only be
+  **one** `<main>` element per document.
+* **`<section>`**: Represents a standalone thematic grouping of content, typically
+  with a heading. Think of it like chapters in a book or distinct
+  sections on a landing page (e.g., "About Us", "Services", "Contact
+  Info"). Use it when there isn't a more specific semantic element
+  available.
+* **`<article>`**: Represents a self-contained composition in a document, page,
+  application, or site, which is intended to be independently
+  distributable or reusable (e.g., in syndication). Examples include a
+  forum post, a magazine or newspaper article, a blog entry, a
+  user-submitted comment, or an interactive widget. An
+  `<article>` often has its own header and sometimes a
+  footer.
+* **`<aside>`**: Represents a portion of a document whose content is only indirectly
+  related to the document's main content. Often used for sidebars, pull
+  quotes, glossaries, advertising, or groups of navigation links
+  separate from the main navigation.
+* **`<footer>`**: Represents a footer for its nearest ancestor sectioning content or
+  sectioning root element. Typically contains information about the
+  author, copyright data, links to related documents, terms of use, or
+  contact information. Like `<header>`, it can be used
+  multiple times (e.g., site footer and article footer).
+* **`<address>`**: Represents contact information for its nearest
+  `<article>` or `<body>` ancestor.
+  This can include physical addresses, URLs, email addresses, phone
+  numbers, social media handles, etc. It should not be used for
+  arbitrary addresses (like mailing addresses within main content unless
+  they are the contact info for the article/body).
+* **`<figure>`** and
+  `<figcaption>`: `<figure>` represents self-contained content,
+  potentially with an optional caption
+  (`<figcaption>`), that is referenced from the main
+  flow of the document, but that can be moved to another part of the
+  document or to an appendix without affecting the main flow. Often used
+  for images, illustrations, diagrams, code snippets, or videos that
+  need a caption. `<figcaption>` provides the caption
+  for the `<figure>`.
+
+## `<div>` vs. Semantic Elements
+<section id="div-vs-semantic-elements" />
+
+The `<div>` element is still perfectly valid and
+useful. It's a generic container with no semantic meaning. Use
+`<div>` when there's no specific semantic element that
+accurately describes the content's purpose, often purely for styling or
+grouping elements for layout purposes with CSS (e.g., creating columns,
+wrappers, or styling hooks).
+
+**Rule of thumb:** If a semantic element exists that
+accurately describes the content's purpose (header, nav, section,
+article, etc.), use it. If not, use a `<div>`.
+
+## Examples
+<section id="examples" />
+
+### Example 1: Basic Blog Post Structure
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Awesome Blog Post</title>
+    <!-- Link to styles for semantic elements -->
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        .blog-example header { background-color: #dbeafe; padding: 10px; }
+        .blog-example nav { background-color: #e0e7ff; padding: 5px; }
+        .blog-example main { margin-top: 15px; }
+        .blog-example article header h1 { font-size: 1.8em; color: #1e40af; }
+        .blog-example article footer { font-size: 0.9em; color: #6b7280; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 5px;}
+        .blog-example footer { background-color: #dbeafe; padding: 10px; margin-top: 20px; text-align: center; font-size: 0.9em;}
+        .blog-example nav ul { list-style: none; padding: 0; } .blog-example nav li { display: inline; margin-right: 10px; }
+    </style>
+</head>
+<body class="blog-example">
+
+    <header> <!-- Site Header -->
+        <h1>My Awesome Blog</h1>
+        <nav> <!-- Main Site Navigation -->
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main> <!-- Main Content Area -->
+        <article> <!-- Individual Blog Post -->
+            <header> <!-- Article Header -->
+                <h1>The Importance of Semantic HTML</h1>
+                <p>Published on <time datetime="2025-05-03">May 3, 2025</time> by Author Name</p>
+                <!-- <time> is another semantic inline element -->
+            </header>
+
+            <p>Semantic HTML is crucial for modern web development...</p>
+            <p>It improves accessibility, SEO, and code maintainability.</p>
+
+            <section> <!-- Section within the article -->
+                <h2>Benefits for Accessibility</h2>
+                <p>Screen readers can navigate pages more effectively...</p>
+            </section>
+
+             <section>
+                <h2>Benefits for SEO</h2>
+                <p>Search engines better understand content structure...</p>
+            </section>
+
+            <footer> <!-- Article Footer -->
+                <p>Tags: <a href="/tags/html">HTML</a>, <a href="/tags/webdev">Web Development</a></p>
+            </footer>
+        </article>
+        <!-- More articles could go here -->
+    </main>
+
+    <footer> <!-- Site Footer -->
+        <p>© 2025 My Awesome Blog. All rights reserved.</p>
+        <address>Contact us at: <a href="mailto:info@awesomeblog.com">info@awesomeblog.com</a></address>
+    </footer>
+
+</body>
+</html>
+```
+
+**Output Preview:**
+
+<div className="blog-example" style={{ fontFamily: "sans-serif", lineHeight: 1.6 ,background:"#bec8fa"}}>
+  {/* Site Header */}
+  <header style={{ backgroundColor: "#dbeafe", padding: "10px" }}>
+    <h1>My Awesome Blog</h1>
+
+    {/* Main Site Navigation */}
+    <nav style={{ backgroundColor: "#e0e7ff", padding: "5px" }}>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        <li style={{ display: "inline", marginRight: "10px" }}>
+          <a href="/">Home</a>
+        </li>
+        <li style={{ display: "inline", marginRight: "10px" }}>
+          <a href="/about">About</a>
+        </li>
+        <li style={{ display: "inline", marginRight: "10px" }}>
+          <a href="/contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  {/* Main Content Area */}
+  <main style={{ marginTop: "15px" }}>
+    {/* Individual Blog Post */}
+    <article>
+      {/* Article Header */}
+      <header>
+        <h1 style={{ fontSize: "1.8em", color: "#1e40af" }}>
+          The Importance of Semantic HTML
+        </h1>
+        <p>
+          Published on{" "}
+          <time dateTime="2025-05-03">May 3, 2025</time> by Author Name
+        </p>
+      </header>
+
+      <p>Semantic HTML is crucial for modern web development...</p>
+      <p>It improves accessibility, SEO, and code maintainability.</p>
+
+      {/* Section within the article */}
+      <section>
+        <h2>Benefits for Accessibility</h2>
+        <p>Screen readers can navigate pages more effectively...</p>
+      </section>
+
+      <section>
+        <h2>Benefits for SEO</h2>
+        <p>Search engines better understand content structure...</p>
+      </section>
+
+      {/* Article Footer */}
+      <footer
+        style={{
+          fontSize: "0.9em",
+          color: "#6b7280",
+          marginTop: "15px",
+          borderTop: "1px solid #ccc",
+          paddingTop: "5px",
+        }}
+      >
+        <p>
+          Tags:{" "}
+          <a href="./">HTML</a>,{" "}
+          <a href="../">Web Development</a>
+        </p>
+      </footer>
+    </article>
+  </main>
+
+  {/* Site Footer */}
+  <footer
+    style={{
+      backgroundColor: "#dbeafe",
+      padding: "10px",
+      marginTop: "20px",
+      textAlign: "center",
+      fontSize: "0.9em",
+    }}
+  >
+    <p>© 2025 My Awesome Blog. All rights reserved.</p>
+    <address>
+      Contact us at:{" "}
+      <a href="mailto:info@awesomeblog.com">info@awesomeblog.com</a>
+    </address>
+  </footer>
+</div>
+
+<br /><br />
+### Example 2: Page Layout with Header, Nav, Main, Aside, Footer
+
+<div className="semantic-example">
+  <header>Site Header (Logo, Site Title)</header>
+  
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>About</li>
+      <li>Services</li>
+      <li>Contact</li>
+    </ul>
+  </nav>
+  
+  <aside>Sidebar (Related Links, Ads)</aside>
+  
+  <main>
+    Main Page Content Area
+    
+    <section>
+      <h2>Section 1 Title</h2>
+      <p>Content for section 1...</p>
+    </section>
+    
+    <section>
+      <h2>Section 2 Title</h2>
+      <p>Content for section 2...</p>
+      
+      <article>
+        <h3>Embedded Article/Widget</h3>
+        <p>Self-contained content within section 2.</p>
+      </article>
+    </section>
+  </main>
+  
+  <footer>
+    Site Footer (Copyright, Contact Info)
+    <address>1234 Street Name, City, Country</address>
+  </footer>
+</div>
+
+<br />
+*Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Layout Example</title>
+ <!-- Link to styles that might float aside, etc. -->
+<style>
+    body { font-family: sans-serif; }
+    header, nav, main, aside, footer, section, article { border: 1px solid grey; padding: 10px; margin: 5px; }
+    header { background-color: lightblue; }
+    nav { background-color: lightcoral; }
+    main { background-color: lightyellow; }
+    aside { background-color: lightgrey; float: right; width: 25%; min-height: 200px;}
+    section { background-color: white; }
+    article { background-color: #eee; }
+    footer { background-color: lightblue; clear: both; }
+    main { width: 70%; float: left;} /* Adjust main width to accommodate aside */
+</style>
+</head>
+<body>
+
+    <header>Site Header (Logo, Site Title)</header>
+    <nav>Main Navigation Menu</nav>
+
+    <aside>Sidebar (Related Links, Ads)</aside>
+
+    <main>
+        Main Page Content Area
+        <section>
+            <h2>Section 1 Title</h2>
+            <p>Content for section 1...</p>
+        </section>
+         <section>
+            <h2>Section 2 Title</h2>
+            <p>Content for section 2...</p>
+             <article>
+                <h3>Embedded Article/Widget</h3>
+                <p>Self-contained content within section 2.</p>
+             </article>
+        </section>
+    </main>
+
+    <footer>Site Footer (Copyright, Contact Info)</footer>
+
+</body>
+</html>
+```
+
+### Example 3: Using `<figure>` and `<figcaption>`
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Figure Example</title>
+    <style>
+        figure {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px;
+            display: inline-block; /* Or block, depending on layout needs */
+            text-align: center;
+        }
+        figcaption {
+            margin-top: 8px;
+            font-style: italic;
+            font-size: 0.9em;
+            color: #555;
+        }
+        figure img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>Diagrams and Images</h1>
+    <p>As shown in the diagram below, the process involves several steps.</p>
+
+    <figure>
+        <img src="https://via.placeholder.com/400x200.png?text=Process+Diagram" alt="Diagram showing the 5-step process.">
+        <figcaption>Fig. 1: Overview of the 5-step workflow.</figcaption>
+    </figure>
+
+    <p>The code example also illustrates this concept:</p>
+
+    <figure>
+        <pre><code class="language-javascript">
+function greet(name) {
+  console.log(Hello, ${name}!);
+}
+greet('World');
+        </code></pre>
+        <figcaption>Code Snippet 1: Basic JavaScript greeting function.</figcaption>
+    </figure>
+
+</body>
+<!-- Include Prism JS for code highlighting if needed -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-javascript.min.js"></script>
+<script>Prism.highlightAll();</script>
+</html>
+```
+**Output:** 
+<div style={{ fontFamily: "sans-serif", padding: "20px"}}>
+  <h1>Diagrams and Images</h1>
+  <p>As shown in the diagram below, the process involves several steps.</p>
+
+  {/* Image Figure */}
+  <figure
+    style={{
+      border: "1px solid #ccc",
+      padding: "10px",
+      margin: "20px",
+      display: "inline-block",
+      textAlign: "center",
+    }}
+  >
+    <img
+      src="https://via.placeholder.com/400x200.png?text=Process+Diagram"
+      alt="Diagram showing the 5-step process."
+      style={{ maxWidth: "100%", height: "auto" }}
+    />
+    <figcaption
+      style={{
+        marginTop: "8px",
+        fontStyle: "italic",
+        fontSize: "0.9em",
+        color: "#555",
+      }}
+    >
+      Fig. 1: Overview of the 5-step workflow.
+    </figcaption>
+  </figure>
+
+  <p>The code example also illustrates this concept:</p>
+
+  {/* Code Figure */}
+  <figure
+    style={{
+      border: "1px solid #ccc",
+      padding: "10px",
+      margin: "20px",
+      display: "inline-block",
+      textAlign: "center",
+    }}
+  >
+    <pre>
+      <code className="language-javascript">{`function greet(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+greet('World');`}</code>
+    </pre>
+    <figcaption
+      style={{
+        marginTop: "8px",
+        fontStyle: "italic",
+        fontSize: "0.9em",
+        color: "#555",
+      }}
+    >
+      Code Snippet 1: Basic JavaScript greeting function.
+    </figcaption>
+  </figure>
+</div>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import semantic_html_quizData from "../../data/semantic_html_quizData"
+
+<Quiz questions = {semantic_html_quizData} />

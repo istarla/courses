@@ -1,0 +1,182 @@
+# CSS Functions (calc(), var(), attr())
+
+CSS functions allow you to perform calculations, use variables (custom
+properties), and access attribute values directly within your
+stylesheets. These functions enhance the dynamic capabilities of CSS,
+making stylesheets more flexible and maintainable. Today we'll focus on
+three key functions: calc(), var(), and
+attr().
+
+## 1. calc() - Performing Calculations
+
+The `calc()` CSS function lets you perform calculations to
+determine CSS property values. You can use addition (`+`),
+subtraction (`-`), multiplication (`*`), and
+division (`/`) with different units.
+
+**Syntax:** property: calc(expression);
+
+**Key features:**
+
+* You can mix different units (e.g., calc(100% - 50px)).
+* Whitespace around operators (`+`, `-`,
+  `*`, `/`) is important. For `+` and
+  `-`, whitespace is required on both sides. For
+  `*` and `/`, it's not strictly required but
+  highly recommended for readability.
+* Can be used for lengths, frequencies, angles, times, numbers,
+  integers.
+* Especially useful for responsive design, allowing for fluid layouts
+  with fixed offsets.
+
+Width: calc(100% - 40px)  
+Height: calc(50vh - var(--header-height))
+
+```css
+:root {
+  --default-padding: 15px;
+  --sidebar-width: 250px;
+}
+.container {
+  width: calc(100% - (2 * var(--default-padding))); /* Full width minus padding on both sides */
+  padding: var(--default-padding);
+}
+.main-content {
+  width: calc(100% - var(--sidebar-width) - 20px); /* 100% minus sidebar and a gutter */
+  margin-left: var(--sidebar-width);
+}
+.element {
+  font-size: calc(1rem + 0.5vw); /* Font size that scales with viewport width but has a base */
+  height: calc(100vh / 3); /* One third of the viewport height */
+}
+```
+
+## 2. var() - Using CSS Custom Properties (Variables)
+
+CSS Custom Properties, also known as CSS Variables, allow you to define
+reusable values throughout your stylesheet. The
+var() function is used to insert the value of a custom
+property.
+
+**Defining a custom property:**
+--property-name: value; (usually defined within a
+`:root` selector for global scope, or a specific element for
+local scope).
+
+**Using a custom property:**
+property: var(--property-name, fallback_value);
+
+* Custom property names are case-sensitive and must start with two
+  hyphens (`--`).
+* The optional fallback value is used if the custom property is not
+  defined.
+* Great for theming, maintaining consistent spacing/sizing, and reducing
+  repetition.
+
+This box uses `var()` for background, text color, padding,
+and border color (with a fallback for border).
+
+```css
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --base-font-size: 16px;
+  --standard-margin: 1.5rem;
+}
+
+body {
+  font-size: var(--base-font-size);
+  color: var(--text-color, #222); /* Fallback if --text-color isn't set */
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5em 1em;
+  margin-bottom: var(--standard-margin);
+  border: 1px solid var(--primary-color);
+}
+
+.button-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+```
+
+CSS variables are subject to the cascade and inheritance. You can
+override them within more specific selectors.
+
+## 3. attr() - Accessing Attribute Values
+
+The attr() CSS function is used to retrieve the value of an
+attribute of the selected element and use it in the stylesheet.
+Historically, its primary use has been with the
+content property in pseudo-elements.
+
+**Syntax:**
+`property: attr(attribute-name <type-or-unit>? [,
+<fallback>]? );`
+
+* **attribute-name**: The name of the HTML attribute (e.g.,
+  data-tooltip, href).
+* `<type-or-unit>`: (CSS Values and Units Level 4,
+  experimental for properties other than content) Specifies
+  the type of the attribute value (e.g., string,
+  color, url, integer,
+  length). For content, it's implicitly
+  string.
+* `<fallback>`: (Also experimental for properties other
+  than `content`) A fallback value if the attribute is
+  missing or invalid.
+
+Some content here. The label "Info:" is from data-label.
+
+More text.
+
+Color?
+
+```css
+/* Common use: Displaying attribute content */
+a[href]::after {
+  content: " (" attr(href) ")"; /* Shows the URL in parentheses after the link text */
+  font-size: 0.8em;
+  color: gray;
+}
+
+/* Using data attributes for tooltips (simplified) */
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  /* ... other styling for tooltip ... */
+  display: none; /* Shown on hover typically */
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+[data-tooltip]:hover::after {
+  display: block;
+}
+
+/* Experimental usage (CSS Values and Units Level 4 - support varies):
+.element {
+  width: attr(data-width px, 100px); /* Use data-width as px, fallback to 100px */
+  color: attr(data-color color, black); /* Use data-color as a color type */
+}
+*/
+```
+
+**Current Support for `attr()`:** While
+`attr()` works reliably for the `content` property
+to return string values, its use with other properties and with
+type/unit conversions (like `attr(data-width px)` or
+`attr(data-color color)`) is still largely experimental and
+not widely supported across all browsers. Always check
+[caniuse.com](https://caniuse.com/?search=attr())
+for current browser compatibility.
+
+{/* // import Quiz from '../../../components/Quiz'
+// import cssMCQs from '../quiz-data/css_functions.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

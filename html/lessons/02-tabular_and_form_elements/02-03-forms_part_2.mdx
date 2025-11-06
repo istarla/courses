@@ -1,0 +1,1079 @@
+# HTML Forms - Part 2
+
+## More Form Elements
+<section id="more-form-elements" />
+
+Let's explore more essential elements used to build versatile and
+user-friendly forms.
+
+### The `<textarea>` Element
+
+Used for multi-line text input, suitable for longer messages, comments,
+or descriptions. Unlike `<input>`, it's not an empty
+element; any text between `<textarea>` and
+`</textarea>` becomes its default content.
+
+* **`name`:** Specifies the name sent to the server.
+* **`id`:** For associating labels.
+* **`rows`:** Suggests the visible number of text lines (height).
+* **`cols`:** Suggests the visible width in average character widths. (Note: CSS
+  is generally preferred for controlling exact dimensions).
+* **`required`:** Makes input mandatory.
+* **`placeholder`:** Provides a hint.
+
+*Sample Code*
+```html
+<label for="comment_box">Your Comment:</label>
+<textarea id="comment_box" name="comment" rows="5" cols="40" placeholder="Enter your feedback here..." required></textarea>
+```
+**Output:**
+<div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
+  <label
+  htmlFor="comment_box"
+  style={{
+    display: "block",
+    marginBottom: "0.3rem",
+    fontWeight: "bold",
+    color: "#374151",
+  }}
+>
+  Your Comment:
+</label>
+
+<textarea
+  id="comment_box"
+  name="comment"
+  rows="5"
+  cols="40"
+  placeholder="Enter your feedback here..."
+  required
+  style={{
+    width: "100%",
+    border: "1px solid #d1d5db",
+    borderRadius: "4px",
+    padding: "0.5rem 0.8rem",
+    fontSize: "1rem",
+    boxSizing: "border-box",
+  }}
+></textarea>
+</div>
+
+### The `<select>` Element (Dropdown Lists)
+
+Creates a dropdown list allowing users to choose one or more options
+from a predefined list.
+
+* **`<select>`:** The container element. Requires `name` and
+  `id` attributes.
+  + **`multiple`:** Boolean attribute allowing selection of
+    multiple options (usually requires holding Ctrl/Cmd while
+    clicking).
+  + **`size`:** Specifies the number of visible options in the
+    list (creates a scroll box instead of a dropdown if > 1).
+* **`<option>`:** Defines an individual item within the dropdown list.
+  + **`value`:** The value sent to the server if this option is
+    selected. **Crucial attribute.** If omitted, the text
+    content of the option is sent.
+  + **`selected`:** Boolean attribute to pre-select this option
+    by default.
+  + The text content between `<option>` and
+    `</option>` is what the user sees in the list.
+* **`<optgroup>`:** Used to group related options within a dropdown list. Requires a
+  `label` attribute which provides the heading for the group
+  (this heading is not selectable).
+
+*Sample Code*
+```html
+<label for="country_select">Choose your country:</label>
+<select id="country_select" name="country">
+  <option value="">--Please choose an option--</option> <!-- Placeholder option -->
+  <optgroup label="North America">
+    <option value="US">United States</option>
+    <option value="CA">Canada</option>
+    <option value="MX">Mexico</option>
+  </optgroup>
+  <optgroup label="Europe">
+    <option value="GB" selected>United Kingdom</option> <!-- Pre-selected -->
+    <option value="DE">Germany</option>
+    <option value="FR">France</option>
+  </optgroup>
+</select>
+```
+
+**Output:**
+<div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
+  <label
+  htmlFor="country_select"
+  style={{
+    display: "block",
+    marginBottom: "0.3rem",
+    fontWeight: "bold",
+    color: "#374151",
+  }}
+>
+  Choose your country:
+</label>
+
+<select
+  id="country_select"
+  name="country"
+  defaultValue="GB" 
+  style={{
+    padding: "0.5rem 0.8rem",
+    border: "1px solid #d1d5db",
+    borderRadius: "4px",
+    fontSize: "1rem",
+    width: "100%",
+    boxSizing: "border-box",
+  }}
+>
+  <option value="">--Please choose an option--</option>
+  <optgroup label="North America">
+    <option value="US">United States</option>
+    <option value="CA">Canada</option>
+    <option value="MX">Mexico</option>
+  </optgroup>
+  <optgroup label="Europe">
+    <option value="GB">United Kingdom</option>
+    <option value="DE">Germany</option>
+    <option value="FR">France</option>
+  </optgroup>
+</select>
+</div>
+
+### The `<button>` Element
+
+Offers more flexibility than `<input type="button">`,
+`<input type="submit">`, or
+`<input type="reset">` because you can include HTML
+content (like images or text formatting) inside it.
+
+* **`type`:** Specifies the button's behavior:
+  + **`submit`**(Default): Submits the form
+    data. Acts like `<input type="submit">`.
+  + **`reset`:** Resets the form controls. Acts like
+    `<input type="reset">`.
+  + **`button`:** A clickable button with no default behavior. Typically used
+    with JavaScript to trigger custom actions.
+* **`name` / `value`:** Can be included. If a submit button has a `name` and
+  `value`, these are sent with the form data, which can be
+  useful if you have multiple submit buttons and need to know which one
+  was clicked.
+
+*Sample Code*
+```html
+<button type="submit" name="action" value="save">
+  <!-- You can add icons/images here -->
+  <img src="save-icon.png" alt="" width="16" height="16"> <strong>Save</strong> Draft
+</button>
+
+<button type="reset">Clear All</button>
+
+<button type="button" onclick="alert('Hello!');">Click Me (JS)</button>
+```
+**Output:**
+<div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
+  <form
+  onSubmit={(e) => {
+    e.preventDefault();
+    alert("Form submitted successfully!");
+    e.target.reset(); // clears all inputs
+  }}
+  style={{
+    padding: "20px",
+    maxWidth: "500px",
+    margin: "auto",
+    border: "1px solid #e5e7eb",
+    borderRadius: "8px",
+  }}
+>
+  <h2 style={{ marginBottom: "1rem", color: "#1f2937" }}>Demo Form</h2>
+
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="name"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "bold",
+        color: "#374151",
+      }}
+    >
+      Name:
+    </label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      placeholder="Enter your name"
+      style={{
+        padding: "0.5rem 0.8rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    />
+  </div>
+
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="message"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "bold",
+        color: "#374151",
+      }}
+    >
+      Message:
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      placeholder="Type your message..."
+      required
+      style={{
+        width: "100%",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        padding: "0.5rem 0.8rem",
+        fontSize: "1rem",
+        boxSizing: "border-box",
+      }}
+    ></textarea>
+  </div>
+
+  {/* Responsive Button Group */}
+  <div
+    style={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "0.5rem",
+      marginTop: "1rem",
+    }}
+  >
+    {/* Save Button */}
+    <button
+      type="submit"
+      name="action"
+      value="save"
+      style={{
+        flex: "1 1 150px",
+        padding: "0.6rem 1rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "6px",
+        fontSize: "1rem",
+        backgroundColor: "#2563eb",
+        color: "white",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "0.4rem",
+        transition: "background-color 0.2s",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#1d4ed8")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+    >
+      <img src="save-icon.png" alt="" width="16" height="16" />
+      <strong>Save</strong> Draft
+    </button>
+
+    {/* Clear Button */}
+    <button
+      type="reset"
+      style={{
+        flex: "1 1 150px",
+        padding: "0.6rem 1rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "6px",
+        fontSize: "1rem",
+        backgroundColor: "#6b7280",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#4b5563")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#6b7280")}
+    >
+      Clear All
+    </button>
+
+    {/* Click Me (JS) Button */}
+    <button
+      type="button"
+      onClick={() => alert("Hello! 👋")}
+      style={{
+        flex: "1 1 150px",
+        padding: "0.6rem 1rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "6px",
+        fontSize: "1rem",
+        backgroundColor: "#10b981",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#059669")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#10b981")}
+    >
+      Click Me (JS)
+    </button>
+  </div>
+</form>
+</div>
+
+(Note: The `onclick` attribute is a simple way to add
+JavaScript, but more complex interactions are better handled in separate
+script files).
+
+### The `<fieldset>` and `<legend>` Elements
+
+Used to group related controls within a form, visually and semantically.
+
+* **`<fieldset>`:** Draws a box (border) around the grouped elements. Helps organize
+  complex forms.
+* **`<legend>`:** Provides a caption or title for the `<fieldset>`.
+  It should be the first child of the `<fieldset>`.
+  Improves accessibility by clearly labeling the group.
+
+*Sample Code*
+```html
+<fieldset>
+  <legend>Contact Information</legend>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email"><br>
+
+  <label for="phone">Phone:</label>
+  <input type="tel" id="phone" name="phone"> <!-- type="tel" is another input type -->
+</fieldset>
+```
+**Output:**
+<fieldset
+  style={{
+    border: "2px solid #d1d5db",
+    borderRadius: "8px",
+    padding: "1rem",
+    maxWidth: "400px",
+    margin: "auto",
+  }}
+>
+  <legend
+    style={{
+      fontWeight: "bold",
+      padding: "0 0.5rem",
+      color: "#1f2937",
+    }}
+  >
+    Contact Information
+  </legend>
+
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="email"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "500",
+        color: "#374151",
+      }}
+    >
+      Email:
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Enter your email"
+      style={{
+        width: "100%",
+        padding: "0.5rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        boxSizing: "border-box",
+      }}
+    />
+  </div>
+
+  <div>
+    <label
+      htmlFor="phone"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "500",
+        color: "#374151",
+      }}
+    >
+      Phone:
+    </label>
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      placeholder="Enter your phone number"
+      style={{
+        width: "100%",
+        padding: "0.5rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        boxSizing: "border-box",
+      }}
+    />
+  </div>
+</fieldset>
+
+
+## Other Useful Input Types (HTML5)
+<section id="other-useful-input-types" />
+
+HTML5 introduced several new input types that provide better user
+experiences and built-in browser validation:
+
+* **`type="number"`:** For numerical input. Browsers often display spinner controls
+  (up/down arrows). Attributes like `min`, `max`,
+  and `step` can be used for constraints.
+* **`type="date"`**, **`type="month"`**, **`type="week"`**, **`type="time"`**, **`type="datetime-local"`**: Provide specialized controls for picking dates and times, often
+  showing a calendar or time picker interface. Browser support and
+  appearance vary.
+* **`type="range"`:** Displays as a slider control for selecting a value within a defined
+  range (using `min`, `max`,
+  `step` attributes).
+* **`type="color"`:** Provides a color picker interface.
+* **`type="url"`:** For web addresses. Provides validation for URL format.
+* **`type="tel"`:** For telephone numbers. Doesn't enforce a strict format (as formats
+  vary widely) but can trigger numeric keypads on mobile devices.
+* **`type="search"`:** Functionally similar to `text`, but browsers might style
+  it differently (e.g., adding a clear 'x' icon) and it indicates
+  semantic purpose.
+
+## Examples
+<section id="examples" />
+
+### Example 1: Registration Form with Fieldset, Select, Textarea
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+     <style>
+        /* Basic Form Styling Copied Here for Demo */
+        body { padding: 20px; max-width: 600px; margin: auto; font-family: sans-serif; color: #1f2937;}
+        form div, fieldset div { margin-bottom: 1rem; } label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #374151; }
+        input[type="text"], input[type="email"], input[type="password"], textarea, select, button { padding: 0.5rem 0.8rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; width: calc(100% - 1.8rem); box-sizing: border-box; max-width: 400px;}
+        textarea { min-height: 80px; } button { background-color: #2563eb; color: white; cursor: pointer; transition: background-color 0.2s; width: auto; margin-top: 0.5rem; } button:hover { background-color: #1d4ed8; }
+        fieldset { border: 1px solid #d1d5db; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; max-width: 450px;} legend { font-weight: bold; margin-bottom: 0.5rem; color: #374151; padding: 0 0.5rem;}
+    </style>
+</head>
+<body>
+    <h1>Create Account</h1>
+    <form action="/register" method="post">
+        <fieldset>
+            <legend>Login Credentials</legend>
+            <div>
+                <label for="reg_email">Email:</label>
+                <input type="email" id="reg_email" name="email" required>
+            </div>
+             <div>
+                <label for="reg_pass">Password:</label>
+                <input type="password" id="reg_pass" name="password" required minlength="8"> <!-- Added minlength -->
+            </div>
+        </fieldset>
+
+        <fieldset>
+             <legend>Personal Information</legend>
+            <div>
+                <label for="reg_country">Country:</label>
+                <select id="reg_country" name="country" required>
+                    <option value="">Select...</option>
+                    <option value="IN">India</option>
+                    <option value="US">United States</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+             <div>
+                <label for="reg_bio">Short Bio:</label>
+                <textarea id="reg_bio" name="bio" rows="4" placeholder="Tell us a bit about yourself..."></textarea>
+            </div>
+        </fieldset>
+
+         <div>
+             <!-- Using button element for submit -->
+             <button type="submit">Register Account</button>
+        </div>
+    </form>
+</body>
+</html>
+```
+**Output**
+<form
+  onSubmit={(e) => {
+    e.preventDefault();
+    e.target.reset();
+  }}
+  style={{
+    padding: "20px",
+    maxWidth: "600px",
+    margin: "auto",
+    fontFamily: "sans-serif",
+    color: "#1f2937",
+  }}
+>
+  <h1 style={{ textAlign: "center", marginBottom: "1.5rem" }}>Create Account</h1>
+
+  {/* Login Credentials */}
+  <fieldset
+    style={{
+      border: "1px solid #d1d5db",
+      padding: "1rem",
+      borderRadius: "4px",
+      marginBottom: "1rem",
+      maxWidth: "450px",
+    }}
+  >
+    <legend
+      style={{
+        fontWeight: "bold",
+        marginBottom: "0.5rem",
+        color: "#374151",
+        padding: "0 0.5rem",
+      }}
+    >
+      Login Credentials
+    </legend>
+
+    <div style={{ marginBottom: "1rem" }}>
+      <label
+        htmlFor="reg_email"
+        style={{
+          display: "block",
+          marginBottom: "0.3rem",
+          fontWeight: "bold",
+          color: "#374151",
+        }}
+      >
+        Email:
+      </label>
+      <input
+        type="email"
+        id="reg_email"
+        name="email"
+        required
+        style={{
+          padding: "0.5rem 0.8rem",
+          border: "1px solid #d1d5db",
+          borderRadius: "4px",
+          fontSize: "1rem",
+          width: "100%",
+          boxSizing: "border-box",
+          maxWidth: "400px",
+        }}
+      />
+    </div>
+
+    <div>
+      <label
+        htmlFor="reg_pass"
+        style={{
+          display: "block",
+          marginBottom: "0.3rem",
+          fontWeight: "bold",
+          color: "#374151",
+        }}
+      >
+        Password:
+      </label>
+      <input
+        type="password"
+        id="reg_pass"
+        name="password"
+        required
+        minLength="8"
+        style={{
+          padding: "0.5rem 0.8rem",
+          border: "1px solid #d1d5db",
+          borderRadius: "4px",
+          fontSize: "1rem",
+          width: "100%",
+          boxSizing: "border-box",
+          maxWidth: "400px",
+        }}
+      />
+    </div>
+  </fieldset>
+
+  {/* Personal Information */}
+  <fieldset
+    style={{
+      border: "1px solid #d1d5db",
+      padding: "1rem",
+      borderRadius: "4px",
+      marginBottom: "1rem",
+      maxWidth: "450px",
+    }}
+  >
+    <legend
+      style={{
+        fontWeight: "bold",
+        marginBottom: "0.5rem",
+        color: "#374151",
+        padding: "0 0.5rem",
+      }}
+    >
+      Personal Information
+    </legend>
+
+    <div style={{ marginBottom: "1rem" }}>
+      <label
+        htmlFor="reg_country"
+        style={{
+          display: "block",
+          marginBottom: "0.3rem",
+          fontWeight: "bold",
+          color: "#374151",
+        }}
+      >
+        Country:
+      </label>
+      <select
+        id="reg_country"
+        name="country"
+        required
+        style={{
+          padding: "0.5rem 0.8rem",
+          border: "1px solid #d1d5db",
+          borderRadius: "4px",
+          fontSize: "1rem",
+          width: "100%",
+          boxSizing: "border-box",
+          maxWidth: "400px",
+        }}
+      >
+        <option value="">Select...</option>
+        <option value="IN">India</option>
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="OTHER">Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label
+        htmlFor="reg_bio"
+        style={{
+          display: "block",
+          marginBottom: "0.3rem",
+          fontWeight: "bold",
+          color: "#374151",
+        }}
+      >
+        Short Bio:
+      </label>
+      <textarea
+        id="reg_bio"
+        name="bio"
+        rows="4"
+        placeholder="Tell us a bit about yourself..."
+        style={{
+          padding: "0.5rem 0.8rem",
+          border: "1px solid #d1d5db",
+          borderRadius: "4px",
+          fontSize: "1rem",
+          width: "100%",
+          boxSizing: "border-box",
+          maxWidth: "400px",
+          minHeight: "80px",
+        }}
+      ></textarea>
+    </div>
+  </fieldset>
+
+  {/* Submit Button */}
+  <div>
+    <button
+      type="submit"
+      style={{
+        backgroundColor: "#2563eb",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+        width: "auto",
+        marginTop: "0.5rem",
+        padding: "0.5rem 1rem",
+        border: "none",
+        borderRadius: "4px",
+        fontSize: "1rem",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#1d4ed8")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+    >
+      Register Account
+    </button>
+  </div>
+</form>
+
+
+### Example 2: Using HTML5 Input Types (Number, Date, Range)
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Inputs</title>
+     <style>
+        /* Basic Form Styling Copied Here for Demo */
+         body { padding: 20px; max-width: 600px; margin: auto; font-family: sans-serif; color: #1f2937;}
+        form div { margin-bottom: 1rem; } label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #374151; }
+        input[type="number"], input[type="date"], input[type="range"], input[type="submit"] { padding: 0.5rem 0.8rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; width: calc(100% - 1.8rem); box-sizing: border-box; max-width: 300px;}
+        input[type="range"] { padding: 0; height: auto; } /* Adjust range input padding */
+        input[type="submit"] { background-color: #2563eb; color: white; cursor: pointer; transition: background-color 0.2s; width: auto; margin-top: 0.5rem; } input[type="submit"]:hover { background-color: #1d4ed8; }
+        output { display: inline-block; margin-left: 10px; font-weight: bold; color: #1d4ed8;}
+    </style>
+</head>
+<body>
+    <h1>Booking Details</h1>
+    <form action="/booking" method="post">
+        <div>
+            <label for="num_guests">Number of Guests:</label>
+            <input type="number" id="num_guests" name="guests" min="1" max="10" value="2" required>
+        </div>
+        <div>
+            <label for="checkin_date">Check-in Date:</label>
+            <input type="date" id="checkin_date" name="checkin" required>
+        </div>
+        <div>
+            <label for="satisfaction">Satisfaction (1-10):</label>
+            <input type="range" id="satisfaction" name="rating" min="1" max="10" step="1" value="5"
+                   oninput="this.nextElementSibling.value = this.value"> <!-- Simple JS to display value -->
+            <output>5</output>
+        </div>
+        <div>
+            <input type="submit" value="Submit Booking">
+        </div>
+    </form>
+
+</body>
+</html>
+```
+**Output:**
+<form
+  onSubmit={(e) => {
+    e.preventDefault();
+    e.target.reset();
+    alert("Booking details submitted!");
+  }}
+  style={{
+    padding: "20px",
+    maxWidth: "600px",
+    margin: "auto",
+    fontFamily: "sans-serif",
+    color: "#1f2937",
+  }}
+>
+  <h1 style={{ marginBottom: "1.5rem" }}>Booking Details</h1>
+
+  {/* Number of Guests */}
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="num_guests"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "bold",
+        color: "#374151",
+      }}
+    >
+      Number of Guests:
+    </label>
+    <input
+      type="number"
+      id="num_guests"
+      name="guests"
+      min="1"
+      max="10"
+      defaultValue="0"
+      required
+      style={{
+        padding: "0.5rem 0.8rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        width: "100%",
+        boxSizing: "border-box",
+        maxWidth: "300px",
+      }}
+    />
+  </div>
+
+  {/* Check-in Date */}
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="checkin_date"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "bold",
+        color: "#374151",
+      }}
+    >
+      Check-in Date:
+    </label>
+    <input
+      type="date"
+      id="checkin_date"
+      name="checkin"
+      required
+      style={{
+        padding: "0.5rem 0.8rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        width: "100%",
+        boxSizing: "border-box",
+        maxWidth: "300px",
+      }}
+    />
+  </div>
+
+  {/* Satisfaction Range */}
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="satisfaction"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "bold",
+        color: "#374151",
+      }}
+    >
+      Satisfaction (1-10):
+    </label>
+
+    <div>
+      <input
+        type="range"
+        id="satisfaction"
+        name="rating"
+        min="1"
+        max="10"
+        step="1"
+        defaultValue="5"
+        onInput={(e) =>
+          (document.getElementById("satisfaction_value").textContent =
+            e.target.value)
+        }
+        style={{
+          width: "100%",
+          maxWidth: "300px",
+          marginRight: "10px",
+        }}
+      />
+      <output id="satisfaction_value" style={{ fontWeight: "bold", color: "#1d4ed8" }}>
+        5
+      </output>
+    </div>
+  </div>
+
+  {/* Submit Button */}
+  <div>
+    <input
+      type="submit"
+      value="Submit Booking"
+      style={{
+        backgroundColor: "#2563eb",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+        width: "auto",
+        marginTop: "0.5rem",
+        padding: "0.5rem 1rem",
+        border: "none",
+        borderRadius: "4px",
+        fontSize: "1rem",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#1d4ed8")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+    />
+  </div>
+</form>
+
+### Example 3: Multi-Select and Button Types
+*Sample Code*
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-Select & Buttons</title>
+    <style>
+        /* Basic Form Styling Copied Here for Demo */
+        body { padding: 20px; max-width: 600px; margin: auto; font-family: sans-serif; color: #1f2937;}
+        form div { margin-bottom: 1rem; } label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #374151; }
+        select[multiple], button { padding: 0.5rem 0.8rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 1rem; width: calc(100% - 1.8rem); box-sizing: border-box; max-width: 300px;}
+        select[multiple] { height: 100px; } /* Give multi-select height */
+        button { background-color: #2563eb; color: white; cursor: pointer; transition: background-color 0.2s; width: auto; margin-top: 0.5rem; margin-right: 0.5rem;} button:hover { background-color: #1d4ed8; }
+        button[type="reset"] { background-color: #6b7280;} button[type="reset"]:hover { background-color: #4b5563;}
+        button[type="button"] { background-color: #10b981;} button[type="button"]:hover { background-color: #059669;}
+    </style>
+</head>
+<body>
+    <h1>Preferences</h1>
+    <form action="/prefs" method="post">
+        <div>
+            <label for="topics">Select interesting topics (Ctrl/Cmd + Click):</label>
+            <select id="topics" name="interested_topics" multiple size="5">
+                <option value="tech">Technology</option>
+                <option value="science">Science</option>
+                <option value="art">Art & Design</option>
+                <option value="sports">Sports</option>
+                <option value="music">Music</option>
+                <option value="travel">Travel</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" name="save_action" value="final">Save Preferences</button>
+            <button type="reset">Reset Choices</button>
+            <button type="button" onclick="alert('Checking for updates... (not really!)')">Check Updates</button>
+        </div>
+    </form>
+</body>
+</html>
+```
+**Output:**
+<form
+  onSubmit={(e) => {
+    e.preventDefault();
+    e.target.reset();
+    alert("Preferences saved successfully!");
+  }}
+  style={{
+    padding: "20px",
+    maxWidth: "600px",
+    margin: "auto",
+    fontFamily: "sans-serif",
+    color: "#1f2937",
+  }}
+>
+  <h1 style={{ marginBottom: "1.5rem" }}>Preferences</h1>
+
+  {/* Multi-select topics */}
+  <div style={{ marginBottom: "1rem" }}>
+    <label
+      htmlFor="topics"
+      style={{
+        display: "block",
+        marginBottom: "0.3rem",
+        fontWeight: "bold",
+        color: "#374151",
+      }}
+    >
+      Select interesting topics (Ctrl/Cmd + Click):
+    </label>
+    <select
+      id="topics"
+      name="interested_topics"
+      multiple
+      size="5"
+      style={{
+        padding: "0.5rem 0.8rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        width: "100%",
+        maxWidth: "300px",
+        boxSizing: "border-box",
+        height: "100px",
+      }}
+    >
+      <option value="tech">Technology</option>
+      <option value="science">Science</option>
+      <option value="art">Art & Design</option>
+      <option value="sports">Sports</option>
+      <option value="music">Music</option>
+      <option value="travel">Travel</option>
+    </select>
+  </div>
+
+  {/* Buttons */}
+  <div>
+    <button
+      type="submit"
+      name="save_action"
+      value="final"
+      style={{
+        backgroundColor: "#2563eb",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+        padding: "0.5rem 0.8rem",
+        border: "none",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        marginRight: "0.5rem",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#1d4ed8")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#2563eb")}
+    >
+      Save Preferences
+    </button>
+
+    <button
+      type="reset"
+      style={{
+        backgroundColor: "#6b7280",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+        padding: "0.5rem 0.8rem",
+        border: "none",
+        borderRadius: "4px",
+        fontSize: "1rem",
+        marginRight: "0.5rem",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#4b5563")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#6b7280")}
+    >
+      Reset Choices
+    </button>
+
+    <button
+      type="button"
+      onClick={() => alert("Checking for updates... (not really!)")}
+      style={{
+        backgroundColor: "#10b981",
+        color: "white",
+        cursor: "pointer",
+        transition: "background-color 0.2s",
+        padding: "0.5rem 0.8rem",
+        border: "none",
+        borderRadius: "4px",
+        fontSize: "1rem",
+      }}
+      onMouseOver={(e) => (e.target.style.backgroundColor = "#059669")}
+      onMouseOut={(e) => (e.target.style.backgroundColor = "#10b981")}
+    >
+      Check Updates
+    </button>
+  </div>
+</form>
+
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from '../../../components/quiz';
+import formsPart2Quiz from '../../data/forms_part2_quizData';
+
+<Quiz questions={formsPart2Quiz} />

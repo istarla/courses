@@ -1,0 +1,225 @@
+# Basic HTML Structure
+
+## Anatomy of an HTML Element
+<section-anchor id="anatomy-of-an-html-element" />
+
+As we touched upon before, an HTML element usually consists of a
+start tag, content, and an end tag. Let's delve deeper into this:
+
+* Start Tag: It marks the beginning
+  of an element and is enclosed in angle brackets (e.g.,
+  `<p>`).
+* Content: This is the information
+  that appears between the start and end tags (e.g., "This is a
+  paragraph.").
+* End Tag: It marks the end of an
+  element. End tags look like start tags but have a forward slash before
+  the element name (e.g., `</p>`).
+
+For example, in `<h1>My Main Title</h1>`,
+`<h1>` is the start tag, "My Main Title" is the
+content, and `</h1>` is the end tag.
+
+## Nesting HTML Elements
+<section-anchor id="nesting-html-elements" />
+
+HTML elements can be nested within each other. This means you can have
+one element inside another. Proper nesting is crucial for the browser to
+correctly interpret your HTML structure.
+
+*Sample Code*
+```html
+<div style="border:1px solid blue;">
+    <p>This paragraph is inside a <strong>div</strong> element.</p>
+</div>
+```
+**Output:**
+<div style={{border:"1px solid blue"}}>
+    <p>This paragraph is inside a <strong>div</strong> element.</p>
+</div>
+<br/>
+
+In this example, the `<p>` element and the
+`<strong>` element are nested within the
+`<div>` element. It's important to close the inner
+elements before closing the outer ones. Incorrect nesting can lead to
+unexpected behavior and make your HTML harder to read and maintain.
+
+*Sample Code*
+```html
+<!-- Incorrect Nesting -->
+<p><strong>This is bold text.</p></strong>
+
+<!-- Correct Nesting -->
+<p><strong>This is bold text.</strong></p>
+```
+**Output:**
+<p><strong>This is bold text.</strong></p>
+<p><strong>This is bold text.</strong></p>
+
+Note: Both examples may look the same when rendered because browsers
+automatically fix invalid nesting.
+However, the first example is not valid HTML — it breaks the
+logical tag structure. Always close inner elements before closing the
+outer ones to ensure cleaner, predictable, and accessible HTML.
+
+## Block-Level vs. Inline Elements
+<section-anchor id="block-level-vs-inline-elements" />
+
+HTML elements can be categorized into two main types based on how they
+behave in terms of layout: block-level and inline elements.
+
+### Block-Level Elements
+<section-anchor id="block-level-elements" />
+
+* Block-level elements always start on a new line and take up the full
+  width available (stretching out to the left and right as far as they
+  can).
+* They can contain both inline and other block-level elements.
+* Examples of common block-level elements include:
+  `<div>`, `<p>`,
+  `<h1>` to `<h6>`,
+  `<ul>`, `<ol>`,
+  `<li>`, `<form>`,
+  `<header>`, `<footer>`,
+  `<section>`.
+
+*Sample Code*
+```html
+<div style="border: 1px solid red;">This is a block-level div.</div>
+<p style="border: 1px solid green;">This is a block-level paragraph.</p>
+```
+**Output:**
+<div style={{ border: "1px solid red" }}>This is a block-level div.</div>
+<p style={{ border: "1px solid green" }}>This is a block-level paragraph.</p>
+
+
+### Inline Elements
+<section-anchor id="inline-elements" />
+
+* Inline elements do not start on a new line and only take up as much
+  width as necessary.
+* They typically contain only data or other inline elements.
+* Examples of common inline elements include: `<span>`,
+  `<a>`, `<strong>`,
+  `<em>`, `<img>`,
+  `<input>`, `<textarea>`,
+  `<select>`.
+
+*Sample Code*
+```html
+<span style="border: 1px solid blue;">This is an inline span.</span>
+<strong style="border: 1px solid orange;">This is inline bold text.</strong>
+```
+<p>**Conceptual output:**</p>
+<span style={{border: "1px solid blue"}}>This is an inline span.</span>
+<strong style={{border: "1px solid orange"}}>This is inline bold text.</strong>
+
+Understanding the difference between block-level and inline elements is
+crucial for controlling the layout and structure of your web pages.
+
+## Attributes
+<section-anchor id="attributes" />
+
+Attributes provide extra information about HTML elements. They are
+always specified in the start tag. Attributes usually come in name/value
+pairs like: `name="value"`.
+
+* Common Attributes: Some common
+  attributes include `id` (to uniquely identify an element),
+  `class` (to classify elements), `style` (to add
+  inline styles), `src` (for images), `href` (for
+  links), and `alt` (for image descriptions).
+* Global Attributes: These are
+  attributes that can be used on almost any HTML element (e.g.,
+  `id`, `class`, `style`,
+  `title`, `lang`).
+
+*Sample Code*
+```html
+<p id="intro" class="main-paragraph" style="color: green;">This paragraph has an ID, a class, and inline styling.</p>
+<img src="image.jpg" alt="My Image" width="400">
+<a href="https://www.example.com" title="Go to Example.com">Visit Example</a>
+```
+<p>**output:**</p>
+<span id="intro" className="main-paragraph" style={{ color: "green" }}>This paragraph has an ID, a class, and inline styling.</span>
+
+<img src="/src/courses/assets/images/image3.webp" alt="My Image" width="400" />
+
+<a href="https://www.example.com" title="Go to Example.com">
+  Visit Example
+</a>
+
+
+## Comments in HTML
+<section-anchor id="comments-in-html" />
+
+HTML comments are used to insert explanatory notes in the code. They are
+ignored by the browser and are not displayed on the page. Comments are
+very useful for documenting your code and making it easier to
+understand.
+
+*Sample Code*
+```html
+<!-- This is an HTML comment -->
+<p>This paragraph is not a comment.</p>
+<!--
+    This is a
+    multi-line
+    HTML comment.
+-->
+```
+**Output:**
+<p>This paragraph is not a comment.</p>
+
+## Examples
+<section-anchor id="examples" />
+
+### Example 1: A Nested Structure
+*Sample Code*
+```html
+<article>
+    <h2>Article Title</h2>
+    <p>This is the main content of the article. <em>It includes emphasized text.</em></p>
+</article>
+```
+**Output:**
+<article>
+    <h2>Article Title</h2>
+    <p>This is the main content of the article. <em>It includes emphasized text.</em></p>
+</article>
+
+### Example 2: Block and Inline Elements
+*Sample Code*
+```html
+<div style="background-color: #eee; padding: 10px;">
+    This is a <span style="color: blue;">block-level</span> element containing an
+    <strong>inline</strong> element.
+</div>
+```
+<p>**output:**</p>
+<div style={{ backgroundColor: "#eee", padding: "10px" }}>
+  This is a <span style={{ color: "blue" }}>block-level</span> element containing an{" "}
+  <strong>inline</strong> element.
+</div>
+
+
+### Example 3: Using Attributes
+*Sample Code*
+```html
+<a href="https://www.w3schools.com" target="_blank">Visit W3Schools</a>
+<!--
+    - href: specifies the URL of the link.
+    - target="_blank": opens the link in a new tab.
+-->
+```
+<p>**output:**</p>
+<a href="https://www.w3schools.com" target="_blank">Visit W3Schools</a>
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import HTML_Basics_Quiz from "../../data/basic_html_structure_quizData"
+
+<Quiz questions = {HTML_Basics_Quiz} />

@@ -1,0 +1,200 @@
+# Pseudo-elements
+
+Pseudo-elements are keywords added to a selector that let you style a
+specific part of the selected element(s). For example, you can style the
+first letter or line of an element, or insert content before or after
+the content of an element. Pseudo-elements use a double colon
+(`::`) syntax (e.g., `::before`), although
+browsers also support the single colon syntax (`:before`) for
+backward compatibility with older pseudo-elements from CSS1 and CSS2.
+
+**`:` vs `::`:** The CSS3
+specification recommends using `::` for pseudo-elements to
+distinguish them from pseudo-classes (which use a single
+`:`). For older pseudo-elements like `:before`,
+`:after`, `:first-line`, and
+`:first-letter`, the single-colon syntax is still widely
+supported. However, for newer pseudo-elements like
+`::marker` or `::placeholder`, the double-colon
+syntax is required. It's generally good practice to use
+`::` for all pseudo-elements.
+
+## 1. ::first-line
+
+The `::first-line` pseudo-element applies styles to the first
+line of a block-level element. The length of the first line depends on
+many factors, including the width of the element, the width of the
+document, and the font size of the text.
+
+This is a paragraph of text. The first line of this paragraph will be
+styled differently than the rest of the text. This effect dynamically
+adjusts if the width of the container changes, causing the line breaks
+to shift.
+
+```css
+p::first-line {
+  font-weight: bold;
+  color: navy;
+  text-transform: uppercase;
+}
+```
+
+## 2. ::first-letter
+
+The `::first-letter` pseudo-element applies styles to the
+first letter of the first line of a block-level element, but only if
+it's not preceded by other content (such as images or inline tables) on
+its line.
+
+Once upon a time, in a land far, far away, there lived a web developer
+who loved CSS. They used pseudo-elements to create beautiful and
+engaging web pages.
+
+```css
+article p::first-letter {
+  font-size: 3em; /* Make the first letter much larger */
+  color: #8B0000; /* DarkRed */
+  float: left; /* Allows text to wrap around it */
+  margin-right: 0.1em;
+  line-height: 0.8; /* Adjust line height for better alignment */
+}
+```
+
+## 3. ::before and ::after
+
+The `::before` and `::after` pseudo-elements
+create a pseudo-element that is the first child (for
+`::before`) or last child (for `::after`) of the
+selected element. They are often used to add cosmetic content to an
+element, such as an icon or a text string, using the
+`content` property. The `content` property is
+required for these pseudo-elements to be rendered.
+
+These pseudo-elements are inline by default.
+
+This is an important piece of information.
+
+Read more on
+[Example.com](https://example.com). Another link
+[MDN Web Docs](https://developer.mozilla.org).
+
+```css
+.warning::before {
+  content: "⚠️ "; /* Adds a warning emoji before */
+}
+
+q::before {
+  content: open-quote; /* Inserts the appropriate opening quotation mark */
+}
+q::after {
+  content: close-quote; /* Inserts the appropriate closing quotation mark */
+}
+
+a.pdf-link::after {
+  content: " (PDF)";
+  font-size: 0.8em;
+  color: gray;
+}
+```
+
+Content inserted with `::before` and
+`::after` is generally not accessible to screen readers by
+default unless specific ARIA attributes are used, or if the content is
+purely decorative. Be mindful of accessibility when using them for
+crucial information.
+
+## 4. ::marker
+
+
+The `::marker` pseudo-element selects the marker box of a
+list item (`<li>`), which typically contains a bullet
+or number. It can be used to style the color, size, content (using
+`content` property), and other properties of the list marker.
+
+* First item with a styled marker.
+* Second item.
+
+1. Numbered item one.
+2. Numbered item two.
+
+```css
+ul li::marker {
+  color: green;
+  font-size: 1.2em;
+  /* content: "► "; You can change the marker symbol */
+}
+
+ol li::marker {
+  font-weight: bold;
+  color: purple;
+}
+```
+
+## 5. ::selection
+
+The `::selection` pseudo-element applies styles to the
+portion of a document that has been highlighted by the user (e.g., by
+clicking and dragging the mouse across text).
+
+Only a limited set of CSS properties can be used with
+`::selection`: `color`,
+`background-color`, `cursor`,
+`caret-color`, `outline`,
+`text-decoration`, `text-emphasis-color`, and
+`text-shadow`.
+
+Try selecting this text to see the custom selection style. It should
+have a yellow background and dark text when selected.
+
+```css
+::selection {
+  background-color: #ffcc00; /* Bright yellow background */
+  color: #333333; /* Dark text */
+}
+
+/* Firefox uses a separate pseudo-element */
+::-moz-selection {
+  background-color: #ffcc00;
+  color: #333333;
+}
+```
+
+## 6. ::placeholder
+
+
+The `::placeholder` pseudo-element styles the placeholder
+text in an input or textarea field. Placeholder text is usually
+displayed when the field is empty and loses focus.
+
+```css
+input::placeholder {
+  color: #9ca3af; /* gray-400 */
+  font-style: italic;
+  opacity: 0.8; /* Some browsers might need opacity for consistency */
+}
+
+/* For cross-browser compatibility, you might need vendor prefixes: */
+input::-webkit-input-placeholder { /* Chrome, Safari, Opera, Edge */
+  color: #9ca3af;
+  font-style: italic;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+  color: #9ca3af;
+  font-style: italic;
+  opacity: 1; /* Firefox applies a lower opacity by default */
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #9ca3af;
+  font-style: italic;
+}
+input::-ms-input-placeholder { /* Microsoft Edge (legacy) */
+  color: #9ca3af;
+  font-style: italic;
+}
+```
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/pseudo_elements.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

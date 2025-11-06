@@ -1,0 +1,299 @@
+# Border Properties
+
+Following our discussion on element dimensions, today we'll explore the
+CSS properties used to style the borders of an element. Borders are part
+of the box model, located between the padding and the margin. They can
+be styled in terms of width, style, and color.
+
+## Individual Border Properties
+
+You can control each aspect of the border (width, style, color)
+individually, and even for each side (top, right, bottom, left)
+separately.
+
+### border-width
+
+The `border-width` property sets the thickness of the border.
+It can take length values (e.g., px, em) or
+predefined keywords: thin, medium,
+thick.
+
+You can specify widths for individual sides:
+
+* border-top-width
+* border-right-width
+* border-bottom-width
+* border-left-width
+
+Shorthand for `border-width` (similar to padding/margin):
+
+*  border-width: value; (all four sides)
+*  border-width: top_bottom left_right;
+*  border-width: top right_left bottom;
+*  border-width: top right bottom left;
+
+      <div
+        class="example-box"
+        style="border-style: solid; border-color: green; border-width: thin"
+      >
+        thin width
+      </div>
+      <div
+        class="example-box"
+        style="
+          border-style: solid;
+          border-color: red;
+          border-top-width: 10px;
+          border-right-width: 2px;
+          border-bottom-width: 5px;
+          border-left-width: 1px;
+        "
+      >
+        Varied widths
+      </div>
+```css
+.box1 {
+  border-style: solid; /* Style must be set for width to show */
+  border-color: black;
+  border-width: 3px; /* 3px on all sides */
+}
+.box2 {
+  border-style: solid;
+  border-color: darkcyan;
+  border-width: 5px 10px; /* 5px top/bottom, 10px left/right */
+}
+.box3 {
+  border-style: dotted;
+  border-color: crimson;
+  border-top-width: 8px;
+  border-bottom-width: 2px;
+  /* right and left widths default or inherit */
+}
+```
+
+### border-style
+
+The `border-style` property sets the style of the border. A
+border style must be specified for the border to be visible (`border-width`
+and `border-color` have no effect if
+`border-style` is `none` or not set).
+
+Common values:
+
+* **none**: No border (default).
+* **hidden**: Same as `none`, except for border
+  conflict resolution in tables.
+* **solid**: A single, solid line.
+* **dotted**: A series of dots.
+* **dashed**: A series of short dashes.
+* **double**: Two parallel solid lines. The
+  `border-width` is the sum of the two lines and the space
+  between them.
+* **groove**: A 3D grooved effect. Depends on
+  `border-color`.
+* **ridge**: A 3D ridged effect. Depends on
+  `border-color`.
+* **inset**: A 3D inset effect. Depends on
+  `border-color`.
+* **outset**: A 3D outset effect. Depends on
+  `border-color`.
+
+Individual side styles (e.g., `border-top-style`) and
+shorthand (same as `border-width`) also apply.
+
+      <div
+        class="example-box"
+        style="border-width: 5px; border-color: teal; border-style: dotted"
+      >
+        dotted
+      </div>
+      <div
+        class="example-box"
+        style="border-width: 5px; border-color: orange; border-style: dashed"
+      >
+        dashed
+      </div>
+
+```css
+.solid-border {
+  border-width: 2px;
+  border-color: blue;
+  border-style: solid;
+}
+.mixed-styles {
+  border-width: 4px;
+  border-color: purple;
+  border-top-style: dotted;
+  border-right-style: dashed;
+  border-bottom-style: solid;
+  border-left-style: double;
+}
+```
+
+### border-color
+
+The `border-color` property sets the color of the border.
+Color values can be named colors, hex, RGB, HSL, etc.
+
+Individual side colors (e.g., border-top-color) and
+shorthand (same as border-width) also apply.
+
+      <div
+        class="example-box"
+        style="border-width: 5px; border-style: solid; border-color: tomato"
+      >
+        tomato
+      </div>
+      <div
+        class="example-box"
+        style="
+          border-width: 5px;
+          border-style: solid;
+          border-top-color: red;
+          border-right-color: green;
+          border-bottom-color: blue;
+          border-left-color: yellow;
+        "
+      >
+        Multi-color
+      </div>
+
+```css
+.primary-border {
+  border-width: 3px;
+  border-style: solid;
+  border-color: #3498db; /* A nice blue */
+}
+.gradient-effect-border { /* Note: True gradients on borders are more complex, often requiring pseudo-elements or background-clipping */
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: gold;
+  border-right-color: orangered;
+  border-bottom-color: crimson;
+  border-left-color: darkviolet;
+}
+```
+
+## Shorthand border Property
+
+The border property is a shorthand for setting
+border-width, border-style, and
+border-color for all four sides of an element at once.
+
+**Syntax:**
+border: [border-width] [border-style] [border-color];
+
+If border-color is omitted, it typically defaults to the
+element's text color.
+
+5px solid green
+
+thick dashed tomato
+
+```css
+.simple-border {
+  border: 1px solid #ccc; /* Common for subtle borders */
+}
+.fancy-border {
+  border: 4px outset darkorange;
+}
+.no-color-border {
+  color: blue; /* Text color */
+  border: 2px dotted; /* Border color will be blue */
+}
+```
+
+You can also set properties for individual sides using shorthand like
+border-top, border-right,
+border-bottom, and border-left.
+
+```css
+.top-only-border {
+  border-top: 3px solid red;
+  padding-top: 5px; /* Add padding so content isn't right against the border */
+}
+.left-emphasis-border {
+  border-left: 8px groove navy;
+  padding-left: 10px;
+}
+```
+
+border-top: 3px solid red;
+
+border-left: 8px groove navy;
+
+## border-radius
+
+The `border-radius` property is used to create rounded
+corners for an element's border. It can take one to four length or
+percentage values.
+
+* One value: all four corners.
+* Two values: top-left/bottom-right, top-right/bottom-left.
+* Three values: top-left, top-right/bottom-left, bottom-right.
+* Four values: top-left, top-right, bottom-right, bottom-left.
+
+You can also specify elliptical corners by providing two values
+separated by a slash (`/`) for horizontal and vertical radii
+(e.g., `border-top-left-radius: 20px / 10px;`).
+
+      <div
+        class="example-box"
+        style="
+          border: 3px solid #2ecc71;
+          border-radius: 15px;
+          line-height: normal;
+        "
+      >
+        <code>border-radius: 15px;</code>
+      </div>
+      <div
+        class="example-box"
+        style="
+          border: 3px solid #e74c3c;
+          border-radius: 50%;
+          line-height: 100px;
+        "
+      >
+        <code>border-radius: 50%;</code> (Circle if width=height)
+      </div>
+      <div
+        class="example-box"
+        style="
+          border: 3px solid #3498db;
+          border-top-left-radius: 25px;
+          border-bottom-right-radius: 25px;
+          line-height: normal;
+        "
+      >
+        Specific corners
+      </div>
+
+```css
+.rounded-corners {
+  border: 2px solid mediumvioletred;
+  padding: 20px;
+  border-radius: 10px; /* All corners 10px radius */
+}
+.pill-shape {
+  border: 2px solid darkslateblue;
+  padding: 10px 30px; /* More horizontal padding */
+  border-radius: 50px; /* Large enough value to make ends fully rounded */
+  display: inline-block; /* So it doesn't take full width */
+}
+.funky-radius {
+  border: 2px solid teal;
+  padding: 20px;
+  border-radius: 5px 20px 0 30px; /* TL, TR, BR, BL */
+}
+```
+
+**Creating Circles:** To create a perfect circle, use
+`border-radius: 50%;` on an element that has equal
+`width` and `height`.
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/border_properties.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

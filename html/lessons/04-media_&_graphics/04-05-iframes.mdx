@@ -1,0 +1,364 @@
+# IFrames
+
+## What is an Iframe?
+<section id="what-is-an-iframe" />
+
+An iframe (Inline Frame) is an HTML element,
+`<iframe>`, used to embed another HTML document within the current HTML document.
+Essentially, it allows you to load a separate webpage inside a
+rectangular region on your current page.
+
+Think of it like cutting a window in your current webpage and looking
+through that window at a completely different webpage. The content
+inside the iframe exists in its own Browse context, independent of the
+parent page (though limited interaction is possible via JavaScript under
+certain security conditions).
+
+Common uses for iframes include:
+
+* Embedding third-party content like YouTube videos, Google Maps, social
+  media widgets (like buttons or feeds).
+* Displaying advertisements from ad networks.
+* Integrating separate web applications or parts of applications.
+* Older uses included complex page layouts, but this is now discouraged
+  in favor of CSS.
+
+## The `<iframe>` Element and Attributes
+<section id="the-iframe-element-and-attributes" />
+
+The basic structure involves the `<iframe>` tag with
+several important attributes:
+
+```html
+<iframe src="url" width="600" height="400" title="Description of content">
+  Fallback content for browsers that do not support iframes.
+</iframe>
+```
+
+* **`src`:** (Required) Specifies the URL of the HTML document to embed in the
+  iframe. This can be a page on the same server (relative URL) or on a
+  completely different website (absolute URL).
+* **`width`:** Specifies the width of the iframe container in pixels or
+  percentage.
+* **`height`:** Specifies the height of the iframe container in pixels or
+  percentage.
+* **`title`:** (Strongly Recommended for Accessibility) Provides a descriptive
+  title for the iframe's content. Screen readers use this title to
+  inform users about the embedded content, allowing them to understand
+  its purpose and decide whether to interact with it.
+* **`name`:** Assigns a name to the iframe, which can be used as a target for
+  links (using the `target` attribute in
+  `<a>` tags) or for JavaScript interactions.
+* **`frameborder`** (Deprecated, use CSS):
+  Historically used to specify whether to display a border around the
+  iframe (`1` for yes, `0` for no). Use the CSS
+  `border` property instead.
+* **`allowfullscreen`** (Boolean): Allows the
+  iframe content (like a video player) to enter fullscreen mode.
+* **`loading="lazy"`** (Modern Browsers): Tells
+  the browser to defer loading the iframe content until the user scrolls
+  near it. Improves initial page load performance.
+* **`sandbox`:** Enables a set of extra restrictions on the content hosted by the
+  iframe for security purposes. Can restrict things like script
+  execution, form submission, popups, etc. Values specify exceptions
+  (e.g., `sandbox="allow-scripts allow-same-origin"`). Use
+  with care.
+* **`allow`:** Specifies a feature policy for the iframe, controlling which
+  browser features (like camera, microphone, geolocation, fullscreen)
+  are available to the embedded content.
+
+The content between `<iframe>` and
+`</iframe>` serves as fallback content for very old
+browsers or browsers with iframe support disabled.
+
+## Security Considerations
+<section id="security-considerations" />
+
+Iframes can pose security risks if not used carefully, primarily because
+they allow embedding content from potentially untrusted third-party
+sources.
+
+* **Clickjacking:** Malicious sites might try to load your
+  site in an invisible iframe and trick users into clicking buttons or
+  links on your site without realizing it. Server-side headers like
+  `X-Frame-Options` or
+  `Content-Security-Policy: frame-ancestors` can prevent your
+  site from being embedded in iframes on other domains.
+* **Cross-Site Scripting (XSS):** While the iframe content
+  runs in its own context, poorly configured interactions between the
+  parent page and iframe (via JavaScript) could potentially lead to
+  vulnerabilities if the embedded content is malicious.
+* **Sandboxing:** The `sandbox` attribute is a
+  powerful tool to mitigate risks by restricting the capabilities of the
+  embedded content.
+
+Generally, only embed content from trusted sources. When embedding
+third-party widgets (like YouTube), they usually provide the correct
+iframe code with appropriate security attributes already set.
+
+## Responsive Iframes
+<section id="responsive-iframes" />
+
+Making iframes responsive (so they resize nicely on different screen
+sizes while maintaining their aspect ratio) often requires a CSS trick,
+especially for content like videos. Since the iframe's content might not
+be inherently responsive, we often wrap the iframe in a container div
+and use padding to enforce the aspect ratio.
+
+```css
+/* CSS for a 16:9 aspect ratio container */
+.responsive-iframe-container {
+  position: relative; /* Establishes positioning context */
+  overflow: hidden;
+  padding-top: 56.25%; /* Height / Width = 9 / 16 = 0.5625 = 56.25% */
+}
+
+.responsive-iframe-container iframe {
+  position: absolute; /* Position iframe absolutely within the container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; /* Optional: remove default border */
+}
+```
+
+```html
+<!-- HTML -->
+<div class="responsive-iframe-container">
+  <iframe
+    src="your-video-or-map-url"
+    title="Descriptive Title"
+    allowfullscreen>
+  </iframe>
+</div>
+```
+**Output:**
+<div
+  style={{
+    position: "relative",
+    overflow: "hidden",
+    paddingTop: "56.25%", // 16:9 aspect ratio
+  }}
+>
+  <iframe
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+    title="Responsive Video"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: 0,
+    }}
+  ></iframe>
+</div>
+
+## Examples
+<section id="examples" />
+
+### Example 1: Embedding a YouTube Video
+
+YouTube provides ready-made iframe code via its "Share" -> "Embed"
+option.
+
+<div
+  style={{
+    position: 'relative',
+    overflow: 'hidden',
+    paddingTop: '56.25%',
+  }}
+>
+  <iframe
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=n3k0l4k9n3l1k9n3"
+    title="YouTube video player"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      border: 0,
+    }}
+  />
+</div>
+
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Embedding YouTube</title>
+    <style>
+       .responsive-iframe-container { position: relative; overflow: hidden; padding-top: 56.25%; /* 16:9 */ }
+       .responsive-iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    </style>
+</head>
+<body>
+    <h1>Embedded YouTube Video</h1>
+    <div class="responsive-iframe-container">
+        <!-- Example YouTube Embed Code (Replace with actual video ID) -->
+        <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=n3k0l4k9n3l1k9n3"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+    </div>
+</body>
+</html>
+```
+
+### Example 2: Embedding Google Maps
+
+
+<div
+  style={{
+    position: 'relative',
+    overflow: 'hidden',
+    paddingTop: '75%', // 4:3 aspect ratio
+  }}
+>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.374866794226!2d78.39839597493712!3d17.489609883415202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb91f70b12ce0b%3A0xacfdfc5be90df396!2sLogicWhile!5e0!3m2!1sen!2sin!4v1761205517233!5m2!1sen!2sin"
+    title="Google Map showing Monas"
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      border: 0,
+    }}
+  />
+</div>
+
+Google Maps also provides iframe code via its "Share" -> "Embed a map"
+option.
+
+* Step 1: Open Your Google Maps Link
+
+First, you need the location you want to embed. For example, use your Google Maps link:  
+
+👉 [Open Google Maps](https://maps.app.goo.gl/prMrQP9t81FNvgo89)  
+
+This will open the map of your current location in Google Maps.
+
+* Step 2: Get the Embed URL
+
+Follow these steps to get the embed link:
+
+1. Click the **Share** button on Google Maps.  
+2. Select the **“Embed a map”** tab in the popup.  
+3. Copy the iframe code shown, or at least the `src` URL.  
+4. Your embed URL will look something like this:
+
+```text
+https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!...etc...
+```
+* step 3: Use the Embed Code in Your HTML
+
+you can now use the iframe code in your HTML document as shown below:
+
+```html
+<iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322802!2d106.8195801147688!3d-6.194741995514041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sNational%20Monument%20(Monas)!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid"
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Google Map showing Monas">
+</iframe>
+```
+*Full Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Embedding Google Maps</title>
+    <style>
+        /* Adjust padding-top for map's typical aspect ratio if needed (e.g., 75% for 4:3) */
+       .responsive-iframe-container { position: relative; overflow: hidden; padding-top: 75%; /* 4:3 Aspect Ratio */ }
+       .responsive-iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    </style>
+</head>
+<body>
+    <h1>Embedded Google Map</h1>
+    <div class="responsive-iframe-container">
+        <!-- Example Google Maps Embed Code (Replace with actual map embed) -->
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322802!2d106.8195801147688!3d-6.194741995514041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sNational%20Monument%20(Monas)!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Google Map showing Monas">
+        </iframe>
+    </div>
+</body>
+</html>
+```
+
+### Example 3: Embedding a Page from the Same Site (with a fixed size)
+
+Embedding another simple HTML page from the same origin.
+
+<div
+  style={{
+    margin: '20px 0',
+    border: '1px solid navy',
+    width: '90%',
+    height: '400px',
+    overflow: 'hidden',
+  }}
+>
+  <iframe
+    src="day_1_introduction_to_html.html"
+    title="Day 1 HTML Course Content"
+    style={{
+      width: '100%',
+      height: '100%',
+      border: 0,
+    }}
+  >
+    Fallback content if iframes are not supported or the page doesn't load.  
+    You can view Day 1 content <a href="day_1_introduction_to_html.html">here</a>.
+  </iframe>
+</div>
+
+*Code*
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internal Iframe</title>
+    <style>
+        iframe { border: 1px solid navy; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Embedding Content from this Course</h1>
+    <p>Below is the content from Day 1:</p>
+
+    <iframe src="day_1_introduction_to_html.html" width="90%" height="400" title="Day 1 HTML Course Content">
+        Fallback content if iframes are not supported or the page doesn't load.
+        You can view Day 1 content <a href="day_1_introduction_to_html.html">here</a>.
+    </iframe>
+
+    <p>End of embedding section.</p>
+</body>
+</html>
+```
+
+## Test Your Knowledge
+<section id="test-your-knowledge" />
+
+import Quiz from "../../../components/quiz"
+import iframes_quizData from "../../data/iframe_quizData"
+
+<Quiz questions = {iframes_quizData} />

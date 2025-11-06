@@ -1,0 +1,242 @@
+# Width, Height, and Max/Min Dimensions
+
+Yesterday, we introduced the CSS Box Model. Today, we'll focus
+specifically on controlling the dimensions of the content area using the
+`width` and `height` properties, as well as
+establishing dimension boundaries with `min-width`,
+`max-width`, `min-height`, and
+`max-height`.
+
+## width and height Properties
+
+The `width` and `height` properties are used to
+set the width and height of an element's content area. These properties
+do not include padding, borders, or margins by default (this behavior is
+controlled by the `box-sizing` property, which we'll cover
+later).
+
+### Possible Values:
+
+
+* **auto**: This is the default value. The browser calculates the width and
+  height based on the element's content or other properties. For
+  block-level elements, `width: auto;` typically means it
+  takes up the full available width of its container. For inline
+  elements or replaced elements (like images), it usually means the
+  intrinsic width/height of the content.
+* **`<length>`**: An absolute length value, such as `px` (pixels),
+  `cm` (centimeters), `em` (relative to the
+  font-size of the element), `rem` (relative to the font-size
+  of the root element). Example: `width: 300px;`,
+  `height: 10em;`.
+* **`<percentage>`**: A percentage value relative to the width or height of the
+  containing block. Example: `width: 50%;` (50% of the
+  parent's width).
+
+`width: 200px; height: 100px; background-color: lightblue;`
+
+      <div class="example-box">
+        <p>
+          <code>width: 200px; height: 100px; background-color: lightblue;</code>
+        </p>
+        <div
+          style="
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            border: 1px solid blue;
+            padding: 5px;
+            text-align: center;
+          "
+        >
+          Content Area
+        </div>
+      </div>
+
+```css
+.fixed-size-box {
+  width: 250px;
+  height: 120px;
+  background-color: #e6e6fa; /* Lavender */
+  border: 1px solid purple;
+  padding: 10px;
+}
+
+.percentage-width-box {
+  width: 75%; /* Takes 75% of its parent's width */
+  height: auto; /* Height adjusts to content */
+  background-color: #f0fff0; /* Honeydew */
+  border: 1px solid green;
+  padding: 15px;
+}
+```
+
+      <div class="example-box">
+        <p>
+          <code>width: 75%; background-color: honeydew;</code> (inside this gray
+          example box)
+        </p>
+        <div
+          class="percentage-width-box"
+          style="
+            width: 75%;
+            height: auto;
+            background-color: #f0fff0;
+            border: 1px solid green;
+            padding: 15px;
+          "
+        >
+          This box is 75% of the width of its container. Add more content here
+          to see its height adjust automatically. Lorem ipsum dolor sit amet.
+        </div>
+      </div>
+
+**Inline Elements:** By default, you cannot directly set
+`width` and `height` on inline elements (like
+`<span>` or `<a>`). To apply
+dimensions, you'd need to change their display type (e.g., to
+`inline-block` or `block`).
+
+## min-width and max-width
+
+These properties are used to set minimum and maximum width constraints
+for an element. They are particularly useful for creating responsive
+designs that adapt to different screen sizes.
+
+* **min-width**
+
+The `min-width` property ensures that an element's width does
+not shrink below the specified value, even if its content is smaller or
+the `width` property is set to a smaller value. The element
+can become wider than `min-width` if its content or
+`width` property requires it.
+
+        <div
+          class="resizable-box"
+          style="
+            min-width: 150px;
+            width: 50%;
+            background-color: lightcoral;
+            padding: 10px;
+            text-align: center;
+          "
+        >
+          Min 150px wide, but can be 50% of parent if larger.
+        </div>
+
+```css
+.content-area {
+  width: 60%; /* Tries to be 60% of parent */
+  min-width: 300px; /* But will not go below 300px */
+  background-color: #fffacd; /* LemonChiffon */
+  padding: 10px;
+  border: 1px solid #FFD700; /* Gold */
+}
+```
+
+* **max-width**
+
+The `max-width` property ensures that an element's width does
+not expand beyond the specified value, even if its content is larger or
+the `width` property is set to a larger value. The element
+can become narrower than `max-width`.
+
+max-width is commonly used to prevent wide elements (like
+images or containers) from breaking the layout on large screens, while
+still allowing them to shrink on smaller screens.
+
+        <div
+          class="resizable-box"
+          style="
+            max-width: 400px;
+            width: 80%;
+            background-color: lightseagreen;
+            color: white;
+            padding: 10px;
+            margin: 0 auto;
+            text-align: center;
+          "
+        >
+          Max 400px wide, or 80% of parent if smaller. Centered.
+        </div>
+
+```css
+.container {
+  max-width: 960px; /* Common for main site container */
+  width: 90%; /* Responsive, takes 90% of viewport until 960px */
+  margin: 0 auto; /* Center the container */
+  background-color: #f5f5f5; /* WhiteSmoke */
+  padding: 20px;
+}
+
+img.responsive {
+  max-width: 100%; /* Image will not exceed its container's width */
+  height: auto; /* Maintain aspect ratio */
+}
+```
+
+
+## min-height and max-height
+
+Similar to their width counterparts, `min-height` and
+`max-height` control the minimum and maximum height of an
+element.
+
+* **min-height**
+
+The `min-height` property ensures that an element's height
+does not shrink below the specified value. This is useful for elements
+that might initially have little content but are expected to grow,
+ensuring they still occupy a certain amount of vertical space.
+
+`min-height: 80px;` This box will be at least 80px tall, even
+with little content. Add more content to see it grow.
+
+```css
+.card {
+  min-height: 200px; /* Ensures cards have a consistent minimum height */
+  width: 250px;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+}
+```
+
+* **max-height**
+
+The `max-height` property ensures that an element's height
+does not expand beyond the specified value. If the content exceeds this
+height, it will typically overflow (which can be controlled by the
+`overflow` property, covered later).
+
+`max-height: 100px; overflow: auto;` This box will not exceed
+100px in height. If content is taller, a scrollbar will appear. Lorem
+ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.
+
+```css
+.scrollable-text-area {
+  max-height: 150px;
+  overflow-y: auto; /* Add a vertical scrollbar if content exceeds max-height */
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+```
+
+**Combining Properties:** You can use
+`width`/`height` with `min-`/`max-`
+properties together. For example,
+`width: 50%; max-width: 600px; min-width: 280px;` creates a
+flexible element that tries to be 50% wide but doesn't go over 600px
+or under 280px.
+
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/width.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}

@@ -1,0 +1,167 @@
+# Introduction to CSS Grid
+
+Welcome to Week 7! After exploring Flexbox for one-dimensional layouts,
+we now turn to **CSS Grid Layout** (or simply "Grid"). Grid
+is a powerful **two-dimensional** layout system for the
+web, allowing you to arrange content into rows and columns. It provides
+a level of control over layout that was previously difficult or
+impossible to achieve with CSS alone.
+
+## Why CSS Grid?
+
+
+While Flexbox excels at arranging items along a single axis (either a
+row or a column), Grid is designed for layouts involving both rows and
+columns simultaneously.
+
+Key advantages of Grid:
+
+* **Two-Dimensional Layout:** Explicitly define columns and
+  rows, creating complex grid structures.
+* **Item Placement Control:** Precisely place items into
+  specific grid cells or allow them to span multiple cells.
+* **Alignment Capabilities:** Robust alignment options for
+  both the grid itself and the items within it.
+* **Gap Control:** Easily define gutters or spacing between
+  grid tracks (rows/columns).
+* **Reduced Need for Markup:** Complex layouts can often be
+  achieved with simpler HTML structures compared to older methods.
+* **Overlap:** Grid allows items to overlap if placed in
+  the same grid area.
+
+## Core Grid Terminology
+
+Understanding Grid requires learning some specific terminology:
+
+* **Grid Container:** The element on which
+  `display: grid;` or `display: inline-grid;` is
+  applied.
+* **Grid Items:** The direct children of the grid
+  container.
+* **Grid Lines:** The dividing lines (both horizontal and
+  vertical) that make up the structure of the grid. Lines are numbered
+  starting from 1.
+* **Grid Tracks:** The space between two adjacent grid
+  lines. These are the columns or rows of the grid.
+* **Grid Cell:** The space between two adjacent row lines
+  and two adjacent column lines – the smallest unit in a grid.
+* **Grid Area:** A total space surrounded by four grid
+  lines. A grid area may be composed of any number of grid cells.
+* **Gap (or Gutter):** The space between grid tracks (rows
+  or columns). Defined using `gap`, `row-gap`,
+  `column-gap`.
+
+  <div class="terminology-diagram">
+        <p class="font-bold">Conceptual Grid (3x2)</p>
+        <p>
+          Col Line 1 | Column 1 Track | Col Line 2 | Column 2 Track | Col Line 3
+          | Column 3 Track | Col Line 4
+        </p>
+        <p>
+          ----------------------------------------------------------------------------------------
+        </p>
+        <p>Row Line 1 | Row 1 Track | (Cell 1,1) | (Cell 1,2) | (Cell 1,3) |</p>
+        <p>
+          ----------------------------------------------------------------------------------------
+        </p>
+        <p>Row Line 2 | Row 2 Track | (Cell 2,1) | (Cell 2,2) | (Cell 2,3) |</p>
+        <p>
+          ----------------------------------------------------------------------------------------
+        </p>
+        <p>Row Line 3</p>
+        <p class="mt-2 text-sm">
+          A Grid Area could span multiple cells (e.g., from Col Line 1 to 3 and
+          Row Line 1 to 2).
+        </p>
+      </div>
+
+
+A Grid Area could span multiple cells (e.g., from Col Line 1 to 3 and
+Row Line 1 to 2).
+
+## Enabling Grid Layout: The display Property
+
+Similar to Flexbox, you enable Grid layout by applying the
+`display` property to the container element:
+
+* **`display: grid;`**: Makes the element a block-level grid container.
+* **`display: inline-grid;`**: Makes the element an inline-level grid container.
+
+Once applied, the direct children become grid items and will initially
+be placed automatically into the available grid cells according to the
+auto-placement algorithm (unless explicitly placed).
+
+### Basic Grid Container Example
+
+This example creates a simple 3-column grid. We'll learn how
+     
+```css
+<div class="grid-container">
+  <div class="grid-item">1</div>
+  <div class="grid-item">2</div>
+  <div class="grid-item">3</div>
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+  <div class="grid-item">6</div>
+</div>
+```
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto; /* Define 3 columns of automatic width */
+  gap: 10px; /* 10px space between rows and columns */
+  background-color: lightgreen;
+  padding: 10px;
+  border: 1px solid green;
+}
+
+.grid-item {
+  background-color: lightseagreen;
+  color: white;
+  padding: 20px;
+  border: 1px solid darkcyan;
+  text-align: center;
+}
+```
+
+In this basic setup, Grid automatically creates rows as needed to
+accommodate the items within the defined columns.
+
+### Grid vs. Flexbox: When to Use Which?
+
+While both are powerful layout tools, they excel in different areas:
+
+* **Use Flexbox for:** One-dimensional layouts (a single
+  row or column), distributing items along that axis, content-first
+  layouts where item size might dictate layout, simpler component
+  layouts (like navigation bars, button groups).
+* **Use Grid for:** Two-dimensional layouts (rows and
+  columns simultaneously), layouts where strict alignment in both
+  dimensions is critical, "layout-first" designs where the grid
+  structure is defined upfront, overlapping elements.
+
+It's also very common to **use them together**! For
+example, you might use Grid for the overall page structure (header,
+sidebar, main content, footer) and then use Flexbox within the header
+to align the logo and navigation items.
+
+### Upcoming Grid Topics
+
+* **Defining Grid Tracks**
+  (`grid-template-columns`, `grid-template-rows`)
+  and Gaps (`gap`).
+* **Placing Items using Line Numbers**
+  (`grid-column`, `grid-row`).
+* **Placing Items using Named Areas**
+  (`grid-template-areas`, `grid-area`) and
+  Shorthands.
+* **Aligning Grid Items and Tracks**
+  (`justify-items`, `align-items`,
+  `justify-content`, `align-content`).
+
+{/* // import Quiz from '../../../components/Quiz.js'
+// import cssMCQs from '../quiz-data/introduction_to_grid.js'
+
+// <section id="quiz-time"></section>
+// <Quiz questions={cssMCQs} /> */}
