@@ -59,7 +59,7 @@ Hexadecimal color values are one of the most common ways to specify
 colors in web design. They represent colors using a combination of Red,
 Green, and Blue (RGB) light.
 
-**Format:** `#RRGGBB` or
+**Format:** `#RRGGBB` or 
 `#RGB` (shorthand).
 
 * **RR**: Two hexadecimal digits (0-9, A-F) representing the
@@ -84,23 +84,27 @@ Green, and Blue (RGB) light.
 * **#333** (shorthand for `#333333`): Dark Gray
 * **#A0A0A0:** A medium gray.
 
-   <div class="example-html">
-        <div class="color-swatch" style="background-color: rgb(255, 87, 51)">
-          rgb(255,87,51)
-        </div>
-        <div
-          class="color-swatch rgba-example"
-          style="background-color: rgba(52, 152, 219, 0.7)"
-        >
-          <span class="color-swatch-text">rgba(52,152,219,0.7)</span>
-        </div>
-        <div
-          class="color-swatch rgba-example"
-          style="background-color: rgba(46, 204, 113, 0.4)"
-        >
-          <span class="color-swatch-text">rgba(46,204,113,0.4)</span>
-        </div>
-      </div>
+<div className="example-html">
+  <div className="color-swatch" style={{ backgroundColor: "rgb(255, 87, 51)" }}>
+    rgb(255,87,51)
+  </div>
+
+  <div
+    className="color-swatch rgba-example"
+    style={{ backgroundColor: "rgba(52, 152, 219, 0.7)" }}
+  >
+    <span className="color-swatch-text">rgba(52,152,219,0.7)</span>
+  </div>
+
+  <div
+    className="color-swatch rgba-example"
+    style={{ backgroundColor: "rgba(46, 204, 113, 0.4)" }}
+  >
+    <span className="color-swatch-text">rgba(46,204,113,0.4)</span>
+  </div>
+</div>
+
+      
 ```css
 body {
   background-color: #f4f4f4; /* Light gray */
@@ -223,8 +227,4 @@ lightness, or more or less vibrant versions by adjusting saturation,
 all while keeping the hue constant.
 
 
-{/* // import Quiz from '../../../components/Quiz'
-// import cssMCQs from '../quiz-data/color-values.js'
 
-// <section id="quiz-time"></section>
-// <Quiz questions={cssMCQs} /> */}

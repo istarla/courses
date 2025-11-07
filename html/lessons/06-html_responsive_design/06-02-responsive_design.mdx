@@ -1,7 +1,7 @@
 # Responsive Design Concepts
 
 ## What is Responsive Web Design (RWD)?
-<section id="what-is-responsive-web-design" />
+
 
 Responsive Web Design is an approach to web design that makes web pages
 render well and be easy to use on a variety of devices and screen sizes
@@ -19,7 +19,7 @@ the necessary structure and, most importantly, setting up the browser's
 viewport correctly.
 
 ## The Viewport Meta Tag
-<section id = "the-viewport-meta-tag" />
+
 
 Mobile browsers often try to mimic desktop browsers by setting a virtual
 viewport width (e.g., 980px) and then scaling the resulting page down to
@@ -47,7 +47,7 @@ Without it, your responsive CSS (like media queries) might not work as
 expected on mobile devices.
 
 ## Core Concepts of RWD (Implemented with CSS)
-<section id = "core-concepts-of-rwd" />
+
 While the implementation is done in CSS, understanding these concepts
 helps you structure your HTML appropriately:
 * ### Fluid Grids / Flexible Layouts: 
@@ -68,6 +68,7 @@ helps you structure your HTML appropriately:
 
   <br/>
   *Sample Css Code*
+
   ```css
   img, video {
     max-width: 100%; /* Never wider than the container */
@@ -83,6 +84,7 @@ helps you structure your HTML appropriately:
   above or below certain thresholds (called breakpoints).
   <br/>
   *Sample css media queries*
+
   ```css
   /* Default styles (mobile-first approach) */
   .container {
@@ -93,7 +95,7 @@ helps you structure your HTML appropriately:
     display: block; /* Stack navigation items on small screens */
     margin-bottom: 10px;
   }
-
+```
   /* Styles for tablets and wider (e.g., >= 768px) */
   @media (min-width: 768px) {
     .container {
@@ -126,7 +128,7 @@ and write CSS for the smallest screens first (mobile) and then use
 screens. This often leads to simpler and more efficient CSS.
 
 ## Examples
-<section id="examples" />
+
 
 ### Example 1: Basic HTML Structure with Viewport Meta Tag
 
@@ -312,6 +314,7 @@ screen size defined by CSS media queries. (Viewport meta tag is included
 in this page's head).
 
 *sample code*
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -354,6 +357,7 @@ in this page's head).
 </head>
 <body>
     <h1>Resize Your Browser Window</h1>
+
     <div class="responsive-demo-box">
         This box changes appearance based on screen width using CSS Media Queries.
     </div>
@@ -362,11 +366,12 @@ in this page's head).
 ```
 **rendered Output:**
 
-<>
   <h1 style={{fontSize: "20px"}}>Resize Your Browser Window</h1>
   <div className="responsive-demo-box">
     This box changes appearance based on screen width using CSS Media Queries.
   </div>
+  <style>{` ... `}</style>
+
   <style>{`
     .responsive-demo-box {
       background-color: lightblue;
@@ -398,7 +403,7 @@ in this page's head).
       }
     }
   `}</style>
-</>
+
 
 
 ### Example 3: Fluid Image
@@ -407,11 +412,12 @@ This image will scale down if the container is narrower than the image's
 natural width, but it won't scale up larger than its original size.
 
 <img 
-  src="/src/courses/assets/images/image3.webp" 
+  src="${SERVER_UUURRRLLL}/course/images/html/asserts/images/image3.webp" 
   alt="Fluid local image" 
 />
 
 *Sample Code*
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -460,17 +466,19 @@ natural width, but it won't scale up larger than its original size.
     </p>
     <img
       className="fluid"
-      src="/src/courses/assets/images/image3.webp"
+      src="${SERVER_UUURRRLLL}/course/images/html/asserts/images/image3.png"
       alt="Placeholder fluid image"
       style={{ maxWidth: "100%", height: "auto", display: "block" }}
     />
   </div>
 </>
 
-## Test Your Knowledge
+
+
+{/* ## Test Your Knowledge
 <section id="test-your-knowledge" />
 
 import Quiz from "../../../components/quiz"
 import responsive_design_quizData from "../../data/responsive_design_quizData"
 
-<Quiz questions = {responsive_design_quizData} />
+<Quiz questions = {responsive_design_quizData} /> */}

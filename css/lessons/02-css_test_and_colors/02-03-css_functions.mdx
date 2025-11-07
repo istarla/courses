@@ -29,7 +29,7 @@ division (`/`) with different units.
 * Especially useful for responsive design, allowing for fluid layouts
   with fixed offsets.
 
-      <div class="example-html">
+        <div class="example-html">
         <div class="calc-example">
           Width: <code>calc(100% - 40px)</code><br />
           Height: <code>calc(50vh - var(--header-height))</code><br />
@@ -121,8 +121,10 @@ Historically, its primary use has been with the
 content property in pseudo-elements.
 
 **Syntax:**
-`property: attr(attribute-name <type-or-unit>? [,
-<fallback>]? );`
+
+```css
+property: attr(attribute-name <type-or-unit>? [, <fallback>]? );
+
 
 * **attribute-name**: The name of the HTML attribute (e.g.,
   data-tooltip, href).
@@ -192,8 +194,4 @@ not widely supported across all browsers. Always check
 [caniuse.com](https://caniuse.com/?search=attr())
 for current browser compatibility.
 
-{/* // import Quiz from '../../../components/Quiz'
-// import cssMCQs from '../quiz-data/css_functions.js'
 
-// <section id="quiz-time"></section>
-// <Quiz questions={cssMCQs} /> */}
