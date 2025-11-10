@@ -19,18 +19,24 @@ lightgray, cyan, magenta,
 tomato, dodgerblue,
 mediumseagreen.
 
-      <div className="example-html">
-        <div className="color-swatch">
-        </div>
-        <div className="color-swatch">
-        </div>
-        <div
-          className="color-swatch">
-        </div>
-        <div className="color-swatch">
-  
-        </div>
-      </div>
+   <div className="example-html">
+  <div className="color-swatch" style={{ backgroundColor: "#ff5733" }}>
+    #FF5733
+  </div>
+  <div className="color-swatch" style={{ backgroundColor: "#3498db" }}>
+    #3498DB
+  </div>
+  <div
+    className="color-swatch"
+    style={{ backgroundColor: "#2ecc71", color: "#000", textShadow: "none" }}
+  >
+    #2ECC71
+  </div>
+  <div className="color-swatch" style={{ backgroundColor: "#f0f" }}>
+    #F0F (Pink)
+  </div>
+</div>
+
 
 ```css
 p {
@@ -79,25 +85,8 @@ Green, and Blue (RGB) light.
 * **#333** (shorthand for `#333333`): Dark Gray
 * **#A0A0A0:** A medium gray.
 
-<div className="example-html">
-  <div className="color-swatch" style={{ backgroundColor: "rgb(255, 87, 51)" }}>
-    rgb(255,87,51)
-  </div>
 
-  <div
-    className="color-swatch rgba-example"
-    style={{ backgroundColor: "rgba(52, 152, 219, 0.7)" }}
-  >
-    <span className="color-swatch-text">rgba(52,152,219,0.7)</span>
-  </div>
 
-  <div
-    className="color-swatch rgba-example"
-    style={{ backgroundColor: "rgba(46, 204, 113, 0.4)" }}
-  >
-    <span className="color-swatch-text">rgba(46,204,113,0.4)</span>
-  </div>
-</div>
 
       
 ```css
@@ -116,7 +105,7 @@ Modern CSS also supports 8-digit hex notation (`#RRGGBBAA`)
 and 4-digit hex notation (`#RGBA`) to include an alpha
 (transparency) channel, similar to RGBA (covered next).
 
-## 3. RGB and RGBA Color Values
+### 3. RGB and RGBA Color Values
 
 
 RGB (Red, Green, Blue) is another way to define colors based on the
@@ -141,22 +130,19 @@ rgba(red, green, blue, alpha)
 *  rgba(50, 50, 50, 0.8): Semi-transparent Dark Gray
 
   <div className="example-html">
-        <div className="color-swatch" style="background-color: hsl(30, 100%, 50%)">
-          hsl(30,100%,50%)
-        </div>
-        <div
-          className="color-swatch hsla-example"
-          style="background-color: hsla(200, 70%, 60%, 0.7)"
-        >
-          <span class="color-swatch-text">hsla(200,70%,60%,0.7)</span>
-        </div>
-        <div
-          className="color-swatch hsla-example"
-          style="background-color: hsla(320, 80%, 50%, 0.4)"
-        >
-          <span className="color-swatch-text">hsla(320,80%,50%,0.4)</span>
-        </div>
-      </div>
+  <div className="color-swatch" style={{ backgroundColor: "rgb(255, 87, 51)" }}>
+    rgb(255,87,51)
+  </div>
+
+  <div className="color-swatch rgba-example" style={{ backgroundColor: "rgba(52, 152, 219, 0.7)" }}>
+    <span className="color-swatch-text">rgba(52,152,219,0.7)</span>
+  </div>
+
+  <div className="color-swatch rgba-example" style={{ backgroundColor: "rgba(46, 204, 113, 0.4)" }}>
+    <span className="color-swatch-text">rgba(46,204,113,0.4)</span>
+  </div>
+</div>
+
 
 ```css
 .error-text {
@@ -170,7 +156,7 @@ rgba(red, green, blue, alpha)
 }
 ```
 
-## 4. HSL and HSLA Color Values
+### 4. HSL and HSLA Color Values
 
 
 HSL (Hue, Saturation, Lightness) offers a more intuitive way to define
