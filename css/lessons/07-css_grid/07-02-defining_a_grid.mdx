@@ -97,14 +97,18 @@ with `auto` height (sizing based on content) as needed.
 **Example: Fixed Height Rows**
 
       <div
-        class="grid-container grid-rows-px"
-        style="grid-template-columns: 1fr 1fr"
-      >
-        <div className="grid-item">Row 1 (50px)</div>
-        <div className="grid-item">Row 1 (50px)</div>
-        <div className="grid-item">Row 2 (100px)</div>
-        <div className="grid-item">Row 2 (100px)</div>
-      </div>
+  className="grid-container grid-rows-px"
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+  }}
+>
+  <div className="grid-item" style={{ height: "50px" }}>Row 1 (50px)</div>
+  <div className="grid-item" style={{ height: "50px" }}>Row 1 (50px)</div>
+  <div className="grid-item" style={{ height: "100px" }}>Row 2 (100px)</div>
+  <div className="grid-item" style={{ height: "100px" }}>Row 2 (100px)</div>
+</div>
+
 
 ```css
 .grid-container {
@@ -207,15 +211,20 @@ in Flexbox).
 
 **Example: Uniform Gap**
 
-      <div
-        class="grid-container grid-gap-10"
-        style="grid-template-columns: 1fr 1fr"
-      >
-        <div className="grid-item">1</div>
-        <div className="grid-item">2</div>
-        <div className="grid-item">3</div>
-        <div className="grid-item">4</div>
-      </div>
+     <div
+  className="grid-container grid-gap-10"
+  style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "10px", // grid-gap equivalent
+  }}
+>
+  <div className="grid-item">1</div>
+  <div className="grid-item">2</div>
+  <div className="grid-item">3</div>
+  <div className="grid-item">4</div>
+</div>
+
 
 ```css
 .grid-container {
