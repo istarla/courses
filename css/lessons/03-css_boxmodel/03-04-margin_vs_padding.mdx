@@ -39,21 +39,24 @@ box model:
                         = 200px + 30px + 30px + 2px + 2px = 264px */
 ```
 
-      <div class="example-outer">
-        <div
-          class="padded-content"
-          style="
-            background-color: lightblue;
-            border: 2px solid blue;
-            padding: 30px;
-            width: 200px;
-            text-align: center;
-            margin: 0 auto;
-          "
-        >
-          Content
-        </div>
-      </div>
+      <>
+  <div className="example-outer">
+    <div
+      className="padded-content"
+      style={{
+        backgroundColor: "lightblue",
+        border: "2px solid blue",
+        padding: "30px",
+        width: "200px",
+        textAlign: "center",
+        margin: "0 auto",
+      }}
+    >
+      Content
+    </div>
+  </div>
+</>
+
 
 ### Margin
 * **Location:** Margin is the space *outside* the
@@ -76,19 +79,20 @@ box model:
 }
 ```
 
-        <div
-          class="margined-element"
-          style="
-            background-color: lightgreen;
-            border: 2px solid green;
-            width: 150px;
-            padding: 10px;
-            margin: 25px auto;
-            text-align: center;
-          "
-        >
-          Content
-        </div>
+       <div
+  className="margined-element"
+  style={{
+    backgroundColor: "lightgreen",
+    border: "2px solid green",
+    width: "150px",
+    padding: "10px",
+    margin: "25px auto",
+    textAlign: "center",
+  }}
+>
+  Content
+</div>
+
 
 **Analogy:** Think of a picture frame.
 
@@ -117,18 +121,30 @@ bottom). Horizontal margins (left and right) never collapse.
    The bottom margin of a block element collapses with the top margin
    of the next block sibling element.
 
-            <div class="example-outer">
-            <div class="collapse-box collapse-box1" style="margin-bottom: 30px">
-              Box 1 (margin-bottom: 30px)
-            </div>
-            <div class="collapse-box collapse-box2" style="margin-top: 20px">
-              Box 2 (margin-top: 20px)
-            </div>
-            <p class="text-center text-sm mt-2">
-              Expected space: 50px. Actual space due to collapse: 30px
-              (max(30px, 20px)).
-            </p>
-          </div>
+            <div className="example-outer">
+  <div
+    className="collapse-box collapse-box1"
+    style={{
+      marginBottom: "30px",
+    }}
+  >
+    Box 1 (margin-bottom: 30px)
+  </div>
+
+  <div
+    className="collapse-box collapse-box2"
+    style={{
+      marginTop: "20px",
+    }}
+  >
+    Box 2 (margin-top: 20px)
+  </div>
+
+  <p className="text-center text-sm mt-2">
+    Expected space: 50px. Actual space due to collapse: 30px (max(30px, 20px)).
+  </p>
+</div>
+
 
    ```css
    .box-a {
@@ -148,22 +164,26 @@ bottom). Horizontal margins (left and right) never collapse.
    the bottom margin of its last child, their bottom margins collapse.
 
              <div
-            class="example-outer"
-            style="padding: 0; border: 2px solid #6d28d9"
-          >
-            <div
-              class="collapse-box"
-              style="
-                background-color: #ede9fe;
-                border-color: #a78bfa;
-                color: #5b21b6;
-                margin-top: 25px;
-              "
-            >
-              Parent has margin-top: 0 (from example-outer); Child has
-              margin-top: 25px. Collapsed margin is 25px.
-            </div>
-          </div>
+  className="example-outer"
+  style={{
+    padding: "0",
+    border: "2px solid #6d28d9",
+  }}
+>
+  <div
+    className="collapse-box"
+    style={{
+      backgroundColor: "#ede9fe",
+      borderColor: "#a78bfa",
+      color: "#5b21b6",
+      marginTop: "25px",
+    }}
+  >
+    Parent has margin-top: 0 (from example-outer); Child has margin-top: 25px.
+    Collapsed margin is 25px.
+  </div>
+</div>
+
    ```css
    .parent {
      /* margin-top: 40px; (Assume this or from its parent) */
@@ -180,28 +200,43 @@ bottom). Horizontal margins (left and right) never collapse.
    'height' or 'min-height' that would give it height) has both top and
    bottom margins, those margins can collapse with each other.
 
-          <div class="example-outer">
-            <div class="collapse-box" style="margin-bottom: 15px">
-              Box Before
-            </div>
-            <div
-              style="
-                margin-top: 20px;
-                margin-bottom: 25px;
-                border: 1px dashed gray;
-                height: 0px;
-              "
-            ></div>
-            <p class="text-center text-sm">
-              (Invisible collapsed margin between above and below: max(20,25) =
-              25px)
-            </p>
-            <div class="collapse-box" style="margin-top: 10px">Box After</div>
-            <p class="text-center text-sm mt-2">
-              Space between Box Before and Box After could be affected by the
-              empty block's collapsed margins.
-            </p>
-          </div>
+          <div className="example-outer">
+  <div
+    className="collapse-box"
+    style={{
+      marginBottom: "15px",
+    }}
+  >
+    Box Before
+  </div>
+
+  <div
+    style={{
+      marginTop: "20px",
+      marginBottom: "25px",
+      border: "1px dashed gray",
+      height: "0px",
+    }}
+  ></div>
+
+  <p className="text-center text-sm">
+    (Invisible collapsed margin between above and below: max(20,25) = 25px)
+  </p>
+
+  <div
+    className="collapse-box"
+    style={{
+      marginTop: "10px",
+    }}
+  >
+    Box After
+  </div>
+
+  <p className="text-center text-sm mt-2">
+    Space between Box Before and Box After could be affected by the empty
+    block's collapsed margins.
+  </p>
+</div>
 
    Space between Box Before and Box After could be affected by the
    empty block's collapsed margins.

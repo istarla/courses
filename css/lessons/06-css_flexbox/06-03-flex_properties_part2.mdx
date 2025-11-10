@@ -10,30 +10,25 @@ items: `align-items` (for single lines) and
 
 Items for `align-items` examples (varying heights):
 
-        <div
-          class="flex-container"
-          id="alignItemsContainerTemplate"
-          style="display: none"
-        >
-          <div class="flex-item item-short">Item 1 (short)</div>
-          <div class="flex-item item-tall">Item 2 (tall)</div>
-          <div class="flex-item item-medium">Item 3 (medium)</div>
-        </div>
-        <p class="text-sm text-gray-600 mb-2">
-          Items for <code>align-content</code> examples (many items to wrap):
-        </p>
-        <div
-          class="flex-container ac-container"
-          id="alignContentContainerTemplate"
-          style="display: none"
-        >
-          <div class="flex-item" style="width: 60px; height: 40px">1</div>
-          <div class="flex-item" style="width: 60px; height: 40px">2</div>
-          <div class="flex-item" style="width: 60px; height: 40px">3</div>
-          <div class="flex-item" style="width: 60px; height: 40px">4</div>
-          <div class="flex-item" style="width: 60px; height: 40px">5</div>
-          <div class="flex-item" style="width: 60px; height: 40px">6</div>
-        </div>
+        <p><strong>Example: <code>align-items</code></strong></p>
+
+<div class="flex-container" style="align-items: flex-start;">
+  <div class="flex-item item-short">Item 1 (short)</div>
+  <div class="flex-item item-tall">Item 2 (tall)</div>
+  <div class="flex-item item-medium">Item 3 (medium)</div>
+</div>
+
+<p><strong>Example: <code>align-content</code> (requires wrap & multiple rows)</strong></p>
+
+<div class="flex-container ac-container" style="flex-wrap: wrap; height: 150px; align-content: space-between;">
+  <div class="flex-item" style="width: 60px; height: 40px;">1</div>
+  <div class="flex-item" style="width: 60px; height: 40px;">2</div>
+  <div class="flex-item" style="width: 60px; height: 40px;">3</div>
+  <div class="flex-item" style="width: 60px; height: 40px;">4</div>
+  <div class="flex-item" style="width: 60px; height: 40px;">5</div>
+  <div class="flex-item" style="width: 60px; height: 40px;">6</div>
+</div>
+
       
 
 
@@ -62,52 +57,41 @@ Possible values:
 For these examples, assume `flex-direction: row;` (main axis
 is horizontal, cross axis is vertical).
 
-      <div class="flex-container ai-stretch">
-        <div class="flex-item">Item 1</div>
-        <div class="flex-item">Item 2</div>
-        <div class="flex-item">Item 3</div>
-      </div>
-    
-      <div class="flex-container ai-stretch">
-        <div class="flex-item">Item 1</div>
-        <div class="flex-item">Item 2</div>
-        <div class="flex-item">Item 3</div>
-      </div>
-      <p>
-        <strong
-          >Example: <code>align-items: flex-start;</code> (Items with varying
-          heights)</strong>
-        >
-      </p>
-      <div class="flex-container ai-flex-start">
-        <div class="flex-item item-short">1 (short)</div>
-        <div class="flex-item item-tall">2 (tall)</div>
-        <div class="flex-item item-medium">3 (medium)</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-items: flex-end;</code></strong>
-      </p>
-      <div class="flex-container ai-flex-end">
-        <div class="flex-item item-short">1 (short)</div>
-        <div class="flex-item item-tall">2 (tall)</div>
-        <div class="flex-item item-medium">3 (medium)</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-items: center;</code></strong>
-      </p>
-      <div class="flex-container ai-center">
-        <div class="flex-item item-short">1 (short)</div>
-        <div class="flex-item item-tall">2 (tall)</div>
-        <div class="flex-item item-medium">3 (medium)</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-items: baseline;</code></strong>
-      </p>
-      <div class="flex-container ai-baseline">
-        <div class="flex-item item-short">Base</div>
-        <div class="flex-item item-tall">Line</div>
-        <div class="flex-item item-medium">Text</div>
-      </div>
+     <p><strong>Example: <code>align-items: stretch;</code></strong></p>
+<div className="flex-container ai-stretch">
+  <div className="flex-item">Item 1</div>
+  <div className="flex-item">Item 2</div>
+  <div className="flex-item">Item 3</div>
+</div>
+
+<p><strong>Example: <code>align-items: flex-start;</code> (Items with varying heights)</strong></p>
+<div className="flex-container ai-flex-start">
+  <div className="flex-item item-short">1 (short)</div>
+  <div className="flex-item item-tall">2 (tall)</div>
+  <div className="flex-item item-medium">3 (medium)</div>
+</div>
+
+<p><strong>Example: <code>align-items: flex-end;</code></strong></p>
+<div className="flex-container ai-flex-end">
+  <div className="flex-item item-short">1 (short)</div>
+  <div className="flex-item item-tall">2 (tall)</div>
+  <div className="flex-item item-medium">3 (medium)</div>
+</div>
+
+<p><strong>Example: <code>align-items: center;</code></strong></p>
+<div className="flex-container ai-center">
+  <div className="flex-item item-short">1 (short)</div>
+  <div className="flex-item item-tall">2 (tall)</div>
+  <div className="flex-item item-medium">3 (medium)</div>
+</div>
+
+<p><strong>Example: <code>align-items: baseline;</code></strong></p>
+<div className="flex-container ai-baseline">
+  <div className="flex-item item-short">Base</div>
+  <div className="flex-item item-tall">Line</div>
+  <div className="flex-item item-medium">Text</div>
+</div>
+
 
 ```css
 .my-flex-container {
@@ -152,83 +136,58 @@ For these examples, container is
 `flex-wrap: wrap; height: 300px; width: 250px;` with 6 items
 (60px wide, 40px tall each).
 
-<p>
-        <strong>Example: <code>align-content: stretch;</code> (Default)</strong>
-      </p>
-      <div class="flex-container ac-container ac-stretch">
-        <div class="flex-item" style="width: 60px; height: auto">1</div>
-        <div class="flex-item" style="width: 60px; height: auto">2</div>
-        <div class="flex-item" style="width: 60px; height: auto">3</div>
-        <div class="flex-item" style="width: 60px; height: auto">4</div>
-        <div class="flex-item" style="width: 60px; height: auto">5</div>
-        <div class="flex-item" style="width: 60px; height: auto">6</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-content: flex-start;</code></strong>
-      </p>
-      <div class="flex-container ac-container ac-flex-start">
-        <div class="flex-item" style="width: 60px; height: 40px">1</div>
-        <div class="flex-item" style="width: 60px; height: 40px">2</div>
-        <div class="flex-item" style="width: 60px; height: 40px">3</div>
-        <div class="flex-item" style="width: 60px; height: 40px">4</div>
-        <div class="flex-item" style="width: 60px; height: 40px">5</div>
-        <div class="flex-item" style="width: 60px; height: 40px">6</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-content: flex-end;</code></strong>
-      </p>
-      <div class="flex-container ac-container ac-flex-end">
-        <div class="flex-item" style="width: 60px; height: 40px">1</div>
-        <div class="flex-item" style="width: 60px; height: 40px">2</div>
-        <div class="flex-item" style="width: 60px; height: 40px">3</div>
-        <div class="flex-item" style="width: 60px; height: 40px">4</div>
-        <div class="flex-item" style="width: 60px; height: 40px">5</div>
-        <div class="flex-item" style="width: 60px; height: 40px">6</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-content: center;</code></strong>
-      </p>
-      <div class="flex-container ac-container ac-center">
-        <div class="flex-item" style="width: 60px; height: 40px">1</div>
-        <div class="flex-item" style="width: 60px; height: 40px">2</div>
-        <div class="flex-item" style="width: 60px; height: 40px">3</div>
-        <div class="flex-item" style="width: 60px; height: 40px">4</div>
-        <div class="flex-item" style="width: 60px; height: 40px">5</div>
-        <div class="flex-item" style="width: 60px; height: 40px">6</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-content: space-between;</code></strong>
-      </p>
-      <div class="flex-container ac-container ac-space-between">
-        <div class="flex-item" style="width: 60px; height: 40px">1</div>
-        <div class="flex-item" style="width: 60px; height: 40px">2</div>
-        <div class="flex-item" style="width: 60px; height: 40px">3</div>
-        <div class="flex-item" style="width: 60px; height: 40px">4</div>
-        <div class="flex-item" style="width: 60px; height: 40px">5</div>
-        <div class="flex-item" style="width: 60px; height: 40px">6</div>
-      </div>
-<p>
-        <strong>Example: <code>align-content: space-around;</code></strong>
-      </p>
-      <div class="flex-container ac-container ac-space-around">
-        <div class="flex-item" style="width: 60px; height: 40px">1</div>
-        <div class="flex-item" style="width: 60px; height: 40px">2</div>
-        <div class="flex-item" style="width: 60px; height: 40px">3</div>
-        <div class="flex-item" style="width: 60px; height: 40px">4</div>
-        <div class="flex-item" style="width: 60px; height: 40px">5</div>
-        <div class="flex-item" style="width: 60px; height: 40px">6</div>
-      </div>
-      <p>
-        <strong>Example: <code>align-content: space-evenly;</code></strong>
-      </p>
-      <div class="flex-container ac-container ac-space-evenly">
-        <div class="flex-item" style="width: 60px; height: 40px">1</div>
-        <div class="flex-item" style="width: 60px; height: 40px">2</div>
-        <div class="flex-item" style="width: 60px; height: 40px">3</div>
-        <div class="flex-item" style="width: 60px; height: 40px">4</div>
-        <div class="flex-item" style="width: 60px; height: 40px">5</div>
-        <div class="flex-item" style="width: 60px; height: 40px">6</div>
-      </div>
+<p><strong>Example: <code>align-content: stretch;</code> (Default)</strong></p>
+<div className="flex-container ac-container ac-stretch">
+  <div className="flex-item" style={{width: "60px"}}>1</div>
+  <div className="flex-item" style={{width: "60px"}}>2</div>
+  <div className="flex-item" style={{width: "60px"}}>3</div>
+  <div className="flex-item" style={{width: "60px"}}>4</div>
+  <div className="flex-item" style={{width: "60px"}}>5</div>
+  <div className="flex-item" style={{width: "60px"}}>6</div>
+</div>
+
+<p><strong>Example: <code>align-content: flex-start;</code></strong></p>
+<div className="flex-container ac-container ac-flex-start">
+  {Array.from({length: 6}, (_, i) => (
+    <div key={i} className="flex-item" style={{width: "60px", height: "40px"}}>{i + 1}</div>
+  ))}
+</div>
+
+<p><strong>Example: <code>align-content: flex-end;</code></strong></p>
+<div className="flex-container ac-container ac-flex-end">
+  {Array.from({length: 6}, (_, i) => (
+    <div key={i} className="flex-item" style={{width: "60px", height: "40px"}}>{i + 1}</div>
+  ))}
+</div>
+
+<p><strong>Example: <code>align-content: center;</code></strong></p>
+<div className="flex-container ac-container ac-center">
+  {Array.from({length: 6}, (_, i) => (
+    <div key={i} className="flex-item" style={{width: "60px", height: "40px"}}>{i + 1}</div>
+  ))}
+</div>
+
+<p><strong>Example: <code>align-content: space-between;</code></strong></p>
+<div className="flex-container ac-container ac-space-between">
+  {Array.from({length: 6}, (_, i) => (
+    <div key={i} className="flex-item" style={{width: "60px", height: "40px"}}>{i + 1}</div>
+  ))}
+</div>
+
+<p><strong>Example: <code>align-content: space-around;</code></strong></p>
+<div className="flex-container ac-container ac-space-around">
+  {Array.from({length: 6}, (_, i) => (
+    <div key={i} className="flex-item" style={{width: "60px", height: "40px"}}>{i + 1}</div>
+  ))}
+</div>
+
+<p><strong>Example: <code>align-content: space-evenly;</code></strong></p>
+<div className="flex-container ac-container ac-space-evenly">
+  {Array.from({length: 6}, (_, i) => (
+    <div key={i} className="flex-item" style={{width: "60px", height: "40px"}}>{i + 1}</div>
+  ))}
+</div>
+
 ```css
 .multi-line-container {
   display: flex;

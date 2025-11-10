@@ -6,34 +6,38 @@ start exploring the properties that can be applied to the
 We'll cover flex-direction, flex-wrap, the
 flex-flow shorthand, and justify-content.
 
-      <div class="example-html">
-        <p class="text-sm text-gray-600 mb-2">
-          Default items for examples (3 items):
-        </p>
-        <div
-          class="flex-container"
-          id="defaultItemsContainer"
-          style="display: none"
-        >
-          <div class="flex-item">1</div>
-          <div class="flex-item">2</div>
-          <div class="flex-item">3</div>
-        </div>
-        <p class="text-sm text-gray-600 mb-2">
-          Some examples will use more items (5 items):
-        </p>
-        <div
-          class="flex-container"
-          id="moreItemsContainer"
-          style="display: none"
-        >
-          <div class="flex-item" style="width: 60px">1</div>
-          <div class="flex-item" style="width: 60px">2</div>
-          <div class="flex-item" style="width: 60px">3</div>
-          <div class="flex-item" style="width: 60px">4</div>
-          <div class="flex-item" style="width: 60px">5</div>
-        </div>
-      </div>
+      <div className="example-html">
+  <p className="text-sm text-gray-600 mb-2">
+    Default items for examples (3 items):
+  </p>
+
+  <div
+    className="flex-container"
+    id="defaultItemsContainer"
+    style={{ display: "none" }}
+  >
+    <div className="flex-item">1</div>
+    <div className="flex-item">2</div>
+    <div className="flex-item">3</div>
+  </div>
+
+  <p className="text-sm text-gray-600 mb-2">
+    Some examples will use more items (5 items):
+  </p>
+
+  <div
+    className="flex-container"
+    id="moreItemsContainer"
+    style={{ display: "none" }}
+  >
+    <div className="flex-item" style={{ width: "60px" }}>1</div>
+    <div className="flex-item" style={{ width: "60px" }}>2</div>
+    <div className="flex-item" style={{ width: "60px" }}>3</div>
+    <div className="flex-item" style={{ width: "60px" }}>4</div>
+    <div className="flex-item" style={{ width: "60px" }}>5</div>
+  </div>
+</div>
+
 
 ## 1. flex-direction
 
@@ -51,35 +55,48 @@ Possible values:
   axis is vertical.
 * **`column-reverse`**: Flex items are laid out vertically, from bottom to top.
 
-      <div class="flex-container fd-row">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>flex-direction: row-reverse;</code></strong>
-      </p>
-      <div class="flex-container fd-row-reverse">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>flex-direction: column;</code></strong>
-      </p>
-      <div class="flex-container fd-column">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>flex-direction: column-reverse;</code></strong>
-      </p>
-      <div class="flex-container fd-column-reverse">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
+<div className="flex-container fd-row">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>
+    Example: <code>flex-direction: row-reverse;</code>
+  </strong>
+</p>
+
+<div className="flex-container fd-row-reverse">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>
+    Example: <code>flex-direction: column;</code>
+  </strong>
+</p>
+
+<div className="flex-container fd-column">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>
+    Example: <code>flex-direction: column-reverse;</code>
+  </strong>
+</p>
+
+<div className="flex-container fd-column-reverse">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
 
 ```css
 .container-row {
@@ -110,45 +127,49 @@ Possible values:
 * **wrap-reverse**: Flex items will wrap onto multiple lines if necessary, from bottom
   to top.
 
-           <p>
-        <strong
-          >Example: <code>flex-wrap: nowrap;</code> (Default) - Container width
-          300px, items 60px wide each</strong>
-        >
-      </p>
-      <div class="flex-container fw-nowrap">
-        <div class="flex-item" style="width: 60px">1</div>
-        <div class="flex-item" style="width: 60px">2</div>
-        <div class="flex-item" style="width: 60px">3</div>
-        <div class="flex-item" style="width: 60px">4</div>
-        <div class="flex-item" style="width: 60px">5</div>
-      </div>
-      <p>
-        <strong
-          >Example: <code>flex-wrap: wrap;</code> - Container width
-          250px</strong>
-        >
-      </p>
-      <div class="flex-container fw-wrap">
-        <div class="flex-item" style="width: 60px">1</div>
-        <div class="flex-item" style="width: 60px">2</div>
-        <div class="flex-item" style="width: 60px">3</div>
-        <div class="flex-item" style="width: 60px">4</div>
-        <div class="flex-item" style="width: 60px">5</div>
-      </div>
-      <p>
-        <strong
-          >Example: <code>flex-wrap: wrap-reverse;</code> - Container width
-          250px</strong>
-        >
-      </p>
-      <div class="flex-container fw-wrap-reverse">
-        <div class="flex-item" style="width: 60px">1</div>
-        <div class="flex-item" style="width: 60px">2</div>
-        <div class="flex-item" style="width: 60px">3</div>
-        <div class="flex-item" style="width: 60px">4</div>
-        <div class="flex-item" style="width: 60px">5</div>
-      </div>
+<p>
+  <strong>
+    Example: <code>flex-wrap: nowrap;</code> (Default) - Container width 300px,
+    items 60px wide each
+  </strong>
+</p>
+
+<div className="flex-container fw-nowrap">
+  <div className="flex-item" style={{ width: "60px" }}>1</div>
+  <div className="flex-item" style={{ width: "60px" }}>2</div>
+  <div className="flex-item" style={{ width: "60px" }}>3</div>
+  <div className="flex-item" style={{ width: "60px" }}>4</div>
+  <div className="flex-item" style={{ width: "60px" }}>5</div>
+</div>
+
+<p>
+  <strong>
+    Example: <code>flex-wrap: wrap;</code> - Container width 250px
+  </strong>
+</p>
+
+<div className="flex-container fw-wrap">
+  <div className="flex-item" style={{ width: "60px" }}>1</div>
+  <div className="flex-item" style={{ width: "60px" }}>2</div>
+  <div className="flex-item" style={{ width: "60px" }}>3</div>
+  <div className="flex-item" style={{ width: "60px" }}>4</div>
+  <div className="flex-item" style={{ width: "60px" }}>5</div>
+</div>
+
+<p>
+  <strong>
+    Example: <code>flex-wrap: wrap-reverse;</code> - Container width 250px
+  </strong>
+</p>
+
+<div className="flex-container fw-wrap-reverse">
+  <div className="flex-item" style={{ width: "60px" }}>1</div>
+  <div className="flex-item" style={{ width: "60px" }}>2</div>
+  <div className="flex-item" style={{ width: "60px" }}>3</div>
+  <div className="flex-item" style={{ width: "60px" }}>4</div>
+  <div className="flex-item" style={{ width: "60px" }}>5</div>
+</div>
+
 
 
 
@@ -175,15 +196,20 @@ single declaration.
 The default value is `row nowrap`.
 
       <div
-        class="flex-container"
-        style="flex-flow: column wrap; height: 150px; width: 200px"
-      >
-        <div class="flex-item" style="height: 40px">1</div>
-        <div class="flex-item" style="height: 40px">2</div>
-        <div class="flex-item" style="height: 40px">3</div>
-        <div class="flex-item" style="height: 40px">4</div>
-        <div class="flex-item" style="height: 40px">5</div>
-      </div>
+  className="flex-container"
+  style={{
+    flexFlow: "column wrap",
+    height: "150px",
+    width: "200px",
+  }}
+>
+  <div className="flex-item" style={{ height: "40px" }}>1</div>
+  <div className="flex-item" style={{ height: "40px" }}>2</div>
+  <div className="flex-item" style={{ height: "40px" }}>3</div>
+  <div className="flex-item" style={{ height: "40px" }}>4</div>
+  <div className="flex-item" style={{ height: "40px" }}>5</div>
+</div>
+
 
 ```css
 .container-shorthand {
@@ -219,51 +245,57 @@ Possible values:
 * **`space-evenly`**: Items are distributed so that the spacing between any two items
   (and the space to the edges) is equal.
 
-      <div class="flex-container jc-flex-start">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>justify-content: flex-end;</code></strong>
-      </p>
-      <div class="flex-container jc-flex-end">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>justify-content: center;</code></strong>
-      </p>
-      <div class="flex-container jc-center">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>justify-content: space-between;</code></strong>
-      </p>
-      <div class="flex-container jc-space-between">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>justify-content: space-around;</code></strong>
-      </p>
-      <div class="flex-container jc-space-around">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
-      <p>
-        <strong>Example: <code>justify-content: space-evenly;</code></strong>
-      </p>
-      <div class="flex-container jc-space-evenly">
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-      </div>
+<div className="flex-container jc-flex-start">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>Example: <code>justify-content: flex-end;</code></strong>
+</p>
+<div className="flex-container jc-flex-end">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>Example: <code>justify-content: center;</code></strong>
+</p>
+<div className="flex-container jc-center">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>Example: <code>justify-content: space-between;</code></strong>
+</p>
+<div className="flex-container jc-space-between">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>Example: <code>justify-content: space-around;</code></strong>
+</p>
+<div className="flex-container jc-space-around">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
+<p>
+  <strong>Example: <code>justify-content: space-evenly;</code></strong>
+</p>
+<div className="flex-container jc-space-evenly">
+  <div className="flex-item">1</div>
+  <div className="flex-item">2</div>
+  <div className="flex-item">3</div>
+</div>
+
 
 ```css
 .nav-menu {

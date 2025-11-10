@@ -53,12 +53,13 @@ The `flex` property is a shorthand for
   `flex: <positive-number> 1 0%;`. These items will
   share space proportionally.
 
-      <div class="flex-container shorthand-example">
-        <div class="flex-item itemA">Item A (0 1 auto)</div>
-        <div class="flex-item itemB">Item B (flex: 1)</div>
-        <div class="flex-item itemC">Item C (0 0 150px)</div>
-        <div class="flex-item itemD">Item D (2 0 auto)</div>
-      </div>
+<div className="flex-container shorthand-example">
+  <div className="flex-item itemA">Item A (0 1 auto)</div>
+  <div className="flex-item itemB">Item B (flex: 1)</div>
+  <div className="flex-item itemC">Item C (0 0 150px)</div>
+  <div className="flex-item itemD">Item D (2 0 auto)</div>
+</div>
+
 
 ```css
 .item-default { flex: initial; /* Same as flex: 0 1 auto; */ }
@@ -93,14 +94,15 @@ It accepts the same values as `align-items`, plus
 
 Default (flex-start from container)
 
- <div class="flex-item item-default-align">
-          Default (flex-start from container)
-        </div>
-        <div class="flex-item as-center">Center</div>
-        <div class="flex-item as-flex-end">Flex-End</div>
-        <div class="flex-item as-stretch" style="height: auto">
-          Stretch (height:auto)
-        </div>
+ <div className="flex-item item-default-align">
+  Default (flex-start from container)
+</div>
+<div className="flex-item as-center">Center</div>
+<div className="flex-item as-flex-end">Flex-End</div>
+<div className="flex-item as-stretch" style={{ height: "auto" }}>
+  Stretch (height:auto)
+</div>
+
 
 ```css
 .flex-container {
@@ -132,17 +134,18 @@ which re-arranges on smaller screens (though the responsive part would
 need media queries, we focus on the flex layout here).
 
 MyLogo
-      <div class="example-html">
-        <nav class="nav-bar">
-          <div class="nav-logo">MyLogo</div>
-          <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+      <div className="example-html">
+  <nav className="nav-bar">
+    <div className="nav-logo">MyLogo</div>
+    <ul className="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+
 
 ```css
 .nav-bar {
@@ -176,26 +179,27 @@ MyLogo
 Creating a row of cards that can grow or shrink and wrap onto multiple
 lines.
 
-      <div class="example-html">
-        <div class="card-container">
-          <div class="card">
-            <h3>Card 1</h3>
-            <p>Some descriptive text for card one. It might be a bit longer.</p>
-          </div>
-          <div class="card">
-            <h3>Card 2</h3>
-            <p>Shorter text for card two.</p>
-          </div>
-          <div class="card">
-            <h3>Card 3</h3>
-            <p>Another card with some content to fill it up nicely.</p>
-          </div>
-          <div class="card">
-            <h3>Card 4</h3>
-            <p>The final card in this example row.</p>
-          </div>
-        </div>
-      </div>
+      <div className="example-html">
+  <div className="card-container">
+    <div className="card">
+      <h3>Card 1</h3>
+      <p>Some descriptive text for card one. It might be a bit longer.</p>
+    </div>
+    <div className="card">
+      <h3>Card 2</h3>
+      <p>Shorter text for card two.</p>
+    </div>
+    <div className="card">
+      <h3>Card 3</h3>
+      <p>Another card with some content to fill it up nicely.</p>
+    </div>
+    <div className="card">
+      <h3>Card 4</h3>
+      <p>The final card in this example row.</p>
+    </div>
+  </div>
+</div>
+
 
 
 

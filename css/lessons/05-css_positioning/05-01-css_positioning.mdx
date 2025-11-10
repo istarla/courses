@@ -21,12 +21,13 @@ elements are laid out in the normal document flow. The offset properties
 `left`) and `z-index` have
 **no effect** on statically positioned elements.
 
-      <div class="example-html">
-        <div class="box static-box">Static (Default)</div>
-        <div class="box static-box" style="top: 50px; left: 50px">
-          Static with top/left (ignored)
-        </div>
-      </div>
+      <div className="example-html">
+  <div className="box static-box">Static (Default)</div>
+  <div className="box static-box" style={{ top: "50px", left: "50px", position: "static" }}>
+    Static with top/left (ignored)
+  </div>
+</div>
+
 
 ```css
 .element {
@@ -48,15 +49,29 @@ surrounding elements).
 Relatively positioned elements serve as positioning contexts for
 absolutely positioned children.
 
-      <div class="example-html">
-        <div class="box static-box" style="background-color: #b0c4de">
-          Neighbor 1
-        </div>
-        <div class="box relative-box">Relative (top: 20px; left: 30px;)</div>
-        <div class="box static-box" style="background-color: #b0c4de">
-          Neighbor 2 (unaffected by relative's offset)
-        </div>
-      </div>
+      <div className="example-html">
+  <div
+    className="box static-box"
+    style={{ backgroundColor: "#b0c4de" }}
+  >
+    Neighbor 1
+  </div>
+
+  <div
+    className="box relative-box"
+    style={{ top: "20px", left: "30px", position: "relative" }}
+  >
+    Relative (top: 20px; left: 30px)
+  </div>
+
+  <div
+    className="box static-box"
+    style={{ backgroundColor: "#b0c4de" }}
+  >
+    Neighbor 2 (unaffected by relative's offset)
+  </div>
+</div>
+
 
 ```css
 .relative-item {
@@ -81,18 +96,28 @@ containing block (usually the
 The `top`, `right`, `bottom`, and
 `left` properties determine its final position.
 
-      <div class="example-html absolute-container">
-        Containing Block (position: relative)
-        <div class="box absolute-box">
-          Absolute (top: 40px; right: 20px from container)
-        </div>
-        <div
-          class="box static-box"
-          style="margin-top: 10px; background-color: #90ee90"
-        >
-          This element flows normally, ignoring the absolute box.
-        </div>
-      </div>
+      <div className="example-html absolute-container" style={{ position: "relative" }}>
+  Containing Block (position: relative)
+
+  <div
+    className="box absolute-box"
+    style={{
+      position: "absolute",
+      top: "40px",
+      right: "20px",
+    }}
+  >
+    Absolute (top: 40px; right: 20px from container)
+  </div>
+
+  <div
+    className="box static-box"
+    style={{ marginTop: "10px", backgroundColor: "#90ee90" }}
+  >
+    This element flows normally, ignoring the absolute box.
+  </div>
+</div>
+
 ```css
 .container {
   position: relative; /* Establishes a positioning context */

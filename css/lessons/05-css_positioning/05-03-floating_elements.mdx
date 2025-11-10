@@ -87,36 +87,52 @@ will line up horizontally as space allows. If they are floated in
 opposite directions, they will move to the respective edges of their
 container.
 
-      <div class="example-html">
-        <div
-          class="float-left"
-          style="width: 80px; height: 80px; background-color: #f87171"
-        >
-          Box 1 (L)
-        </div>
-        <div
-          class="float-left"
-          style="width: 80px; height: 80px; background-color: #60a5fa"
-        >
-          Box 2 (L)
-        </div>
-        <div
-          class="float-right"
-          style="width: 80px; height: 80px; background-color: #34d399"
-        >
-          Box 3 (R)
-        </div>
-        <p
-          style="
-            clear: both;
-            padding-top: 10px;
-            text-align: center;
-            font-size: 0.9em;
-          "
-        >
-          Text after floated elements (cleared).
-        </p>
-      </div>
+      <div className="example-html">
+  <div
+    className="float-left"
+    style={{
+      width: "80px",
+      height: "80px",
+      backgroundColor: "#f87171",
+    }}
+  >
+    Box 1 (L)
+  </div>
+
+  <div
+    className="float-left"
+    style={{
+      width: "80px",
+      height: "80px",
+      backgroundColor: "#60a5fa",
+    }}
+  >
+    Box 2 (L)
+  </div>
+
+  <div
+    className="float-right"
+    style={{
+      width: "80px",
+      height: "80px",
+      backgroundColor: "#34d399",
+    }}
+  >
+    Box 3 (R)
+  </div>
+
+  <p
+    style={{
+      clear: "both",
+      paddingTop: "10px",
+      textAlign: "center",
+      fontSize: "0.9em",
+    }}
+  >
+    Text after floated elements (cleared).
+  </p>
+</div>
+
 ```css
 .gallery-item {
   float: left;

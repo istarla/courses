@@ -30,24 +30,34 @@ they can within their container).
 * `padding`, `margin`, and
   `border` will push other elements away. Vertical margins
   (top and bottom) are respected between block elements.
-* Common block-level elements include: `<div>`,
-  `<p>`,
-  `<h1>`-`<h6>`,
-  `<ul>`, `<ol>`,
-  `<li>`, `<form>`,
-  `<article>`, `<section>`.
+* Common block-level elements include: `div`,
+`p`,
+`h1`–`h6`,
+`ul`, `ol`,
+`li`, `form`,
+`article`, `section`.
 
-     <div class="example-html">
-        <div class="demo-box demo-block">
-          I am a block element (<code>div</code>).
-        </div>
-        <div class="demo-box demo-block">
-          I am another block element. I start on a new line.
-        </div>
-        <span class="demo-box demo-block" style="width: 50%; margin: 5px auto"
-          >I am a span, but styled as block (width 50%).</span>
-        >
-      </div>
+<div className="example-html">
+  <div className="demo-box demo-block">
+    I am a block element (<code>div</code>).
+  </div>
+
+  <div className="demo-box demo-block">
+    I am another block element. I start on a new line.
+  </div>
+
+  <span
+    className="demo-box demo-block"
+    style={{
+      width: "50%",
+      margin: "5px auto",
+      display: "block",
+    }}
+  >
+    I am a span, but styled as block (width 50%).
+  </span>
+</div>
+
 
 ```css
 div {
@@ -86,34 +96,33 @@ content.
   **do not** affect the layout of surrounding block-level
   elements or other inline elements in terms of vertical spacing.
   Top/bottom margins have no effect.
-* Common inline elements include: `<span>`,
-  `<a>`, `<img>` (though
-  `<img>` is a bit special, it's a "replaced element"),
-  `<strong>`, `<em>`,
-  `<button>` (often styled as inline-block by user
-  agents).
+* Common inline elements include: `span`, `a`, `img` (though `img` is a "replaced element"),
+`strong`, `em`, `button` (often behaves like inline-block).
 
-      <div class="example-html">
-        <p>
-          This paragraph contains
-          <span class="demo-box demo-inline">an inline span</span> and also
-          <a href="#" class="demo-box demo-inline">an inline link</a>. They flow
-          together.
-          <span
-            class="demo-box demo-inline"
-            style="
-              padding: 10px;
-              margin: 10px;
-              border: 2px solid green;
-              width: 100%;
-              height: 50px;
-              display:block;
-            "
-            >This span has width/height set, but they are ignored. Vertical
-            padding/margin won't push block elements.</span>
-          >
-        </p>
-      </div>
+<div className="example-html">
+  <p>
+    This paragraph contains
+    <span className="demo-box demo-inline">an inline span</span> and also
+    <a href="#" className="demo-box demo-inline">an inline link</a>. They flow
+    together.
+    <span
+      className="demo-box demo-inline"
+      style={{
+        padding: "10px",
+        margin: "10px",
+        border: "2px solid green",
+        width: "100%",
+        height: "50px",
+        display: "block",
+      }}
+    >
+      This span has width/height set, but they are ignored. Vertical
+      padding/margin won't push block elements.
+    </span>
+  </p>
+</div>
+
+
 ```css
 span {
   display: inline; /* Default for span */
@@ -145,23 +154,28 @@ padding, like block elements.
   `height` properties.
 * `padding`, `margin` (including vertical), and
   `border` are all respected and affect layout.
-* Often used for navigation items, buttons, or small layout components
-  that need specific dimensions but should remain in the flow of text.
+*Often used for navigation items, buttons, or small layout components
+that need specific dimensions but should remain in the flow of text.
 
-      <div class="example-html">
-        <p>
-          Here are some inline-block elements:
-          <span class="demo-box demo-inline-block">Box 1</span>
-          <span
-            class="demo-box demo-inline-block"
-            style="height: 70px; background-color: #90ee90"
-            >Box 2 (taller)</span>
-          >
-          <button class="demo-box demo-inline-block">A Button</button>
-          They sit on the same line but can have custom dimensions and full
-          margin/padding.
-        </p>
-      </div>
+<div className="example-html">
+  <p>
+    Here are some inline-block elements:
+    <span className="demo-box demo-inline-block">Box 1</span>
+    <span
+      className="demo-box demo-inline-block"
+      style={{
+        height: "70px",
+        backgroundColor: "#90ee90",
+      }}
+    >
+      Box 2 (taller)
+    </span>
+    <button className="demo-box demo-inline-block">A Button</button>
+    They sit on the same line but can have custom dimensions and full
+    margin/padding.
+  </p>
+</div>
+
 
 ```css
 button.custom-style {

@@ -32,26 +32,34 @@ Shorthand for `border-width` (similar to padding/margin):
 *  border-width: top right_left bottom;
 *  border-width: top right bottom left;
 
-      <div
-        class="example-box"
-        style="border-style: solid; border-color: green; border-width: thin"
-      >
-        thin width
-      </div>
+<>
+  <div
+    className="example-box"
+    style={{
+      borderStyle: "solid",
+      borderColor: "green",
+      borderWidth: "thin",
+    }}
+  >
+    thin width
+  </div>
 
-      <div
-        class="example-box"
-        style="
-          border-style: solid;
-          border-color: red;
-          border-top-width: 10px;
-          border-right-width: 2px;
-          border-bottom-width: 5px;
-          border-left-width: 1px;
-        "
-      >
-        Varied widths
-      </div>
+  <div
+    className="example-box"
+    style={{
+      borderStyle: "solid",
+      borderColor: "red",
+      borderTopWidth: "10px",
+      borderRightWidth: "2px",
+      borderBottomWidth: "5px",
+      borderLeftWidth: "1px",
+    }}
+  >
+    Varied widths
+  </div>
+</>
+
+
 ```css
 .box1 {
   border-style: solid; /* Style must be set for width to show */
@@ -102,18 +110,30 @@ Common values:
 Individual side styles (e.g., `border-top-style`) and
 shorthand (same as `border-width`) also apply.
 
-      <div
-        class="example-box"
-        style="border-width: 5px; border-color: teal; border-style: dotted"
-      >
-        dotted
-      </div>
-      <div
-        class="example-box"
-        style="border-width: 5px; border-color: orange; border-style: dashed"
-      >
-        dashed
-      </div>
+      <>
+  <div
+    className="example-box"
+    style={{
+      borderWidth: "5px",
+      borderColor: "teal",
+      borderStyle: "dotted",
+    }}
+  >
+    dotted
+  </div>
+
+  <div
+    className="example-box"
+    style={{
+      borderWidth: "5px",
+      borderColor: "orange",
+      borderStyle: "dashed",
+    }}
+  >
+    dashed
+  </div>
+</>
+
 
 ```css
 .solid-border {
@@ -139,25 +159,33 @@ Color values can be named colors, hex, RGB, HSL, etc.
 Individual side colors (e.g., border-top-color) and
 shorthand (same as border-width) also apply.
 
-      <div
-        class="example-box"
-        style="border-width: 5px; border-style: solid; border-color: tomato"
-      >
-        tomato
-      </div>
-      <div
-        class="example-box"
-        style="
-          border-width: 5px;
-          border-style: solid;
-          border-top-color: red;
-          border-right-color: green;
-          border-bottom-color: blue;
-          border-left-color: yellow;
-        "
-      >
-        Multi-color
-      </div>
+      <>
+  <div
+    className="example-box"
+    style={{
+      borderWidth: "5px",
+      borderStyle: "solid",
+      borderColor: "tomato",
+    }}
+  >
+    tomato
+  </div>
+
+  <div
+    className="example-box"
+    style={{
+      borderWidth: "5px",
+      borderStyle: "solid",
+      borderTopColor: "red",
+      borderRightColor: "green",
+      borderBottomColor: "blue",
+      borderLeftColor: "yellow",
+    }}
+  >
+    Multi-color
+  </div>
+</>
+
 
 ```css
 .primary-border {
@@ -238,37 +266,42 @@ You can also specify elliptical corners by providing two values
 separated by a slash (`/`) for horizontal and vertical radii
 (e.g., `border-top-left-radius: 20px / 10px;`).
 
-      <div
-        class="example-box"
-        style="
-          border: 3px solid #2ecc71;
-          border-radius: 15px;
-          line-height: normal;
-        "
-      >
-        <code>border-radius: 15px;</code>
-      </div>
-      <div
-        class="example-box"
-        style="
-          border: 3px solid #e74c3c;
-          border-radius: 50%;
-          line-height: 100px;
-        "
-      >
-        <code>border-radius: 50%;</code> (Circle if width=height)
-      </div>
-      <div
-        class="example-box"
-        style="
-          border: 3px solid #3498db;
-          border-top-left-radius: 25px;
-          border-bottom-right-radius: 25px;
-          line-height: normal;
-        "
-      >
-        Specific corners
-      </div>
+      <>
+  <div
+    className="example-box"
+    style={{
+      border: "3px solid #2ecc71",
+      borderRadius: "15px",
+      lineHeight: "normal",
+    }}
+  >
+    <code>border-radius: 15px;</code>
+  </div>
+
+  <div
+    className="example-box"
+    style={{
+      border: "3px solid #e74c3c",
+      borderRadius: "50%",
+      lineHeight: "100px",
+    }}
+  >
+    <code>border-radius: 50%;</code> (Circle if width = height)
+  </div>
+
+  <div
+    className="example-box"
+    style={{
+      border: "3px solid #3498db",
+      borderTopLeftRadius: "25px",
+      borderBottomRightRadius: "25px",
+      lineHeight: "normal",
+    }}
+  >
+    Specific corners
+  </div>
+</>
+
 
 ```css
 .rounded-corners {

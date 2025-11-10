@@ -20,19 +20,19 @@ rows and columns. In a grid with `N` columns, there are
 Lines can also be numbered negatively, starting from the end. The last
 line is -1, the second-to-last is -2, and so on.
 
-      <div class="grid-container1">
-        <div class="grid-item1">1</div>
-        <div class="grid-item1">2</div>
-        <div class="grid-item1">3</div>
-        <div class="grid-item1">4</div>
-        <div class="grid-item1">5</div>
-        <div class="grid-item1">6</div>
-        <div class="grid-item1">7</div>
-        <div class="grid-item1">8</div>
-        <div class="grid-item1">9</div>
-        <div class="grid-item1">10</div>
-        <div class="grid-item1">11</div>
-        <div class="grid-item1">12</div>
+      <div className="grid-container1">
+        <div className="grid-item1">1</div>
+        <div className="grid-item1">2</div>
+        <div className="grid-item1">3</div>
+        <div className="grid-item1">4</div>
+        <div className="grid-item1">5</div>
+        <div className="grid-item1">6</div>
+        <div className="grid-item1">7</div>
+        <div className="grid-item1">8</div>
+        <div className="grid-item1">9</div>
+        <div className="grid-item1">10</div>
+        <div className="grid-item1">11</div>
+        <div className="grid-item1">12</div>
       </div>
 
 Conceptual 4x3 Grid: Column lines 1-5, Row lines 1-4.
@@ -52,12 +52,12 @@ line number itself is exclusive, similar to array slicing.
 
 Example Grid (4 columns, 3 rows)
 
-        <div class="grid-container1">
-          <div class="grid-item1 item-a">A (col 1-3, row 1-2)</div>
-          <div class="grid-item1 item-b">B (col 3-5, row 1-4)</div>
-          <div class="grid-item1 item-c">C (col 1, row 2-4)</div>
-          <div class="grid-item1 item-d">D (col 2, row 2)</div>
-          <div class="grid-item1 item-e">E (row 3, col 2)</div>
+        <div className="grid-container1">
+          <div className="grid-item1 item-a">A (col 1-3, row 1-2)</div>
+          <div className="grid-item1 item-b">B (col 3-5, row 1-4)</div>
+          <div className="grid-item1 item-c">C (col 1, row 2-4)</div>
+          <div className="grid-item1 item-d">D (col 2, row 2)</div>
+          <div className="grid-item1 item-e">E (row 3, col 2)</div>
         </div>
 
 ```css
@@ -112,7 +112,7 @@ row).
 }
 ```
 
-## Spanning Tracks: The span Keyword
+### Spanning Tracks: The span Keyword
 
 Instead of specifying the end line, you can specify how many tracks an
 item should span using the `span` keyword.

@@ -36,10 +36,10 @@ represents the size of a column track.
 
 **Example: Fixed Width Columns**
 
-      <div class="grid-container grid-cols-px">
-        <div class="grid-item">100px</div>
-        <div class="grid-item">200px</div>
-        <div class="grid-item">100px</div>
+      <div className="grid-container grid-cols-px">
+        <div className="grid-item">100px</div>
+        <div className="grid-item">200px</div>
+        <div className="grid-item">100px</div>
       </div>
 
 ```css
@@ -51,10 +51,10 @@ represents the size of a column track.
 
 **Example: Fractional Unit Columns**
 
-      <div class="grid-container grid-cols-fr">
-        <div class="grid-item">1fr</div>
-        <div class="grid-item">2fr</div>
-        <div class="grid-item">1fr</div>
+      <div className="grid-container grid-cols-fr">
+        <div className="grid-item">1fr</div>
+        <div className="grid-item">2fr</div>
+        <div className="grid-item">1fr</div>
       </div>
 
 ```css
@@ -66,10 +66,10 @@ represents the size of a column track.
 
 **Example: Mixed Units**
 
-      <div class="grid-container grid-cols-mixed">
-        <div class="grid-item">150px</div>
-        <div class="grid-item">1fr</div>
-        <div class="grid-item">2fr</div>
+      <div className="grid-container grid-cols-mixed">
+        <div className="grid-item">150px</div>
+        <div className="grid-item">1fr</div>
+        <div className="grid-item">2fr</div>
       </div>
 
 ```css
@@ -100,10 +100,10 @@ with `auto` height (sizing based on content) as needed.
         class="grid-container grid-rows-px"
         style="grid-template-columns: 1fr 1fr"
       >
-        <div class="grid-item">Row 1 (50px)</div>
-        <div class="grid-item">Row 1 (50px)</div>
-        <div class="grid-item">Row 2 (100px)</div>
-        <div class="grid-item">Row 2 (100px)</div>
+        <div className="grid-item">Row 1 (50px)</div>
+        <div className="grid-item">Row 1 (50px)</div>
+        <div className="grid-item">Row 2 (100px)</div>
+        <div className="grid-item">Row 2 (100px)</div>
       </div>
 
 ```css
@@ -116,13 +116,13 @@ with `auto` height (sizing based on content) as needed.
 
 **Example: Auto Height Rows**
 
-      <div class="grid-container grid-rows-auto">
-        <div class="grid-item">Row 1 (auto height)<br />More Content</div>
-        <div class="grid-item">Row 1 (auto height)</div>
-        <div class="grid-item">Row 2 (60px height)</div>
-        <div class="grid-item">Row 2 (60px height)</div>
-        <div class="grid-item">Row 3 (auto height)</div>
-        <div class="grid-item">Row 3 (auto height)<br />Line<br />Line</div>
+      <div className="grid-container grid-rows-auto">
+        <div className="grid-item">Row 1 (auto height)<br />More Content</div>
+        <div className="grid-item">Row 1 (auto height)</div>
+        <div className="grid-item">Row 2 (60px height)</div>
+        <div className="grid-item">Row 2 (60px height)</div>
+        <div className="grid-item">Row 3 (auto height)</div>
+        <div className="grid-item">Row 3 (auto height)<br />Line<br />Line</div>
       </div>
 
 ```css
@@ -148,10 +148,10 @@ To avoid writing out the same track size multiple times, you can use the
 
 **Example: Repeating Columns**
 
-      <div class="grid-container grid-cols-repeat">
-        <div class="grid-item">1fr</div>
-        <div class="grid-item">1fr</div>
-        <div class="grid-item">1fr</div>
+      <div className="grid-container grid-cols-repeat">
+        <div className="grid-item">1fr</div>
+        <div className="grid-item">1fr</div>
+        <div className="grid-item">1fr</div>
       </div>
 
 ```css
@@ -170,12 +170,12 @@ Using `auto-fill` or `auto-fit` with
 even if they are empty. `auto-fit` behaves similarly but
 collapses empty tracks.
 
-      <div class="grid-container grid-cols-auto">
-        <div class="grid-item">Item 1</div>
-        <div class="grid-item">Item 2</div>
-        <div class="grid-item">Item 3</div>
-        <div class="grid-item">Item 4</div>
-        <div class="grid-item">Item 5</div>
+      <div className="grid-container grid-cols-auto">
+        <div className="grid-item">Item 1</div>
+        <div className="grid-item">Item 2</div>
+        <div className="grid-item">Item 3</div>
+        <div className="grid-item">Item 4</div>
+        <div className="grid-item">Item 5</div>
       </div>
 
 ```css
@@ -211,10 +211,10 @@ in Flexbox).
         class="grid-container grid-gap-10"
         style="grid-template-columns: 1fr 1fr"
       >
-        <div class="grid-item">1</div>
-        <div class="grid-item">2</div>
-        <div class="grid-item">3</div>
-        <div class="grid-item">4</div>
+        <div className="grid-item">1</div>
+        <div className="grid-item">2</div>
+        <div className="grid-item">3</div>
+        <div className="grid-item">4</div>
       </div>
 
 ```css
@@ -228,10 +228,10 @@ in Flexbox).
 **Example: Different Row and Column Gaps**
 
       <div class="grid-container grid-gap-separate">
-        <div class="grid-item">1</div>
-        <div class="grid-item">2</div>
-        <div class="grid-item">3</div>
-        <div class="grid-item">4</div>
+        <div className="grid-item">1</div>
+        <div className="grid-item">2</div>
+        <div className="grid-item">3</div>
+        <div className="grid-item">4</div>
       </div>
 
 ```css

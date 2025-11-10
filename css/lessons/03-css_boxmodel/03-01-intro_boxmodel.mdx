@@ -83,16 +83,17 @@ element. We will cover these in more detail tomorrow.
 }
 ```
 <div
-    class="example-box my-box"
-        style="
-          width: 300px;
-          height: 150px;
-          background-color: lightcoral;
-          margin: auto;
-        "
-      >
-        Content Area
-      </div>
+  className="example-box my-box"
+  style={{
+    width: "300px",
+    height: "150px",
+    backgroundColor: "lightcoral",
+    margin: "auto"
+  }}
+>
+  Content Area
+</div>
+
 
 ### 2. padding
 
@@ -175,19 +176,20 @@ Basic shorthand: border: width style color;
 }
 ```
 
-     <div
-        class="example-box bordered-box"
-        style="
-          width: 250px;
-          padding: 20px;
-          background-color: lightgoldenrodyellow;
-          border: 5px solid navy;
-          margin: auto;
-          text-align: center;
-        "
-      >
-        Bordered Content
-      </div>
+  <div
+  className="example-box bordered-box"
+  style={{
+    width: "250px",
+    padding: "20px",
+    backgroundColor: "lightgoldenrodyellow",
+    border: "5px solid navy",
+    margin: "auto",
+    textAlign: "center"
+  }}
+>
+  Bordered Content
+</div>
+
 
 ### 4. margin
 
@@ -230,36 +232,44 @@ Similar to padding, margin can be set for all sides or individually:
 }
 ```
 
-      <div class="example-box" style="background-color: #eee; padding: 10px">
-        <div
-          class="box-with-margin"
-          style="
-            width: 150px;
-            height: 60px;
-            background-color: salmon;
-            border: 2px solid darkred;
-            padding: 10px;
-            margin: 20px 30px 40px 50px;
-            text-align: center;
-          "
-        >
-          Box 1
-        </div>
-        <div
-          class="box-with-margin"
-          style="
-            width: 150px;
-            height: 60px;
-            background-color: lightgreen;
-            border: 2px solid darkgreen;
-            padding: 10px;
-            margin: 10px;
-            text-align: center;
-          "
-        >
-          Box 2 (margins separate these boxes)
-        </div>
-      </div>
+      <div
+  className="example-box"
+  style={{
+    backgroundColor: "#eee",
+    padding: "10px"
+  }}
+>
+  <div
+    className="box-with-margin"
+    style={{
+      width: "150px",
+      height: "60px",
+      backgroundColor: "salmon",
+      border: "2px solid darkred",
+      padding: "10px",
+      margin: "20px 30px 40px 50px",
+      textAlign: "center"
+    }}
+  >
+    Box 1
+  </div>
+
+  <div
+    className="box-with-margin"
+    style={{
+      width: "150px",
+      height: "60px",
+      backgroundColor: "lightgreen",
+      border: "2px solid darkgreen",
+      padding: "10px",
+      margin: "10px",
+      textAlign: "center"
+    }}
+  >
+    Box 2 (margins separate these boxes)
+  </div>
+</div>
+
 **Centering Block Elements:** Setting
 `margin-left` and `margin-right` to
 `auto` for a block-level element with a defined width will
@@ -307,19 +317,19 @@ Total visible width for .sample-div (excluding margin):
 */
 ```
       <div
-        class="sample-div"
-        style="
-          width: 200px;
-          height: 50px;
-          padding: 20px;
-          border: 5px solid black;
-          margin: 10px auto;
-          background-color: skyblue;
-          text-align: center;
-        "
-      >
-        Visible width: 250px
-      </div>
+  className="sample-div"
+  style={{
+    width: "200px",
+    height: "50px",
+    padding: "20px",
+    border: "5px solid black",
+    margin: "10px auto",
+    backgroundColor: "skyblue",
+    textAlign: "center"
+  }}
+>
+  Visible width: 250px
+</div>
 
-Visible width: 250px
+
 

@@ -35,23 +35,25 @@ later).
 
 `width: 200px; height: 100px; background-color: lightblue;`
 
-      <div class="example-box">
-        <p>
-          <code>width: 200px; height: 100px; background-color: lightblue;</code>
-        </p>
-        <div
-          style="
-            width: 200px;
-            height: 100px;
-            background-color: lightblue;
-            border: 1px solid blue;
-            padding: 5px;
-            text-align: center;
-          "
-        >
-          Content Area
-        </div>
-      </div>
+     <div className="example-box">
+  <p>
+    <code>width: 200px; height: 100px; background-color: lightblue;</code>
+  </p>
+
+  <div
+    style={{
+      width: "200px",
+      height: "100px",
+      backgroundColor: "lightblue",
+      border: "1px solid blue",
+      padding: "5px",
+      textAlign: "center",
+    }}
+  >
+    Content Area
+  </div>
+</div>
+
 
 ```css
 .fixed-size-box {
@@ -71,25 +73,26 @@ later).
 }
 ```
 
-      <div class="example-box">
-        <p>
-          <code>width: 75%; background-color: honeydew;</code> (inside this gray
-          example box)
-        </p>
-        <div
-          class="percentage-width-box"
-          style="
-            width: 75%;
-            height: auto;
-            background-color: #f0fff0;
-            border: 1px solid green;
-            padding: 15px;
-          "
-        >
-          This box is 75% of the width of its container. Add more content here
-          to see its height adjust automatically. Lorem ipsum dolor sit amet.
-        </div>
-      </div>
+  <div className="example-box">
+  <p>
+    <code>width: 75%; background-color: honeydew;</code> (inside this gray example box)
+  </p>
+
+  <div
+    className="percentage-width-box"
+    style={{
+      width: "75%",
+      height: "auto",
+      backgroundColor: "#f0fff0",
+      border: "1px solid green",
+      padding: "15px",
+    }}
+  >
+    This box is 75% of the width of its container. Add more content here
+    to see its height adjust automatically. Lorem ipsum dolor sit amet.
+  </div>
+</div>
+    
 
 **Inline Elements:** By default, you cannot directly set
 `width` and `height` on inline elements (like
@@ -112,17 +115,18 @@ can become wider than `min-width` if its content or
 `width` property requires it.
 
         <div
-          class="resizable-box"
-          style="
-            min-width: 150px;
-            width: 50%;
-            background-color: lightcoral;
-            padding: 10px;
-            text-align: center;
-          "
-        >
-          Min 150px wide, but can be 50% of parent if larger.
-        </div>
+  className="resizable-box"
+  style={{
+    minWidth: "150px",
+    width: "50%",
+    backgroundColor: "lightcoral",
+    padding: "10px",
+    textAlign: "center",
+  }}
+>
+  Min 150px wide, but can be 50% of parent if larger.
+</div>
+
 
 ```css
 .content-area {
@@ -146,19 +150,20 @@ images or containers) from breaking the layout on large screens, while
 still allowing them to shrink on smaller screens.
 
         <div
-          class="resizable-box"
-          style="
-            max-width: 400px;
-            width: 80%;
-            background-color: lightseagreen;
-            color: white;
-            padding: 10px;
-            margin: 0 auto;
-            text-align: center;
-          "
-        >
-          Max 400px wide, or 80% of parent if smaller. Centered.
-        </div>
+  className="resizable-box"
+  style={{
+    maxWidth: "400px",
+    width: "80%",
+    backgroundColor: "lightseagreen",
+    color: "white",
+    padding: "10px",
+    margin: "0 auto",
+    textAlign: "center",
+  }}
+>
+  Max 400px wide, or 80% of parent if smaller. Centered.
+</div>
+
 
 ```css
 .container {
