@@ -93,7 +93,7 @@ colors.update(list_colors)
 print(f"After update(list_colors): {colors}") # Includes 'purple'
 ```
 
-### 2. Removing Elements
+## 2. Removing Elements
 
 1. **remove(element)**: Removes the specified element from the set. Raises a `KeyError` if the element is not found.
 2. **discard(element)**: Removes the specified element if it is present. Does **not** raise an error if the element is not found (safer if you're unsure).
@@ -138,7 +138,7 @@ items.clear()
 print(f"After clear(): {items}")
 ```
 
-### 3. Membership Testing (`in`)
+## 3. Membership Testing (`in`)
 
 Checking if an item exists in a set is very efficient, much more so than checking for membership in a list, especially for large collections. Use the `in` keyword.
 
@@ -158,7 +158,7 @@ if user_to_check not in allowed_users: # Can also use 'not in'
     print(f"'{user_to_check}' is NOT an allowed user.")
 ```
 
-### 4. Iterating Through Sets
+## 4. Iterating Through Sets
 
 You can iterate through the elements of a set using a `for` loop. Remember that the order of iteration is not guaranteed.
 
@@ -173,7 +173,7 @@ for tag in unique_tags:
     print(f"- {tag}") # Order is not guaranteed
 ```
 
-### Example 1: Finding Unique Characters
+## Example 1: Finding Unique Characters
 
 
 
@@ -191,7 +191,7 @@ print(f"Unique characters: {unique_letters}")
 print(f"Number of unique characters: {len(unique_letters)}")
 ```
 
-### Example 2: Tracking Attended Workshops
+## Example 2: Tracking Attended Workshops
 
 
 
@@ -226,7 +226,7 @@ else:
     print(f"{name_check} did not attend.")
 ```
 
-### Example 3: Removing Duplicates from a List
+## Example 3: Removing Duplicates from a List
 
 
 A common idiom is to convert a list to a set to remove duplicates, and then optionally convert it back to a list (losing the original order).

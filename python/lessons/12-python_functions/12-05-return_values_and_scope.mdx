@@ -41,7 +41,7 @@ is_pos = check_value(-5)
 print(f"Is -5 positive? {is_pos}")
 ```
 
-### Functions without an Explicit **return**
+## Functions without an Explicit **return**
 
 If a function doesn't have a `return` statement, or if the `return` statement has no expression after it, the function automatically returns the special value `None` when it finishes executing.
 
@@ -66,7 +66,7 @@ none_val = explicit_return_none()
 print(f"\nValue from explicit_return_none(): {none_val}") # Output: None
 ```
 
-### Returning Multiple Values
+## Returning Multiple Values
 
 
 A function can return multiple values by listing them after the `return` statement, separated by commas. Python automatically packs these values into a **tuple**, which is then returned. The caller can unpack this tuple.
@@ -101,14 +101,14 @@ print(f"Area from tuple: {stats_tuple[0]:.2f}")
 
 **Scope** refers to the region of a program where a variable is accessible or "visible". Understanding scope is crucial for avoiding naming conflicts and managing data flow.
 
-### Local Scope
+## Local Scope
 
 1. Variables defined **inside** a function (including parameters) have **local scope**.
 2. They only exist and can only be accessed from within that specific function.
 3. They are created when the function is called and destroyed when the function finishes (returns).
 4. Each call to a function creates a new local scope.
 
-### Global Scope
+## Global Scope
 
 1. Variables defined **outside**of any function have **global scope**.
 2. They can be accessed (read) from anywhere in the program, including inside functions.
@@ -146,7 +146,7 @@ except NameError as e:
     print(f"Error accessing local_var: {e}")
 ```
 
-### Modifying Global Variables (The **global** Keyword)
+## Modifying Global Variables (The **global** Keyword)
 
 
 **Generally Avoid Modifying Globals:** Modifying global variables from within functions is generally discouraged as it makes program flow harder to track and can lead to unexpected side effects. It's usually better to use parameters and return values to pass data in and out of functions.

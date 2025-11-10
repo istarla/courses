@@ -55,7 +55,7 @@ Specificity is typically represented as a three-column value (or
 sometimes four, including inline styles): (IDs,
 Classes/Attributes/Pseudo-classes, Elements/Pseudo-elements).
 
-### Calculating Specificity:
+## Calculating Specificity:
       <table class="min-w-full bg-white specificity-table my-4">
         <thead>
           <tr>
@@ -112,7 +112,7 @@ column by column from left to right (A, then B, then C). The first
 column with a higher value determines the more specific selector. For
 example, `1,0,0` is more specific than `0,50,0`.
 
-### Specificity Examples:
+## Specificity Examples:
 
       <div class="example-html">
         <div class="specificity-example">
@@ -145,7 +145,7 @@ selector (`#unique-para`) has the highest specificity among
 the stylesheet rules. If an inline style was added, that would override
 the ID selector.
 
-### The important Rule
+## The important Rule
 
 Appending `!important` to a CSS declaration makes that
 declaration override any other declarations for that property on that

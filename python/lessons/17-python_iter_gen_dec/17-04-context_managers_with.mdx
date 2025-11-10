@@ -47,7 +47,7 @@ When you write `with expression as variable:`
 
 While many built-in objects and library objects act as context managers, you can also create your own using classes or the **contextlib** module.
 
-### 1. Using a Class
+## 1. Using a Class
 
 Define a class implementing **__enter__** and **__exit__**.
 
@@ -108,7 +108,7 @@ print("\nProgram finished.")
 
 Notice how **__exit__** is still called even when the **ZeroDivisionError** occurs inside the second **with** block.
 
-### 2. Using **contextlib.contextmanager** Decorator
+## 2. Using **contextlib.contextmanager** Decorator
 
 
 The **contextlib** module provides a convenient decorator, **@contextmanager**, that lets you create a context manager using a simple generator function.

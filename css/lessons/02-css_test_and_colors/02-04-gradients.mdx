@@ -1,4 +1,4 @@
-# Gradients (linear-gradient, radial-gradient)
+## Gradients (linear-gradient, radial-gradient)
 
 CSS gradients allow you to create smooth transitions between two or more
 specified colors. They are a type of `<image>` data
@@ -26,7 +26,7 @@ the direction of the gradient and the color stops.
 ### Simple Two-Color Linear Gradient
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           background-image: linear-gradient(to right, steelblue, lightskyblue);
         "
@@ -44,10 +44,10 @@ the direction of the gradient and the color stops.
 }
 ```
 
-### Linear Gradient with an Angle
+## Linear Gradient with an Angle
 
      <div
-        class="gradient-box"
+        className="gradient-box"
         style="background-image: linear-gradient(45deg, orange, tomato)"
       >
         45deg, orange, tomato
@@ -60,10 +60,10 @@ the direction of the gradient and the color stops.
 /* 0deg is 'to top', 90deg is 'to right', 180deg is 'to bottom', 270deg is 'to left' */
 ```
 
-### Linear Gradient with Multiple Color Stops and Positions
+## Linear Gradient with Multiple Color Stops and Positions
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           background-image: linear-gradient(
             to right,
@@ -76,7 +76,7 @@ the direction of the gradient and the color stops.
         to right, red 0%, yellow 50%, green 100%
       </div>
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           margin-top: 10px;
           background-image: linear-gradient(
@@ -126,10 +126,10 @@ end-color);`
 * **`color-stop`**: Similar to linear gradients, a color value, optionally with a
   position.
 
-### Simple Two-Color Radial Gradient (Circle)
+## Simple Two-Color Radial Gradient (Circle)
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="background-image: radial-gradient(circle, white, steelblue)"
       >
         circle, white, steelblue
@@ -145,10 +145,10 @@ end-color);`
 }
 ```
 
-### Radial Gradient with Shape, Size, and Position
+## Radial Gradient with Shape, Size, and Position
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           background-image: radial-gradient(
             ellipse farthest-corner at 70% 30%,
@@ -169,10 +169,10 @@ end-color);`
 }
 ```
 
-### Radial Gradient with Multiple Color Stops
+## Radial Gradient with Multiple Color Stops
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           background-image: radial-gradient(
             circle,
@@ -202,7 +202,7 @@ clock.
 [angle], ...);`
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           background-image: conic-gradient(
             red,
@@ -218,7 +218,7 @@ clock.
         Simple Conic (Rainbow)
       </div>
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           margin-top: 10px;
           background-image: conic-gradient(
@@ -254,7 +254,7 @@ You can create repeating patterns using
 and then the pattern repeats itself to fill the element.
 
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           background-image: repeating-linear-gradient(
             45deg,
@@ -268,7 +268,7 @@ and then the pattern repeats itself to fill the element.
         Repeating Linear Stripes
       </div>
       <div
-        class="gradient-box"
+        className="gradient-box"
         style="
           margin-top: 10px;
           background-image: repeating-radial-gradient(

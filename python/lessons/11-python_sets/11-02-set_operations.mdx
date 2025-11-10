@@ -15,10 +15,10 @@ Python sets support several standard operations, which can be performed using ei
         <table>
         <thead>
           <tr>
-            <th>Operation</th>
-            <th>Method</th>
-            <th>Operator</th>
-            <th>Description</th>
+            <th>**Operation**</th>
+            <th>**Method**</th>
+            <th>**Operator**</th>
+            <th>**Description**</th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +65,7 @@ Python sets support several standard operations, which can be performed using ei
 
 These methods and operators return new sets, leaving the original sets unchanged. There are also corresponding in-place update methods (e.g., `update()`, `intersection_update()`, `difference_update()`, `symmetric_difference_update()`) that modify the set they are called on.
 
-### 1. Union 
+## 1. Union 
 
 Combines all unique elements from two or more sets.
 
@@ -93,7 +93,7 @@ union_abc = set_a.union(set_b, set_c) # Method can take multiple args
 print(f"Union (A.union(B, C)): {union_abc}") # Output: {1, 2, 3, 4, 5, 6, 7, 8}
 ```
 
-### 2. Intersection 
+## 2. Intersection 
 
 Finds elements common to both sets.
 
@@ -120,7 +120,7 @@ intersection_xz = set_x & set_z
 print(f"Intersection (X & Z): {intersection_xz}") # Output: set() (an empty set)
 ```
 
-### 3. Difference 
+## 3. Difference 
 
 Finds elements present in the first set but not in the second. Order matters!
 
@@ -144,7 +144,7 @@ diff_pq_method = set_p.difference(set_q)
 print(f"Difference (P.difference(Q)): {diff_pq_method}") # Output: {10, 20, 30}
 ```
 
-### 4. Symmetric Difference 
+## 4. Symmetric Difference 
 
 Finds elements present in either set, but not both (the opposite of intersection).
 
@@ -178,10 +178,10 @@ Sets also provide methods to check relationships between them:
       <table>
         <thead>
           <tr>
-            <th>Check</th>
-            <th>Method</th>
-            <th>Operator</th>
-            <th>Description</th>
+            <th>**Check**</th>
+            <th>**Method**</th>
+            <th>**Operator**</th>
+            <th>**Description</th>
           </tr>
         </thead>
         <tbody>
@@ -276,7 +276,7 @@ print(f"\nA and B disjoint? {A.isdisjoint(B)}") # False (common elements 1, 2, 3
 print(f"A and D disjoint? {A.isdisjoint(D)}") # True (no common elements)
 ```
 
-### Example 1: Finding Common and Unique Skills
+## Example 1: Finding Common and Unique Skills
 
 
 * **File: compare_skills.py**
@@ -310,7 +310,7 @@ unique_either = skills_dev1 ^ skills_dev2
 print(f"Skills unique to either Dev: {unique_either}")
 ```
 
-### Example 2: Checking Required Ingredients
+## Example 2: Checking Required Ingredients
 
 * **File: check_ingredients.py**
 ```python
@@ -328,7 +328,7 @@ else:
     print(f"Cannot bake. Missing ingredients: {missing}")
 ```
 
-### Example 3: Identifying Non-overlapping Groups
+## Example 3: Identifying Non-overlapping Groups
 
 * **File: disjoint_groups.py**
 ```python

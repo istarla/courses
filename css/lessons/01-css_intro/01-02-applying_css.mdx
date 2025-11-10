@@ -7,7 +7,7 @@ inline styles, internal stylesheets, and external stylesheets.
 Understanding these methods is crucial for organizing your styles
 effectively.
 
-#### **1. Inline Styles**
+## **1. Inline Styles**
 
 
 Inline styles are applied directly to individual HTML elements using the
@@ -29,7 +29,7 @@ within the attribute's value, separated by semicolons.
 
   
 
-#### **Pros and Cons of Inline Styles:**
+## **Pros and Cons of Inline Styles:**
 
 **Pros:**
   + Quick for testing or applying a unique style to a single element.
@@ -47,7 +47,7 @@ within the attribute's value, separated by semicolons.
 are often used in HTML emails (due to limited CSS support in some
 email clients) or by JavaScript to dynamically change styles.
 
-### 2. Internal Styles
+## 2. Internal Styles
 
 Internal stylesheets are defined within the
 `<style>` element, placed inside the
@@ -81,7 +81,7 @@ written here apply only to the current HTML page.
 </html>
 ```
 
-#### **Pros and Cons of Internal Stylesheets:**
+## **Pros and Cons of Internal Stylesheets:**
 
 **Pros:**
   + Keeps styles for a single page in one place.
@@ -100,7 +100,7 @@ written here apply only to the current HTML page.
 **Note:** Internal stylesheets are useful for single-page
 websites or for styles that are truly unique to one specific page.
 
-### 3. External Stylesheets
+## 3. External Stylesheets
 
 
 External stylesheets are the most common and recommended method for
@@ -165,7 +165,7 @@ The `<link>` element has a few important attributes:
   for `rel="stylesheet"`).
 * **href="mystyles.css"**: Specifies the path to the CSS file.
 
-### Pros and Cons of External Stylesheets:
+## Pros and Cons of External Stylesheets:
 
 **Pros:**
   + **Separation of Concerns:** Keeps HTML (content) and
@@ -191,7 +191,7 @@ The `<link>` element has a few important attributes:
 * **Best Practice:** For most web development projects,
 external stylesheets are the preferred method for managing CSS.
 
-### Order of Precedence (The Cascade)
+## Order of Precedence (The Cascade)
 
 When multiple styles are applied to the same element, the browser needs
 to decide which style to use. This is where the "Cascading" part of CSS

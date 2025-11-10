@@ -14,7 +14,7 @@ Today, we'll cover some of the most important aspects of PEP 8. The full documen
 ## Key PEP 8 Guidelines
 
 
-### 1. Indentation
+## 1. Indentation
 
 *   Use **4 spaces** per indentation level.
 *   Do not mix tabs and spaces (most modern editors can be configured to insert spaces when you press the Tab key). Python 3 disallows mixing tabs and spaces in a way that causes ambiguity.
@@ -35,7 +35,7 @@ def my_function(arg):
 #         print("Less than or equal to 10")
 ```
 
-### 2. Line Length
+## 2. Line Length
 
 *   Limit all lines to a maximum of **79 characters**.
 *   For long blocks of text (docstrings, comments), limit lines to 72 characters.
@@ -57,7 +57,7 @@ result = some_function(
 # my_really_long_variable_name_that_goes_on_and_on = function_call_one() + function_call_two() + another_value + yet_another
 ```
 
-### 3. Blank Lines
+## 3. Blank Lines
 
 *   Use **two blank lines** to separate top-level function and class definitions.
 *   Use **one blank line** to separate method definitions inside a class.
@@ -89,7 +89,7 @@ class MyClass:
         pass
 ```
 
-### 4. Imports
+## 4. Imports
 
 *   Imports should usually be on separate lines:
     ```python
@@ -122,7 +122,7 @@ class MyClass:
     ```
 *   Avoid wildcard imports (`from module import *`) as they pollute the namespace.
 
-### 5. Whitespace in Expressions and Statements
+## 5. Whitespace in Expressions and Statements
 
 *   Avoid extraneous whitespace immediately inside parentheses, brackets, or braces.
     ```python
@@ -166,7 +166,7 @@ class MyClass:
     #     return magic(r = real, i = imag)                
     ```
 
-### 6. Naming Conventions
+## 6. Naming Conventions
 
 *   **Modules:** Short, all-lowercase names. Underscores can be used if it improves readability (e.g., **string_utils**).
 *   **Packages:** Short, all-lowercase names. Preferably no underscores (e.g., **mypackage**).
@@ -176,7 +176,7 @@ class MyClass:
 *   **Constants:** All uppercase with words separated by underscores (e.g., **MAX_CONNECTIONS**, **PI**).
 *   **Method Arguments:** Always use **self** for the first argument to instance methods. Always use **cls** for the first argument to class methods.
 
-### 7. Comments
+## 7. Comments
 
 *   Write comments that are clear, concise, and explain the "why" rather than just the "what" (if the code is already clear).
 *   Keep comments up-to-date with code changes.

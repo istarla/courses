@@ -41,7 +41,7 @@ The `clear` property can take the following values:
 * inherit: The element inherits the clear value of its
   parent.
 
-### Method 1: Using an Empty Clearing Element
+## Method 1: Using an Empty Clearing Element
 
 A common, older technique is to add an empty element (like a
 `<div>`) after the floated elements and apply
@@ -66,7 +66,7 @@ A common, older technique is to add an empty element (like a
 
 While this works, it adds non-semantic HTML to the markup.
 
-### Method 2: The "Clearfix" Hack (using `::after` pseudo-element)
+## Method 2: The "Clearfix" Hack (using `::after` pseudo-element)
 
 A more modern and preferred method is the "clearfix" technique, which
 uses the `::after` pseudo-element on the container of the
@@ -97,7 +97,7 @@ HTML.
 <p>This content follows normally.</p>
 ```
 
-### Method 3: Using `overflow` on the Container
+## Method 3: Using `overflow` on the Container
 
 Setting the `overflow` property on the parent container to a
 value other than `visible` (e.g., `auto`,
@@ -123,7 +123,7 @@ This is often the simplest method but be aware that
 container's bounds, and `overflow: scroll/auto` might show
 scrollbars if content exceeds dimensions.
 
-### Method 4: Using `display: flow-root;`
+## Method 4: Using `display: flow-root;`
 
 A newer CSS value, `display: flow-root;`, is specifically
 designed to create a BFC without any other side effects (like clipping

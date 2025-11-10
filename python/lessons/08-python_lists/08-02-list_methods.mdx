@@ -18,8 +18,8 @@ Here is a table summarizing some of the most common and useful list methods.
         <table>
         <thead>
           <tr>
-            <th>Method Name</th>
-            <th>Description</th>
+            <th>**Method Name**</th>
+            <th>**Description**</th>
           </tr>
         </thead>
         <tbody>
@@ -70,7 +70,7 @@ Here is a table summarizing some of the most common and useful list methods.
         </tbody>
       </table>
 
-### 1. Adding Items
+## 1. Adding Items
 
 1. **append(item)**: Adds a single `item` to the very end of the list.
 2. **insert(index, item)**: Inserts an `item` at the specified `index`. Existing items from that index onwards are shifted to the right.
@@ -103,7 +103,7 @@ print(f"After extend([50, 60]): {my_list}") # Output: [10, 15, 20, 30, 40, 50, 6
 # my_list.append([70, 80]) -> [10, ..., 60, [70, 80]]
 ```
 
-### 2. Removing Items
+## 2. Removing Items
 
 1. **remove(item)**: Removes the **first** occurrence of the specified `item` from the list. Raises a `ValueError` if the item is not found.
 2. **pop(index=-1)**: Removes and **returns**the item at the specified `index`. If no index is provided, it defaults to `-1`, removing and returning the last item. Raises an `IndexError` if the index is out of range or the list is empty.
@@ -135,7 +135,7 @@ items.clear()
 print(f"After clear(): {items}") # Output: []
 ```
 
-### 3. Searching and Counting
+## 3. Searching and Counting
 
 1. **index(item, start=0, end=len(list))**: Returns the index of the **first** occurrence of the specified `item`. Optional `start` and `end` arguments can limit the search range. Raises a `ValueError` if the item is not found.
 2. **count(item)**: Returns the number of times the specified `item` appears in the list.
@@ -166,7 +166,7 @@ count_100 = grades.count(100)
 print(f"Number of 100s: {count_100}") # Output: 0
 ```
 
-### 4. Sorting and Reversing
+## 4. Sorting and Reversing
 
 
 *   **sort(key=None, reverse=False)**: Sorts the items of the list in-place. By default, sorts in ascending order. Set `reverse=True` for descending order. The optional `key` argument allows specifying a function to customize the sort order (more advanced topic). Items must be comparable (e.g., all numbers or all strings).
@@ -201,7 +201,7 @@ nums.reverse() # Reverses the already descending list
 print(f"After reverse(): {nums}") # Output: [1, 2, 3, 4, 5]
 ```
 
-### 5. Copying Lists
+## 5. Copying Lists
 
 
 Assigning a list to a new variable doesn't create a copy; both variables point to the same list object. To create a true independent copy, use:
